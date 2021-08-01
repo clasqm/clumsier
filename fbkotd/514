@@ -1,0 +1,69 @@
+LSET
+================
+
+Left-justifies a string
+
+Syntax:
+declare sub Lset ( byref dst as string, byref src as const string )
+declare sub Lset ( byval dst as wstring ptr, byval src as const wstring ptr )
+
+Usage:
+Lset dst, src
+Lset dst_udt, src_udt
+
+Parameters:
+
+`dst`
+String `String` to receive the data.
+
+`src`
+Source `String` to get the data.
+
+`dst_udt`
+User defined `Type` to receive the data.
+
+`src_udt`
+User defined `Type` to copy the data from.
+
+Description:
+
+`Lset` left justifies text into the string buffer `dst`, filling the left part
+of the string with `src` and the right part with spaces. The string buffer
+size is not modified.
+If text is too long for the string buffer size, `Lset` truncates characters
+from the right.
+
+For compatibility with QBasic, `Lset` can also copy a user defined type
+variable into another one. The copy is made byte for byte, without any care
+for fields or alignment. It's up to the programmer to take care for the
+validity of the result.
+
+Examples:
+
+Dim buffer As String
+buffer = Space(10)
+LSet buffer, "91.5"
+Print "-[" & buffer & "]-"
+
+
+
+Type mytype1
+    x As Integer
+    y As Integer
+End Type
+
+Type mytype2
+    z As Integer
+End Type
+
+Dim a As mytype1 , b As mytype2
+b.z = 1234
+
+LSet a, b
+Print a.x
+
+
+Differences from QB:
+  * In QB, the syntax was `Lset dst = src`. That syntax is also supported 
+  by FB.
+

@@ -1,0 +1,38 @@
+UNLOCK
+================
+
+Removes a previous access restriction (lock) on a file
+
+Syntax:
+Unlock #filenum, record
+Unlock #filenum, start To end
+
+Parameters:
+`filenum`
+The file number used to `Open` the file.
+
+`record`
+The record (`Random` files) to unlock.
+
+`start`
+The first byte position (`Binary` files) in a range to unlock.
+
+`end`
+The last byte position (`Binary` files) in a range to unlock.
+
+Description:
+`Unlock` removes the temporary access restriction set by `Lock`.
+
+It is strongly recommended to use the same arguments used in the previous
+`Lock`.
+
+Note: This command does not always work, neither as documented nor as
+expected. It appears to be broken at the moment.
+
+Examples:
+
+For an example see `Lock`.
+
+Differences from QB:
+  * Currently, FB cannot implicitly unlock the entire file
+  * In `Random` mode, FB cannot unlock a range of records

@@ -1,0 +1,38 @@
+CHDIR
+================
+
+Changes the current drive and directory
+
+Syntax:
+declare function Chdir ( byref path as const string ) as long
+
+Usage:
+result = Chdir( path )
+
+Parameters:
+
+`path`
+A `string` argument specifying the path to change to.
+
+Return Value:
+Returns zero (0) on success and negative one (-1) on failure.
+
+Description:
+Changes the current drive and directory to that specified.
+
+Examples:
+
+Dim pathname As String = "x:\folder"
+Dim result As Integer = ChDir(pathname)
+If 0 <> result Then Print "error changing current directory to " & pathname &"."
+
+Platform Differences:
+
+  * Linux requires the filename case matches the real name of the file. Windows
+   and DOS are case insensitive.
+  * Path separators in Linux are forward slashes / . Windows uses backward slashes \ 
+  but it allows for forward slashes . DOS uses backward \ slashes.
+
+Differences from QB:
+  * In QB, the drive could not be specified.
+

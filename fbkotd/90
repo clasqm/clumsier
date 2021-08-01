@@ -1,0 +1,26 @@
+FOR
+===============
+
+Control flow statement, open statement clause, or operator depending on
+context.
+
+Syntax:
+For iterator = startvalue To endvalue [ Step increment ]
+
+or
+
+Open [ device ] "filename" For filemode As #handle
+
+or
+
+declare operator For ( byref stp as datatype )
+
+Examples:
+
+See example at `For...Next`.
+
+See also:
+
+  * `For...Next`
+  * `Open`
+  * `Operator`

@@ -1,0 +1,23 @@
+Compiler Option: -l
+===================
+
+Add a library file to the linker's list.
+
+Syntax:
+-l < libname >
+
+Parameters:
+`libname`
+Name of the library to link in. The library file name's extension should not
+be included. For example, when using `-l something`, the linker will look for
+the files:
+
+  * `libsomething.a`
+  * `libsomething.dll.a` (Windows)
+  * `something.dll` (Windows)
+  * `libsomething.so` (Linux)
+
+Description:
+
+The `-l` compiler option adds a library file to the linker's list, to be
+linked into the final executable or library if needed to satisfy dependencies.

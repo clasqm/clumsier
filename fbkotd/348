@@ -1,0 +1,45 @@
+ATAN2
+================
+
+Returns the arctangent of a ratio
+
+Syntax:
+declare function ATan2 ( byval y as double, byval x as double ) as double
+
+Usage:
+result = ATan2( y, x )
+
+Parameters:
+
+`y`
+Vertical component of the ratio.
+
+`x`
+Horizontal component of the ratio.
+
+Return Value:
+The angle whose tangent is `y/x`, in radians, in the range [-Pi..Pi].
+
+Description:
+
+`ATan2` returns the arctangent of the ratio `y/x` as a `Double` within the
+range of -Pi to Pi. The arctangent is the inverse of the `Tan` function. The
+returned angle is measured in radians (not degrees).
+
+`ATan2` cannot be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Print Atan2 ( 4, 5 )     'this is the same as PRINT ATN ( 4 / 5 )
+
+The output would be:
+
+    0.6747409422235527
+
+
+Differences from QB:
+New to FreeBASIC
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Atan2`.

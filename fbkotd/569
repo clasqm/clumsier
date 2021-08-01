@@ -1,0 +1,69 @@
+CALLOCATE
+================
+
+Allocates memory for a certain number of elements from the free store and
+clears the contents
+
+Syntax:
+declare function Callocate cdecl ( byval num_elements as uinteger, byval size
+as uinteger = 1 ) as any ptr
+
+Usage:
+result = Callocate( num_elements [, size ] )
+
+Parameters:
+
+`num_elements`
+The number of elements to allocate memory for.
+
+`size`
+The size, in bytes, of each element.
+
+Return Value:
+If successful, the address of the start of the allocated memory is returned.
+Otherwise, the null pointer (`0`) is returned.
+
+Description:
+
+`Callocate` initializes the allocated memory with zeros.
+Consequently, `Callocate` can be also directly used with `String` or `UDT`
+containing string, because the string descriptor is cleared (set to 0) first.
+Similarly, `Callocate` can also be used directly with `Zstring` or `Wstring`
+because string data is created with null characters.
+
+Examples:
+
+' Allocate and initialize space for 10 integer elements.
+Dim p As Integer Ptr = CAllocate(10, SizeOf(Integer))
+
+' Fill the memory with integer values.
+For index As Integer = 0 To 9
+    p[index] = (index + 1) * 10
+Next
+
+' Display the integer values.
+For index As Integer = 0 To 9
+    Print p[index] ;
+Next
+
+' Free the memory.
+Deallocate(p)
+
+Outputs:
+
+ 
+ 
+     10 20 30 40 50 60 70 80 90 100
+
+
+Platform Differences:
+
+  * This procedure is not guaranteed to be thread-safe.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Callocate`.
+
+Differences from QB:
+New to FreeBASIC
+

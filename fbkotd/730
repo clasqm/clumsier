@@ -1,0 +1,100 @@
+RGB
+================
+
+Computes a valid color value for hi/truecolor modes
+
+Syntax:
+for fbc version < 1.08:
+
+#define RGB(r,g,b) ((culng(r) shl 16) or (culng(g) shl 8) or culng(b) or
+&hFF000000)
+
+for fbc version >= 1.08:
+
+#define RGB(r,g,b) culng((cubyte(r) shl 16) or (cubyte(g) shl 8) or cubyte(b)
+or (&hFF000000ul))
+
+Usage:
+result = RGB(red, green, blue)
+
+Parameters:
+
+`red`
+
+red color component value
+
+`green`
+
+green color component value
+
+`blue`
+
+blue color component value
+
+Return Value:
+The combined color.
+
+Description:
+
+`red`, `green` and `blue` are components ranging `0`-`255`.
+
+The `RGB` function can be used to compute a valid color value for use while in
+hi/truecolor modes. It returns an unsigned integer for fbc version < 1.08, or
+an unsigned long for fbc version >= 1.08, in the format `&hAARRGGBB`, where
+`RR`, `GG` and `BB` equal the values passed to this function, in hexadecimal
+format. `AA` is the implicit alpha value and is automatically set to `&hFF`
+(opaque).
+It is possible to retrieve the red, green, blue and alpha values from a color
+value, by using a combination of `And` and `Shr`. The second example below
+shows how to `#Define` and use macros to do this.
+
+Note for Windows API programmers: The macro named `RGB` in the Windows
+references has been renamed `BGR` in the FB headers for Windows to avoid
+collisions.
+
+Examples:
+
+See `Put (Graphics)` example in addition.
+
+ScreenRes 640,480,32  '32 bit color
+Line(0,0)-(319,479), RGB(255,0,0) 'draws a bright red box on the left side of
+the window
+Line(639,0)-(320,479), RGB(0,0,255) 'draws a bright blue box on the right side
+of the window
+
+Sleep 'wait before exiting
+
+
+
+'' setting and retrieving Red, Green, Blue and Alpha values
+
+#define RGBA_R( c ) ( CULng( c ) Shr 16 And 255 )
+#define RGBA_G( c ) ( CULng( c ) Shr  8 And 255 )
+#define RGBA_B( c ) ( CULng( c )        And 255 )
+#define RGBA_A( c ) ( CULng( c ) Shr 24         )
+
+Dim As UByte r, g, b, a
+
+Dim As ULong col = RGB(128, 192, 64)
+
+Print Using "Color: _&H\      \"; Hex(col, 8)
+
+r = RGBA_R( col )
+g = RGBA_G( col )
+b = RGBA_B( col )
+a = RGBA_A( col )
+
+Print
+Print Using "Red:         _&H\\\ = ###"; Hex(r, 2); r
+Print Using "Green:       _&H\\\ = ###"; Hex(g, 2); g
+Print Using "Blue:        _&H\\\ = ###"; Hex(b, 2); b
+Print Using "Alpha:       _&H\\\ = ###"; Hex(a, 2); a
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Rgb`.
+
+Differences from QB:
+New to FreeBASIC
+

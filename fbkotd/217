@@ -1,0 +1,28 @@
+ULONGINT
+===================
+
+Standard data type: 64 bit unsigned.
+Equivalent to `Unsigned Longint`.
+
+Syntax:
+dim variable as Ulongint
+
+Description:
+A 64-bit unsigned whole-number data type. Can hold values from 0 to 18 446 744
+073 709 551 615. Corresponds to an unsigned QWORD.
+
+Examples:
+
+Dim x As ULongInt = 0
+Dim y As ULongInt = &HFFFFFFFFFFFFFFFFull
+Print "ULongInt Range = "; x; " to "; y
+
+Output:
+
+    ULongInt Range = 0 to 18446744073709551615
+Dialect Differences:
+
+Not available in the -lang qb dialect unless referenced with the alias `__Ulongint`.
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,51 @@
+USING (Namespaces)
+================
+
+Brings namespace symbols into the current scope
+
+Syntax:
+Using identifier [, identifier [, ...] ]
+
+Parameters:
+
+`identifier`
+The name of the `Namespace` that you want to use.
+
+Description:
+
+The `Using` command allows all symbols from a given namespace to be accessed
+without the namespace's name prefix. Unlike C++ but like C#, the `Namespace`
+keyword is not needed after `Using`, because individual symbols cannot be
+inherited from a namespace.
+
+Inheriting a whole namespace can save typing, but sometimes some meaning of
+the code can be lost, and conflicts with other symbols could be created. For
+example, if there is duplicated symbol in the global namespace (unnamed
+namespace), access to local symbol is captured by duplicated global symbol (in
+that case, full prefixing is required to access local symbol).
+
+Examples:
+
+Namespace Sample
+    Type T
+        x As Integer
+    End Type
+End Namespace
+
+'' Just using the name T would not find the symbol,
+'' because it is inside a namespace.
+Dim SomeVariable As Sample.T
+
+'' Now the whole namespace has been inherited into
+'' the global namespace.
+Using Sample
+
+'' This statement is valid now, since T exists
+'' without the "Sample." prefix.
+Dim OtherVariable As T
+
+
+Differences from QB:
+  * QB had the `Using` keyword, but for other purposes. Namespaces did 
+  not exist in QB.
+

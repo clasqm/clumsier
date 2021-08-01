@@ -1,0 +1,211 @@
+Conditional Variables
+=======================
+
+The built-in procedures that create, wait-for/signal, and destroy Conditional
+Variables.
+
+Preamble:
+
+A condition variable is a mechanism that allows threads to wait (without
+wasting CPU cycles) for some even to occur.
+Several threads may wait on a condition variable, until some other thread
+signals this condition variable (thus sending a notification).
+At this time, one of the threads waiting on this condition variable wakes up,
+and can act on the event. It is possible to also wake up all threads waiting
+on this condition variable by using a broadcast method on this variable.
+
+A condition variable does not provide locking. Thus, a mutex must be used
+along with the condition variable, to provide the necessary locking when
+accessing this condition variable.
+
+Conditional variable capability (and also mutex capability) can be fully used
+even with a detached thread (only its handler is no longer accessible by its
+identifier).
+
+Creating / Destructing a conditional variable
+
+`CondCreate` creates a condition variable, returning a handle identifier which
+is to be referred to when destroying the condition variable.
+Condition variables created with `CondCreate` should be destroyed when no
+longer needed or before the end of the program with `CondDestroy` (to avoid
+leaking resources in the OS).
+
+Create
+
+- Syntax:
+
+`declare function CondCreate ( ) as any ptr`
+
+- Usage:
+
+`conditionalid = CondCreate`
+
+- Return value:
+
+The `any ptr` handle `(conditionalid)` to the conditional variable created, or
+the null pointer (`0`) on failure.
+
+Destroy
+
+- Syntax:
+
+`declare sub CondDestroy ( byval conditionalid as any ptr )`
+
+- Usage:
+
+`CondDestroy ( conditionalid )`
+
+- Parameter:
+
+`conditionalid`
+
+The `any ptr` handle of the conditional variable to be destroyed.
+
+Description
+
+`CondDestroy` destroys a condition variable, freeing the resources it might
+hold.
+No threads must be waiting on the condition variable on entrance to
+`CondDestroy`.
+
+Waiting-for/Signaling a conditional variable
+
+The condition variable mechanism allows threads to suspend execution and
+relinquish the processor until some condition is true.
+
+`CondWait` stops execution of the current thread until some condition becomes
+true.
+`CondSignal` allows to restart one thread waiting on the conditional, while
+`CondBroadCast` allows to restart all threads waiting on the conditional.
+
+Wait-for
+
+- Syntax:
+
+`declare sub CondWait ( byval conditionalid as any ptr, byval mutexid as any
+ptr )`
+
+- Usage:
+
+`CondWait ( conditionalid, mutexid )`
+
+- Parameters:
+
+`conditionalid`
+
+The handle identifier of a conditional variable.
+
+`mutexid`
+
+The handle identifier of the mutex associated with this conditional variable,
+which must be locked when testing the condition and calling `CondWait`.
+
+Signal
+
+- Syntax:
+
+`declare sub CondSignal ( byval conditionalid as any ptr )`
+
+or
+
+`declare sub CondBroadCast ( byval conditionalid as any ptr )`
+
+- Usage:
+
+`CondSignal ( conditionalid )`
+
+or
+
+`CondBroadCast ( conditionalid )`
+
+- Parameter:
+
+`conditionalid`
+
+The `any ptr` handle of the conditional variable to be signaled.
+
+Description
+
+Once the conditional variable is created with `CondCreate` and the threads are
+started, one of more of them (including the implicit main thread executing
+main program) can be set in waiting for the conditional state by `CondWait`.
+They will be stopped until another thread signals by `CondSignal` that one
+among the waiting threads can restart.
+`CondBroadCast` can be used to restart all threads waiting for the
+conditional.
+
+A condition variable must always be associated with a mutex to avoid a race
+condition created by one thread preparing to wait and another thread which may
+signal the condition before the first thread actually waits on it resulting in
+a deadlock. The thread will be perpetually waiting for a signal that is never
+sent. Any mutex can be used, there is no explicit link between the mutex and
+the condition variable.
+
+When calling `CondWait`, mutex should already be locked (using the same mutex
+as one used with `CondSignal` or `CondBroadCast`).
+The detailed sequence is the following:
+
+- An atomic unlock of the mutex is applied before entering in waiting on
+the conditional variable in order to release other eventual threads using
+this mutex (this is why `CondWait` takes as arguments both the mutex and
+condition variable).
+- The thread execution is suspended and does not consume any CPU time
+until the condition variable is signaled.
+- When the condition variable becomes signaled, mutex is atomically
+re-locked.
+- The thread execution can resume after the `CondWait` statement, but is
+suspended because of the locked mutex owned by the signal-caller.
+- So, the signal-caller is then responsible for unlocking mutex in order
+that the called-thread completes the `CondWait` subroutine and that
+execution after the `CondWait` call can then really resume.
+
+`CondSignal` restarts one thread waiting. It should be called after mutex is
+locked (using the same mutex as one used with `CondWait`):
+
+- If no threads are waiting on the conditional, nothing happens (the
+signal is lost forever).
+- if several are waiting, only one is restarted:
+
+. It might be that a condition variable that has several threads waiting on it
+is signaled many times, and yet one of the threads waiting on it never
+awakened.
+. This is because it is not known which of the waiting threads is awakened
+when the variable is signaled.
+. It might be that the awakened thread quickly comes back to waiting on the
+condition variables, and gets awakened again when the variable is signaled
+again, and so on (no wake-up priority based on history is assured).
+. It is up to the programmer to make sure this situation does not occur if it
+implies bad behavior.
+
+When using `CondBroadCast`, this does not mean all threads are running
+together:
+
+- Each of them tries to lock the mutex again before returning from their
+wait function.
+- And thus they will start running one by one, each one locking the mutex,
+doing their work, and freeing the mutex before the next thread gets its
+chance to run.
+
+Note:
+
+- It is a good habit to use `CondWait` in a protected way against
+eventual spurious wake-ups.
+- For that, `CondWait` is put within a loop for checking that a Boolean
+predicate is indeed true (predicate set true by another thread just
+before executing `CondSignal` or `CondBroadCast`) when the thread has
+finished waiting:
+
+`While predicate <> True
+
+Condwait(conditionalid, mutexid)
+
+Wend
+predicate = False`
+
+- The loop can terminate only when the predicate is true.
+- On the other hand, if the predicate is already true before the thread
+reaches the loop, `CondWait` is downright skipped (allowing to take into
+account a case of `CondSignal` or `CondBroadCast` that would have been
+lost otherwise, because prematurely executed in a second thread before
+the first thread is really waiting for this).
+

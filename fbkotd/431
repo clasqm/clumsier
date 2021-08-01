@@ -1,0 +1,50 @@
+ASIN
+================
+
+Finds the arcsine of a number
+
+Syntax:
+declare function Asin ( byval number as double ) as double
+
+Usage:
+result = Asin( number )
+
+Parameters:
+
+`number`
+Sine value in the range [-1..1].
+
+Return Value:
+The arcsine of `number`, in radians, in the range [-Pi/2..Pi/2].
+
+Description:
+
+`Asin` returns the arcsine of the argument `number` as a `Double` within the
+range of -Pi/2 to Pi/2. The arcsine is the inverse of the `Sin` function. The
+returned angle is measured in radians (not degrees).
+
+`Asin` can be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Dim h As Double
+Dim o As Double
+Input "Please enter the length of the hypotenuse of a triangle: ", h
+Input "Please enter the length of the opposite side of the triangle: ", o
+Print ""
+Print "The angle between the sides is"; Asin ( o / h )
+Sleep
+
+The output would look like:
+
+
+    Please enter the length of the hypotenuse of a triangle: 5
+    Please enter the length of the opposite side of the triangle: 3
+    The angle between the sides is 0.6435011087932844
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Asin`.
+
+Differences from QB:
+New to FreeBASIC

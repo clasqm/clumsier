@@ -1,0 +1,44 @@
+SWAP
+================
+
+Exchanges the values of two variables
+
+Syntax:
+declare sub Swap ( byref a as any, byref b as any )
+
+Parameters:
+
+`a`
+A variable to swap.
+
+`b`
+A variable to swap.
+
+Description:
+
+Swaps the value of two variables, including UDT instances (swaps all data
+members).
+
+Note: When the data are referenced by a pointer, alone or within a descriptive
+structure (a UDT, for example), `Swap` only exchanges the values of the
+pointers or the contents of the descriptive structures without accessing data
+themselves.
+For var-len strings, `Swap` only exchanges the descriptors of the strings
+rather than reallocate memory for exchange all strings data characters.
+For UDTs, `Swap` simply exchanges the contents of the structures, without any
+operators or methods being called.
+
+Examples:
+
+' using swap to order 2 numbers:
+Dim a As Integer, b As Integer
+
+Input "input a number: "; a
+Input "input another number: "; b
+If a > b Then Swap a, b
+Print "the numbers, in ascending order are:"
+Print a, b
+
+Differences from QB:
+  * None
+

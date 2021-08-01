@@ -1,0 +1,64 @@
+FLIP
+================
+
+Changes the current video display page
+
+Syntax:
+declare function Flip ( byval frompage as long = -1, byval topage as long = -1
+) as long
+
+Usage:
+Flip [ frompage ] [, topage ]
+
+Parameters:
+
+`frompage`
+previous page
+
+`topage`
+new page to display
+
+Return Value:
+Returns zero (`0`) if successful, or a non-zero error code to indicate a
+failure.
+
+Description:
+
+In normal graphics mode, `Flip` is an alias for `PCopy` and `ScreenCopy`. See
+`ScreenCopy` for details.
+
+In OpenGL mode, `Flip` does a hardware page flip and displays the contents of
+the backbuffer. It is recommended that you call `Flip` regularly while in
+OpenGL mode, otherwise your app may also become unresponsive.
+
+The error code returned by `Flip` can be checked using `Err` in the next line.
+The function version of `Flip` returns directly the error code as a 32 bit
+`Long`.
+
+Examples:
+
+ScreenRes 320, 240, 32, 2    'Sets up the screen to be 320x240 in 32-bit color
+with 2 video pages.
+ScreenSet 1,0                'Sets the working page to 1 and the displayed
+page to 0
+
+
+For n As Integer = 50 To 270
+    Cls
+    Circle (n, 50),50 ,RGB(255,255,0) 'Draws a circle with a 50 pixel 
+                                      'radius in yellow on page 1
+    Flip 1,0    'Copies our circle from page 1 to page 0
+    Sleep 25
+Next
+Print "Now wasn't that neat!"
+Print "Push any key."
+Flip 1,0    'Copies our text from page 1 to page 0
+Sleep
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Flip`.
+
+Differences from QB:
+New to FreeBASIC
+

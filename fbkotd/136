@@ -1,0 +1,18 @@
+__FB_BUILD_DATE_ISO__
+========================
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FB_BUILD_DATE_ISO__
+
+Description:
+Substituted with the quoted string containing the date (`YYYY-MM-DD`) the
+compiler was built on in ISO date format.
+
+Examples:
+
+Print "Compiled with a compiler built on this date:" & __FB_BUILD_DATE_ISO__
+
+Differences from QB:
+New to FreeBASIC

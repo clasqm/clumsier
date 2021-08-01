@@ -1,0 +1,69 @@
+WHILE...WEND
+================
+
+Control flow statement for looping
+
+Syntax:
+While [condition]
+
+[statement block]
+
+Wend
+
+Description:
+The `While` statement will cause the following set of statements in the
+`statement block` to execute repeatedly if and while the expression condition
+evaluates to true.
+
+If `condition` evaluates to false when the `While` statement is first
+executed, then the `statement block` is skipped and execution resumes
+immediately following the enclosing `Wend` statement.
+
+If an `Exit While` statement is encountered inside the statement block, the
+loop is terminated, and execution resumes immediately following the enclosing
+`Wend` statement. If a `Continue While` statement is encountered, the rest of
+the `statement block` is skipped and execution resumes at the `While`
+statement.
+
+Like all control flow statements, the `While` statement can be nested, that
+is, it can be used in a statement block of another `While` statement.
+
+note: the `While` keyword is also used in the `Do...Loop` statement to
+indicate the type of comparison. Used in this way, the `Do` statement becomes
+functionally equivalent to the `While` statement, so do not confuse their
+enclosing keywords `Loop` and `Wend`, respectively.
+
+Examples:
+
+In this example, a `While` loop is used to reverse a string by iterating
+through it backward. The loop stops if index is less than `0` (`0` being the
+first index in the string).
+
+Dim As String sentence                          '' string to reverse
+sentence = "The quick brown fox jumps over the lazy dog."
+
+Dim As String ecnetnes
+Dim As Integer index
+index = Len( sentence ) \- 1                     '' point to last character
+While( index >= 0 )                             '' stop after first character
+  ecnetnes += Chr( sentence[index] )           '' append character to new
+string
+  index -= 1
+Wend
+
+Print "original: """ ; sentence ; """"
+Print "reversed: """ ; ecnetnes ; """"
+
+End 0
+
+
+Dialect Differences:
+In the -lang qb and -lang fblite dialects, variables declared inside a
+ `While`..`Wend` loop have a function-wide scope as in QB
+  * In the -lang fb and -lang deprecated dialects, variables declared 
+  inside a `While`..`Wend` block are visible only inside the block, and 
+  can't be accessed outside it.
+
+Differences from QB:
+  * None
+

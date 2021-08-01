@@ -1,0 +1,60 @@
+LEFT
+================
+
+Returns the leftmost substring of a string
+
+Syntax:
+declare function Left ( byref str as const string, byval n as integer ) as
+string
+declare function Left ( byref str as const wstring, byval n as integer ) as
+wstring
+
+Usage:
+result = Left[$]( str, n )
+
+Parameters:
+
+`str`
+The source string.
+
+`n`
+The number of characters to return from the source string.
+
+Return Value:
+Returns the leftmost substring from `str`.
+
+Description:
+
+Returns the leftmost `n` characters starting from the left (beginning) of
+`str`. If `str` is empty, then the null string (`"``"`) is returned. If `n <=
+0` then the null string (`"``"`) is returned. If `n > len(str)` then the
+entire source string is returned.
+
+Examples:
+
+Dim text As String = "hello world"
+Print Left(text, 5)
+
+will produce the output:
+ 
+ 
+    hello
+
+An Unicode example:
+
+dim text as wstring*20
+text = "Привет, мир!"
+print left(text, 6) 'displays "Привет"
+
+Platform Differences:
+
+  * DOS does not support the wide-character string version of `Left`.
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * QB does not support Unicode.
+

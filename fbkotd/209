@@ -1,0 +1,27 @@
+#IFDEF
+===================
+
+Preprocessor conditional directive
+
+Syntax:
+#ifdef symbol
+	Conditionally included statements
+#endif
+
+Description:
+Conditionally includes statements at compile time.
+
+Statements within the `#ifdef...#endif` block are included if `symbol` is
+defined and excluded (ignored) if `symbol` is not defined.
+
+`#ifdef symbol` is equivalent to `#if defined (symbol)`
+
+Examples:
+
+#DEFINE _DEBUG
+#IFDEF _DEBUG
+    ' Special statements for debugging
+#ENDIF
+
+Differences from QB:
+New to Freebasic

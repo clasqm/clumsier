@@ -1,0 +1,62 @@
+FILECOPY
+================
+
+Copies a file
+
+Syntax:
+declare function FileCopy ( byval source as zstring ptr, byval destination as
+zstring ptr ) as long
+
+Usage:
+#include "file.bi"
+FileCopy source, destination
+
+`
+or
+`
+
+#include "file.bi"
+result = FileCopy( source, destination )
+
+Parameters:
+
+`source`
+A `string` argument specifying the filename of the file to copy from. This
+file must exist.
+
+`destination`
+A `string` argument specifying the filename of the file to copy to. This file
+will be overwritten if it exists. This file should not be currently referenced
+by any open file handles.
+
+Return Value:
+Returns `0` on success, or `1` if an error occurred.
+
+Description:
+
+Copies the contents of the source file into the destination file, overwriting
+the destination file if it already exists.
+It is necessary to `#Include` either `"file.bi"` or `"vbcompat.bi"` in order
+to gain access to this function.
+
+The error code returned by `FileCopy` can be checked using `Err` in the next
+line. The function version of `FileCopy` returns directly the error code as a
+32 bit `Long`.
+
+Examples:
+
+#include "file.bi"
+FileCopy "source.txt", "destination.txt"
+
+
+Platform Differences:
+
+  * Linux requires the `filename` case matches the real name of the file. 
+  Windows and DOS are case insensitive.
+  * Path separators in Linux are forward slashes `/`. Windows uses 
+  backward slashes `\` but it allows forward slashes. DOS uses backward 
+  slashes `\`.
+
+Differences from QB:
+  * New to FreeBASIC. Existed in Visual Basic.
+

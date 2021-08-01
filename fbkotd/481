@@ -1,0 +1,54 @@
+SCREENGLPROC
+================
+
+Gets the address of an OpenGL procedure
+
+Syntax:
+declare function ScreenGLProc ( byref procname as const string ) as any ptr
+
+Parameters:
+
+`procname`
+name of the procedure to retrieve the address of
+
+Description:
+
+This function can be used to get the address of any OpenGL procedure, to be
+used to retrieve the pointers to new functions associated with OpenGL
+extensions. If given procedure named `procname` cannot be found,
+`screenglproc` will return NULL (`0`).
+
+Examples:
+
+'' include fbgfx.bi for some useful definitions
+#include "fbgfx.bi"
+
+Dim SwapInterval As Function(ByVal interval As Integer) As Integer
+Dim extensions As String
+
+'' Setup OpenGL and retrieve supported extensions
+ScreenRes 640, 480, 32,, FB.GFX_OPENGL
+ScreenControl FB.GET_GL_EXTENSIONS, extensions
+
+If (InStr(extensions, "WGL_EXT_swap_control") <> 0) Then
+    '' extension supported, retrieve proc address
+    SwapInterval = ScreenGLProc("wglSwapIntervalEXT")
+    If (SwapInterval <> 0) Then
+        '' Ok, we got it. Set OpenGL to wait for vertical sync on buffer swaps
+        SwapInterval(1)
+    End If
+End If
+
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Screenglproc`.
+
+Platform Differences:
+
+  * Not available for DOS target.
+
+Differences from QB:
+New to FreeBASIC
+

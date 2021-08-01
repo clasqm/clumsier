@@ -1,0 +1,61 @@
+CSNG
+================
+
+Converts numeric or string expression to `Single` precision floating point
+
+Syntax:
+declare function Csng ( byval expression as datatype ) as single
+
+Type typename
+
+declare operator cast ( ) as single
+
+End Type
+
+Usage:
+result = Csng( numeric expression )
+result = Csng( string expression )
+result = Csng( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Single` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Single` precision value.
+
+Description:
+
+The `Csng` function returns a 32-bit `Single` value. The function does not
+check for an overflow, so be sure not to pass a value outside the
+representable range of the `Single` data type. The name can be explained as
+'Convert to SiNGle'.
+
+If the argument to `Csng` is a string expression, it is first converted to
+numeric by using `Val`.
+
+Examples:
+
+' Using the CSNG function to convert a numeric value
+
+'Create an SINGLE variable
+Dim numeric_value As Single
+
+'Convert a numeric value
+numeric_value = CSng(-12345.123)
+
+'Print the result, should return -12345.123
+Print numeric_value
+Sleep
+
+
+Differences from QB:
+  * The string argument was not allowed in QB
+

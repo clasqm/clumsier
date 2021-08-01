@@ -1,0 +1,84 @@
+OPEN CONS
+================
+
+Opens the console's standard input (stdin) or output (stdout) streams for use
+in file operations.
+
+Syntax:
+Open Cons As [#]filenumber
+Open Cons For Input As [#]filenumber
+Open Cons For Output As [#]filenumber
+
+Usage:
+result = Open Cons( [For {Input|Output}[,]] As filenumber )
+
+`(or using the QB-like syntax,)`
+
+Open Cons [For {Input|Output}] As filenumber
+
+Parameters:
+
+`filenumber`
+An available file number to bind to the stdin or stdout stream, which can be
+found with `Freefile`.
+
+Return Value:
+In the first usage, `Open Cons()` returns a 32 bit `Long`: a zero (0) on
+success and a non-zero error code otherwise.
+
+Description:
+
+`Open Cons` opens the console's stdin or stdout streams for reading or
+writing. A file number is bound to the stream, which is used in subsequent
+file operations, such as `Input #`. An available file number can be retrieved
+with `Freefile`.
+
+The `Input` file mode opens the stdin stream for reading file operations, such
+as `Line Input #`, while the `Output` file mode opens the stdout stream for
+writing file operations, such as `Print #`. The `Output` file mode is the
+default if not specified.
+
+The stdin and stdout streams are the ones used when the calling process' input
+or output is redirected (piped) by OS commands, or when it is opened with
+`Open Pipe`.
+
+To open both the stdin and stdout streams for file operations, a process must
+use multiple file numbers.
+
+The error code returned by `Open Cons` can be checked using `Err` in the next
+line. The function version of `Open Cons` returns directly the error code as a
+32 bit `Long`.
+
+Warning: Presently, `Open Cons` does not work as described above. Without any
+file mode specifier, a runtime error 1 (illegal function call) occurs. With
+the `Input` file mode specifier, the only input mode is well supported. But
+with the `Output` file mode specifier, input and output modes are
+simultaneously supported.
+
+Runtime errors:
+
+`Open Cons` throws one of the following runtime errors:
+
+(`1`) Illegal function call
+
+  * `filenumber` was not free at the time. use `Freefile` to ensure 
+  that `filenumber` is free.
+
+Examples:
+
+Dim a As String
+
+Open Cons For Input As #1
+Open Cons For Output As #2
+
+Print #2,"Please write something and press ENTER"
+Line Input #1,a
+Print #2, "You wrote : ";a
+
+Close
+Sleep
+
+
+Differences from QB:
+  * In QB the syntax was `OPEN "CON:" FOR INPUT|OUTPUT AS [#] filenumber`
+

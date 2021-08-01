@@ -1,0 +1,32 @@
+OPTION NOGOSUB
+================
+
+Disables support for `Gosub` and `On Gosub`.
+
+Syntax:
+Option Nogosub
+
+Description:
+`Option Nogosub` disables support for `Gosub` and `Return` (from gosub).
+
+Because `Return` could mean return-from-gosub or return-from-procedure,
+`Option Gosub` and `Option Nogosub` can be used to enable and disable `Gosub`
+support. When `Gosub` support is disabled, `Return` is then recognized as
+return-from-procedure.
+
+Examples:
+
+'' Compile with the "-lang qb" compiler switch
+'$lang: "qb"
+'' turn off gosub support
+Option nogosub
+Function foo() As Integer
+    Return 1234
+End Function
+Print foo
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC

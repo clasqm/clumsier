@@ -1,0 +1,62 @@
+HIWORD
+================
+
+Gets the second 16bit word of the operand.
+
+Syntax:
+#define Hiword( expr ) ((Cast(Uinteger, expr) and &hFFFF0000) shr 16)
+
+Usage:
+result = Hiword( expr )
+
+Parameters:
+
+`expr`
+A numeric expression, converted to an `Uinteger` value.
+
+Return Value:
+Returns the value of the high 16bit word of the low 32bit dword of expr.
+
+Description:
+
+This macro converts the numeric expression `expr` to an `Uinteger` value, then
+expands to an `Uinteger` representing the value of its second 16bit word -
+that is the most-significant (high) 16bit word of the least-significant (low)
+32bit dword of expr.
+
+Examples:
+
+Dim N As UInteger
+
+'Note there are 32 bits
+N = &b10000000000000011111111111111111
+
+Print "N is                                       "; N
+Print "The binary representation of N is          "; Bin(N)
+Print "The most significant word (MSW) of N is    "; HiWord(N)
+Print "The least significant word (LSW) of N is   "; LoWord(N)
+Print "The binary representation of the MSW is    "; Bin(HiWord(N))
+Print "The binary representation of the LSW is    "; Bin(LoWord(N))
+
+Sleep
+
+
+The output would look like:
+
+ 
+ 
+    N Is                                       2147614719
+    The Binary representation of N Is          10000000000000011111111111111111
+    The most significant word (MSW) of N Is    32769
+    The least significant word (LSW) of N Is   65535
+    The Binary representation of the MSW Is    1000000000000001
+    The Binary representation of the LSW Is    1111111111111111
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__HIWORD`.
+
+Differences from QB:
+New to FreeBASIC
+

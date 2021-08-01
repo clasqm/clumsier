@@ -1,0 +1,42 @@
+NEXT
+================
+
+Control flow statement to mark the end of a `For...Next` loop.
+
+Syntax:
+Next [ identifier_list ]
+
+Description:
+Indicates the end of a statement block associated with a matching `For`
+statement.
+
+When `Next` is used on its own without an identifier_list, it closes the most
+recent `For` statement block.
+
+`identifier_list` is optional and may be one or more variable names separated
+by commas. This form of the `Next` statement is retained for compatibility
+with QB. `identifier_list`, if given, must match the identifiers used in the
+associated `For` statements in reverse order, from inner to outer.
+
+Examples:
+
+For i As Integer = 1 To 10
+    For j As Integer = 1 To 2
+        ' ...
+    Next
+Next
+
+For i As Integer = 1 To 10
+    For j As Integer = 1 To 2
+        ' ...
+    Next j
+Next i
+
+For i As Integer = 1 To 10
+For j As Integer = 1 To 2
+    ' ...
+Next j,i
+
+Differences from QB:
+  * `Byref` arguments cannot be used as counters.
+

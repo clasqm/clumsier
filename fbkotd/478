@@ -1,0 +1,65 @@
+DATEVALUE
+================
+
+Returns a Date Serial from a string
+
+Syntax:
+declare function DateValue ( byref date_string as string ) as double
+
+Usage:
+#include "vbcompat.bi"
+result = DateValue( date_string )
+
+Parameters:
+
+`date_string`
+the string to convert to a date serial
+
+Return Value:
+Returns a Date Serial from a date string.
+
+Description:
+
+The date string must be in the format set in the regional settings of the
+Operating System.
+
+`DateValue( Date() )` will work correctly only if the regional settings
+specify the same short date format QB used (`mm-dd-yyyy`). Consider using the
+`Now` function in the expression `Fix(Now())` to obtain the current date as a
+date serial.
+
+The compiler will not recognize this function unless `vbcompat.bi` or
+`datetime.bi` is included.
+
+Examples:
+
+#include "vbcompat.bi"
+
+Dim As Integer v1, v2
+Dim As String  s1, s2
+
+Print "Enter first date: ";
+Line Input s1
+
+If IsDate( s1 ) = 0 Then
+  Print "not a date"
+  End
+End If
+
+Print "Enter second date: ";
+Line Input s2
+
+If IsDate( s2 ) = 0 Then
+  Print "not a date"
+  End
+End If
+
+'' convert the strings to date serials
+v1 = DateValue( s1 )
+v2 = DateValue( s2 )
+
+Print "Number of days between dates is " & Abs( v2 - v1 )
+
+
+Differences from QB:
+  * Did not exist in QB. This function appeared in PDS and VBDOS

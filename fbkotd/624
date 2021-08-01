@@ -1,0 +1,67 @@
+FIELD
+================
+
+Specifies field alignment.
+
+Syntax:
+Type|Union typename Field = { 1 | 2 | 4 }
+
+...
+
+End Type|Union
+
+Description:
+`Field` can be used to pack `Types` or `Unions` more tightly than the default
+layout. The most commonly used value is `Field = 1`, which causes the `Type`
+or `Union` to be packed as tightly as possible, without any padding bytes
+being added between the fields or at the end of the `Type`. `Field` can only
+be used to decrease field alignment, but it cannot be used to increase it. In
+order to add padding bytes, a `Union` with appropriate members could be used
+instead.
+
+Examples:
+
+Type bitmap_header Field = 1
+    bfType          As UShort
+    bfsize          As ulong
+    bfReserved1     As UShort
+    bfReserved2     As UShort
+    bfOffBits       As ulong
+    biSize          As ulong
+    biWidth         As ulong
+    biHeight        As ulong
+    biPlanes        As UShort
+    biBitCount      As UShort
+    biCompression   As ulong
+    biSizeImage     As ulong
+    biXPelsPerMeter As ulong
+    biYPelsPerMeter As ulong
+    biClrUsed       As ulong
+    biClrImportant  As ulong
+End Type
+
+Dim bmp_header As bitmap_header
+
+'Open up bmp.bmp and get its header data:
+'Note: Will not work without a bmp.bmp to load . . .
+Open "bmp.bmp" For Binary As #1
+
+    Get #1, , bmp_header
+   
+Close #1
+
+Print bmp_header.biWidth, bmp_header.biHeight
+
+Sleep
+
+
+Dialect Differences:
+In the -lang qb dialect, the compiler assumes `Field = 1` by default, if 
+no other `Field` was specified, causing all structures to be tightly packed,
+without added padding, as in QB.
+
+Differences from QB:
+  * In QB `Field` was used to define fields in a file buffer at run time. 
+  This feature is not implemented in FB, so the keyword has been redefined. 
+  To define fields in a file buffer, `Types` must be used.
+

@@ -1,0 +1,64 @@
+THREADDETACH
+================
+
+Releases a thread handle without waiting for the thread to finish
+
+Syntax:
+Declare Sub ThreadDetach ( Byval id As Any Ptr )
+
+Usage:
+#include "fbthread.bi"
+ThreadDetach( id )
+
+Parameters:
+
+`id`
+`Any Ptr` handle of a thread created by `ThreadCreate` or `ThreadCall`
+
+Description:
+
+ThreadDetach releases resources associated with a thread handle returned by
+`ThreadCreate` or `ThreadCall`. The thread handle will be destroyed by
+ThreadDetach and cannot be used anymore.
+Unlike `ThreadWait`, ThreadDetach does not wait for the thread to finish and
+thread execution continues independently. Any allocated resources will be
+freed once the thread exits.
+
+In order to avoid memory leaks, the safe way to end a thread is to always
+signal to it that it must end, and then call `ThreadWait` on that thread
+except if ThreadDetach has previously been called.
+
+Note: As ThreadDetach destroys the thread handle, `ThreadWait` can no longer
+check for the thread ending, and even the use of `ThreadWait` becomes
+unpredictable (may crash the program). The use between `ThreadWait` and
+ThreadDetach must be exclusive.
+But mutexes and conditional variables can also be used with detached threads.
+
+Examples:
+
+#include "fbthread.bi"
+
+Sub mythread( ByVal param As Any Ptr )
+    Print "hi!"
+End Sub
+
+Var thread = ThreadCreate( @mythread )
+threaddetach( thread )
+
+threaddetach( ThreadCreate( @mythread ) )
+
+Sleep
+
+
+
+Dialect Differences:
+Threading is not allowed in the -lang qb dialect.
+
+Platform Differences:
+
+  * ThreadDetach is not available with the DOS version of FreeBASIC, because 
+  multithreading is not supported by DOS kernel nor the used extender.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,38 @@
+CPTR
+================
+
+Converts a pointer expression to a specified data type pointer
+
+Syntax:
+Cptr( PointerDataType, expression )
+
+Description:
+Converts `expression` to `PointerDataType`.
+
+`PointerDataType` must be a `Pointer` type (e.g. a DataType `Ptr` or an `Any`
+`Ptr`), or a `Type (Alias)` to one.
+`expression` may have a different pointer type or be an `Integer`.
+
+  * Note: Currently, FB does not actually enforce that `PointerDataType`
+  must be a pointer. This will likely change in future versions though.
+  Currently, it may display a warning if you try to convert to a non-pointer
+  (for any conversion type if you compile with the `-w pedantic` compiler
+  switch).
+
+Examples:
+
+Dim intval As Integer
+Dim intptr As Integer Ptr
+intval = &h0080
+intptr = @intval
+'' will print -128 and 128, as the first expression will be "seen" as an
+signed byte
+Print *CPtr( Byte Ptr, intptr ), *intptr
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Cptr`.
+
+Differences from QB:
+New to FreeBASIC
+

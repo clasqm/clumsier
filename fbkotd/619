@@ -1,0 +1,82 @@
+SCREENINFO
+================
+
+Retrieves information about current video mode or the desktop.
+
+Syntax:
+declare sub Screeninfo ( byref w as integer = 0, byref h as integer = 0, byref
+depth as integer = 0, byref bpp as integer = 0, byref pitch as integer = 0,
+byref rate as integer = 0, byref driver as string = "``" )
+
+Usage:
+Screeninfo [ w ] [, [ h ] [, [ depth ] [ , [ bpp ] [ , [ pitch ] [ , [ rate ]
+[, driver ]]]]]
+
+Parameters:
+
+`w`
+Width.
+
+`h`
+Height.
+
+`depth`
+Color depth in bits.
+
+`bpp`
+Bytes per pixel.
+
+`pitch`
+Bytes per scan line.
+
+`rate`
+Refresh rate.
+
+`driver`
+Driver name.
+
+Description:
+
+This function can be useful to get current mode informations like graphics
+driver name, color depth, screen size and more.
+
+If `Screeninfo` is called when no graphics mode is set, it returns the
+information about the desktop.
+
+Here's a description of available fields:
+
+w Width of the screen in pixels
+h Height of the screen in pixels
+depth Current pixel format bits per pixel: this can be 1, 2, 4, 8, 16, or 32
+bpp Bytes per pixel
+pitch Size of a framebuffer row in bytes
+rate Current refresh rate, or 0 if unknown
+driver Name of current graphics driver in use, like DirectX (Direct2D added on
+new systems) or X11
+
+
+Examples:
+
+Dim w As Integer, h As Integer
+Dim depth As Integer
+Dim driver_name As String
+
+Screen 15, 32
+' Obtain info about current mode
+ScreenInfo w, h, depth,,,,driver_name
+Print Str(w) \+ "x" \+ Str(h) \+ "x" \+ Str(depth);
+Print " using " \+ driver_name + " driver"
+Sleep
+' Quit graphics mode and obtain info about desktop
+Screen 0
+ScreenInfo w, h, depth
+Print "Desktop running at " \+ Str(w) \+ "x" \+ Str(h) \+ "x" \+ Str(depth);
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Screeninfo`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,38 @@
+OBJECT
+================
+
+Built-in type providing run-time type information
+
+Syntax:
+type object
+    as fb_BaseVT ptr vtable_ptr
+    declare constructor()
+end type
+
+Usage:
+
+type typename extends object
+end type
+dim variable as object
+
+Description:
+Object is a built-in type which provides Run-Time Type Information (RTTI) for
+all types derived from it using `Extends`, allowing them to be used with
+`Operator Is`, and to support `Virtual` and `Abstract` methods.
+
+Extending the built-in Object type allows to add an extra hidden vtable
+pointer field at the top of the `Type`. The vtable is used to dispatch
+`Virtual` and `Abstract` methods and to access information for run-time type
+identification used by `Operator Is`.
+
+Examples:
+
+See the `Operator Is` page, the `Virtual` and `Abstract` pages.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Object`.
+
+Differences from QB:
+New to FreeBASIC
+

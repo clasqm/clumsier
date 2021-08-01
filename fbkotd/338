@@ -1,0 +1,32 @@
+User Input (Runtime Library)
+================
+
+Statements and procedures (from runtime library) that get input from the user.
+
+Description:
+
+These statements and procedures allow access to the keyboard buffer, and
+provide ways of getting input from the user.
+
+
+Reading values from the keyboard buffer
+##INPUT
+
+Reads values from the keyboard buffer.
+##LINE INPUT
+
+Reads a line of text from the keyboard buffer.
+##INPUT()
+
+Reads a number of characters from the keyboard buffer, file or device.
+##WINPUT()
+
+Reads a number of wide characters from the keyboard buffer, file or device.
+Reading keys from the keyboard buffer
+
+##INKEY
+Gets the first key, if any, waiting in the keyboard buffer.
+
+##GETKEY
+Gets and waits for the first key in the keyboard buffer.
+

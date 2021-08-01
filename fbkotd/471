@@ -1,0 +1,45 @@
+END (Block)
+================
+
+Indicates the end of a compound statement block.
+
+Syntax:
+End { Sub | Function | If | Select | Type | Enum | Scope | With | Namespace |
+Extern | Constructor | Destructor | Operator | Property }
+
+Description:
+Used to indicate the end of the most recent code block.
+
+The type of the block must be included in the command: one of `Sub`,
+`Function`, `If`, `Select`, `Type`, `Enum`, `Scope`, `With`, `Namespace`,
+`Extern`, `Constructor`, `Destructor`, `Operator`, or `Property`.
+
+Ending a `Sub`, `Function`, `If`, `Select`, `Scope`, `Constructor`,
+`Destructor`, `Operator`, or `Property` block also closes the scope for
+variables defined inside that block. When the scope is closed, variables
+defined inside the scope are destroyed, calling their destructors as needed.
+
+To end a program, see `End (Statement)`.
+
+Examples:
+
+Declare Sub checkvalue( n As Integer )
+
+Dim variable As Integer
+
+Input "Give me a number: ", variable
+If variable = 1 Then
+Print "You gave me a 1"
+Else
+Print "You gave me a big number!"
+End If
+checkvalue(variable)
+
+Sub checkvalue( n As Integer )
+Print "Value is: " & n
+End Sub
+
+
+Differences from QB:
+  * none
+

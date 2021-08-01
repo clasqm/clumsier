@@ -1,0 +1,67 @@
+<html>
+<head><style> table,th {border: 1px solid black; padding: 5px;}
+</style>
+</head>
+<body>
+<h1> CLUMSIER</h1>
+</p><p>
+CLUMSIER is an lightweight <a href="www.freebasic.net">FreeBASIC</a> IDE for console on FreeDOS or Linux, written in FreeBASIC itself.
+</p><p>
+<p><image alt=clumsier IDE src="./clumsier.png" /></p>
+</p><p>
+<em><strong>Linux Users:<strong> When I say "for console", I mean the big black screen you get when you press CTRL-ALT-F1. It will run in a Terminal Emulator under X11 like Gnome-Terminal or Xterm (in fact, that is how I made the screenshot above), but those emulators may swallow up the keystrokes for their own use before they ever reach my program. You can probably remap the keystrokes in your terminal emulator to some extent.<em>
+</p><p>
+This branch represents my edits to the original <a href="https://github.com/lucaevangelisti/clumsy">Clumsy by Luca Evangelisti</a>. I'm doing this mostly to learn the FreeBASIC dialect, and also because I want a console FB IDE for myself.
+</p><p>
+CLUMSIER is controlled mostly with function keys, but also has Control-key shortcuts. For example, ctrl-s, ctrl-x and ctrl-v behave like the normal save cut and paste keys (note that cut and paste work on whole lines). Some more obscure function keys are not displayed on the onscreen help but can be revealed with F9. On some setups F11 and F12 may not be detected properly (they were later additions to the PC standard) and you will have to use the CTRL equivalents instead.
+</p><p>
+FreeBASIC is a complex language, indeed some people claim its creators are trying to turn BASIC into C++. To assist in learning this dialect, The Linux version of Clumsier has a "Keyword of the Day" feature that will display a random part of the FreeBASIC help files. This should be used in conjunction with the normal FreeBASIC manual, not instead of it! It turned out that the DOS filesystem in unable to handle the demands this feature places on the file system, and it has not been enabled there.
+</p><p>
+Press F9 for a complete Help display.
+</p><p>
+<h2> Compilation</h2>
+</p><p>
+You will need FreeBASIC to be installed.
+</p><p>
+<h3> FreeDOS</h3>
+</p><p>
+Use the included <em>COMPILE.BAT</em>. Just issuing the command COMPILE should do it. The batch file tries to find the <em>fbc</em> compiler, but if yours is installed in a weird place, just open up the batch file in a text editor and see what it does. It's not that complicated.
+</p><p>
+<h3> Linux</h3>
+</p><p>
+Use the included <em>compile</em> shell script, as follows: <em>./compile.sh</em>. This <em>might</em> also work on the BSDs, but I have no way to test that, sorry.
+</p><p>
+<h2> Installation</h2>
+</p><p>
+<h3> FreeDOS</h3>
+</p><p>
+Use the included <em>INSTALL.BAT</em> after compiling. Just issuing the command INSTALL should do it. The batch file tries to find the directory containing the <em>fbc</em> compiler, but if yours is installed in a weird place, just open up the batch file in a text editor and see what it does. It's not that complicated. If it is found, CLUMSIER will be installed in a subdirectory of that. A launcher batch file on your PATH will be created to let you start CLUMSIER with a single command.
+</p><p>
+<h3> Linux</h3>
+</p><p>
+Use the included <em>install</em> shell script after compiling, as follows: <em>./install.sh</em>. This will install CLUMSIER into ~/.comfig/clumsier, project files in ~/clumsier<em>prj and a launcher script into /us/local/bin.
+</p><p>
+<h2> Usage</h2>
+</p><p>
+<ul><li>F1 or CTRL-N &#45 Open a new file.</li>
+<li>F2 or CTRL-O &#45 Open an existing file.</li>
+<li>F3 or CTRL-S &#45 Save the current file.</li>
+<li>F4 or CTRL-Z &#45 Edit the location of the FreeBasic Compiler.</li>
+<li>F5 or CTRL-R &#45 Compile and run your program.</li></ul>
+</p><p>
+<ul><li>F6 or CTRL-X &#45 Cut the current line to memory.</li>
+<li>F7           &#45 Copy the current line to memory.</li></ul></p>
+<strong>Note:</strong> CTRL-C is disabled because it crashes the program.<br />
+<strong>Note:</strong> These commands do not interact with the Linux system clipboard.</p>
+<ul><li>F8 or CTRL-V &#45 Paste a line from memory to the current cursor position.</li>
+<li>F9           &#45 Help</li>
+<li>F10 or CTRL-P &#45 Prettyprinting: change all FreeBASIC keywords to uppercase.</li>
+<li>F11 or CTRL-F &#45 In Linux, display a random Keyword of the Day. Not used in FreeDOS</li>
+<li>F12 or CTRL-B &#45 Create a backup file</li>
+<li>ESC or CTRL-Q &#45 Quit</li></ul>
+</p><p>
+</p><p>
+(C) Michel Clasquin 2021, Released under GPLv3.
+</p><p>
+</body>
+</html>

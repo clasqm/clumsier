@@ -1,0 +1,31 @@
+#ELSEIF
+================
+
+Preprocessor conditional directive
+
+Syntax:
+#if (expression1)
+	' Conditionally included statements if expression1 is True
+#elseif (expression2)
+	' Conditionally included statements if expression2 is True
+#else
+	' Conditionally included statements if both
+	' expression1 and expression2 are False
+#endif
+
+Description:
+#elseif can be added to an `#if` block to provide an additional conditions.
+
+Examples:
+
+#DEFINE WORDSIZE 16
+#IF (WORDSIZE = 16)
+  ' Do some some 16 bit stuff
+#ELSEIF (WORDSIZE = 32)
+  ' Do some some 32 bit stuff
+#ELSE
+  #ERROR WORDSIZE must be set To 16 Or 32
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

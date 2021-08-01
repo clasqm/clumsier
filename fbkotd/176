@@ -1,0 +1,17 @@
+Compiler Option: -earray
+==========================
+Enable array bounds checking
+
+Syntax:
+-earray
+
+Description:
+Add array bounds error checking in generated run-time code. A run-time error
+is generated if an array index attempts to access an array element that is
+outside the bounds of the array.
+
+-earray` is automatically implied by the `-exx` option.
+
+`__FB_ERR__` can be used to determine in user source code if the `-earray`
+option was specified or implied on the command line.
+

@@ -1,0 +1,45 @@
+Compiler Switches
+==================
+
+Statements that affect how code is compiled.
+
+Description
+	These statements affect how the compiler declares variables,
+	arrays and procedures, parses string literals, passes procedure
+	parameters and more.
+
+Metacommands
+	$DYNAMIC
+	$INCLUDE
+	$STATIC
+	$LANG
+
+Compiler Options
+	OPTION BASE
+	OPTION BYVAL
+	OPTION DYNAMIC
+	OPTION ESCAPE
+	OPTION EXPLICIT
+	OPTION GOSUB
+	OPTION NOGOSUB
+	OPTION NOKEYWORD
+	OPTION PRIVATE
+	OPTION STATIC
+
+Set Default Datatypes
+	DEFBYTE
+	DEFDBL
+	DEFINT
+	DEFLNG
+	DEFLONGINT
+	DEFSHORT
+	DEFSNG
+	DEFSTR
+	DEFUBYTE
+	DEFUINT
+	DEFULONGINT
+	DEFUSHORT
+
+Dialect Differences:
+	DEFLONGINT available only in the [-lang fblite] dialect.
+	OPTION statements are available only in the [-lang fblite] and [-lang qb] dialects only.

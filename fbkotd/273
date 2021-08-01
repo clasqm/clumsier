@@ -1,0 +1,33 @@
+SEEK (Function)
+================
+
+Gets the position of the next read/write operation for a file or device
+
+Syntax:
+declare function Seek ( byval filenum as long ) as longint
+
+Parameters:
+`filenum`
+file number of an open file
+
+Return Value:
+The file position where the next read or write operation will take place.
+
+Description:
+The position is given in records if the file was opened in `Random` access
+mode, in bytes in any other case. The file position returned is 1-based, so
+the first record of a file is 1.
+
+The `Seek` statement is used to set the position of the next read or write
+operation.
+
+Examples:
+
+Dim f As Integer, position As Integer
+f = FreeFile
+Open "file.ext" For Binary As #f
+position = Seek(f)
+Close #f
+
+Differences from QB:
+  * None

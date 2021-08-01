@@ -1,0 +1,40 @@
+CONST
+================
+
+Non-modifiable variable declaration.
+
+Syntax:
+Const symbolname1 [AS DataType] = value1 [, symbolname2 [AS DataType] =
+value2, ...]
+
+or
+
+Const [AS DataType] symbolname1 = value1 [, symbolname2 = value2, ...]
+
+Description:
+Declares non-modifiable constant data that can be integer or decimal
+(floating-point) numbers or strings. The constant type will be inferred if
+`DataType` isn't explicitly given.
+
+Specifying `String * size`, `Zstring * size` or `Wstring * size` as `DataType`
+is not allowed.
+Specifying `String` as `DataType` is tolerated but without effect because the
+resulting type is always a `Zstring * size`.
+
+Constants follow visibility rules similar to those of variables for Namespace
+blocks, Type blocks, and compound block statements.
+
+Examples:
+
+Const Red = RGB(252, 2, 4)
+Const Black As UInteger = RGB(0, 0, 0)
+Const Text = "This is red text on a black bkgnd."
+
+Locate 1, 1
+Color Red, Black
+Print Text
+Sleep
+End
+
+Differences from QB:
+  * QB does not support the `as` `datatype` syntax.

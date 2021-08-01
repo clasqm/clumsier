@@ -1,0 +1,23 @@
+__FILE__
+============
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FILE__
+
+Description:
+Substituted with the quoted source file name where used.
+An example of normal use is to report wrong values in debugging.
+
+Examples:
+
+Dim a As Integer
+If a<0 Then
+    Print "Error: a = " & a & " in " & __FILE__ & " (" & __FUNCTION__ & ") line " & __LINE__
+End If
+
+    Error: a = -32767 in test.bas (MAIN) line 47
+
+Differences from QB:
+Did not exist in QB

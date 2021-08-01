@@ -1,0 +1,10 @@
+libvorbis
+===============
+
+Ogg Vorbis audio compression library
+
+Website: http://xiph.org/vorbis/
+Platforms supported: Win32, Linux
+Headers to include: vorbis/vorbisenc.bi, vorbis/vorbisfile.bi
+Header version: from 2007
+

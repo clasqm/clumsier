@@ -1,0 +1,18 @@
+CASE
+======
+
+Control flow statement
+
+Syntax:
+	Case expression
+
+Examples:
+	See example at `Select Case`.
+
+Differences from QB:
+	None
+
+See also:
+	Select Case
+
+

@@ -1,0 +1,54 @@
+ON...GOSUB
+================
+
+Calls a label based on an expression
+
+Syntax:
+On expression Gosub label1[, ...]
+
+Description:
+Branches to different labels depending on the value of expression. An
+expression value of 1 will branch to the first label, a value of 2 to the
+second, etc. If the value of expression is zero (0) or greater than the number
+of items in the list, execution continues on the next statement following the
+`On...Gosub`.
+
+This statement behaves exactly like `Gosub` and execution may return to the
+statement following the `On...Gosub` using `Return`.
+
+It is recommended that the structured `Select Case` conditional statement be
+used instead of `On...Gosub`.
+
+Examples:
+
+'' Compile with -lang qb
+
+'$lang: "qb"
+
+choice = 3
+On choice GoSub labela, labelb, labelc
+Print "Good bye."
+End
+
+labela:
+Print "choice a"
+Return
+
+labelb:
+Print "choice b"
+Return
+
+labelc:
+Print "choice c"
+Return
+
+
+Dialect Differences:
+Only available in the -lang qb and -lang fblite dialects.
+  * `On Gosub` support is disabled by default in the -lang fblite unless 
+  the `Option Gosub` statement is used.
+
+Differences from QB:
+  * FreeBASIC does not generate a run-time error if `expression` is 
+  negative or greater than 255.
+

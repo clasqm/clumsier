@@ -1,0 +1,57 @@
+LOCK
+================
+
+Restricts read/write access to a file or portion of a file
+
+Syntax:
+Lock #filenum, record
+Lock #filenum, start To end
+
+Parameters:
+
+`filenum`
+
+The file number used to `Open` the file.
+
+`record`
+The record (`Random` files) to lock.
+
+`start`
+The first byte position (`Binary` files) to lock from.
+
+`end`
+The last byte position (`Binary` files) to lock to.
+
+Description:
+
+`Lock` temporarily restricts access by other threads or programs to a file, or
+portion of a file, usually to allow safe writing to it.
+
+After modifying the data, an `Unlock` with the same parameters as the `Lock`
+should be issued.
+
+Note: This command does not always work, neither as documented nor as
+expected. It appears to be broken at the moment.
+
+Examples:
+
+'' e.g. locking a file, reading 100 bytes, and unlocking it.
+'' To run, make sure there exists a file called 'file.ext'
+'' in the current directory that is at least 100 bytes.
+
+Dim array(1 To 100) As Integer
+Dim f As Integer, i As Integer
+f = FreeFile
+Open "file.ext" For Binary As #f
+Lock #f, 1 To 100
+For i = 1 To 100
+    Get #f, i, array(i)
+Next
+Unlock #f, 1 To 100
+Close #f
+
+
+Differences from QB:
+  * Currently, FB cannot implicitly lock the entire file
+  * In `Random` mode, FB cannot lock a range of records
+

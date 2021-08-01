@@ -1,0 +1,28 @@
+USHORT
+========================
+
+Standard data type: 16 bit unsigned.
+Equivalent to `Unsigned Short`.
+
+Syntax:
+dim variable as Ushort
+
+Description:
+16-bit unsigned whole-number data type. Can hold values from 0 to 65535.
+
+Examples:
+
+  Dim x As UShort = 0
+  Dim y As UShort = &HFFFF
+  Print "UShort Range = "; x; " to "; y
+
+Output:
+
+    UShort Range = 0 to 65535
+
+Dialect Differences:
+  * Not available in the -lang qb dialect unless referenced with the
+  alias `__Ushort`.
+
+Differences from QB:
+  * New to FreeBASIC

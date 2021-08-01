@@ -1,0 +1,38 @@
+Constants
+================
+
+Description:
+
+Constants are numbers (including booleans) or strings which cannot be changed
+after they are defined. For example, 5 will always mean the same number.
+
+In FreeBASIC, a constant definition differs from a variable definition by
+usage of the `Const` command.
+
+Such constants are then available globally, meaning that once defined, you can
+use the word to refer to a constant anywhere in your program.
+
+After being defined with the `Const` command, constants cannot be altered. If
+code tries to alter a constant, an error message will result upon code
+compilation.
+
+Examples:
+
+Declare Sub PrintConstants ()
+Const FirstNumber = 1
+Const SecondNumber = 2
+Const FirstString = "First string."
+Const FirstBoolean = False
+Const SecondBoolean = True
+Print FirstNumber, SecondNumber 'This will print 1      2
+Print FirstString 'This will print First string.
+Print FirstBoolean, SecondBoolean 'This will print false      true
+Print
+PrintConstants ()
+
+Sub PrintConstants ()
+    Print FirstNumber, SecondNumber 'This will also print 1        2
+    Print FirstString 'This will also print First string.
+    Print FirstBoolean, SecondBoolean 'This will also print false      true
+End Sub
+

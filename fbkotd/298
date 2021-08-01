@@ -1,0 +1,39 @@
+AS
+================
+
+Part of a declaration which specifies a data type, or part of the Open
+statement which specifies a file handle.
+
+Syntax:
+symbolname As datatype
+open ... As #filenumber
+type ... As datatype
+
+Description:
+`As` is used to declare the type of variables, fields or arguments and is also
+used in the `Open` statement to determine the file handle. `As` is also used
+with the `Type (Alias)` syntax, similar to C's typedef statement.
+
+Examples:
+
+'' don't try to compile this code, the examples are unrelated
+Declare Sub mySub (X As Integer, Y As Single, Z As String)
+' ...
+Dim X As Integer
+' ...
+
+Type myType
+  X As Integer
+  Y As Single
+  Z As String
+End Type
+' ...
+
+Type TheNewType As myType
+' ...
+
+Open "test" For Input As #1
+' ...
+
+Differences from QB:
+The Type (Alias) syntax was not supported in QB.

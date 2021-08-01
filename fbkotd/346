@@ -1,0 +1,37 @@
+MUTEXDESTROY
+================
+
+Destroys a mutex
+
+Syntax:
+declare sub Mutexdestroy ( byval id as any ptr )
+
+Usage:
+Mutexdestroy( id )
+
+Parameters:
+
+`id`
+The `any ptr` handle of the mutex to be destroyed.
+
+Description:
+`Mutexdestroy` discards a mutex created by `Mutexcreate`. This call should be
+executed after any threads using the mutex are no longer in use.
+
+See `Mutexcreate` for more general information on mutexes.
+
+Examples:
+See the examples in `Mutexcreate` and also `Threadcreate`.
+
+Dialect Differences:
+Threading is not allowed in the -lang qb dialect.
+
+Platform Differences:
+
+  * The DOS version of FreeBASIC does not allow for threads, as the OS
+  does not support them.
+  * In Linux the threads are always started in the order they are created,
+  this can't be assumed in Win32. It's an OS, not a FreeBASIC issue.
+
+Differences from QB:
+New to FreeBASIC

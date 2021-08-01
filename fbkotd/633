@@ -1,0 +1,76 @@
+SETMOUSE
+================
+
+Sets the position and visibility of the mouse cursor
+
+Syntax:
+declare function Setmouse ( byval x as long = -1, byval y as long = -1, byval
+visibility as long = -1, byval clip as long = -1 ) as long
+
+Usage:
+result = Setmouse([ x ] [, [ y ] [, [ visibility ] [, [ clip ]]]])
+
+Parameters:
+
+(For each parameter, `-1` is a special value indicating "no changes.")
+`x`
+
+optional - set x coordinate
+
+`y`
+
+optional - set y coordinate
+
+`visibility`
+
+optional - set visibility: `1` indicates visible, `0` indicates hidden
+
+`clip`
+
+optional - set clipping: `1` indicates mouse is clipped to graphics window,
+`0` indicates no clipping
+
+Return Value:
+Zero (`0`) on success, non-zero to indicate failure.
+
+Description:
+
+`Setmouse` will set the (`x`, `y`) coordinates of the mouse pointer, as well
+as setting its visibility. The mouse position is set using the `x` and `y`
+parameters. The mouse will be visible if visibility is set to `1`, and
+invisible if `visibility` is set to `0`. `Setmouse` is intended for graphics
+modes initiated using the `Screen (Graphics)` statement only.
+
+The error code returned by `Setmouse` can be checked using `Err` in the next
+line. The function version of `Setmouse` returns directly the error code as a
+32 bit `Long`.
+
+Examples:
+
+Dim As Integer x, y, buttons
+
+' create a screen 640*480
+ScreenRes 640, 480
+Print "Click the mouse button to center the mouse"
+
+Do
+    ' get mouse x, y and button state (wait until mouse is onscreen)
+    Do: Sleep 1: Loop While GetMouse( x, y , , buttons) <> 0
+
+    If buttons And 1 Then
+        ' on left mouse click, center mouse
+        SetMouse 320, 240
+    End If
+
+    ' run loop until a key is pressed or the window is closed
+Loop While Inkey = ""
+
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Setmouse`.
+
+Differences from QB:
+New to FreeBASIC
+

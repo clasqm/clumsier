@@ -1,0 +1,80 @@
+Bitwise Operators Truth Tables
+================
+
+Computed values for the bitwise logical operators.
+
+Binary operators
+
+Operators that take two operands.
+
+Unary operator
+
+Operator that take a single operand.
+
+These logical operators return a value based on the value of their operand(s).
+For the binary operators, each bit in the left-hand side value is applied
+logically to the corresponding bit in the right-hand side value. The result of
+this operation is returned. For the unary operator, (`Operator Not`), the
+logic is applied to its right-hand side operand only.
+
+
+Binary operators
+
+##Operator And (Conjunction)
+
+Bits in the result are set if and only if both of the corresponding bits in
+the left and right-hand side operands are set.
+
+Lhs 0 0 1 1
+Rhs 0 1 0 1
+Result 0 0 0 1
+
+##Operator Eqv (Equivalence)
+
+Bits in the result are set if and only if both of the corresponding bits in
+the left and right-hand side operands are both either set or unset.
+
+Lhs 0 0 1 1
+Rhs 0 1 0 1
+Result 1 0 0 1
+
+##Operator Imp (Implication)
+
+Bits in the result are set if and only if the corresponding bit in the left-
+hand side operand implies the bit in the right-hand side operand.
+
+Lhs 0 0 1 1
+Rhs 0 1 0 1
+Result 1 1 0 1
+
+##Operator Or (Inclusive Disjunction)
+
+Bits in the result are set if either of the corresponding bits in the left and
+right-hand side operands are set.
+
+Lhs 0 0 1 1
+Rhs 0 1 0 1
+Result 0 1 1 1
+
+
+
+##Operator Xor (Exclusive Disjunction)
+
+Bits in the result are set if and only if one of the corresponding bits in the
+left and right-hand side operands is set.
+
+Lhs 0 0 1 1
+Rhs 0 1 0 1
+Result 0 1 1 0
+
+
+Unary operators
+
+##Operator Not (Complement)
+
+Bits in the result are set if the corresponding bits in the right-hand side
+operand are unset, and unset if they are set.
+
+Rhs 0 1
+Result 1 0
+

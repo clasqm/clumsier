@@ -1,0 +1,91 @@
+__FB_ARG_RIGHTOF__
+================
+
+Intrinsic define (macro) performed by the compiler.
+
+Syntax:
+__FB_ARG_RIGHTOF__( arg, sep [, ret] )
+
+Parameters:
+
+`arg`
+argument
+
+`sep`
+separator, obviously different from the comma (,)
+
+`ret`
+default return if separator not found
+
+Description:
+
+Returns the right token of the argument (`arg`), based on the separator
+(`sep`).
+
+By default, if the default return (`ret`) is not given, the macro returns
+nothing (empty token) if the separator (`sep`) is not found.
+Otherwise, if the default return (`ret`) is given, the macro returns the
+default return (`ret`) if the separator (`sep`) is not found.
+
+Examples:
+
+#macro m( arg )
+    Scope
+        Var v = __FB_ARG_RIGHTOF__( arg, versus, "Not found 'versus'" )
+        Print v
+    End Scope
+#endmacro
+
+m(1 versus 2)
+m("left-side" versus "right-side")
+m(pi verso 3.14)
+
+Sleep
+
+/' Output:
+ 2
+right-side
+Not found 'versus'
+'/
+
+
+#macro count( range )
+    Scope
+        Dim x As Integer = __FB_ARG_LEFTOF__( range, To )
+        Dim y As Integer = __FB_ARG_RIGHTOF__( range, To )
+        Dim s As Integer = Sgn(y - x)
+        Print "Counting " & #range
+        For i As Integer = x To y Step s
+            Print i
+        Next i
+    End Scope
+
+#endmacro
+
+count( 4 To 10 )
+count( 7 To 2 )
+
+Sleep
+
+/' Output:
+Counting 4 To 10
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+ 10
+Counting 7 To 2
+ 7
+ 6
+ 5
+ 4
+ 3
+ 2
+'/
+
+
+Differences from QB:
+New to FreeBASIC
+

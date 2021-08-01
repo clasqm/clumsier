@@ -1,0 +1,27 @@
+gmp, The GNU Multiple Precision Arithmetic Library
+================
+
+Free library for arbitrary precision arithmetic, operating on signed integers,
+rational numbers, and floating point numbers.
+
+Website: https://www.gmplib.org
+Platforms supported: Win32, Linux
+Headers to include: gmp.bi
+Header version: 4.1.4
+
+Examples:
+
+#include once "gmp.bi"
+Dim As mpz_ptr bignum = Allocate(SizeOf(__mpz_struct))
+mpz_init_set_si(bignum, 2)
+mpz_pow_ui(bignum, bignum, 65536)
+
+Print "2^65536 = ";
+Dim As ZString Ptr s = mpz_get_str(0, 10, bignum)
+Print *s;
+Deallocate(s)
+Print
+
+mpz_clear(bignum)
+Deallocate(bignum)
+

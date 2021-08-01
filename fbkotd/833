@@ -1,0 +1,117 @@
+COMMAND
+================
+
+Returns command line parameters used to call the program
+
+Syntax:
+declare function Command ( byval index as long = -1 ) as string
+
+Usage:
+result = Command[$]( [ index ] )
+
+Parameters:
+
+`index`
+
+Zero-based index for a particular command-line argument.
+
+Return Value:
+Returns the command-line arguments(s).
+
+Description:
+
+`Command` returns command-line arguments passed to the program upon execution.
+
+If `index` is less than zero (`< 0`), a space-separated list of all command-
+line arguments is returned, otherwise, a single argument is returned. A value
+of zero (`0`) returns the name of the executable; and values of one (`1`) and
+greater return each command-line argument.
+
+If `index` is greater than the number of arguments passed to the program, the
+null string (`"``"`) is returned.
+
+When the command line is parsed for arguments, everything between double
+quotes in the parameter list will be considered as a single block, and is
+returned without the double quotes.
+
+By default, filename globbing for arguments (expansion of wildcards to
+filenames) is used on all ports of FreeBASIC for compatibility. Arguments on
+the command line containing wildcards are typically not expanded if when no
+file is matched or if properly quoted. Other special characters for
+redirection are typically not returned unless properly quoted. Consult the
+documentation on the shell being used for more information on the proper
+quoting of command line arguments.
+There may be some strange behavior when using backslash(es) in command line
+arguments, and the result may even depend on the platform.
+
+  * WARNING: By nature of constructor precedence in FreeBASIC and main() 
+  initialization, calling `Command` within a global constructor (module 
+  constructor or UDT constructor called for static/shared object) is not 
+  safe (may even induce a runtime error).
+
+Disabling filename globbing under Win32
+
+Define the following global variable(s) somewhere in the source:
+
+'' For MinGW.org and Cygwin runtimes:
+Extern _CRT_glob Alias "_CRT_glob" As Long
+Dim Shared _CRT_glob As Long = 0
+
+'' For MinGW-w64 runtime:
+Extern _dowildcard Alias "_dowildcard" As Long
+Dim Shared _dowildcard As Long = 0
+
+
+
+Disabling filename globbing under Dos
+
+Define the following function somewhere in the source:
+
+Function __crt0_glob_function Alias "__crt0_glob_function" ( ByVal arg As
+UByte Ptr ) As UByte Ptr Ptr
+  Return 0
+End Function
+
+
+Disabling filename globbing under Linux
+
+Filename globbing is handled by the command shell. Quote the argument
+containing wildcards or disable filename globbing in the shell prior to
+executing the command. For example in bash use 'set -f' to disable wildcard
+expansion
+
+Examples:
+
+Print "program launched via: " & Command(0)
+
+Dim As Integer i = 1
+Do
+    Dim As String arg = Command(i)
+    If Len(arg) = 0 Then
+        Exit Do
+    End If
+
+    Print "command line argument " & i & " = """ & arg & """"
+    i += 1
+Loop
+
+If i = 1 Then
+    Print "(no command line arguments)"
+End If
+
+Sleep
+
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * The numeric argument was not supported in QB.
+  * QB converted the parameter list to uppercase before returning it, 
+  FreeBASIC doesn't.
+  * By default arguments containing wildcard characters are expanded 
+  (filename globbing)
+

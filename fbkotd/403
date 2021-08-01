@@ -1,0 +1,45 @@
+__FB_LANG__
+================
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__FB_LANG__
+
+Description:
+`__FB_LANG__` indicates which language compatibility option was set at the
+time of compilation of a module. By default `__FB_LANG__` will be set to
+`"fb"`. The language compatibility option can be changed using one (or more)
+of the following methods:
+
+  * -lang command line option
+  * -forcelang command line option
+  * `#lang` directive
+  * `$lang` metacommand
+
+Returns a lower case string with one of the following values:
+
+value description
+''fb'' FreeBASIC compatibility (default)
+''qb'' QBASIC compatibility
+''fblite'' FreeBASIC language compatibility, with a more QBASIC-compatible
+coding style
+''deprecated'' FBC version 0.16 compatibility
+
+`__FB_LANG__` is always defined.
+
+Examples:
+
+'' Set option explicit always on
+
+#ifdef __FB_LANG__
+  #if __FB_LANG__ <> "fb"
+    Option Explicit
+  #endif
+#else
+  '' Older version - before lang fb
+  Option Explicit
+#endif
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,16 @@
+Compiler Option: -p
+========================
+Add a path to search for libraries
+
+Syntax:
+-p < library path >
+
+Parameters:
+`library path`
+The directory path, relative or absolute, of where to search for library
+files.
+
+Description:
+The `-p` compiler option adds a path to search for libraries. By default,
+libraries are looked for in the system FreeBASIC libraries directory and in
+the current directory.

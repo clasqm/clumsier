@@ -1,0 +1,14 @@
+Compiler Option: -edebuginfo
+=============================
+
+Add debug information
+
+Syntax:
+-edebuginfo
+
+Description:
+The `-edebuginfo` compiler inserts debugging symbols into output files, to use
+with GDB-compatible debuggers.
+`-edebuginfo` is automatically implied by the `-g` option.
+`__FB_ERR__` can be used to determine in user source code if the `-edebugingo`
+option was specified or implied on the command line.

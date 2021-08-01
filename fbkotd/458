@@ -1,0 +1,50 @@
+SETDATE
+================
+
+Sets the current system date
+
+Syntax:
+declare function Setdate ( byref newdate as const string ) as long
+
+Usage:
+result = Setdate( newdate )
+
+Parameters:
+
+`newdate`
+the new date to set
+
+Return Value:
+Returns zero on success or non-zero on failure on all ports except DOS.
+
+Description:
+
+To set the date you just format `newdate` and send to `Setdate` in a valid
+format following one of the following: `"mm-dd-yy"`, `"mm-dd-yyyy"`,
+`"mm/dd/yy"`, or `"mm/dd/yyyy"` (`mm` is the month, `dd` is the day, `yy` or
+`yyyy` is the year). Two-digit year numbers are based on the year 1900.
+
+The error code returned by `Setdate` can be checked using `Err` in the next
+line. The function version of `Setdate` returns directly the error code as a
+32 bit `Long`.
+
+Examples:
+
+Dim m As String, d As String, y As String
+m = "03" 'march
+d = "13" 'the 13th
+y = "1994" 'good ol' days
+SetDate m + "/" \+ d + "/" \+ y
+
+
+Platform Differences:
+
+  * On Windows the privilege SE_SYSTEMTIME_NAME is required, which 
+  typically means that the calling process has to be run with administrator 
+  privileges.
+  * On Linux the capability CAP_SYS_TIME is required, which typically 
+  means that the calling process has to run as root/superuser.
+
+Differences from QB:
+  * The DATE statement was used in QB and the syntax was "DATE = string"
+

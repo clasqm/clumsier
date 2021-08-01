@@ -1,0 +1,119 @@
+WITH
+================
+
+Statement block to allow implicit access to fields in a user defined type
+variable
+
+Syntax:
+With user_defined_var
+
+statements
+
+End With
+
+Description:
+The `With...End With` block allows the omission of the name of a variable of a
+user-defined `Type` when referring to its fields. The fields may then be
+accessed with just a single period (`.`) before them, e.g. if the `Type`
+contains an field element called "`element`", then it could be accessed within
+the `With` block as "`.element`".
+
+It can be used as a shorthand to save typing and avoid cluttering the source.
+`With` can also be used with dereferenced pointers, as the second example
+shows.
+
+`With` blocks may be nested. In this case, only the innermost `With` block is
+active, and any outer ones are ignored until the inner one is closed again.
+See the third example for an illustration of this.
+
+Internally, a reference to the variable is taken at the start of the `With`
+block, and then is used to calculate any element accesses within the block.
+Note that this means that `Goto` should not be used to jump into a `With`
+block, otherwise the reference will not have been set, and the results of
+trying to access it will be undefined.
+
+Note for `With` block used inside member procedure:
+To access duplicated symbols defined outside the Type, add two dots as prefix:
+"`..SomeSymbol`" (inside a `With...End With` block).
+
+Examples:
+
+Type rect_type
+    x As Single
+    y As Single
+End Type
+
+Dim the_rectangle As rect_type
+Dim As Integer temp, t
+
+With the_rectangle
+    temp = .x
+    .x = 234 * t + 48 \+ .y
+    .y = 321 * t + 2
+End With
+
+
+
+Type rect_type
+    x As Single
+    y As Single
+End Type
+
+Dim the_rectangle As rect_type Ptr
+
+the_rectangle = CAllocate( 5 * Len( rect_type ) )
+
+Dim As Integer loopvar, temp, t
+
+For loopvar = 0 To 4
+
+  With the_rectangle[loopvar]
+
+    temp = .x
+    .x = 234 * t + 48 \+ .y
+    .y = 321 * t + 2
+
+  End With
+
+Next
+
+
+
+Type rect_type
+    x As Single
+    y As Single
+End Type
+
+Dim As rect_type rect1, rect2
+
+'' Nested With blocks
+With rect1
+
+    .x = 1
+    .y = 2
+
+    With rect2
+
+        .x = 3
+        .y = 4
+
+    End With
+
+End With
+
+Print rect1.x, rect1.y '' 1,  2
+Print rect2.x, rect2.y '' 3,  4
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__With`.
+  * In the -lang qb and -lang fblite dialects, variables declared inside a 
+  `With`..`End With` block have a function-wide scope as in QB.
+  * In the -lang fb and -lang deprecated dialects, variables declared inside 
+  a `With`..`End With` block are visible only inside the block, and can't 
+  be accessed outside it.
+
+Differences from QB:
+New to FreeBASIC
+

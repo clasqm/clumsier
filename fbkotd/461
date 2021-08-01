@@ -1,0 +1,66 @@
+WSTRING (Function)
+================
+
+Fills a `wstring` with a certain length of a certain wide character
+
+Syntax:
+declare function Wstring ( byval count as integer, byval ch_code as long ) as
+wstring
+declare function Wstring ( byval count as integer, byref ch as const wstring )
+as wstring
+
+Usage:
+result = Wstring( count, ch_code )
+
+or
+
+result = Wstring( count, ch )
+
+Parameters:
+
+`count`
+
+An `integer` specifying the length of the string to be created.
+
+`ch_code`
+
+A `long` specifying the Unicode char to be used to fill the string.
+
+`ch`
+
+A `wstring` whose first character is to be used to fill the string.
+
+Return Value:
+The created `wstring`. An empty string will be returned if either `ch` is an
+empty string, or `count <= 0`.
+
+Description:
+
+`Wstring` generates a temporary `wstring` filled with `count` copies of a
+Unicode character. This string can be printed or assigned to a previously
+`Dim`ed `wstring`.
+
+Examples:
+
+Print WString( 4, 934 )
+Print WString( 5, WStr("Indeed") )
+End 0
+
+
+ΦΦΦΦ
+IIIII
+
+
+
+
+Platform Differences:
+
+  * Unicode strings are not supported in the DOS port of FreeBASIC.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Wstring`.
+
+Differences from QB:
+  * QBasic does not support Unicode
+

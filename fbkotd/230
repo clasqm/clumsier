@@ -1,0 +1,32 @@
+DAY
+================
+
+Gets the day of the month from a Date Serial
+
+Syntax:
+declare function Day ( byval date_serial as double ) as long
+
+Usage:
+#include "vbcompat.bi"
+result = Day( date_serial )
+
+Parameters:
+`date_serial`
+the date
+
+Return Value:
+Returns the day of the month from a variable containing a date in Date Serial
+format.
+
+Description:
+The compiler will not recognize this function unless `vbcompat.bi` is
+included.
+
+Examples:
+
+#include "vbcompat.bi"
+Dim ds As Double = DateSerial(2005, 11, 28)
+Print Format(ds, "yyyy/mm/dd "); Day(ds)
+
+Differences from QB:
+  * Did not exist in QB. This function appeared in PDS and VBDOS

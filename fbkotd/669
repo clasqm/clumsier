@@ -1,0 +1,79 @@
+Operator - (Subtract)
+================
+
+Subtracts two expressions
+
+Syntax:
+declare operator - ( byref lhs as integer, byref rhs as integer ) as integer
+declare operator - ( byref lhs as uinteger, byref rhs as uinteger ) as
+uinteger
+
+declare operator - ( byref lhs as single, byref rhs as single ) as single
+declare operator - ( byref lhs as double, byref rhs as double ) as double
+
+declare operator - ( byref lhs as T Pointer, byref rhs as T Pointer ) as
+integer
+declare operator - ( byref lhs as T Pointer, byref rhs as integer ) as T
+Pointer
+
+declare operator - ( byref lhs as T, byref rhs as T ) as integer
+declare operator - ( byref lhs as T, byref rhs as integer ) as T
+declare operator - ( byref lhs as integer, byref rhs as T ) as T
+
+Usage:
+result = lhs `-` rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression to subtract from.
+
+`rhs`
+The right-hand side expression to subtract.
+
+`T`
+Any pointer type.
+
+Return Value:
+Returns the subtraction of two expressions.
+
+Description:
+
+When the left and right-hand side expressions are numeric values, `Operator -`
+(Subtract) returns the subtraction of the two values.
+
+If the left and right-hand side expressions are both of the `T Pointer` type,
+for some type `T`, the operator performs pointer subtraction on the address,
+returning the result. This is different from numeric subtraction because the
+difference is divided by `Sizeof( T )`.
+
+If an integral value `n` is subtracted from a `T Pointer` type, the operator
+performs pointer arithmetic on the address, returning the memory position of a
+`T` value, `n` indices before (assuming `(-n)` is within bounds of a
+contiguous array of `T` values). This behaves differently from numeric
+subtraction, because the `Integer` value is scaled by `Sizeof( T )`.
+
+Neither operand is modified in any way.
+
+This operator can be overloaded to accept user-defined types.
+
+Examples:
+
+Dim n As Single
+n = 4 \- 5
+Print n
+
+will produce the output:
+
+
+ 
+ 
+    -1
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * None
+

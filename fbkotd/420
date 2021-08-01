@@ -1,0 +1,43 @@
+LOCAL
+================
+
+Error handling statement to set the current error handler
+
+Syntax:
+On Local Error Goto label
+
+Description:
+The `Local` clause in an `On Error` construction allows to define an error
+handler in the same `Sub` or `Function` the `On Local Error` is in.
+
+Remark: Presently, the `Local` clause (authorized only inside Sub/Function) is
+ignored by the compiler, and the error handler can be either in the scope of
+the same procedure the On [Local] Error is in, or in the main part of the
+module (if defined before the procedure).
+Exception if -gen gcc is used: when the On [Local] Error is inside a
+Sub/Function, the error handler also must always be inside that same
+procedure.
+
+Examples:
+
+'' compile with -lang fblite or qb
+#lang "fblite"
+Declare Sub foo
+foo
+Print "ok"
+Sleep
+Sub foo
+  Dim errno As Integer
+  On Local Error Goto fail
+  Open "xzxwz.zwz" For Input As #1
+  On Local Error Goto 0
+  Exit Sub
+fail:                  ' here starts the error handler
+  errno = Err
+  Print "Error "; errno      ' just print the error number
+  Sleep
+End Sub
+
+Differences from QB:
+  * The LOCAL clause comes from PDS 7.1. QB 4.5 does not allow local error 
+  handling.

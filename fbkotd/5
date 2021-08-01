@@ -1,0 +1,29 @@
+__FB_GUI__
+===========
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__FB_GUI__
+
+Description:
+__FB_GUI__ indicates if the executable subsystem option '-s gui' was s
+pecified on the command line at the time of compilation.
+
+Returns non-zero (-1) if the executable subsystem option '-s gui' was
+specified. Returns zero (0) otherwise (no executable subsystem option
+specified, or executable subsystem option '-s console' specified).
+
+Examples:
+
+#if __FB_GUI__ <> 0
+        #print Executable subsystem: gui
+#else
+        #print Executable subsystem: console
+#endif
+
+Platform Differences:
+    Supported on Windows and Cygwin only.
+
+Differences from QB:
+    New to FreeBASIC

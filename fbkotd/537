@@ -1,0 +1,52 @@
+RUN
+================
+
+Transfers execution to an external program
+
+Syntax:
+declare function Run ( byref program as const string, byref arguments as const
+string = "``" ) as long
+
+Usage:
+result = Run( program [, arguments ] )
+
+Parameters:
+
+`program`
+The file name (including file path) of the program (executable) to transfer
+control to.
+
+`arguments`
+The command-line arguments to be passed to the program.
+
+Return Value:
+Returns negative one (`-1`) if the program could not be executed.
+
+Description:
+
+Transfers control over to an external program. When the program exits,
+execution will return to the system.
+
+Examples:
+
+'' Attempt to transfer control to "program.exe" in the current directory.
+Dim result As Integer = Run("program.exe")
+
+'' at this point, "program.exe" has failed to execute, and
+'' result will be set to -1.
+
+
+Platform Differences:
+
+  * Linux requires the program case matches the real name of the file. 
+  Windows and DOS are case insensitive. The program being run may be case 
+  sensitive for its command line parameters.
+  * Path separators in Linux are forward slashes ("`/`"). Windows uses 
+  backward slashes ("`\`") although some versions of Windows allow forward 
+  slashes. DOS uses backward slashes.
+
+Differences from QB:
+  * `Run` needs the full executable name, including extension (`.exe`) 
+  on platforms that have one (Win32, DOS).
+  * Returning an error code is new to FreeBASIC.
+

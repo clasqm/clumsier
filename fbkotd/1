@@ -1,0 +1,31 @@
+Statements and procedures for working with arrays.
+==================================================
+
+Defining Arrays
+
+OPTION DYNAMIC
+	Forces arrays to be defined as variable-length arrays.
+'$DYNAMIC
+	Alternate form of the OPTION DYNAMIC statement.
+OPTION STATIC
+	Reverts a previous OPTION DYNAMIC command.
+'$STATIC
+	Alternate form of the OPTION STATIC statement.
+REDIM
+	Defines and resizes variable-length arrays.
+PRESERVE
+	Preserves array contents when used with REDIM.
+	Clearing Array Data
+ERASE
+	Destroys variable-length array elements and initializes fixed-length
+	array elements.
+
+Retrieving Array Size
+LBOUND
+	Returns the lower bound of an array's dimension.
+UBOUND
+	Returns the upper bound of an array's dimension.
+
+Retrieving Array Descriptor
+Array[Const]DescriptorPtr
+	Returns a [constant] pointer to array's descriptor (FBARRAY).

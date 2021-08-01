@@ -1,0 +1,15 @@
+Compiler Option: -exx
+===================
+
+Add error checking with `Resume` support and array bounds and null-pointer
+checking
+
+Syntax:
+-exx
+
+Description:
+The `-exx` compiler option adds error checking with `Resume` support, plus
+array bounds and null-pointer checking (including the procedure pointers).
+
+Use of the `-exx` option automatically implies `-e`, `-exx`, `-earray`,
+`-elocation`, and `-enullptr`, error checking and code generation options.

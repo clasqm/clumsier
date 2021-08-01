@@ -1,0 +1,43 @@
+MKS
+================
+
+Does a binary copy from a `single` variable to a `string`, setting its length
+to 4 bytes
+
+Syntax:
+declare function Mks ( byval number as single ) as string
+
+Usage:
+result = Mks[$]( number )
+
+Parameters:
+
+`number`
+A `single` variable to binary copy to a `string`.
+
+Return Value:
+Returns a `string` with a binary copy of the `single`.
+
+Description:
+
+Does a binary copy from a `Single` variable to a `string`, setting its length
+to 4 bytes. The resulting string can be read back to a `single` by `Cvs`.
+
+This function is useful to write numeric values to buffers without using a
+`Type` definition.
+
+Examples:
+
+Dim n As Single, e As String
+n = 1.2345
+e = MKS(n)
+Print n, CVS(e)
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * None

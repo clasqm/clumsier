@@ -1,0 +1,22 @@
+__FB_ARM__
+==============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_ARM__
+
+Description:
+Define created at compile time if the compilation target uses the ARM CPU
+architecture, otherwise undefined.
+
+Examples:
+
+#IFDEF __FB_ARM__
+  '...instructions for ARM OSes...
+#ELSE
+  '...instructions for other OSes
+#ENDIF
+
+Differences from QB:
+  * New to FreeBASIC

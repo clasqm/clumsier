@@ -1,0 +1,66 @@
+LOC
+================
+
+Returns the file position where the last file read/write was performed
+
+Syntax:
+declare function Loc ( byval filenum as long ) as longint
+
+Usage:
+result = Loc( filenum )
+
+Parameters:
+
+`filenum`
+The file number of an open file.
+
+Return Value:
+The file position where the last read/write was performed.
+
+Description:
+
+Returns the position where the last file read/write was performed.
+
+The position is indicated in records:
+
+In files opened FOR RANDOM the record length specified when file was opened is
+used
+In text files (FOR INPUT|OUTPUT|APPEND, a record length of 128 bytes is
+supposed.
+In files opened for BINARY a 1 byte record length is used.
+
+In FreeBASIC the file position is 1 based, the first record of a file is
+record 1 (`Loc`=1 after reading or writing the first record, `Loc`=0 for the
+start position in the file).
+
+When used with a serial device, `Loc` returns the number of bytes waiting to
+be read from the serial device's input buffer.
+
+Examples:
+
+Dim b As String
+
+If Open Com ("com1:9600,n,8,1,cs,rs,ds,bin" For Binary As #1) <> 0 Then
+  Print "unable to open serial port"
+  End
+End If
+
+Print "Sending command: AT"
+
+Print #1, "AT" \+ Chr(13, 10);
+
+Sleep 500,1
+
+Print "Response:"
+
+While( LOC(1) > 0 )
+  b = Input(LOC(1), 1)
+  Print b;
+Wend
+
+Close #1
+
+
+Differences from QB:
+  * None
+

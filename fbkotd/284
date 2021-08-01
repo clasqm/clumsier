@@ -1,0 +1,31 @@
+OPTION NOKEYWORD
+================
+
+"Undefines" a reserved keyword
+
+Syntax:
+Option Nokeyword keyword
+
+Parameters:
+`keyword`
+the keyword to undefine
+
+Description:
+`Option Nokeyword` is a statement that undefines a FreeBASIC reserved keyword,
+meaning it can be used as an identifier for a variable, object, procedure or
+any other symbol. The keyword is undefined for the rest of the module in which
+`Option Nokeyword` is used.
+
+Examples:
+
+'' Compile with the "-lang fblite" compiler switch
+#lang "fblite"
+Option NoKeyword Int        ' remove the keyword 'int' from the internal
+                            ' symbol table
+Dim Int As Integer          ' declare a variable with the name 'int'
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC

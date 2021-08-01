@@ -1,0 +1,73 @@
+CINT
+====
+
+	Converts a numeric or string expression to an Integer or an
+	Integer<bits>
+
+Syntax:
+	declare function Cint ( byval expression as datatype ) as integer
+	declare function Cint<bits> ( byval expression as datatype ) as
+	integer<bits>
+
+Type typename
+	declare operator cast ( ) as integer
+	declare operator cast ( ) as integer<bits>
+End Type
+
+Usage:
+	result = Cint( expression )
+	result = Cint( string expression )
+	result = Cint( user defined type )
+
+Parameters:
+	bits
+		A numeric constant expression indicating the size in bits of
+		integer desired. The values allowed are 8, 16, 32 or 64.
+	expression
+		a numeric, string, or pointer expression to cast to a Integer value
+	datatype
+		any numeric, string, or pointer data type
+	typename
+		a user defined type
+
+Return Value:
+	An Integer or Integer<bits> containing the converted value.
+
+Description:
+
+If Cint is passed a numeric expression, it rounds it using using the
+round-to-even method - i.e. it rounds to the closest integer value,
+choosing the closest even integer if the number is equidistant from two
+integers - and returns an Integer, or if a bits value is supplied, an
+integer type of the given size.
+
+The function does not check for an overflow; for example, for a 32-bit
+Integer the results are undefined for values which are less than
+-2 147 483 648 or larger than 2 147 483 647.
+
+If the argument is a string expression, it is converted to numeric by
+using Valint or Vallng, depending on the size of the result type.
+
+The name "CINT" is derived from 'Convert to INTeger'.
+
+Examples:
+
+'Using the CINT function to convert a numeric value
+'Create an INTEGER variable
+Dim numeric_value As Integer
+'Convert a numeric value
+numeric_value = CInt(300.5)
+'Print the result, should return 300, because 300 is even
+numeric_value = CInt(301.5)
+'Print the result, should return 302, because 301 is odd
+Print numeric_value
+
+Dialect Differences:
+
+	In the -lang qb dialect, Cint will return a 16-bit integer, like
+	in QB.
+
+Differences from QB:
+
+    The string argument was not allowed in QB
+    The <bits> parameter was not allowed in QB

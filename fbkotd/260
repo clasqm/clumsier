@@ -1,0 +1,33 @@
+TIMEVALUE
+================
+
+Gets a Date Serial from a time string
+
+Syntax:
+declare function TimeValue ( byref timestring as string ) as double
+
+Usage:
+#include "vbcompat.bi"
+result = TimeValue( timestring )
+
+Parameters:
+
+`timestring`
+the string to convert
+
+Return Value:
+Returns a Date Serial from a time string.
+
+Description:
+The time string must be in the format `"23:59:59"` or `"11:59:59PM"`
+  The compiler will not recognize this function unless `vbcompat.bi` or
+`datetime.bi` is included.
+
+Examples:
+
+#include "vbcompat.bi"
+Dim ds As Double = TimeValue("07:12:28AM")
+Print Format(ds, "hh:mm:ss")
+
+Differences from QB:
+Did not exist in QB. This function appeared in PDS and VBDOS

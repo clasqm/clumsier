@@ -1,0 +1,41 @@
+[ULONG](wikka.php@wakka=Ulong#)
+================
+
+Standard data type: 32-bit unsigned integer.
+Equivalent to `[Unsigned](wikka.php@wakka=Unsigned)
+[Long](wikka.php@wakka=Long)`.
+
+**Syntax:**`
+
+[dim](wikka.php@wakka=Dim) _variable_ [as](wikka.php@wakka=As)
+**Ulong**
+
+`
+**Description:**
+
+32-bit unsigned whole-number data type. Can hold values from ` 0` to
+`4294967295`. Corresponds to an unsigned DWORD.
+
+**Examples:**
+
+  Dim x As ULong = 0
+  Dim y As ULong = &HFFFFFFFF
+  Print "ULong Range = "; x; " to "; y
+
+**Output:**
+
+ 
+ 
+    ULong Range = 0 to 4294967295
+
+
+
+**Dialect Differences:**
+
+  * Not available in the _[-lang qb](wikka.php@wakka=lang)_ dialect unless 
+  referenced with the alias `**__Ulong**`.
+
+**Differences from QB:**
+
+  * New to FreeBASIC
+

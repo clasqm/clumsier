@@ -1,0 +1,26 @@
+__FB_LINUX__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_LINUX__
+
+Description:
+Define without a value created at compile time when compiling to the Linux
+target. Default in the Linux hosted version of the compiler, or active when
+the -target linux command line option is used. It can be used to compile parts
+of the program only if the target is Linux.
+
+Examples:
+
+#IFDEF __FB_LINUX__
+  ' ... instructions only for Linux ...
+  ' ... #libpath "/usr/X11/lib"
+#ELSE
+  ' ... instructions not for Linux ...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC
+

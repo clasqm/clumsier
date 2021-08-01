@@ -1,0 +1,65 @@
+CUSHORT
+================
+
+Converts numeric or string expression to an unsigned integer (`Ushort`)
+
+Syntax:
+declare function Cushort ( byval expression as datatype ) as ushort
+
+Type typename
+
+declare operator cast ( ) as ushort
+
+End Type
+
+Usage:
+result = Cushort( numeric expression )
+result = Cushort( string expression )
+result = Cushort( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Ushort` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Ushort` value.
+
+Description:
+
+The `Cushort` function rounds off the decimal part and returns a 16-bit
+`Ushort` value. The function does not check for an overflow, and results are
+undefined for values which are less than `0` or larger than `65` `535`.
+
+The name can be explained as 'Convert to Unsigned Short'.
+
+If the argument is a string expression, it is converted to numeric by using
+`Valuint`.
+
+Examples:
+
+' Using the CUSHORT function to convert a numeric value
+
+'Create an USHORT variable
+Dim numeric_value As UShort
+
+'Convert a numeric value
+numeric_value = CUShort(36000.4)
+
+'Print the result, should return 36000
+Print numeric_value
+Sleep
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Cushort`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,78 @@
+MID (Function)
+================
+
+Returns a substring of a string
+
+Syntax:
+declare function Mid ( byref str as const string, byval start as integer ) as
+string
+declare function Mid ( byval str as const wstring ptr, byval start as integer
+) as wstring
+declare function Mid ( byref str as const string, byval start as integer,
+byval n as integer ) as string
+declare function Mid ( byval str as const wstring ptr, byval start as integer,
+byval n as integer ) as wstring
+
+Usage:
+result = Mid[$]( str, start [, n ] )
+
+Parameters:
+
+`str`
+The source string.
+
+`start`
+The start position in `str` of the substring. The first character starts at
+position 1.
+
+`n`
+The substring length, in characters.
+
+Description:
+
+Returns a substring starting from `start` in `str`. If `str` is empty then the
+null string (`"``"`) is returned. If `start <= 0` then the null string
+(`"``"`) is returned.
+
+In the first form of `Mid`, all of the remaining characters are returned. In
+the second form, if `n < 0` or `n >= len(str)` then all of the remaining
+characters are returned.
+
+Examples:
+
+Print Mid("abcdefg", 3, 2)
+Print Mid("abcdefg", 3)
+Print Mid("abcdefg", 2, 1)
+
+will produce the output:
+
+ 
+ 
+    cd
+    cdefg
+    b
+
+A Unicode example:
+
+  * Wiki: code rendered this way to allow display of the Unicode characters.
+
+dim text as wstring * 20
+text = "Привет, мир!"
+print mid(text, 6, 4) ' displays "т, м"
+
+
+
+
+Platform Differences:
+
+  * DOS does not support the wide-character string versions of `Mid`.
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * QB does not support Unicode.
+

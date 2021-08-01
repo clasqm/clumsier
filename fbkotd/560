@@ -1,0 +1,45 @@
+EXTENDS WSTRING
+================
+
+Specifies a type which inherits a Wstring behavior
+
+Syntax:
+Type|Union typename Extends Wstring [, base_typename]
+
+...
+
+End Type|Union
+
+Description:
+`Extends Wstring` declares `typename` to inherit properties and behaviors of a
+`Wstring`. Purpose is to allow users to create custom string types (with i.e.
+dynamic memory management) that can integrate well in to existing fbc compiler
+built ins (good interoperability with fbc's `Wstring` type).
+
+This declaration of such a UDT with a suitable `Cast` operator will instruct
+compiler to convert the UDT to a `Wstring` (in addition, other suitable
+operators as `Let`, `[] (Pointer index)`, `Len`, ..., can be also declared).
+
+`Wstring` behaviour can be inherited directly, or indirectly and singly from a
+base-type.
+`Wstring` behaviour can be inherited by a UDT also extending `base_typename`
+(a kind of pseudo multiple-inheritance).
+
+Note: By declaring a type (directly or indirectly) as `Extends Wstring` (in
+addition to defining a suitable `Cast` operator only), this promotes it fully
+compatible even with `Strptr`/`Sadd`, `Lset`/`Rset`, and `Select Case`, but
+currently not yet with the built in functions
+`Val`/`Valint`/`Vallng`/`Valuint`/`Valunlg` and `Left`/`Right`.
+
+Examples:
+
+See `Extends Zstring` for similar examples.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Extends __Wstring`, but unusable because no member procedure is 
+allowed in this dialect.
+
+Differences from QB:
+New to FreeBASIC
+

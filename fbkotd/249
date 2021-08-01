@@ -1,0 +1,27 @@
+STEP
+================
+
+Statement modifier.
+
+Syntax:
+For iterator = initial_value To end_value Step increment
+
+Line [ buffer, ] Step ( x1, y1 ) - Step ( x2, y2 ) [, [ color ][, [ B|BF ][,
+style ] ] ]
+Circle [ target, ] Step ( x, y ), radius [, [ color ][, [ start ][, [ end ][,
+[ aspect ][, F] ] ] ] ]
+Paint [ target, ] STEP ( x, y ) [, [ paint ][, [ border_color ] ] ]
+
+Description:
+In a `For` statement, `Step` specifies the increment of the loop iterator with
+each loop.
+  In a `Line`, `Circle` or `Paint` statement, `Step` indicates that the
+following coordinate has values relative to the graphics cursor.
+
+Examples:
+Dim i As Integer
+For I=10 To 1 Step -1
+Next
+
+Line -Step(10,10),13
+

@@ -1,0 +1,97 @@
+Operator [] (String index)
+================
+
+Returns a reference to the numeric value of a character in a string
+
+Syntax:
+declare operator [] ( byref lhs as string, byref rhs as integer ) byref as
+ubyte
+declare operator [] ( byref lhs as zstring, byref rhs as integer ) byref as
+ubyte
+declare operator [] ( byref lhs as wstring, byref rhs as integer ) byref as T
+
+Usage:
+result = lhs [ rhs ]
+
+or
+
+lhs [ rhs ] = value
+
+Parameters:
+
+`lhs`
+The string (a string reference, not a string returned as local copy).
+
+`rhs`
+A zero-based offset from the first character.
+
+`T`
+The wide-character type (varies per platform).
+
+Description:
+
+This operator returns a reference to the numeric value of a specific character
+in a string:
+
+  * For a `String` or a `ZString`:
+
+a `Ubyte` (containing the ASCII value of the character).
+
+  * For a `WString`:
+
+a numeric type depending on platform, for example `UShort` for Windows or
+`ULong` for Linux (containing the numeric value of the character).
+
+This operator must not be used in case of empty string because reference is
+undefined (inducing runtime error).
+Otherwise, the user must ensure that the index does not exceed the range "[0,
+`Len(lhs) - 1`]". Outside this range, results are undefined.
+
+Unlike 'return by value' (where only a copy is returned), 'return by
+reference' allows you to also modify the referenced variable.
+'Return by reference' is implemented under the hood as a pointer implicitly
+dereferenced:
+
+- In case of a `String` or a `ZString` `'s'`:
+
+`s[n]` is equivalent to `*Cptr(Ubyte Ptr, Strptr(s) + n)`
+
+- In case of a `WString` `'s'`:
+
+`s[n]` is equivalent to `*Cptr(T Ptr, Strptr(s) + n)`
+
+Note: The fact that this operator returns a reference greatly differentiates
+it from `Asc( str [, position ] )` which allows to return the numeric
+representation of a character, but not to modify it.
+
+Examples:
+
+Dim a As String = "Hello, world!"
+Dim i As Integer
+
+For i = 0 To Len(a) \- 1
+    Print Chr(a[i]) & " ";
+Next i
+Print
+Print
+
+For i = 1 To 4
+    a[i] = a[i] \- 32  'converting lowercase alphabetic characters to uppercase
+Next i
+For i = 7 To 11
+    a[i] = a[i] \- 32  'converting lowercase alphabetic characters to uppercase
+Next i
+Print a
+
+Will print:
+
+ 
+ 
+    H e l l o ,   w o r l d !
+ 
+    HELLO, WORLD!
+
+
+Differences from QB:
+New to FreeBASIC
+

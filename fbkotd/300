@@ -1,0 +1,61 @@
+Graphics Keyword List
+================
+
+A list of the keywords and procedures of FreeBASIC's graphics library.
+
+  * ADD
+  * ALPHA
+  * AND (GRAPHICS PUT)
+  * BLOAD
+  * BSAVE
+  * CIRCLE
+  * COLOR
+  * CUSTOM
+  * DRAW
+  * DRAW STRING
+  * EVENT (message data from ScreenEvent)
+  * FLIP
+  * IMAGECONVERTROW
+  * IMAGECREATE
+  * IMAGEDESTROY
+  * IMAGEINFO
+  * GET (GRAPHICS)
+  * GETJOYSTICK
+  * GETMOUSE
+  * INP
+  * LINE (GRAPHICS)
+  * MULTIKEY
+  * OUT
+  * OR (GRAPHICS PUT)
+  * PAINT
+  * PALETTE
+  * PCOPY
+  * PMAP
+  * POINT
+  * POINTCOORD
+  * PRESET
+  * PSET
+  * PSET (GRAPHICS PUT)
+  * PUT (GRAPHICS)
+  * RGB
+  * RGBA
+  * SCREEN (GRAPHICS)
+  * SCREENCONTROL
+  * SCREENCOPY
+  * SCREENEVENT
+  * SCREENGLPROC
+  * SCREENINFO
+  * SCREENLIST
+  * SCREENLOCK
+  * SCREENPTR
+  * SCREENRES
+  * SCREENSET
+  * SCREENSYNC
+  * SCREENUNLOCK
+  * SETMOUSE
+  * TRANS
+  * VIEW (GRAPHICS)
+  * WAIT
+  * WINDOW
+  * WINDOWTITLE
+  * XOR (GRAPHICS PUT)

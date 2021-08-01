@@ -1,0 +1,83 @@
+WSTR
+================
+
+Returns a wide-character string representation of a number or ASCII character
+string
+
+Syntax:
+declare function Wstr ( byval n as byte ) as wstring
+declare function Wstr ( byval n as ubyte ) as wstring
+declare function Wstr ( byval n as short ) as wstring
+declare function Wstr ( byval n as ushort ) as wstring
+declare function Wstr ( byval n as long ) as wstring
+declare function Wstr ( byval n as ulong ) as wstring
+declare function Wstr ( byval n as longint ) as wstring
+declare function Wstr ( byval n as ulongint ) as wstring
+declare function Wstr ( byval n as single ) as wstring
+declare function Wstr ( byval n as double ) as wstring
+declare function Wstr ( byref str as const string ) as wstring
+declare function Wstr ( byval str as const wstring ptr ) as wstring
+
+Usage:
+result = Wstr( number )
+
+or
+
+result = Wstr( string )
+
+Parameters:
+
+`number`
+Numeric expression to convert to a wide-character string.
+
+`string`
+String expression to convert to a wide-character string.
+
+Return Value:
+Returns the wide-character representation of the numeric or string expression.
+
+Description:
+
+`Wstr` converts numeric variables to their wide-character string
+representation. It is the wide-character equivalent to `Str`.
+
+`Wstr` also converts ASCII character strings to Unicode character strings. If
+a wide-character string is given, that string is returned unmodified.
+
+Examples:
+
+#if defined( __FB_WIN32__ )
+#include "windows.bi"
+#endif
+
+Dim zs As ZString * 20
+Dim ws As WString * 20
+
+zs = "Hello World"
+ws = WStr(zs)
+
+#if defined( __FB_WIN32__ )
+
+MessageBox(null, ws, WStr("Unicode 'Hello World'"), MB_OK Or
+MB_ICONINFORMATION)
+
+#else
+
+Print ws
+Print WStr("Unicode 'Hello World'")
+
+#endif
+
+
+Platform Differences:
+
+  * DOS does not support `Wstr`.
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Wstr`.
+
+Differences from QB:
+New to FreeBASIC
+

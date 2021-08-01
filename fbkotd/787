@@ -1,0 +1,123 @@
+PCOPY
+================
+
+Copies one graphical or text page onto another
+
+Syntax:
+declare function Pcopy ( byval source as long = -1, byval destination as long
+= -1 ) as long
+
+Usage:
+Pcopy [ source ] [, destination ]
+
+Parameters:
+
+`source`
+page to copy from
+
+`destination`
+page to copy to
+
+Return Value:
+Returns zero (`0`) if successful, or a non-zero error code to indicate a
+failure.
+
+Description:
+
+Copies one graphical or text video page to another. Useful for drawing all
+graphics on one invisible page and copying it to the active visible page -
+creating smooth graphics and animation. Known as 'double buffering' or 'page
+flipping'.
+
+`source` and `destination` refer to page numbers. The 'source' page is copied
+over the 'destination' page when pcopy is called.
+
+If the `source` argument is omitted, the current working page is assumed. If
+the `destination` page is omitted, the current visible page is assumed.
+
+`Pcopy` is inactive if the `destination` page is locked.
+
+The error code returned by `Pcopy` can be checked using `Err` in the next
+line. The function version of `Pcopy` returns directly the error code as a 32
+bit `Long`.
+
+Examples:
+
+'Sets up the screen to be 320x200 in 8-bit color with 2 video pages.
+ScreenRes 320, 200, 8, 2
+
+'Sets the working page to 1 and the displayed page to 0
+ScreenSet 1, 0
+
+'Draws a circle moving across the top of the screen
+For x As Integer = 50 To 269
+    Cls                    'Clears the screen so we can start fresh
+    Circle (x, 50), 50, 14 'Draws a yellow circle with a 50 pixel radius on page 1
+    PCopy 1, 0             'Copies our image from page 1 to page 0
+    Sleep 25               'Waits for 25 milliseconds.
+Next x
+
+'Wait for a keypress before the screen closes
+Sleep
+
+
+
+'' Compile with -lang fblite or qb
+
+#lang "fblite"
+
+'' Console mode example:
+
+'' Set the working page number to 0, and the visible page number to 1
+#if __FB_LANG__ = "QB"
+Screen ,, 0, 1
+#else
+Screen , 0, 1
+#endif
+
+Dim As Integer i, frames, fps
+Dim As Double t
+
+t = Timer
+
+Do
+    '' Fill working page with a certain color and character
+    Cls
+    Locate 1, 1
+    Color (i And 15), 0
+    Print String$(80 * 25, Hex$(i, 1));
+    i += 1
+
+    '' Show frames per second
+    Color 15, 0
+    Locate 1, 1
+    Print "fps: " & fps,
+    If Int(t) <> Int(Timer) Then
+        t = Timer
+        fps = frames
+        frames = 0
+    End If
+    frames += 1
+
+    '' Copy working page to visible page
+    PCopy
+
+    '' Sleep 50ms per frame to free up cpu time
+    Sleep 50, 1
+
+    '' Run loop until the user presses a key
+Loop Until Len(Inkey$)
+
+
+
+Platform Differences:
+
+  * Maximum number of text pages in Windows is 4.
+  * Maximum number of text pages in DOS is 8.
+  * Maximum number of text pages in all other targets is 1.
+  * Maximum number of graphics pages depends on what was specified when the 
+  `Screen` or `Screenres` statement was called.
+
+Differences from QB:
+  * None
+

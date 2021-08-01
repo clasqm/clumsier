@@ -1,0 +1,51 @@
+Operator ^= (Exponentiate and Assign)
+================
+
+Exponentiates and assigns a value to a variable
+
+Syntax:
+declare operator ^= ( byref lhs as double, byref rhs as double )
+
+Usage:
+lhs ^= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`rhs`
+The value to exponentiate `lhs` by.
+
+Description:
+
+This operator exponentiates and assigns a value to a variable. It is
+functionally equivalent to:
+
+`lhs = lhs ^ rhs`
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: This operator exists in C/C++ with a different meaning - there it
+performs a Bitwise `Xor=`.
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol '^=>'
+can be also used.
+
+Examples:
+
+Dim n As Double
+n = 6
+n ^= 2
+Print n
+Sleep
+
+Output:
+
+    36
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC

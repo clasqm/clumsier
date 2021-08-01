@@ -1,0 +1,23 @@
+__FB_DARWIN__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_DARWIN__
+
+Description:
+Define without a value created at compile time in the Darwin version of the
+compiler, or when the -target darwin command line option is used. It can be
+used to compile parts of the program only if the target is Darwin.
+
+Examples:
+
+#IFDEF __FB_DARWIN__
+  '...instructions only for Darwin...
+#ELSE
+  '...instructions not for Darwin...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

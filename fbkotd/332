@@ -1,0 +1,48 @@
+Labels
+================
+
+Defines a location in a program.
+
+Syntax:
+symbolname :
+
+or
+
+literalnumber
+
+Description:
+Defines a place in a program where `Goto` or `Gosub` can jump to.
+
+A label can be a positive integer line number or a `symbolname`. In both
+cases, the label must start at the first column of line. A `symbolname` label
+must end with a colon (:) character.
+
+Examples:
+
+'' Compile with -lang fblite or qb
+#lang "fblite"
+beginning:
+3 Print "Hello World!"
+Goto beginning
+
+'' compile with -lang qb
+'$lang: "qb"
+'' Labels can be used to "bookmark" DATA blocks, allowing RESTORE to alter the
+''READ sequence.
+Read a,b,c
+Restore here
+Read d,e
+Print a,b,c,d,e
+Data 1,2,3,4,5
+here:
+Data 6,7,8
+
+Output:
+
+    1,2,3,6,7
+
+Dialect Differences:
+Line numbers with decimals is available only in the -lang qb dialect.
+
+Differences from QB:
+  * None if compiled in the -lang qb dialect.

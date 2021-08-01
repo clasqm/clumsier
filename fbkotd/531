@@ -1,0 +1,51 @@
+THREADWAIT
+================
+
+Waits for a thread to finish execution and releases the thread handle
+
+Syntax:
+Declare Sub ThreadWait ( Byval id As Any Ptr )
+
+Usage:
+ThreadWait( id )
+
+Parameters:
+
+`id`
+`Any Ptr` handle of a thread created by `ThreadCreate` or `ThreadCall`
+
+Description:
+
+ThreadWait waits for a thread created by `ThreadCreate` or `ThreadCall` to
+finish execution, and then releases the resources associated with the thread
+handle. ThreadWait does not return until the thread designated by `id` ends.
+During the wait, no CPU time is consumed by the caller.
+
+In order to release a thread handle without waiting for the thread to finish,
+use `ThreadDetach`.
+
+ThreadWait does not force the thread to end; if a thread requires a signal to
+force its end, a mechanism such as shared variables and mutexes must be used.
+
+In order to avoid memory leaks, the safe way to end a thread is to always
+signal to it that it must end, and then call ThreadWait on that thread except
+if `ThreadDetach` has previously been called.
+
+The intrinsic macro `__FB_MT__` is only automatically set from the point of
+usage of ThreadWait onward.
+
+Examples:
+
+See the `Threadcreate` examples.
+
+Dialect Differences:
+Threading is not allowed in the -lang qb dialect.
+
+Platform Differences:
+
+  * ThreadWait is not available with the DOS version of FreeBASIC, because 
+  multithreading is not supported by DOS kernel nor the used extender.
+
+Differences from QB:
+New to FreeBASIC
+

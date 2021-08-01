@@ -1,0 +1,51 @@
+ACOS
+================
+
+Finds the arccosine of an angle
+
+Syntax:
+declare function Acos ( byval number as double ) as double
+
+Usage:
+result = Acos( number )
+
+Parameters:
+
+`number`
+A cosine value in the range [-1..1].
+
+Return Value:
+The arccosine of `number`, in radians, in the range [0..Pi].
+
+Description:
+
+`Acos` returns the arccosine of the argument `number` as a `Double` within the
+range of 0 to Pi. The arccosine is the inverse of the `Cos` function. The
+returned angle is measured in radians (not degrees).
+
+`Acos` can be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Dim h As Double
+Dim a As Double
+Input "Please enter the length of the hypotenuse of a triangle: ", h
+Input "Please enter the length of the adjacent side of the triangle: ", a
+Print ""
+Print "The angle between the sides is"; Acos ( a / h )
+Sleep
+
+The output would look like:
+ 
+    Please enter the length of the hypotenuse of a triangle: 5
+    Please enter the length of the adjacent side of the triangle: 4
+ 
+    The angle between the sides is 0.6435011087932843
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Acos`.
+
+Differences from QB:
+New to FreeBASIC
+

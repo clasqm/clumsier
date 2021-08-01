@@ -1,0 +1,43 @@
+Compiler Option: -forcelang
+================
+
+Provides QuickBASIC or backward compatibility
+
+Syntax:
+-forcelang dialect
+
+Parameters:
+
+`dialect`
+The dialect to use in compilation, one of `fb` (default), `fblite`, `qb` or
+`deprecated`.
+
+Description:
+
+The `-forcelang` compiler option changes the way source code is interpreted,
+and is meant as a tool to users wanting traditional QuickBASIC-like behavior,
+or behavior deprecated from previous versions of FreeBASIC. It overrides any
+`#lang` statements within the code.
+
+The intrinsic macro `__FB_LANG__` is set to the string name of the dialect
+specified on the command line, or `"fb"` by default.
+
+To learn more about the differences between each of these language dialects,
+see Compiler Dialects.
+
+fb
+This is the default dialect, and allows compilation of source code adhering to
+the most recent version of the FreeBASIC language.
+
+fblite
+This dialect provides support for FreeBASIC syntax and functionality, but with
+a more traditional QuickBASIC programming style.
+
+qb
+This dialect provides the best support for older QuickBASIC code.
+
+deprecated
+This dialect is for backward compatibility with some previous versions of
+FreeBASIC, however, this dialect may not exist in future versions. Programmers
+should consider using the "fblite" dialect instead.
+

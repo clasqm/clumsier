@@ -1,0 +1,17 @@
+Iterating Operators
+===============
+
+Operators that work with iterator objects
+
+These operators allow objects of user-defined types to be used as iterators
+and step values in `For...Next` statements.
+
+Operator For
+	Allows an iterator a chance to prepare for the loop.
+
+Operator Step
+	Increments an iterator object.
+
+Operator Next
+	Determines if the loop should terminate or continue iterating.
+

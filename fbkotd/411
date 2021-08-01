@@ -1,0 +1,47 @@
+NAME
+================
+
+Renames a file on disk
+
+Syntax:
+declare function Name( byref oldname as const string, byref newname as const
+string ) as long
+
+Usage:
+result = Name( oldname, newname )
+
+Parameters:
+
+`oldname`
+Name of an existing file.
+
+`newname`
+New name of the file.
+
+Return Value:
+Returns zero (`0`) on success and non-zero on failure.
+
+Description:
+
+Renames a file or folder originally called `oldname` to `newname`.
+
+The function is not guaranteed to succeed if a file/folder exists with the
+same name. It may succeed, overwriting the original, or it may fail. For
+greater control, `FileExists` could be used to test for an existing file, and
+`Kill` could be used to delete an existing file beforehand.
+
+Examples:
+
+Dim OldName As String
+Dim NewName As String
+Dim result As Integer
+OldName = "dsc001.jpg"
+NewName = "landscape.jpg"
+result = Name( OldName, NewName )
+If 0 <> result Then
+    Print "error renaming " & oldname & " to " & newname & "."
+End If
+
+Differences from QB:
+  * In QB, NAME required AS rather than a comma between the old and new 
+  names. This is because NAME was a language keyword rather than a function.

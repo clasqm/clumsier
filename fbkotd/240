@@ -1,0 +1,27 @@
+__FB_DOS__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_DOS__
+
+Description:
+Define without a value created at compile time if compiling for the DOS
+target. Default in the DOS hosted version, or active when the -target dos
+command line option is used. It can be used to compile parts of the program
+only if the target is DOS. Note: the DOS hosted version cannot compile to
+other targets than DOS by now.
+
+Examples:
+
+#IFDEF __FB_DOS__
+  ' ... instructions only for DOS ...
+  ' ... INT 0x31
+#ELSE
+  ' ... instructions not for DOS ...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC
+

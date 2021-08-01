@@ -1,0 +1,10 @@
+Compiler Option: -e
+===============
+
+Add error checking
+
+Syntax:`
+-e
+
+Description:
+	Adds QuickBASIC-like error checking.

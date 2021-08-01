@@ -1,0 +1,23 @@
+__FB_OPENBSD__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_OPENBSD__
+
+Description:
+Define without a value created at compile time in the OpenBSD version of the
+compiler, or when the -target openbsd command line option is used. It can be
+used to compile parts of the program only if the target is OpenBSD.
+
+Examples:
+
+#IFDEF __FB_OPENBSD__
+  '...instructions only for OpenBSD...
+#ELSE
+  '...instructions not for OpenBSD...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

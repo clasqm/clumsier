@@ -1,0 +1,589 @@
+Variable Initializers
+======================
+
+Variable initializers are supported for initializing pre-built type variables,
+UDT objects and arrays.
+
+Preamble:
+
+Pre-built type variables, user defined type (UDT) objects and arrays are
+initialized to zero (or `'False'` for `'Boolean'`) or null strings by default
+when they are created.
+
+To avoid the overhead of default variable initialization, the `'Any'`
+initializer can be used with `'Dim'` to tell the compiler to only reserve the
+place for the variable in memory but not initialize it, so the variable will
+contain garbage. In this case the programmer should not make assumptions about
+the initial values.
+
+Pre-built type variables, UDT objects and arrays may be given a value at the
+time of their declaration using `'Dim ...'`, with the syntaxes shown below.
+Pre-built type variables, UDT objects and arrays are initialized as they would
+in a normal assignment, using an `'='` sign. The `'=>'` sign can also be used,
+allowing to avoid the declaration resembling an expression for example when
+declaring fixed length strings.
+
+Table of Contents
+
+1\. Initializer syntax and validity for pre-built type variable declaration
+2\. Initializer syntax and validity for UDT object declaration
+3\. Initializer syntax and validity for array declaration
+4\. Nested Initializer syntax with another
+
+===============
+
+1\. Initializer syntax and validity for pre-built type variable declaration
+
+The main pre-built types are:
+
+- Integer types
+- Floating-point types
+- Boolean types
+- String types
+
+Initializer syntaxes
+
+4 basic syntaxes are described below.
+
+Static allocations with initializer:
+
+`(1) Dim variable_symbol [As PreBuiltType] = expression`
+`or:`
+`(2) Dim Byref ref_variable_symbol [As PreBuiltType] = variable`
+
+Dynamic allocations with initializer:
+
+`(3) Dim ptr_variable_symbol As PreBuiltType Ptr = New PreBuiltType(
+expression )`
+`or:`
+`(4) Dim Byref ref_variable_symbol As PreBuiltType = *New PreBuiltType(
+expression )`
+
+Initializer validity
+
+- `expression`:
+
+Must produce an evaluated value of `'PreBuiltType'` type or compatible.
+
+- `variable`:
+
+`'PreBuiltType'` variable or compatible, when `'As PreBuiltType'` is
+specified.
+
+Declaration syntax for global symbol
+
+If using global symbols when declaring pre-built type variable with
+initializer (`'Dim Shared'` or `'Static [Shared]'` instead of `'Dim'`), the
+initializer argument must at least be able to be evaluated at the start of the
+program so that it can be placed in the .data section:
+
+- The initializer syntax for variable-length string becomes no longer
+valid because the `'variable_symbol'` must refer to a dynamic memory
+block in the heap.
+- For the other pre-built type variables, the initializer syntax remains
+valid if the provided argument can be evaluated at compile time.
+
+Example
+
+Dim d As Double = 1234.56789
+
+Print d
+
+Sleep
+
+
+Note:
+
+In the `-lang fb` only, `'Var'` can be used instead of `'Dim'` (removing the
+explicit type declaration), except for an initializer value of `'Wstring'`
+type.
+
+
+Back to top
+
+
+===============
+
+2\. Initializer syntax and validity for UDT object declaration
+
+The UDT (User Defined Type) is a type structure defined by the user, in
+addition to the already existing pre-built types.
+
+All the following assumes that any statement below (1 to 7) has the access
+rights to any constructor explicitly defined in the UDT, if any exists.
+
+Initializer syntaxes
+
+7 basic syntaxes are described below.
+
+Static allocations with initializer:
+
+`(1) Dim udt_symbol As UdtName = ( argument_list )`
+`or:`
+`(2) Dim udt_symbol As UdtName = udt_instance`
+`or:`
+`(3) Dim Byref ref_udt_symbol As UdtName = udt_instance`
+`or:`
+`(4) Dim udt_symbol As UdtName = UdtName( argument_list )`
+`or:`
+`(5) Dim udt_symbol As UdtName = Type[<UdtName>]( argument_list )`
+
+Dynamic allocations with initializer:
+
+`(6) Dim ptr_udt_symbol As UdtName Ptr = New UdtName( argument_list )`
+`or:`
+`(7) Dim Byref ref_udt_symbol As UdtName = *New UdtName( argument_list )`
+
+Parameters
+
+- `argument_list`:
+
+List of any argument type (with comma delimited items).
+If there is only one argument, the `'= Type[<UdtName>]( argument )'`
+initializer (if valid) can be shortened into `'= ( argument )'` or even `'=
+argument'` (case of the conversion-constructor).
+
+- `udt_instance`:
+
+Instance of `'UdtName'` or compatible (derived type).
+
+Initializer validity
+
+\- `Initializer syntax line (1)`:
+
+Valid only if exists none constructor (neither implicit nor explicit).
+
+\- `Initializer syntax line (2 or 3)`:
+
+Always valid.
+Case of the copy-construction (2) and reference declaration (3).
+
+\- `Initializer syntax line (4)`:
+
+Valid only if exists an implicit or explicit constructor matching the
+`'argument_list'`.
+
+\- `Initializer syntax line (5)`:
+
+Valid only if exists none constructor (neither implicit nor explicit), or
+otherwise if exists at least a constructor (implicit or explicit) matching
+the `'argument_list'`.
+
+\- `Initializer syntax line (6 or 7)`:
+
+Its validity follows the same rules as that of the `initializer syntax line
+(5)` above.
+
+But the most complex are the rules determining the existence of an implicit
+constructor depending on the type structure:
+
+- Apart from the default-constructor and the default copy-constructor,
+any other type of constructor exists only if it is explicitly defined.
+- For the implicit default-constructor and the implicit copy-constructor,
+it depends on the type structure, for example they both exist for (main cases):
+
+- type having or inheriting a member field with a implicit/explicit
+default-constructor (including member string),
+- or type having a base with an implicit/explicit default-constructor
+(including type derived from Object),
+- .....,
+- otherwise for example, only a variable member with an initializer
+itself induces only an implicit default-constructor. but no implicit
+copy-constructor.
+
+Description
+
+When a UDT has an implicit constructor (due to a string member, or a variable
+member with an initializer itself, or a data member with constructor, or UDT
+derived from Object) or an explicit constructor, then a simple initializer as
+`'= ( argument_list )'`, the first initializer syntax in the list (1), becomes
+not valid.
+In that case, an advanced initialization can be applied by using a constructor
+matching the initialization expression of the last four syntaxes in the list
+(4 to 7).
+
+The simpler initializer syntax, the first in the list (1), can always be
+replaced by one of the last four initializer syntaxes in the list (4 to 7),
+but the contrary does not work.
+
+The second initializer syntax in the list (2) is the special case of copy-
+construction. This initializer syntax always works, either by default copy-
+construction or by the way of a copy-constructor (implicit or explicit).
+
+The third initializer syntax in the list (3) is the special case of reference
+declaration which must always have an initializer. This initializer syntax
+always works if `'udt_instance'` is a reference (or a dereferenced pointer).
+
+Declaration syntax for global symbol
+
+If using global symbols when declaring UDT object with initializer (`'Dim
+Shared'` or `'Static [Shared]'` instead of `'Dim'`), the initializer
+argument(s) must at least be able to be evaluated at the start of the program
+so that it can be placed in the .data section:
+
+- The initializer syntaxes (6) and (7) in the list become no longer
+valid because the symbol must refer to a dynamic memory block in the heap.
+- The other initializer syntaxes remain valid if the provided argument(s)
+can be evaluated at compile time. If the initializer must call an
+existing constructor (implicit or explicit), it is the constructor code,
+called when the program starts, which writes the "initial" values into the
+.data section.
+
+Commented example
+
+Type UDT1
+    Dim As Integer I
+    Dim As Integer J
+End Type
+
+Dim As UDT1 u11 = (1, 2)                  '' default-construction +
+initialization
+'Dim As UDT1 u12 = UDT1(1, 2)             '' not valid: no Constructor(As
+Integer, As Integer)
+Dim As UDT1 u13 = Type<UDT1>(1, 2)        '' default-construction +
+initialization
+Dim As UDT1 Ptr pu14 = New UDT1(1, 2)     '' default-construction +
+initialization
+    Delete pu14
+Dim ByRef As UDT1 ru15 = *New UDT1(1, 2)  '' default-construction +
+initialization
+    Delete @ru15
+
+Dim As UDT1 u16 = u13                     '' default copy-construction
+'Dim As UDT1 u17 = UDT1(u13)              '' not valid: no implicit
+Constructor(As UDT1)
+Dim As UDT1 u18 = Type<UDT1>(u13)         '' default-construction +
+initialization
+Dim As UDT1 Ptr pu19 = New UDT1(u13)      '' default-construction +
+initialization
+    Delete pu19
+Dim ByRef As UDT1 ru110 = *New UDT1(u13)  '' default-construction +
+initialization
+    Delete @ru110
+Print
+
+
+Type UDT2
+    Dim As Integer I = Any
+    Dim As Integer J
+    Declare Constructor ()
+    Declare Constructor (ByVal _I As Integer, ByVal _J As Integer)
+End Type
+Constructor UDT2 ()
+    Print "UDT2.Constructor()"
+End Constructor
+Constructor UDT2 (ByVal _I As Integer, ByVal _J As Integer)
+    Print "UDT2.Constructor(Byval As Integer, Byval As Integer)"
+    This.I = _I
+    This.J = _J
+End Constructor
+
+'Dim As UDT2 u21 = (1, 2)                  '' not valid: exist constructor
+(due at least to '= Any' initialiser)
+Dim As UDT2 u22 = UDT2(1, 2)               '' call Constructor(As Integer, As
+Integer)
+Dim As UDT2 u23 = Type<UDT2>(1, 2)         '' call Constructor(As Integer, As
+Integer)
+Dim As UDT2 Ptr pu24 = New UDT2(1, 2)      '' call Constructor(As Integer, As
+Integer)
+    Delete pu24
+Dim ByRef As UDT2 ru25 = *New UDT2(1, 2)   '' call Constructor(As Integer, As
+Integer)
+    Delete @ru25
+
+Dim As UDT2 u26 = u23                      '' default copy-construction
+'Dim As UDT2 u27 = UDT2(u23)               '' not valid: no implicit
+Constructor(As UDT2)
+'Dim As UDT2 u28 = Type<UDT2>(u23)         '' not valid: no implicit
+Constructor(As UDT2)
+'Dim As UDT2 Ptr pu29 = New UDT2(u23)      '' not valid: no implicit
+Constructor(As UDT2)
+'Dim Byref As UDT2 ru210 = *New UDT2(u23)  '' not valid: no implicit
+Constructor(As UDT2)
+Print
+
+
+Type UDT3
+    Dim As Integer I
+    Dim As String S
+    Declare Constructor ()
+    Declare Constructor (ByVal _I As Integer, ByRef _S As Const String)
+End Type
+Constructor UDT3 ()
+    Print "UDT3.Constructor()"
+End Constructor
+Constructor UDT3 (ByVal _I As Integer, ByRef _S As Const String)
+    Print "UDT3.Constructor(Byval As Integer, Byref As Const String)"
+    This.I = _I
+    This.S = _S
+End Constructor
+
+'Dim As UDT3 u31 = (1, "2")                 '' not valid: exist constructor
+(due at least to string member)
+Dim As UDT3 u32 = UDT3(1, "2")              '' call Constructor(As Integer, As
+String)
+Dim As UDT3 u33 = Type<UDT3>(1, "2")        '' call Constructor(As Integer, As
+String)
+Dim As UDT3 Ptr pu34 = New UDT3(1, "2")     '' call Constructor(As Integer, As
+String)
+    Delete pu34
+Dim ByRef As UDT3 ru35 = *New UDT3(1, "2")  '' call Constructor(As Integer, As
+String)
+    Delete @ru35
+
+Dim As UDT3 u36 = u33                       '' default copy-construction
+Dim As UDT3 u37 = UDT3(u33)                 '' call implicit Constructor(As
+UDT3)
+Dim As UDT3 u38 = Type<UDT3>(u33)           '' call implicit Constructor(As
+UDT3)
+Dim As UDT3 Ptr pu39 = New UDT3(u33)        '' call implicit Constructor(As
+UDT3)
+    Delete pu39
+Dim ByRef As UDT3 ru310 = *New UDT3(u33)    '' call implicit Constructor(As
+UDT3)
+    Delete @ru310
+Print
+
+
+Type UDT4 Extends Object
+    Dim As Integer I
+    Dim As Integer J
+    Declare Constructor ()
+    Declare Constructor (ByVal _I As Integer, ByVal _J As Integer)
+End Type
+Constructor UDT4 ()
+    Print "UDT4.Constructor()"
+End Constructor
+Constructor UDT4 (ByVal _I As Integer, ByVal _J As Integer)
+    Print "UDT4.Constructor(Byval As Integer, Byval As Integer)"
+    This.I = _I
+    This.J = _J
+End Constructor
+
+'Dim As UDT4 u41 = (1, 2)                 '' not valid: exist constructor (due
+at least to Object as base)
+Dim As UDT4 u42 = UDT4(1, 2)              '' call Constructor(As Integer, As
+Integer)
+Dim As UDT4 u43 = Type<UDT4>(1, 2)        '' call Constructor(As Integer, As
+Integer)
+Dim As UDT4 Ptr pu44 = New UDT4(1, 2)     '' call Constructor(As Integer, As
+Integer)
+    Delete pu44
+Dim ByRef As UDT4 ru45 = *New UDT4(1, 2)  '' call Constructor(As Integer, As
+Integer)
+    Delete @ru45
+
+Dim As UDT4 u46 = u43                     '' default copy-construction
+Dim As UDT4 u47 = UDT4(u43)               '' call implicit Constructor(As
+UDT4)
+Dim As UDT4 u48 = Type<UDT4>(u43)         '' call implicit Constructor(As
+UDT4)
+Dim As UDT4 Ptr pu49 = New UDT4(u43)      '' call implicit Constructor(As
+UDT4)
+    Delete pu49
+Dim ByRef As UDT4 ru410 = *New UDT4(u43)  '' call implicit Constructor(As
+UDT4)
+    Delete @ru410
+Print
+
+
+' Note for static UDT declaration + initializer:
+'    When the initializer expression calling the constructor has only one
+parameter 'x', example:
+'    'Dim As UDT u = UDT(x)', in this case, 'UDT(x)' can be shortened into
+'(x)' or even 'x', like:
+'    'Dim As UDT u = (x)' or even 'Dim As UDT u = x', but all these statements
+call the constructor.
+'    (a constructor with one parameter is called a conversion-constructor)
+
+' The six below declarations + initialisers all call only the conversion-
+constructor
+
+Type UDT5
+    Dim As Integer I
+    Declare Constructor ()
+    Declare Constructor (ByVal _I As Integer)
+End Type
+Constructor UDT5 ()
+    Print "UDT5.Constructor()"
+End Constructor
+Constructor UDT5 (ByVal _I As Integer)
+    Print "UDT5.Constructor(Byval As Integer)"
+    This.I = _I
+End Constructor
+
+Dim As UDT5 u51 = UDT5(1)                  '' call Constructor(As Integer)
+Dim As UDT5 u52 = Type<UDT5>(1)            '' call Constructor(As Integer)
+Dim As UDT5 u53 = (1)                      '' call Constructor(As Integer)
+Dim As UDT5 u54 = 1                        '' call Constructor(As Integer)
+Dim As UDT5 Ptr pu55 = New UDT5(1)         '' call Constructor(As Integer)
+    Delete pu55
+Dim ByRef As UDT5 ru56 = *New UDT5(1)      '' call Constructor(As Integer)
+    Delete @ru56
+
+Dim As UDT5 u57 = u54                      '' default copy-construction
+'Dim As UDT5 u58 = UDT5(u54)               '' not valid: no implicit
+Constructor(As UDT5)
+'Dim As UDT5 u59 = Type<UDT5>(u54)         '' not valid: no implicit
+Constructor(As UDT5)
+'Dim As UDT5 Ptr pu510 = New UDT5(u54)     '' not valid: no implicit
+Constructor(As UDT5)
+'Dim Byref As UDT5 ru511 = *New UDT5(u54)  '' not valid: no implicit
+Constructor(As UDT5)
+Print
+
+Sleep
+
+
+Note:
+
+In the `-lang fb` only, `'Var'` can be used instead of `'Dim'` (removing the
+explicit type declaration), but it must not have ambiguity on the type of the
+initializer value.
+In the previous example, only `'Var u11 = (1, 2)'` does not work, but `'Var
+u13 = Type<UDT1>(1, 2)'` works.
+
+
+Back to top
+
+
+===============
+
+3\. Initializer syntax and validity for array declaration
+
+The array can be of any `DataType`.
+
+Initializer syntax
+
+1 basic syntax is described below.
+(arrays of references is not supported presently)
+
+`Dim array_symbol ([lbound To] ubound) [AS DataType] = { expression [, ...] }`
+
+Parameter
+
+- `'lbound'`, `'ubound'`:
+
+Constant numeric values.
+
+- `'expression(s)'`:
+
+List given in comma delimited items, then enclosed by curly brackets.
+Initialization list ordered from `'lbound'` to `'ubound'`.
+Must produce evaluated values of `'DataType'` type or compatible.
+
+Initializer validity
+
+`'lbound'` and `'ubound'` must be constant numeric values because variable-
+length (dynamic) array declaration does not support any initializer.
+Only fixed-length (static) array declaration supports an initializer.
+
+Declaration syntax for global symbol
+
+If using global symbols when declaring array variable with initializer (`'Dim
+Shared'` or `'Static [Shared]'` instead of `'Dim'`), the initializer
+argument(s) must at least be able to be evaluated at the start of the program
+so that it can be placed in the .data section:
+
+- The initializer syntaxe for fixed-length (static) array of variable-
+length string become no longer valid because the symbol must refer to
+a dynamic memory block in the heap.
+- For the fixed-length (static) arrays of other pre-built type variables,
+the initializer syntaxe remains valid if the provided expression(s) can
+be evaluated at compile time.
+
+Example
+
+Dim array(0 To 4) As String = {"array(0)", "array(1)", "array(2)", "array(3)",
+"array(4)"}
+
+For I As Integer = 0 To 4
+    Print array(I),
+Next I
+Print
+
+Sleep
+
+
+Note:
+
+Even in the `-lang fb`, `'Var'` can not be used instead of `'Dim'`, because
+`'Var'` does not support the array declaration.
+
+
+Back to top
+
+
+===============
+
+4\. Nested Initializer syntax with another
+
+These methods of initializing variables can be nested within one another for
+complex assignments.
+For instance, to initialize a multidimensional array:
+
+Dim array(1 To 3, 1 To 5) As Integer = _
+    { _
+        {11, 12, 13, 14, 15}, _
+        {21, 22, 23, 24, 25}, _
+        {31, 32, 33, 34, 35} _
+    }
+
+For I As Integer = 1 To 3
+    For J As Integer = 1 To 5
+        Print array(I, J),
+    Next J
+    Print
+Next I
+
+Sleep
+
+In this declaration, the values for the left-most dimension are given as
+5-index arrays.
+Nesting allows for arrays of any dimension to be initialized.
+
+UDTs and arrays can be nested within each other as well.
+For instance, the following code declares and initializes an array of UDTs:
+
+Type mytype
+    var1 As Double
+    var2 As Integer
+    var3 As ZString Ptr
+End Type
+
+Dim MyVar(0 To 1) As mytype = _
+    { _
+        (1.1, 1, @"Hello"), _
+        (2.2, 2, @"GoodBye") _
+    }
+
+For I As Integer = 0 To 1
+    Print MyVar(I).var1, MyVar(I).var2, *MyVar(I).var3
+Next I
+
+Sleep
+
+
+Note:
+
+Even in the `-lang fb`, `'Var'` can not be used instead of `'Dim'`, because
+`'Var'` does not support the array declaration.
+
+Back to top
+
+
+===============
+
+Dialect Differences:
+
+  * In the -lang qb dialect, variables cannot be initialised.
+  * In the -lang fblite dialect, the explicit type declaration can be
+  omitted in `'Dim ... = ...'`, but only for the `Integer` type
+  (initializer value must match the `Integer` type).
+
+Differences from QB:
+
+  * Variable Initializers are new to FreeBASIC.
+  * The alternate syntax `'Dim [Byref] As DataType symbolname = ...'`
+  is new to FreeBASIC.
+

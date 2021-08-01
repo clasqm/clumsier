@@ -1,0 +1,87 @@
+CVA_START
+================
+
+Macro to initialize variadic argument list object variable
+
+Syntax:
+cva_start( argument_list, last_param )
+
+Parameters:
+
+`argument_list`
+`cva_list` data type variable to initialize
+
+`last_param`
+The last parameter in the procedures parameter list before the ellipsis `...`
+
+Description:
+
+In a variadic procedure definition, `argument_list` is a variable having the
+`cva_list` type and must be initialized with `cva_start` to work with the
+variable length argument list passed to the procedure.
+
+`last_param` is the last parameter before the ellipsis `...` in the variadic
+procedure definition.
+
+`cva_start` can only be used in variadic procedures. A variadic procedure is
+declared or defined by specifying the ellipsis `...` as the last parameter,
+and will accept a variable number of arguments when calling the procedure.
+
+`cva_start` is like a constructor for the variadic `argument_list` object and
+must eventually have a matching call to `cva_end`, which is like a destructor.
+After `cva_end` for `argument_list` has been called, `argument_list` can be
+reused and reinitialized with another call to `cva_start`. The `cva_start` and
+`cva_end` calls must both be called in pairs in the same procedure (for cross
+platform compatibility).
+
+`cva_copy` is similar to `cva_start` except it initializes a variadic
+`argument_list` object from an already initialized variadic `argument_list`
+object, like a copy constructor.
+
+Examples:
+
+'' typical usage of iterating through all arguments
+
+Sub proc CDecl(count As Integer, ... )
+    Dim args As cva_list
+    cva_start( args, count )
+    For i As Integer = 1 To count
+        Print cva_arg( args, Integer )
+    Next
+    cva_end( args )
+End Sub
+
+proc( 4, 4000, 300, 20, 1 )
+
+
+
+'' example of using cva_start to get the first argument
+'' then restarting to get all the arguments
+
+Sub proc CDecl(count As Integer, ... )
+    Dim args As cva_list
+
+    '' get the first argument only
+    cva_start( args, count )
+    Print cva_arg( args, Integer )
+    cva_end( args )
+
+    '' restart and get all the arguments
+    cva_start( args, count )
+    For i As Integer = 1 To count
+        Print cva_arg( args, Integer )
+    Next
+    cva_end( args )
+
+End Sub
+
+proc( 4, 4000, 300, 20, 1 )
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__cva_start`.
+
+Differences from QB:
+New to FreeBASIC
+

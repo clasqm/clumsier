@@ -1,0 +1,16 @@
+String Operators
+===============
+
+Operators that work with strings
+
+These operators provide conversion to string, concatenation and retrieval of
+character data.
+
+Operator + (String concatenation)
+	Concatenates two strings.
+
+Operator & (String concatenation with conversion)
+	Concatenates two values converted to strings.
+
+Operator Strptr (String pointer)
+	Returns the address of a string's character data.

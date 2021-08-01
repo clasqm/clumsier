@@ -1,0 +1,134 @@
+File I/O Functions
+================
+
+Statements and procedures for working with files and devices.
+
+Description:
+
+These statements and procedures provide file and device i/o capabilities. So
+called file numbers can be bound to files or devices, which can be read or
+written to using formatted (text mode) or unformatted (binary mode) data. In
+binary mode, files and devices can be read from or written to in arbitrary
+locations. For multithreaded applications, files and devices can also be
+locked.
+
+Opening Files or Devices
+
+##FREEFILE
+Gets an available file number that can be used to read or write from files or
+devices.
+
+##OPEN
+Binds a file number to a physical file to provide reading and writing
+capabilities.
+
+##OPEN COM
+Binds a file number to a communications port.
+
+##OPEN CONS
+Binds a file number to the standard input and output streams.
+
+##OPEN ERR
+Binds a file number to the standard input and error streams.
+
+##OPEN LPT
+Binds a file number to a printer device.
+
+##OPEN PIPE
+Binds a file number to the input and output streams of a process.
+
+##OPEN SCRN
+Binds a file number directly to the console.
+
+##CLOSE
+Unbinds a file number from a file or device.
+
+##RESET
+Unbinds all active file numbers.
+
+File I/O modes
+
+##INPUT (File Mode)
+Text data can be read from the file.
+
+##OUTPUT
+Text data can be written to the file.
+
+##APPEND
+Text data is added to the end of a file when output.
+
+##BINARY
+Arbitrary data can be read from or written to the file.
+
+##RANDOM
+Blocks of data of certain size can be read from and written to the file.
+
+File access privileges
+
+##ACCESS
+An overview of file access privileges.
+
+##READ (File Access)
+Binary data can only be read from the file.
+
+##WRITE (File Access)
+Binary data can only be written to the file.
+
+##READ WRITE(File Access)
+Binary data can be read from and written to the file.
+
+Character encoding
+
+##ENCODING
+Specifies the character encoding of a file.
+
+Reading from and Writing to Files or Devices
+
+##INPUT #
+Reads a list of values from a file or device.
+
+##WRITE #
+Writes a list of values to a file or device.
+
+##INPUT()
+Reads a number of characters from a file or device.
+
+##WINPUT()
+Reads a number of wide characters from a file or device.
+
+##LINE INPUT #
+Reads a line of text from a file or device.
+
+##PRINT #
+##? # (Shortcut for 'PRINT #')
+Writes text data to a file or device.
+
+##PUT #
+Writes arbitrary data to a file or device.
+
+##GET #
+Reads arbitrary data from a file or device.
+
+File Position and other Info
+
+##LOF
+Gets the length (in bytes) of a file.
+
+##LOC
+Gets the file position of the last read or write operation.
+
+##EOF
+Returns true if all of the data has been read from a file.
+
+##SEEK (Statement)
+Sets the file position of the next read or write operation.
+
+##SEEK (Function)
+Gets the file position of the next read or write operation.
+
+##LOCK
+Restricts read or write access to a file or portion of a file.
+
+##UNLOCK
+Remove read or write restrictions from a previous Lock command.
+

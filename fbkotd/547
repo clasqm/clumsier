@@ -1,0 +1,65 @@
+Operator AND= (Conjunction and Assign)
+================
+
+Performs a bitwise-and (conjunction) and assigns the result to a variable
+
+Syntax:
+declare operator And= ( byref lhs as T1, byref rhs as T2 )
+
+Usage:
+lhs And= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`T1`
+Any numeric or boolean type.
+
+`rhs`
+The value to perform a bitwise-and (conjunction) with `lhs`.
+
+`T2
+Any numeric or boolean type.
+
+Description:
+
+This operator performs a bitwise-and and assigns the result to a variable (for
+conversion of a boolean to an integer, false or true boolean value becomes 0
+or -1 integer value). It is functionally equivalent to:
+
+`lhs = lhs and rhs`
+
+`And=` compares each bit of its operands, `lhs` and `rhs`, and if both bits
+are 1, then the corresponding bit in the first operand, `lhs`, is set to 1,
+otherwise it is set to 0.
+
+`And=` cannot be used in conditional expressions.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'And=>' can be also used.
+
+Examples:
+
+' Using the AND= operator on two numeric values
+Dim As UByte numeric_value1, numeric_value2
+numeric_value1 = 15 '' 00001111
+numeric_value2 = 30 '' 00011110
+
+numeric_value1 And= numeric_value2
+
+'' Result =  14  =     00001110
+Print numeric_value1
+Sleep
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

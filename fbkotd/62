@@ -1,0 +1,19 @@
+DO
+===============
+
+Control flow statement for looping.
+
+Syntax:
+Do [ { Until | While } condition ]
+	[ statement block ]
+Loop
+
+Do
+	[ statement block ]
+Loop [ { Until | While } condition ]
+
+Examples:
+See example at `Do...Loop`.
+
+Differences from QB:
+	None

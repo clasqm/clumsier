@@ -1,0 +1,81 @@
+WOCT
+================
+
+Converts a number to a Unicode octal representation
+
+Syntax:
+declare function Woct ( byval number as ubyte ) as wstring
+declare function Woct ( byval number as ushort ) as wstring
+declare function Woct ( byval number as ulong ) as wstring
+declare function Woct ( byval number as ulongint ) as wstring
+declare function Woct ( byval number as const any ptr ) as wstring
+
+declare function Woct ( byval number as ubyte, byval digits as long ) as
+wstring
+declare function Woct ( byval number as ushort, byval digits as long ) as
+wstring
+declare function Woct ( byval number as ulong, byval digits as long ) as
+wstring
+declare function Woct ( byval number as ulongint, byval digits as long ) as
+wstring
+declare function Woct ( byval number as const any ptr, byval digits as long )
+as wstring
+
+Usage:
+result = Woct( number [, digits ] )
+
+Parameters:
+
+`number`
+
+Number to convert to octal representation.
+
+`digits`
+
+Desired number of digits in the returned string.
+
+Return Value:
+The Unicode octal representation of the number, truncated or padded with zeros
+(`"0"`) to fit the number of digits, if specified.
+
+Description:
+
+Returns the octal `Wstring` (Unicode) representation of `number`. Octal digits
+range from `0` to `7`.
+
+If you specify `digits` > `0`, the result string will be exactly that length.
+It will be truncated or padded with zeros on the left, if necessary.
+
+The length of the returned string will not be longer than the maximum number
+of digits required for the type of `number` (3 characters for `byte`, 6 for
+`short`, 11 for `long`, and 22 for `longint`)
+
+Examples:
+
+Print WOct(54321)
+Print WOct(54321, 4)
+Print WOct(54321, 8)
+
+
+will produce the output:
+
+
+ 
+ 
+    152061
+    2061
+    00152061
+
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Woct`.
+
+Platform Differences:
+
+  * Unicode strings are not supported in the DOS port of FreeBASIC.
+
+Differences from QB:
+  * In QBASIC Unicode was not supported.
+

@@ -1,0 +1,55 @@
+POINTCOORD
+================
+
+Queries `Draw`'s pen position in graphics mode
+
+Syntax:
+Declare Function PointCoord( ByVal func As Long ) As Single
+
+Usage:
+result = PointCoord( func )
+
+Description:
+The `PointCoord` function can be used to query x and y position of the `Draw`
+pen in graphics mode. The result value depends on the passed func value:
+
+func value: return value:
+0 x physical coordinate, same as PMap( PointCoord( 2 ), 0 )
+1 y physical coordinate, same as PMap( PointCoord( 3 ), 1 )
+2 x view coordinate
+3 y view coordinate
+
+
+Examples:
+
+Screen 12
+
+Print "\--- Default window coordinate mapping ---"
+Print "DRAW pen position, at the default (0,0):"
+Print "Physical:", PointCoord( 0 ), PointCoord( 1 )
+Print "View:", PointCoord( 2 ), PointCoord( 3 )
+
+Draw "BM 50,50"
+Print "DRAW pen position, after being moved to (50,50):"
+Print "Physical:", PointCoord( 0 ), PointCoord( 1 )
+Print "View:", PointCoord( 2 ), PointCoord( 3 )
+
+Print "\--- Changing window coordinate mapping ---"
+Window Screen (-100, -100) \- (100, 100)
+
+Draw "BM 0,0"
+Print "DRAW pen position, after being moved to (0,0):"
+Print "Physical:", PointCoord( 0 ), PointCoord( 1 )
+Print "View:", PointCoord( 2 ), PointCoord( 3 )
+
+Draw "BM 50,50"
+Print "DRAW pen position, after being moved to (50,50):"
+Print "Physical:", PointCoord( 0 ), PointCoord( 1 )
+Print "View:", PointCoord( 2 ), PointCoord( 3 )
+
+Sleep
+
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,60 @@
+BYREF (parameters)
+================
+
+Declaration specifier to explicitly pass a parameter by reference
+
+Syntax:
+Byref param as datatype
+
+Usage:
+[ declare ] { sub | function } proc_name ( Byref param as datatype )
+
+Description:
+Passes a variable by reference, that is its address, to a subroutine or
+function. When a variable is passed by reference, the contents of the variable
+can be changed by the target subroutine or function.
+
+In -lang qb and -lang fblite dialects, `Byref` is the default parameter
+passing convention, unless `Option ByVal` is in effect.
+
+Opposite of `ByVal`.
+
+Note: A constant or a literal expression can also be passed to such a
+procedure (which gets by reference), but they are obviously not modifiable
+from the procedure body. In that case, the compiler passes by reference a
+temporary variable initialized with the constant or the literal expression.
+
+Warning: When passing by reference, it is recommended to pass an argument of
+the same type (or fully compatible, like a derived type for example) as that
+of the declared parameter. Although in some cases the compiler accepts to pass
+a different type, often the result is not the one expected.
+
+Examples:
+
+Dim MyVar As Integer
+
+Sub ChangeVar(ByRef AVar As Integer)
+    AVar = AVar + 1
+End Sub
+
+MyVar = 1
+Print "MyVar: "; MyVar 'output = 1
+ChangeVar MyVar
+Print "MyVar: "; MyVar 'output = 2
+Sleep
+End
+
+
+Dialect Differences:
+  * In -lang fb dialect, `Byval` is the default parameter passing convention 
+  for all built-in types except `String` and user-defined `Type` which are 
+  passed `Byref` by default. The `Zstring` and `Wstring` built-in types 
+  are also passed `Byref` by default, but passing `Byval` is forbidden. 
+  Arrays are always passed `Byref` and the use of the specifier `Byref` 
+  or `Byval` is forbidden.
+  * In -lang qb and -lang fblite dialects, `Byref` is the default parameter 
+  passing convention.
+
+Differences from QB:
+New to FreeBASIC
+

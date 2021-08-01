@@ -1,0 +1,87 @@
+SETENVIRON
+================
+
+Sets a system environment variable
+
+Syntax:
+declare function Setenviron ( byref varexpression as string ) as long
+
+Usage:
+result = Setenviron( varexpression )
+
+Parameters:
+
+`varexpression`
+
+Name and setting of an environment variable in the following (or equivalent)
+form: varname=varstring.
+(varname being the name of the environment variable, and varstring being its
+text value to set)
+
+Return Value:
+Return zero (0) if successful, non-zero otherwise.
+
+Description:
+
+Modifies system environment variables. There are several variables available
+for editing other than the default ones on your system. An example of this
+would be fbgfx, where you can choose the form of graphics driver the FreeBASIC
+graphics library will use.
+
+Examples:
+
+'e.g. to set the system variable "path" to "c:":
+
+Shell "set path" 'shows the value of path
+SetEnviron "path=c:"
+Shell "set path" 'shows the new value of path
+
+
+
+  '' WINDOWS ONLY EXAMPLE! - We just set the graphics method to use
+  '' GDI rather than DirectX (or Direct2D added on new systems).
+  '' You may note a difference in FPS.
+SetEnviron("fbgfx=GDI")
+
+  '' Desktop width/height
+Dim As Integer ScrW, ScrH, BPP
+ScreenInfo ScrW, ScrH, BPP
+
+  '' Create a screen at the half width/height of your monitor.
+  '' Normally this would be slow, but GDI is fairly fast for this kind
+  '' of thing.
+ScreenRes ScrW/2, ScrH/2, BPP
+
+  '' Start our timer/
+Dim As Double T = Timer
+
+  '' Lock our page
+ScreenLock
+Do
+ 
+    '' Print time since last frame
+  Locate 1, 1
+  Print "FPS: " & 1 / ( Timer \- T )
+  T = Timer
+ 
+    '' Flip our screen
+  ScreenUnlock
+  ScreenLock
+    '' Commit a graphical change to our screen.
+  Cls
+ 
+Loop Until Len(Inkey)
+
+  '' unlock our page.
+ScreenUnlock
+
+Platform Differences:
+
+  * In Linux, `varexpression` must be permanent (a literal, a variable 
+  declared in the main code or a static variable declared in a procedure), 
+  because Linux does not memorize the string but only a pointer to its 
+  data characters.
+
+Differences from QB:
+  * In QB, `Setenviron` was called `Environ`.
+

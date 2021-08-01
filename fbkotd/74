@@ -1,0 +1,19 @@
+Compiler Option: -ex
+===============
+
+Add error checking with `Resume` support
+
+Syntax:
+-ex
+
+Description:
+
+The `-ex` compiler option adds error handling as with the -e option plus
+support for `Resume`.
+
+See also:
+  * `__FB_ERR__`
+  * Compiler Option: -e
+  * Compiler Option: -exx
+  * Error Handling
+  * Using the Command Line

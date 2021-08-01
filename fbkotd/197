@@ -1,0 +1,25 @@
+LINE INPUT
+================
+
+Reads one line of input from the keyboard
+
+Syntax:
+Line Input [;] [promptstring {;|,} ] stringvariable
+
+Parameters:
+`promptstring`
+prompt to display before waiting for input
+`stringvariable`
+variable to receive the line of text
+
+Description:
+Reads a line of text from the keyboard and stores it in a string variable.
+
+Examples:
+Dim x As String
+Line Input "Enter a line:", x
+Print "You entered '"; x; "'"
+
+Differences from QB:
+QBASIC only allowed literal strings for the prompt text. FreeBASIC
+allows any variable or constant string expression.

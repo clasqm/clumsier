@@ -1,0 +1,55 @@
+LET
+================
+
+Indicates the assignment operator.
+
+Syntax:
+Let variable = value
+
+or
+
+Let( variable1 [, variable2 [, ... ]] ) = udt
+
+or
+
+operator typename.Let ( [ byref | byval ] rhs as datatype )
+
+statements
+
+end operator
+
+Description:
+Command intended to help the programmer to distinguish an assignment statement
+(e.g. `Let a = 1`) from an equality test (e.g. `If a = 1 then ...`). As the
+compiler does not require it, it is usually omitted.
+
+Let can be used as a left-hand side operator to assign the members of a user
+defined type to multiple variables. See `Operator Let() (Assignment)`
+
+Let is used with operator overloading to refer the assignment operator. `See
+Operator Let (Assignment)`
+
+Examples:
+
+'' Compile with -lang fblite or qb
+
+#lang "fblite"
+
+' these two lines have the same effect:
+Let x = 100
+x = 100
+
+
+Dialect Differences:
+  * The use of `let` to indicate an assignment statement (`Let variable 
+  = expr`) is not allowed in the -lang fb dialect.
+  * The UDT to multi-variable Let assignment is only available in the 
+  -lang fb dialect.
+  * Overloading of operators is not available in the -lang qb and 
+  -lang fblite dialects.
+
+Differences from QB:
+  * None in the -lang fb dialect.
+  * The Let operator is new to FreeBASIC.
+  * The UDT to multi-variable Let assignment is new to FreeBASIC.
+

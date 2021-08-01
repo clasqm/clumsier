@@ -1,0 +1,59 @@
+Operator IMP= (Implication and Assign)
+================
+
+Performs a bitwise-imp (implication) and assigns the result to a variable
+
+Syntax:
+declare operator Imp= ( byref lhs as T1, byref rhs as T2 )
+
+Usage:
+lhs Imp= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`T1`
+Any numeric or boolean type.
+
+`rhs`
+The value to perform a bitwise-imp (implication) with `lhs`.
+
+`T2
+Any numeric or boolean type.
+
+Description:
+
+This operator performs a bitwise-imp and assigns the result to a variable (for
+conversion of a boolean to an integer, false or true boolean value becomes 0
+or -1 integer value). It is functionally equivalent to:
+
+`lhs = lhs imp rhs`
+
+`Imp` is a bitwise operator which is the same as (`Not` `lhs`) `Or` `rhs`.
+`Imp=` compares each bit of its operands, `lhs` and `rhs`, and if the bit in
+`lhs` is 0 or the bit in `rhs` is 1, then the corresponding bit in the first
+operand, `lhs`, is set to 1, otherwise it is set to 0.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'Imp=>' can be also used.
+
+Examples:
+
+Dim As UByte a = &b00110011
+Dim As UByte b = &b01010101
+a Imp= b
+'' Result    a = &b11011101
+Print Bin(a)
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

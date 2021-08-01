@@ -1,0 +1,61 @@
+PUBLIC: (Access Control)
+================
+
+Specifies public member access control in a `Type` or `Class`
+
+Syntax:
+Type typename
+
+Public:
+
+member declarations
+
+End Type
+
+Parameters:
+
+`typename`
+name of the `Type` or `Class`
+
+`member declarations`
+declarations for fields, functions, or enumerations
+
+Description:
+
+`Public:` indicates that `member declarations` following it have public
+access. Public members are accessible with any usage of the `Type` or `Class`.
+
+`member declarations` following `Public:` are public until a different access
+control specifier is given, like `Private:` or `Protected:`
+
+Members in a `Type` declaration are `Public:` by default if no member access
+control specifier is given.
+
+Examples:
+
+Type testing
+  Private:
+    nome As String
+  Public:
+    number As Integer
+  Declare Sub setNome( ByRef newnome As String )
+End Type
+
+Sub testing.setnome( ByRef newnome As String )
+  This.nome = newnome
+End Sub
+
+Dim As testing myVariable
+
+'' We can access these members anywhere since
+'' they're public
+myVariable.number = 69 ''
+myVariable.setNome( "FreeBASIC" )
+
+
+Dialect Differences:
+Available only in the -lang fb dialect.
+
+Differences from QB:
+New to FreeBASIC
+

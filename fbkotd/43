@@ -1,0 +1,12 @@
+Compiler Option: -export
+===============
+
+Export symbols for dynamic linkage
+
+Syntax:`
+
+-export
+
+Description:
+	The `-export` compiler option exports symbols for dynamic linkage.
+

@@ -1,0 +1,45 @@
+LIB
+================
+
+Specifies the library where a sub or function can be found as part of a
+declaration
+
+Syntax:
+declare { sub | function } proc_name lib "libname" [ alias "symbol_name" ] (
+arguments list ) as return_type
+extern "mangling" lib "libname"
+declarative statements
+end extern
+type T
+as integer dummy
+declare constructor lib "libname" [ alias "symbol_name" ] ( arguments list )
+end type
+
+Description:
+In `Sub` or `Function` declarations, and also in class method declarations
+(including constructors and destructors), `lib` indicates the library
+containing the function. Libraries specified in this way are linked in as if
+`#inclib "libname"` or `-l libname` had been used.
+
+`lib` can also be used with Extern ... End Extern blocks to specifiy a `lib`
+for all declarations inside.
+
+Examples:
+
+'' mydll.bas
+'' compile with:
+''   fbc -dll mydll.bas
+
+Public Function GetValue() As Integer Export
+  Function = &h1234
+End Function
+
+Declare Function GetValue Lib "mydll" () As Integer
+
+Print "GetValue = &h"; Hex(GetValue())
+
+' Expected Output :
+' GetValue = &h1234
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,19 @@
+__FB_BACKEND__
+===============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_BACKEND__
+
+`
+Description:
+Defined to either `"gas"` or `"gcc"`, depending on which backend was specified
+via -gen.
+
+Examples:
+Print "Back end is: " & __FB_BACKEND__
+
+Differences from QB:
+Did not exist in QB
+

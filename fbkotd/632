@@ -1,0 +1,78 @@
+WHEX
+================
+
+Returns the hexadecimal `wstring` (Unicode) representation of a number
+
+Syntax:
+declare function Whex ( byval number as ubyte ) as wstring
+declare function Whex ( byval number as ushort ) as wstring
+declare function Whex ( byval number as ulong ) as wstring
+declare function Whex ( byval number as ulongint ) as wstring
+declare function Whex ( byval number as const any ptr ) as wstring
+
+declare function Whex ( byval number as ubyte, byval digits as long ) as
+wstring
+declare function Whex ( byval number as ushort, byval digits as long ) as
+wstring
+declare function Whex ( byval number as ulong, byval digits as long ) as
+wstring
+declare function Whex ( byval number as ulongint, byval digits as long ) as
+wstring
+declare function Whex ( byval number as const any ptr, byval digits as long )
+as wstring
+
+Usage:
+result = Whex( number [, digits ] )
+
+Parameters:
+
+`number`
+
+A whole number or expression evaluating to a whole number.
+
+`digits`
+
+Optional number of digits to return.
+
+Return Value:
+Returns a hexadecimal `wstring` representation of `number`, truncated or
+padded with zeros (`"0"`) to fit the number of digits, if specified.
+
+Description:
+
+Hexadecimal digits range from `0`-`9`, or `A`-`F`.
+
+If you specify `digits` > `0`, the resulting `wstring` will be exactly that
+length. It will be truncated or padded with zeros on the left, if necessary.
+
+The length of the wstring will not go longer than the maximum number of digits
+required for the type of `expression` (8 for a `long`, 16 for floating point
+or `longint`)
+
+Examples:
+
+Print Hex(54321)
+Print Hex(54321, 2)
+Print Hex(54321, 5)
+
+will produce the output:
+
+ 
+ 
+    D431
+    31
+    0D431
+
+
+Platform Differences:
+
+  * Unicode strings are not supported in the DOS port of FreeBASIC.
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Whex`.
+
+Differences from QB:
+  * New to FreeBASIC.
+

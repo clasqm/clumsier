@@ -1,0 +1,81 @@
+Control Flow Statements
+================
+
+Statements that direct the flow of program execution.
+
+
+Transferring Statements
+
+##GOTO
+Transfers execution to another point in code defined by a text label.
+
+##GOSUB
+Temporarily transfers execution to another point in code, defined by a text
+label.
+
+##ON GOTO
+Transfers execution to one of a number of points in code defined by text
+labels, based on the value of an expression.
+
+##ON GOSUB
+Temporarily transfers execution to one of a number of points in code defined
+by text labels, based on the value of an expression.
+
+##RETURN (from procedure)
+Returns from a procedure returning a value.
+
+##RETURN (from Gosub)
+Returns from a call using Gosub.
+
+##EXIT SUB, EXIT FUNCTION, EXIT OPERATOR,
+##EXIT CONSTRUCTOR, EXIT DESTRUCTOR and EXIT PROPERTY
+Prematurely leaves a procedure code block.
+
+Branching Statements
+
+##IF..END IF
+Executes a block of statements if a condition is met.
+
+##..ELSE IF..
+Executes a block of code if a condition is met and all previous conditions
+weren't met.
+
+##..ELSE..
+Executes a block of code if all previous conditions weren't met.
+
+##SELECT..END SELECT
+Executes one of a number of statement blocks using a set of conditions.
+
+##..CASE..
+Executes a block of code if a condition is met.
+
+##..CASE ELSE..
+Executes a block of code if all previous conditions weren't met.
+
+Intra-branch control
+
+##EXIT SELECT
+Prematurely breaks out of a `SELECT..END SELECT` statement.
+
+Looping Statements
+
+##WHILE..WEND
+Executes a block of statements while a condition is met.
+
+##FOR..NEXT
+Executes a block of statements while an iterator is less than or greater than
+an expression.
+
+##DO..LOOP
+Executes a block of statements while or until a condition is met.
+
+Intra-loop control
+
+##CONTINUE WHILE, CONTINUE FOR and CONTINUE DO
+Prematurely re-enters a loop.
+
+##EXIT WHILE, EXIT FOR and EXIT DO
+Prematurely breaks out of a loop.
+
+
+

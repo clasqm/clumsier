@@ -1,0 +1,76 @@
+OVERLOAD
+================
+
+Specifies that a procedure name can be overloaded
+
+Syntax:
+Declare [Static] Sub procedure_name [Cdecl|Stdcall|Pascal] Overload [Alias
+"external_name"] [([parameter_list])] [Constructor [priority]] [Static]
+[Export]
+
+Declare [Static] Function procedure_name [Cdecl|Stdcall|Pascal] Overload
+[Alias "external_name"] [([parameter_list])] [ byref ] as return_type [Static]
+[Export]
+
+[Public|Private] Sub procedure_name [Cdecl|Stdcall|Pascal] Overload [Alias
+"external_name"] [([parameter_list])] [Constructor [priority]] [Static]
+[Export]
+
+..procedure body..
+
+End Sub
+
+[Public|Private] Function procedure_name [Cdecl|Stdcall|Pascal] Overload
+[Alias "external_name"] [([parameter_list])] [ byref ] as return_type [Static]
+[Export]
+
+..procedure body..
+
+End Function
+
+Description:
+In procedure declarations, `Overload` allows procedure names to be overloaded,
+that is, other procedures (regardless of whether to be subs or functions) can
+then be declared with the same name if their parameter lists are unique. Two
+parameter lists are unique if they contain a different number of parameters,
+or have parameters of different types. Note that this means that two or more
+procedures cannot be declared with the same name if they differ in return type
+alone.
+A variadic procedure name can never be overloaded.
+
+Once a procedure name has been declared overloaded, further declarations using
+the name need not specify `Overload`, but it is allowed.
+
+`Overload` is not necessary in member procedure declarations, as they are
+always implicitly overloaded.
+
+When calling an overloaded procedure, the compiler determines the most
+appropriate definition to use among a set of compatible candidates, by
+comparing the argument types used to call the procedure with the parameter
+types specified in the definitions. If no match or an ambiguous match is
+found, the compiler generates an error at compile time.
+
+Examples:
+
+Declare Function SUM Overload (A As Integer,B As Integer) As Integer
+Declare Function SUM Overload (A As Single,B As Single) As Single
+Function SUM  (A As Integer,B As Integer) As Integer
+   Function=A+B
+End Function
+Function SUM  (A As Single,B As Single) As Single
+   Function=A+B
+End Function
+Dim As Integer A,B
+Dim As Single A1,B1
+A=2
+B=3
+A1=2.
+b1=3.
+Print SUM(A,B)
+Print SUM (A1,B1)
+Sleep
+
+
+Differences from QB:
+New to FreeBASIC
+

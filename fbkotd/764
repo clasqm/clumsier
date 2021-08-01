@@ -1,0 +1,130 @@
+Preprocessor
+================
+
+Commands that control the preprocessor.
+
+Description:
+
+Preprocessor commands are sent to the compiler to control what gets compiled
+and how. They can be used to choose to compile one block of code rather than
+another for cross-platform compatibility, include headers or other source
+files, define small inline functions called macros, or alter how the compiler
+handles variables.
+
+Conditional Compilation
+
+Commands that allow for branches in compilation based on conditions.
+
+Text Replacement
+
+Commands that create text-replacement macros.
+
+File Directives
+
+Commands that indicate to the compiler how other files relate to the source
+file.
+
+Control Directives
+
+Commands that set compile options, control compilation, and report compile
+time information.
+
+Metacommands
+
+Commands that are kept for backward compatibility.
+
+
+Conditional Compilation
+
+###IF
+Compiles the following code block based on a condition.
+
+###IFDEF
+Compiles the following code block if a symbol is defined.
+
+###IFNDEF
+Compiles the following code block if a symbol is not defined.
+
+###ELSEIF
+Compiles the following code block if a condition is true and the previous
+conditions was false.
+
+###ELSE
+Compiles the following code block if previous conditions were false.
+
+###ENDIF
+Signifies the end of a code block.
+
+##DEFINED
+Returns "-1" if a symbol is defined, otherwise "0".
+
+Text Replacement
+
+###DEFINE
+Creates a single-line text-replacement macro.
+
+###MACRO and #ENDMACRO
+Creates a multi-line text-replacement macro.
+
+###UNDEF
+Undefines a symbol.
+
+### Preprocessor stringize
+Converts text into a string literal.
+
+#### Preprocessor concatenate
+Concatenates two pieces of text.
+
+##! Escaped String Literal
+Indicates string literal immediately following must be processed for escape
+sequences.
+
+##$ Non-Escaped String Literal
+Indicates string literal immediately following must not be processed for
+escape sequences.
+
+File Directives
+
+###INCLUDE
+Inserts text from a file.
+
+###INCLIB
+Includes a library in the linking processes.
+
+###LIBPATH
+Includes a path to search for libraries in the linking process.
+
+Control Directives
+
+###PRAGMA
+Sets compiling options.
+
+###LANG
+Sets dialect from source.
+
+###PRINT
+Outputs a messages to standard output while compiling.
+
+###ERROR
+Outputs a messages to standard output and stops compilation.
+
+###ASSERT
+Stops compilation with an error message if a given condition is false.
+
+###LINE
+Sets the current line number and file name.
+
+Metacommands
+
+##'$INCLUDE
+Alternate form of the #INCLUDE directive.
+
+##'$DYNAMIC
+Alternate form of the OPTION DYNAMIC statement.
+
+##'$STATIC
+Alternate form of the OPTION STATIC statement.
+
+##'$LANG
+Alternate form of the #lang directive.
+

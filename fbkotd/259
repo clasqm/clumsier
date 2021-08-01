@@ -1,0 +1,31 @@
+__FUNCTION__
+================
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FUNCTION__
+
+Description:
+Substituted with the quoted name of the current function block where used.
+
+Its normal use is to report wrong values in debugging.
+
+If `__FUNCTION__` is used at the module level, the function name given will be
+`"__FB_MAINPROC__"` for the main module, or `"__FB_MODLEVELPROC__"` for a
+different module.
+
+Examples:
+
+Dim a As Integer
+'...
+If a < 0 Then '' this shouldn't happen
+    Print "Error: a = " & a & " in " & __FILE__ & " (" & __FUNCTION__ & ") _
+		line " & __LINE__
+End If
+
+    Error: a = -32767 in test.bas (__FB_MAINPROC__) line 47
+
+Differences from QB:
+Did not exist in QB
+

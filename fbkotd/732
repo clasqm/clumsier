@@ -1,0 +1,77 @@
+Operator STRPTR (String pointer)
+================
+
+Returns the address of a string's character data.
+
+Syntax:
+declare operator Strptr ( byref lhs as string ) as zstring ptr
+declare operator Strptr ( byref lhs as wstring ) as wstring ptr
+
+Usage:
+result = Strptr ( lhs )
+
+Parameters:
+
+`lhs`
+A string.
+
+Return Value:
+Returns a `Zstring/wstring Ptr` to a string/wstring's character data (null
+value in case of empty string).
+
+Description:
+
+This operator returns a `Zstring/wstring Ptr` that points to the beginning of
+a string/wstring's character data. `Operator Strptr` is the proper method for
+acquiring the address of a string's character data.
+In case of empty `string` (only for variable length strings), `Operator
+Strptr` returns a null pointer.
+
+The related `Operator Varptr (Variable pointer)` and `Operator @ (Address
+of)`, when used with a `String`, return the address of the internal string
+descriptor.
+When a variable length string is modified, the address of its descriptor
+remains always the same, but the the string's character data address (returned
+by `Operator Strptr`) may change (like any allocated memory that must be
+reallocated).
+When a fixed length string is modified, the string's character data address
+(returned by `Operator Strptr`) is unchanged.
+
+Note: For a variable length string, the operator returns a `Zstring Const Ptr`
+(because returning by reference the string's characters pointer set in the
+string descriptor, this one is to be considered as read only). If the keyword
+`Var` is used to declare/initialize a user pointer from `Operator Strptr`,
+this user pointer is also defined as read only (it can not be modified
+further).
+
+Examples:
+
+'' This example uses Strptr to demonstrate using pointers with strings
+Dim myString As String
+Dim toMyStringDesc As Any Ptr
+Dim toMyString As ZString Ptr
+
+'' Note that using standard VARPTR notation will return a pointer to the
+'' descriptor, not the string data itself
+myString = "Improper method for Strings"
+toMyStringDesc = @myString
+Print myString
+Print Hex( toMyStringDesc )
+Print
+
+'' However, using Strptr returns the proper pointer
+myString = "Hello World Examples Are Silly"
+toMyString = StrPtr(myString)
+Print myString
+Print *toMyString
+Print
+
+'' And the pointer acts like pointers to other types
+myString = "MyString has now changed"
+Print myString
+Print *toMyString
+Print
+
+
+Differences from QB:
+  * New to FreeBASIC, but does exactly the same thing as `Sadd`

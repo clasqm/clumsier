@@ -1,0 +1,79 @@
+RESET
+================
+
+Closes all open files, or resets standard I/O handles.
+
+Syntax:
+declare sub Reset ( )
+declare sub Reset ( byval streamno as long )
+
+Usage:
+Reset
+
+or
+
+Reset( streamno )
+
+Parameters:
+
+`streamno`
+The stream number to reset, `0` for stdin or `1` for stdout.
+
+Description:
+
+`Reset`, when called with no arguments, closes all disk files.
+
+`Reset`, when called with the `streamno` argument, will reset the redirected
+or piped streams associated with stdin (`0`), or stdout (`1`).
+
+Runtime errors:
+
+`Reset(streamno)` can set one of the following runtime errors:
+
+(`1`) Illegal function call
+
+  * `streamno` was neither `0` nor `1`
+
+(`3`) File I/O error
+
+  * Resetting of stdin or stdout failed
+
+Examples:
+
+Open "test.txt" For Output As #1
+Print #1, "testing 123"
+Reset
+
+
+
+Dim x As String
+
+'' Read from STDIN from piped input
+Open Cons For Input As #1
+While EOF(1) = 0
+  Input #1, x
+  Print """"; x; """"
+Wend
+Close #1
+
+'' Reset to read from the keyboard
+Reset(0)
+
+Print "Enter some text:"
+Input x
+
+'' Read from STDIN (now from keyboard)
+Open Cons For Input As #1
+While EOF(1) = 0
+  Input #1, x
+  Print """"; x; """"
+Wend
+Close #1
+
+Note: Under Windows, to specify to the program that data entry is completed
+(transfer EOF), you can press CTRL+Z then press ENTER.
+
+Differences from QB:
+  * None for `Reset()`.
+  * The `Reset(streamno)` usage is new to FreeBASIC.
+

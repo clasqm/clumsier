@@ -1,0 +1,25 @@
+__FB_SIGNATURE__
+===============
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FB_SIGNATURE__
+
+Description:
+Substituted by a signature of the compiler where used.
+
+Examples:
+Print __FB_SIGNATURE__
+
+    FreeBASIC 0.21.1
+
+Differences from QB:
+  * New to FreeBASIC
+
+See also:
+
+  * `__FB_VERSION__`
+  * `__FB_WIN32__`
+  * `__FB_LINUX__`
+  * `__FB_DOS__`

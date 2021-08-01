@@ -1,0 +1,13 @@
+Compiler Option: -c
+=======================
+
+Compile and assemble source file only, do not link
+
+Syntax:
+-c
+
+Description:
+The `-c` option specifies that any source files listed are to be compiled and
+assembled into object files, and not linked into an executable (the default
+behavior). When using the "-c" switch, "-m" must be specified when compiling a
+main source file.

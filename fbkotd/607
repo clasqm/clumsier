@@ -1,0 +1,59 @@
+__FB_ERR__
+================
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__FB_ERR__
+
+Description:
+`__FB_ERR__` indicates if -e, -ex, or -exx was specified on the compiler
+command line at the time of compilation of a module.
+
+`__FB_ERR__` indicates if -earray, -enullptr, or -elocation was specified on
+the compiler command line, or implied by use of -exx, at the time of
+compilation of a module.
+
+`__FB_ERR__` indicates if -edebug, -edebuginfo, or -eassert was specified on
+the compiler command line, or implied by use of -g, at the time of compilation
+of a module.
+
+Returns bit-wise `OR` of the following values:
+
+value description
+0 '-e', '-ex', '-exx' and other error options not specified
+1 '-e' was specified
+3 '-ex' was specified (implies '-e')
+7 '-exx' was specified (implies '-e, -ex')
+8 '-earray' was specified (or implied by '-exx')
+16 '-enullptr' was specified (or implied by '-exx')
+32 '-eassert' was specified (or implied by '-g')
+64 '-edebuginfo' was specified (or implied by '-g')
+128 '-edebug' was specified (or implied by '-g')
+256 '-elocation' was specified (or implied by '-exx')
+
+
+`__FB_ERR__` is always defined.
+
+Examples:
+
+'Example code to demonstrate a use of __FB_ERR__
+Dim err_command_line As UByte
+err_command_line = __FB_ERR__
+Select Case err_command_line
+Case 0
+Print "No Error Checking enabled on the Command Line!"
+Case 1
+Print "Some Error Checking enabled on the Command Line!"
+Case 3
+Print "QBasic style Error Checking enabled on the Command Line!"
+Case 7
+Print "Extreme Error Checking enabled on the Command Line!"
+Case Else
+Print "Some Unknown Error level has been set!"
+End Select
+
+
+Differences from QB:
+New to FreeBASIC
+

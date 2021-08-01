@@ -1,0 +1,22 @@
+__FB_FPMODE__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_FPMODE__
+
+Description:
+Defined as `"fast"` if SSE fast arithmetics is enabled, or `"precise"`
+otherwise.
+
+Examples:
+
+#if __FB_FPMODE__ = "fast"
+  ' ... instructions for using fast-mode math ...
+#else
+  ' ... instructions for using normal math ...
+#endif
+
+Differences from QB:
+  * New to FreeBASIC

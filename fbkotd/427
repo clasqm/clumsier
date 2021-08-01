@@ -1,0 +1,45 @@
+RESUME NEXT
+================
+
+Error handling statement to resume execution after a jump to an error handler
+
+Syntax:
+Resume Next
+
+Description:
+`Resume Next` is used in the traditional QB error handling mechanism within an
+error handler (called by `On Error`) to return execution to the line after the
+one that caused the error. Usually this is used to avoid executing the same
+line and causing the error again.
+
+`Resume Next` resets the `Err` value to 0
+
+Examples:
+
+'' Compile with -lang fblite or qb
+
+#lang "fblite"
+Dim As Single i, j
+On Error Goto ErrHandler
+i = 0
+j = 5
+j = 1 / i ' this line causes a divide-by-zero error; execution jumps to
+ErrHandler label
+Print "ending..."
+End ' end the program so that execution does not fall through to the error
+handler again
+ErrHandler:
+Resume Next ' execution jumps to 'Print "ending..."' line, but j is now in an
+undefined state
+
+Dialect Differences:
+RESUME NEXT is not supported in the -lang fb dialect. Statements can be
+used in its function form to return an error code
+
+If Open( "text" For Input As #1 ) <> 0 Then
+  Print "Unable to open file"
+End If
+
+Differences from QB:
+  * Must compile with -ex or -exx option
+

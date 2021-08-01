@@ -1,0 +1,83 @@
+Operator = (Equal)
+================
+
+Compares two expressions for equality
+
+Syntax:
+declare operator = ( byref lhs as byte, byref rhs as byte ) as integer
+declare operator = ( byref lhs as ubyte, byref rhs as ubyte ) as integer
+declare operator = ( byref lhs as short, byref rhs as short ) as integer
+declare operator = ( byref lhs as ushort, byref rhs as ushort ) as integer
+declare operator = ( byref lhs as integer, byref rhs as integer ) as integer
+declare operator = ( byref lhs as uinteger, byref rhs as uinteger ) as integer
+declare operator = ( byref lhs as longint, byref rhs as longint ) as integer
+declare operator = ( byref lhs as ulongint, byref rhs as ulongint ) as integer
+
+declare operator = ( byref lhs as single, byref rhs as single ) as integer
+declare operator = ( byref lhs as double, byref rhs as double ) as integer
+
+declare operator = ( byref lhs as string, byref rhs as string ) as integer
+declare operator = ( byref lhs as zstring, byref rhs as zstring ) as integer
+declare operator = ( byref lhs as wstring, byref rhs as wstring ) as integer
+
+declare operator = ( byref lhs as T, byref rhs as T ) as integer
+
+declare operator = ( byref lhs as boolean, byref rhs as boolean ) as boolean
+
+Usage:
+result = lhs = rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression to compare to.
+
+`rhs`
+The right-hand side expression to compare to.
+
+`T`
+
+Any pointer type.
+
+Return Value:
+Returns negative one (-1) if expressions are equal, or zero (0) if unequal.
+
+Description:
+
+`Operator =` (Equality) is a binary operator that compares two expressions for
+equality and returns the result - a boolean value mainly in the form of an
+`Integer`: negative one (-1) for true and zero (0) for false. Only if the left
+and right-hand side types are both `Boolean`, the return type is also
+`Boolean`. The arguments are not modified in any way.
+
+This operator can be overloaded to accept user-defined types as well.
+
+`Operator =` (Equality) should not be confused with initializations or
+assignments, both of which also use the "`=`" symbol.
+
+Examples:
+
+Dim i As Integer = 0    '' initialization: initialise i with a value of 0
+i = 420                 '' assignment: assign to i the value of 420
+
+If (i = 69) Then        '' equation: compare the equality of the value of i
+and 69
+    Print "serious error: i should equal 420"
+    End -1
+End If
+
+`Operator <>` (Inequality) is complement to `Operator =` (Equality), and is
+functionally identical when combined with `Operator Not` (Bit-wise
+Complement).
+
+
+   If (420 = 420) Then Print "(420 = 420) is true."
+   If Not (69 <> 69) Then Print "not (69 <> 69) is true."
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * none
+

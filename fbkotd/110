@@ -1,0 +1,22 @@
+READ WRITE (File Access)
+===============
+
+File access specifier
+
+Syntax:
+
+Open filename As String For Binary Access Read Write As #filenum As Integer
+
+Description:
+Specifier for the `Access` clause in the `Open` statement. `Read Write`
+specifies that the file is accessible for both input and output.
+
+Examples:
+See example at `Access`
+
+Differences from QB:
+* None known.
+
+See also:
+  * `Access`
+  * `Open`

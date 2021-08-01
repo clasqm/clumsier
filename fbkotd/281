@@ -1,0 +1,38 @@
+LINE INPUT #
+================
+
+Reads one line of text from a file
+
+Syntax:
+Line Input #file number, string_variable
+
+Parameters:
+`file number`
+file number of an file opened for `Input`
+
+`string_variable`
+variable to receive the line of text
+
+Description:
+
+Reads a line from an open text file (opened for `Input` through a bound file
+number) and stores it in a string variable.
+
+A line of text ends at, but does not include the end of line characters. An
+end of line character may be the `LF` character (`Chr(10)`) or the `CRLF`
+character pair (`Chr(13,10)`).
+
+Examples:
+
+Dim s As String
+Open "myfile.txt" For Output As #1
+Print #1, "Hello, World"
+Close #1
+Open "myfile.txt" For Input As #1
+Line Input #1, s
+Close #1
+Print s
+
+Differences from QB:
+None
+

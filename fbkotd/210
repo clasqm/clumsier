@@ -1,0 +1,27 @@
+#IFNDEF
+===================
+
+Preprocessor conditional directive
+
+Syntax:
+#ifndef symbol
+	Conditionally included statements
+#endif
+
+Description:
+Conditionally includes statements at compile time.
+
+Statements within the `#ifndef...#endif` block are included if `symbol` is not
+defined and excluded (ignored) if symbol is defined.
+
+#ifndef symbol` is equivalent to `#if Not defined(symbol)`
+
+Examples:
+
+#IFNDEF __MYFILE_BI__
+#DEFINE __MYFILE_BI__
+    ' Declarations
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

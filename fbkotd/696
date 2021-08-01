@@ -1,0 +1,76 @@
+BIN
+================
+
+Returns a binary (base 2) string representation of an integer
+
+Syntax:
+declare function Bin ( byval number as ubyte ) as string
+declare function Bin ( byval number as ushort ) as string
+declare function Bin ( byval number as ulong ) as string
+declare function Bin ( byval number as ulongint ) as string
+declare function Bin ( byval number as const any ptr ) as string
+
+declare function Bin ( byval number as ubyte, byval digits as long ) as string
+declare function Bin ( byval number as ushort, byval digits as long ) as
+string
+declare function Bin ( byval number as ulong, byval digits as long ) as string
+declare function Bin ( byval number as ulongint, byval digits as long ) as
+string
+declare function Bin ( byval number as const any ptr, byval digits as long )
+as string
+
+Usage:
+result = Bin[$]( number [, digits ] )
+
+Parameters:
+
+`number`
+A number or expression evaluating to a number. A floating-point number will be
+converted to a `longint`.
+
+`digits`
+Desired number of digits in the returned string.
+
+Return Value:
+A string containing the unsigned binary representation of `number`.
+
+Description:
+
+Returns a string representing the unsigned binary value of the integer
+`number`. Binary digits range from 0 to 1.
+
+If you specify `digits` > 0, the result string will be exactly that length. It
+will be truncated or padded with zeros on the left, if necessary.
+
+The length of the string will not go longer than the maximum number of digits
+required for the type of `number` (32 for a `long`, 64 for a `Longint)`.
+
+If you want to do the opposite, i.e. convert an binary string back into a
+number, the easiest way to do it is to prepend the string with `"&B"`, and
+convert it to an integer type, using a function like `Cint`, similarly to a
+normal numeric string. E.g. `Cint("&B101")`
+
+Examples:
+
+Print Bin(54321)
+Print Bin(54321, 5)
+Print Bin(54321, 20)
+
+will produce the output:
+
+
+ 
+ 
+    1101010000110001
+    10001
+    00001101010000110001
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Bin`.
+  * The string type suffix "$" is ignored in the -lang fblite dialect, always warn.
+  * The string type suffix "$" is ignored in the -lang fb dialect, always warn.
+
+Differences from QB:
+New to FreeBASIC
+

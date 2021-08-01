@@ -1,0 +1,56 @@
+Console Functions
+==================
+
+Procedures that work with the console.
+
+Description:
+	These procedures provide ways to output text to the console, as
+	 well as control where and how text is output.
+[CLS](wikka.php@wakka=KeyPgCls)
+Clears the entire screen or text viewport.
+[WIDTH](wikka.php@wakka=KeyPgWidth)
+Sets or returns the number of rows and columns of the console display.
+[VIEW PRINT](wikka.php@wakka=KeyPgViewtext)
+Sets the printable area of the console screen.
+--------------------------------------------------------------------
+Configuring the Console
+	Statements that affect how text is displayed.
+COLOR
+	Changes the foreground and background color of text to be written.
+CSRLIN
+	Returns the row position of the cursor.
+POS
+	Returns the column position of the cursor.
+LOCATE
+	Sets the row and column position of the cursor and its visibility.
+SCREEN (Console)
+	Gets the character or color attribute at a given location.
+---------------------------------------------------------------------
+Cursor Color and Positioning
+	Procedures that move the cursor and change its color.
+COLOR
+	Changes the foreground and background color of text to be written.
+CSRLIN
+	Returns the row position of the cursor.
+POS
+	Returns the column position of the cursor.
+LOCATE
+	Sets the row and column position of the cursor and its visibility.
+SCREEN (Console)
+	Gets the character or color attribute at a given location.
+
+Writing Text to the Console
+	Procedures that output text to the console.
+PRINT
+? (Shortcut for 'PRINT')
+	Writes text to the console.
+PRINT USING
+? USING (Shortcut for 'PRINT USING')
+	Writes formatted text to the console.
+[WRITE]
+	Writes a list of items to the console.
+SPC
+	Skips a number of spaces when writing text.
+TAB
+	Skips to a certain column when writing text.
+-------------------------------------------------------------------------

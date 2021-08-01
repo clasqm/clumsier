@@ -1,0 +1,40 @@
+Compiler Option: -asm
+================
+
+Set assembler format for inline assembly under -gen gcc
+
+Syntax:
+-asm < format >
+
+Parameters:
+`format`
+The assembler format: intel or att
+
+Description:
+The `-asm` compiler option sets the assembler format for inline `Asm` blocks
+when using -gen gcc.
+
+* `-gen gcc -asm intel`: FB inline assembly blocks must use FB's usual
+Intel syntax format. Under -gen gcc, fbc will try to translate it to
+gcc's format automatically. For example:
+
+Dim a As Long = 1
+Print a
+Asm
+    inc dword Ptr [a]
+End Asm
+Print a
+
+  * `-gen gcc -asm att`: FB inline assembly blocks must use gcc's format.
+For example:
+
+Dim a As Long = 1
+Print a
+Asm
+    "incl %0\n" : "+m" (a) : :
+End Asm
+Print a
+
+The x86 ASM backend (-gen gas) currently only supports `-asm intel` and using
+`-asm att` results in an error.
+

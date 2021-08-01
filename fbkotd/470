@@ -1,0 +1,59 @@
+Operator &= (Concatenate and Assign)
+================
+
+Appends and assigns a string onto another string
+
+Syntax:
+declare operator &= ( byref lhs as string, byref rhs as T2 )
+declare operator &= ( byref lhs as wstring, byref rhs as T2 )
+
+Usage:
+lhs &= rhs
+
+Parameters:
+
+`lhs`
+The string to assign to.
+
+`rhs`
+The value to append to `lhs`.
+
+`T2`
+Any numeric, string or user-defined type that can be converted to a string.
+
+Description:
+
+This operator appends one string onto another. The right-hand side expression
+(`rhs`) is converted to a string before concatenation. It is functionally
+equivalent to,
+
+
+lhs = lhs & rhs
+
+where the result is assigned back to the left-hand side string.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: This operator exists in C/C++ with a different meaning - there it
+performs a bitwise `And=`.
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol '&=>'
+can be also used.
+
+Examples:
+
+Dim s As String = "Hello, "
+s &= " world!"
+Print s
+
+will produce the output:
+
+ 
+    Hello, world!
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC

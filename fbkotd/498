@@ -1,0 +1,65 @@
+OFFSETOF
+================
+
+Returns the offset of a field within a type.
+
+Syntax:
+#define Offsetof(typename, fieldname) cint( @cast( typename ptr, 0
+)->fieldname )
+
+Usage:
+result = Offsetof( typename, fieldname )
+
+Parameters:
+
+`typename`
+Name of the type as defined using the `Type...End Type` statements.
+
+`fieldname`
+Name of the field as defined within the type (or within the base types for a
+derived type).
+
+Description:
+
+For a non-derived type, `Offsetof` will return the location `fieldname` as
+offset in bytes from the beginning of `typename`.
+
+For a derived type, `Offsetof` will return the location `fieldname` as offset
+in bytes from the beginning of its highest base type.
+Note: if a member of the base type is overridden by a new member, the offset
+of the old member cannot be accessed from the derived type.
+
+Examples:
+
+Type MyType
+  x As Single
+  y As Single
+  Union
+    b As Byte
+    i As Integer
+  End Union
+End Type
+
+Print "OffsetOf x = "; OffsetOf(MyType, x)
+Print "OffsetOf y = "; OffsetOf(MyType, y)
+Print "OffsetOf b = "; OffsetOf(MyType, b)
+Print "OffsetOf i = "; OffsetOf(MyType, i)
+
+
+Output
+
+ 
+ 
+    OffsetOf x =  0
+    OffsetOf y =  4
+    OffsetOf b =  8
+    OffsetOf i =  8
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Offsetof`.
+
+Differences from QB:
+New to FreeBASIC
+

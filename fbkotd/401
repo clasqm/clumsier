@@ -1,0 +1,51 @@
+LCASE
+================
+
+Returns a lower case copy of a string
+
+Syntax:
+declare function Lcase ( byref str as const string, byval mode as long = 0 )
+as string
+declare function Lcase ( byref str as const wstring, byval mode as long = 0 )
+as wstring
+
+Usage:
+result = Lcase[$]( str [ , mode ] )
+
+Parameters:
+
+`str`
+String to convert to lowercase.
+
+`mode`
+The conversion mode: 0 = current locale, 1 = ASCII only
+
+Return Value:
+Lowercase copy of `str`.
+
+Description:
+
+Returns a copy of `str` with all of the letters converted to lower case.
+
+If `str` is empty, the null string (`"``"`) is returned.
+
+Examples:
+
+Print LCase("AbCdEfG")
+
+Output:
+
+    abcdefg
+
+Platform Differences:
+
+  * The wide-character string version of `Lcase` is not supported for DOS target
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * QB does not support Unicode.

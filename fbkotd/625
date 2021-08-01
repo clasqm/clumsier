@@ -1,0 +1,56 @@
+RETURN (from Gosub)
+================
+
+Control flow statement to return from a procedure or `Gosub`.
+
+Syntax:
+Return [ label ]
+
+Description:
+`Return` is used to return from a gosub `Gosub`.
+
+Because `Return` could mean return-from-gosub or return-from-procedure,
+`Option Gosub` and `Option Nogosub` can be used to enable and disable `Gosub`
+support. When `Gosub` support is disabled, `Return` is then recognized as
+return-from-procedure. When `Gosub` support is enabled, `Return` is then
+recognized as return-from-gosub.
+
+`Return` (from gosub) is used to return control back to the statement
+immediately following a previous `Gosub` call. When used in combination with
+`Gosub`, no return value can be specified. If the optional `label` is
+specified, execution continues at the specified label. If no `Gosub` was made,
+a runtime error is generated, and execution continues immediately after
+`Return`.
+
+A `Gosub` should always have a matching `Return` statement. However, if
+`Return` (from gosub) is used where no `Gosub` was made, a run-time error is
+generated.
+
+Examples:
+
+'' GOSUB & RETURN example, compile with "-lang qb" or use "$lang" as below
+
+'$lang: "qb"
+
+Print "Let's Gosub!"
+GoSub MyGosub
+Print "Back from Gosub!"
+Sleep
+End
+
+MyGosub:
+Print "In Gosub!"
+Return
+
+Dialect Differences:
+In the -lang fb dialect `Return` always means return-from-procedure.
+  * In the -lang qb dialect, `Return` means return-from-gosub by default 
+  unless changed with `Option Nogosub`, in which case the compiler will 
+  recognize `Return` as return-from-procedure.
+  * In the -lang fblite dialect, `Return` means return-from-procedure 
+  by default unless changed with `Option Gosub`, in which case the compiler 
+  will recognize `Return` as return-from-gosub.
+
+Differences from QB:
+  * None when using the -lang qb dialect.
+

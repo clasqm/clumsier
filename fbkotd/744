@@ -1,0 +1,108 @@
+FUNCTION (Member)
+================
+
+Declares or defines a member procedure returning a value.
+
+Syntax:
+{ Type | Class | Union } typename
+
+declare [ static | const ] Function fieldname [calling convention specifier] [
+alias external_name ] ( [ parameters ] ) [ byref ] as datatype [ Static ]
+
+End { Type | Class | Union }
+
+Function typename.fieldname ( [ parameters ] ) [ byref ] as datatype [ Export
+]
+
+statements
+
+End Function
+
+Parameters:
+
+`typename`
+
+name of the `Type`, `Class`, or `Union`
+
+`fieldname`
+
+name of the procedure
+
+`external_name`
+
+name of field as seen when externally linked
+
+`parameters`
+
+the parameters to be passed to the procedure
+
+`calling convention specifier`
+
+can be one of: `Cdecl`, `Stdcall` or `Pascal`
+
+Description:
+
+`Function` members are accessed with `Operator . (Member access)` or `Operator
+-> (Pointer to member access)` to call a member procedure that returns a value
+(a reference can also be returned by specifying `byref as return_type`). The
+procedure may optionally accept parameters either `byval` or `byref`.
+`typename` be overloaded without explicit use of the `Overload` keyword.
+
+`typename` is the name of the type for which the `Function` method is declared
+and defined. Name resolution for `typename` follows the same rules as
+procedures when used in a `Namespace`.
+
+A hidden `this` parameter having the same type as `typename` is passed to non-
+static member procedures. `this` is used to access the fields of the `Type`,
+`Class`, or `Union`.
+To access duplicated symbols defined outside the Type, add one (or two) dot(s)
+as prefix: `.SomeSymbol` (or `..SomeSymbol` if inside a With..End With block).
+
+A `Static (Member)` may be declared using the `Static` specifier. A `Const
+(Member)` may be declared using the `Const` specifier.
+
+As for a normal `Function`, the return value of a `Function` member can be
+ignored in the calling code.
+
+Examples:
+
+#include "vbcompat.bi"
+
+Type Date
+
+  value As Double
+
+  Declare Static Function Today() As Date
+
+  Declare Function Year() As Integer
+  Declare Function Month() As Integer
+  Declare Function Day() As Integer
+
+End Type
+
+Function Date.Today() As Date
+  Return Type(Now())
+End Function
+
+Function Date.Year() As Integer
+  Return ..Year(value)
+End Function
+
+Function Date.Month() As Integer
+  Return ..Month(value)
+End Function
+
+Function Date.Day() As Integer
+  Return ..Day(value)
+End Function
+
+Dim d As Date = Date.Today
+
+Print "Year  = "; d.Year
+Print "Month = "; d.Month
+Print "Day   = "; d.Day
+
+
+Dialect Differences:
+Only available in the -lang fb dialect.
+

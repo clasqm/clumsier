@@ -1,0 +1,38 @@
+LPOS
+================
+
+Returns the number of characters sent to the printer port in the last `Lprint`
+statement.
+
+Syntax:
+declare function Lpos ( byval printer as long ) as long
+
+Usage:
+result = LPOS(printer)
+
+Parameters:
+`printer`
+Either 0, 1, 2 or 3. Represents the printer port (LPT#)
+
+Return Value:
+Returns the number of characters sent.
+
+Description:
+
+Used to determine, from the last `Lprint`, how many characters were sent to
+the printer port.
+
+Examples:
+
+' compile with -lang fblite or qb
+#lang "fblite"
+Dim test As String = "LPrint Example test"
+Print "Sending '" \+ test + "' to LPT1 (default)"
+LPrint test
+Print "LPT1 last recieved " \+ Str(LPOS(1)) \+ " characters"
+Print "String sent was " \+ Str(Len(test)) \+ " characters long"
+Sleep
+
+Differences from QB:
+None
+

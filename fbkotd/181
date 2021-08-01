@@ -1,0 +1,29 @@
+CSIGN
+================
+
+Converts an expression to signed
+
+Syntax:
+Csign ( expression )
+
+Usage:
+variable = Csign ( expression )
+
+Description:
+
+Converts an unsigned `expression` to a signed one, useful to force signed
+behavior of division or multiplication (including with `Shl` and `Shr`).
+
+This is the opposite of `Cunsg`.
+
+Examples:
+
+Dim value As UShort = 65535
+Print CSign(value)  '' will print -1
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Csign`.
+
+Differences from QB:
+New to FreeBASIC

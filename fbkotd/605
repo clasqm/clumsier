@@ -1,0 +1,357 @@
+Operator Overloading
+================
+
+Changing the way user defined types work with built-in operators.
+
+Overview
+
+Simply, operators are procedures, and their arguments are called operands.
+Operators that take one operand (`Operator Not`) are called unary operators,
+operators that take two operands (`Operator +`) are called binary operators
+and operators taking three operands (`Operator Iif`) are called ternary
+operators.
+
+Most operators are not called like procedures. Instead, their operator symbol
+is placed next to their operands. For unary operators, their sole operand is
+placed to the right of the symbol. For binary operators, their operands -
+referred to as the left and right-hand side operands - are placed to the left
+and right of the operator symbol. FreeBASIC has one ternary operator,
+`Operator Iif`, and it is called like a procedure, with its operands comma-
+separated surrounded by parenthesis.
+For example, the following code calls `Operator Iif` to determine if a pointer
+is valid. If it is, `Operator * (Value of)` is called to dereference the
+pointer, and if not, `Operator / (Divide)` is called to find the value of
+twenty divided by four:
+
+Dim i As Integer = 420
+Dim p As Integer Ptr = @i
+
+Dim result As Integer = IIf( p, *p, CInt( 20 / 4 ) )
+
+Notice the call to `Operator Iif` is similar to a procedure call, while the
+calls to `Operator * (Value of)` and `Operator / (Divide)` are not. In the
+example, `p` is the operand to `Operator * (Value of)`, and `20` and `4` are
+the left and right-hand side operands of `Operator / (Divide)`, respectively.
+
+All operators in FreeBASIC are predefined to take operands of standard data
+types, like `Integer` and `Single`, but they may also be overloaded for user-
+defined types; that is, they can be defined to accept operands that are
+objects as well. There are two types of operators that can be overloaded,
+global operators and member operators.
+
+Global Operators
+
+Global operators are those that are declared in module-level scope (globally).
+These are the operators `- (Negate)`, `Not (Bitwise not)`, `-> (Pointer to
+member access)`, `* (Value of)`, `+ (Add)`, `- (Subtract)`, `* (Multiply)`, `/
+(Divide)`, `\ (Integer divide)`, `& (Concatenate)`, `Mod (Modulus)`, `Shl
+(Shift left)`, `Shr (Shift right)`, `And (Bitwise and)`, `Or (Bitwise or)`,
+`Xor (Bitwise xor)`, `Imp (Bitwise imp)`, `Eqv (Bitwise eqv)`, `^
+(Exponentiate)`, `= (Equal)`, `<> (Not equal)`, `< (Less than)`, `> (Greater
+than)`, `<= (Less than or equal)`, `>= (Greater than or equal)`, `Abs`, `Sgn`,
+`Fix`, `Frac`, `Int`, `Exp`, `Log`, `Sin`, `Asin`, `Cos`, `Acos`, `Tan`,
+`Atan`, `Len`, and `Sqr`.
+
+Declaring a custom global operator is similar to declaring a procedure. The
+`Declare` keyword is used with the `Operator` keyword. The operator symbol is
+placed next followed by the comma-separated list of parameters surrounded in
+parenthesis that will represent the operands passed to the operator. Unlike
+procedures, operators can be overloaded by default, so the `Overload` keyword
+is not necessary when declaring custom operators. At least one of the
+operator's parameters must be of user-defined type (after all, operators with
+built-in type parameters are already defined).
+
+The following example declares the global operators `- (Negate)` and `+
+(Multiply)` to accept operands of a user-defined type:
+
+Type Rational
+    As Integer numerator, denominator
+End Type
+
+Operator \- (ByRef rhs As Rational) As Rational
+    Return Type(-rhs.numerator, rhs.denominator)
+End Operator
+
+Operator * (ByRef lhs As Rational, ByRef rhs As Rational) As Rational
+    Return Type(lhs.numerator * rhs.numerator, _
+        lhs.denominator * rhs.denominator)
+End Operator
+
+Dim As Rational r1 = (2, 3), r2 = (3, 4)
+Dim As Rational r3 = -(r1 * r2)
+Print r3.numerator & "/" & r3.denominator
+
+Here the global operators are defined for type `Rational`, and are used in the
+initialization expression for `r3`. The output is `-6/12`.
+
+Member Operators
+
+Member operators are declared inside a `Type` or `Class` definition, like
+member procedures, and they are the cast and assignment operators `Operator
+Cast (Cast)`, `Operator @ (Address of)`, `Operator [] (Pointer index)`,
+`Operator New Overload`, `Operator Delete Overload`, `Operator For
+(iteration)`, `Operator Step (Iteration)`, `Operator Next (Iteration)`, `Let
+(Assign)`, `+= (Add and assign)`, `-= (Subtract and assign)`, `*= (Multiply
+and assign)`, `/= (Divide and assign)`, `\= (Integer divide and assign)`, `^=
+(Exponentiate and assign)`, `&= (Concat and assign)`, `Mod= (Modulus and
+assign)`, `Shl= (Shift left and assign)`, `Shr= (Shift right and assign)`,
+`And= (Conjunction and assign)`, `Or= (Inclusive disjunction and assign)`,
+`Xor= (Exclusive disjunction and assign)`, `Imp= (Implication and assign)` and
+`Eqv= (Equivalence and assign)`.
+
+When declaring member operators, the `Declare` and `Operator` keywords are
+used followed by the operator symbol and its parameter list. Like member
+procedures, member operators are defined outside the `Type` or `Class`
+definition, and the symbol name is prefixed with the name of the `Type` or
+`Class` name.
+
+The following example overloads the member operators `Operator Cast (Cast)`
+and `*= (Multiply and assign)` for objects of a user-defined type:
+
+Type Rational
+    As Integer numerator, denominator
+   
+    Declare Operator Cast () As Double
+    Declare Operator Cast () As String
+    Declare Operator *= (ByRef rhs As Rational)
+End Type
+
+Operator Rational.Cast () As Double
+    Return numerator / denominator
+End Operator
+
+Operator Rational.Cast () As String
+    Return numerator & "/" & denominator
+End Operator
+
+Operator Rational.*= (ByRef rhs As Rational)
+    numerator *= rhs.numerator
+    denominator *= rhs.denominator
+End Operator
+
+Dim As Rational r1 = (2, 3), r2 = (3, 4)
+r1 *= r2
+Dim As Double d = r1
+Print r1, d
+
+Notice that the member operator `Cast (Cast)` is declared twice, once for the
+conversion to `Double` and once for the conversion to `String`. This is the
+only operator (or procedure) that can be declared multiple times when only the
+return type differs. The compiler decides which cast overload to call based on
+how the object is used (in the initialization of the `Double` `d`,
+`Rational.Cast as double` is called, and in the `Print` statement,
+`Rational.Cast as string` is used instead).
+
+Special Cases of Operators: '.' (Member access), '@' (Address of), '->'
+(Pointer to member access), and '*' (Value of)
+
+- Overloading `Operator . (Member access)`
+
+The `operator '.' (member access)` cannot be overloaded.
+
+- Overloading `Operator @ (Address of)`
+
+The `operator @ (Adress of)` is used to access the address of a variable.
+There is no many interest to overload this operator for an object, and
+moreover if we did, we could no longer access its address.
+
+- Overloading `Operator -> (Pointer to member access)` and `Operator * (Value of)`
+
+The `operator -> (Pointer to member access)` is used to access any member of
+an object (instance) via a pointer to this instance.
+The `operator * (Value of)` is used to access to variable via a pointer to
+this variable.
+Under normal circumstances, the operand of these operators must be a pointer:
+
+`Declare Operator -> ( ByRef lhs As T Ptr ) ByRef As U
+Declare Operator * ( ByRef rhs As T Ptr ) ByRef As T`
+
+Overloading of these operators allows you to create a pointer wrapper class
+and let it behave like the pointer itself:
+
+`Declare Operator -> ( ByRef lhs As wrapperClass ) ByRef As U
+Declare Operator * ( ByRef rhs As wrapperClass ) ByRef As U`
+
+The wrapper can be then used (to access a member) like:
+
+`wrapper->member`
+instead of:
+`wrapper.realPointer->member`
+and:
+`(*wrapper).member`
+instead of:
+`(*wrapper.realPointer).member`
+
+Clarifying the particular case of overloading the `operator -> (pointer to
+member access)`:
+
+The `operator -> (pointer to member access)` exhibits a different behavior
+from the other operators with respect to overloading:
+
+\- It doesn't return only the user datatype as indicated in the overloaded
+procedure header,
+\- but it returns this user datatype implicitly followed by the `operator .
+(member access)`.
+
+The `operator -> (pointer to member access)` is mainly used often in
+conjunction with the `operator * (Value of)` to implement "smart pointers".
+
+- Using smart pointer
+
+The use of smart pointers allows automatic management of dynamic references
+created by `New` (each reference is destroyed automatically when its smart
+pointer goes out of scope), without even making any copy of these references.
+
+Reminder of what a smart pointer:
+
+\- A smart pointer is an object which behaves like a pointer but does more
+than a pointer.
+\- This object is flexible as a pointer and has the advantage of being an
+object (like constructor and destructor called automatically).
+\- Therefore, the destructor of the smart pointer will be automatically called
+when this object goes out of scope, and it will delete the user pointer.
+
+As the smart pointer must behave like a pointer, it must support the same
+interface as a pointer does.
+So it must support the following operations:
+
+\- Dereferencing (`operator * (Value of)`)
+\- Indirection (`operator -> (pointer to member access)`)
+
+The `operator * (Value of)` and the `operator -> (pointer to member access)`
+must return references (by means of using `Byref As .....` in the declaration
+of there return type).
+
+Example of a smart pointer (to UDT) with an interface:
+
+\- public default-constructor
+\- public copy-constructor
+\- public destructor
+\- private UDT pointer and public `operator cast (Cast)` to access it in read
+only mode
+\- private operator 'let' to disallow assignment not implemented here (to
+avoid copying the pointers values only)
+\- `operator * (Value of)` and `operator -> (pointer to member access)`
+
+Type UDT
+    Declare Constructor ()
+    Declare Destructor ()
+    Dim As String s = "object #0"
+End Type
+
+Constructor UDT ()
+    Print "  UDT construction "; @This
+End Constructor
+
+Destructor UDT ()
+    Print "  UDT destruction "; @This
+End Destructor
+
+Type SmartPointer
+    Public:
+        Declare Constructor ()                            '' to construct smart pointer (and UDT object)
+        Declare Constructor (ByRef rhs As SmartPointer)   '' to copy construct smart pointer
+        Declare Operator Cast () As UDT Ptr               '' to cast private UDT pointer (for read only)
+        Declare Destructor ()                             '' to destroy smart pointer (and UDT object)
+    Private:
+        Dim As UDT Ptr p                                  '' private UDT pointer
+        Declare Operator Let (ByRef rhs As SmartPointer)  '' to disallow assignment (to avoid copy of real pointers)
+End Type
+
+Constructor SmartPointer ()
+    Print "SmartPointer construction "; @This
+    This.p = New UDT
+End Constructor
+
+Constructor SmartPointer (ByRef rhs As SmartPointer)
+    Print "SmartPointer copy-construction "; @This; " from "; @rhs
+    This.p = New UDT
+    *This.p = *rhs.p
+End Constructor
+
+Operator SmartPointer.Cast () As UDT Ptr
+    Return This.p
+End Operator
+
+Destructor SmartPointer ()
+    Print "SmartPointer destruction "; @This
+    Delete This.p
+End Destructor
+
+Operator * (ByRef sp As SmartPointer) ByRef As UDT   '' overloaded operator
+'*'
+    Print "SmartPointer operator '*'"
+    Return *Cast(UDT Ptr, sp)                        ''    (returning byref)
+End Operator                                         ''    to behave as
+pointer
+
+Operator -> (ByRef sp As SmartPointer) ByRef As UDT  '' overloaded operator
+'->'
+    Print "SmartPointer operator '->'"
+    Return *Cast(UDT Ptr, sp)                        ''    (returning byref)
+End Operator                                         ''    to behave as
+pointer
+
+
+Scope
+    Dim sp1 As SmartPointer
+    Print "'" & sp1->s & "'"
+    sp1->s = "object #1"
+    Print "'" & sp1->s & "'"
+    Print
+
+    Dim sp2 As SmartPointer = sp1
+    Print "'" & (*sp2).s & "'"
+    (*sp2).s = "object #2"
+    Print "'" & (*sp2).s & "'"
+    Print
+
+    Dim sp3 As SmartPointer = sp1
+    Print "'" & sp3->s & "'"
+    *sp3 = *sp2
+    Print "'" & sp3->s & "'"
+    sp3->s = "object #3"
+    Print "'" & sp3->s & "'"
+    Print
+End Scope
+
+Sleep
+
+Example of output:
+
+ 
+ 
+    SmartPointer construction 1703576
+      UDT construction 10693312
+    SmartPointer operator '->'
+    'object #0'
+    SmartPointer operator '->'
+    SmartPointer operator '->'
+    'object #1'
+ 
+    SmartPointer copy-construction 1703524 from 1703576
+      UDT construction 10693384
+    SmartPointer operator '*'
+    'object #1'
+    SmartPointer operator '*'
+    SmartPointer operator '*'
+    'object #2'
+ 
+    SmartPointer copy-construction 1703472 from 1703576
+      UDT construction 10693456
+    SmartPointer operator '->'
+    'object #1'
+    SmartPointer operator '*'
+    SmartPointer operator '*'
+    SmartPointer operator '->'
+    'object #2'
+    SmartPointer operator '->'
+    SmartPointer operator '->'
+    'object #3'
+ 
+    SmartPointer destruction 1703472
+      UDT destruction 10693456
+    SmartPointer destruction 1703524
+      UDT destruction 10693384
+    SmartPointer destruction 1703576
+      UDT destruction 10693312

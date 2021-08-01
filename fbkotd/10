@@ -1,0 +1,33 @@
+Bit Manipulation
+================
+
+Macros that work with the bits and bytes of numbers.
+
+Description:
+	The macros documented here provide access to the individual bits, bytes and
+	words of integer values.
+
+Byte Manipulation Macros
+	Gets the value of individual bytes or words of
+	Uinteger values.
+LOBYTE
+	Gets the least significant byte (LSB, or _lo-byte_ ) value of an
+	Uinteger value.
+HIBYTE]
+	Gets the most significant byte (MSB, or _hi-byte_ ) value of the least
+	significant word (LSW, or _lo-word_ ) of anUinteger value.
+LOWORD
+	Gets the least significant word (LSW, or _lo-word_ ) value of an
+	Uinteger value.
+HIWORD
+	Gets the most significant word (LSW, or _hi-word_ ) value of an
+	Uinteger value.
+
+Bit Manipulation Macros
+	Gets the state of individual bits of numeric values.
+BIT
+	Gets the state of an individual bit in an integer value.
+BITRESET
+	Gets the value of an integer with a specified bit cleared.
+BITSET
+	Gets the value of an integer with a specified bit set.

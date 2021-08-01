@@ -1,0 +1,25 @@
+
+Compiler Option: -s
+================
+
+Sets the executable subsystem
+
+Syntax:
+-s < subsystem >
+
+Parameters:
+`subsystem`
+The executable subsystem: `gui` or `console`.
+
+Description:
+The `-s` compiler option specifies the executable subsystem. Allowed
+subsystems are `gui` and `console` (by default, `console` is used). Specifying
+a `gui` subsystem prevents the console window from appearing behind the
+program window.
+
+The intrinsic macro `__FB_GUI__` is set to non-zero (-1) if the option with
+`gui` as subsystem was specified, and set to zero (0) otherwise.
+
+Platform Differences:
+Supported on Windows and Cygwin only.
+

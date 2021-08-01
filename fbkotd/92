@@ -1,0 +1,23 @@
+__PATH__
+===============
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__PATH__
+
+Description:
+Set to the quoted absolute path of the source file at the time of compilation.
+
+Examples:
+' Tell the compiler to seach the source file's
+' directory for libraries
+
+#libpath __PATH__
+
+Differences from QB:
+New to FreeBASIC
+
+See also:
+`__FILE__`
+

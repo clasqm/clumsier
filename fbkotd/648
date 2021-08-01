@@ -1,0 +1,87 @@
+ON ERROR
+================
+
+Error handling statement to set the current error handler
+
+Syntax:
+On [Local] Error Goto label
+
+Parameters:
+
+`label`
+Label to jump to when an error occurs
+
+Description:
+
+On Error triggers a jump to an error handler when an error occurs. Such errors
+can be triggered by built-in statements such as `Open`, or when the `Error`
+statement is used.
+
+Note: The error checking for built-in statements is only enabled if the
+program is compiled with one of the -e, -ex or -exx options. On Error remains
+working with `Error` even when none of these options are used.
+
+`On Local Error` can be used to specify a local error handler inside a
+procedure. This allows for specialized per-procedure error handling and will
+override the global error handler, if any. Without `Local`, the handler must
+be in the main part of the module.
+Remark: Presently, the `Local` clause is ignored by the compiler.
+
+`On Error Goto 0` deactivates the current error handler.
+
+Examples:
+
+'' Compile with QB (-lang qb) dialect
+
+'$lang: "qb"
+
+On Error Goto errorhandler
+Error 24 '' simulate an error
+Print "this message will not be seen"
+
+errorhandler:
+n = Err
+Print "Error #"; n; "!"
+End
+
+
+
+'' compile as: fbc onerror.bas -ex
+
+#lang "fblite"
+
+Function hFileExists( filename As String ) As Integer Static
+    Dim f As Integer
+
+    hFileExists = 0
+
+    On Local Error Goto exitfunction
+
+    f = FreeFile
+    Open filename For Input As #f
+   
+    Close #f
+
+    hFileExists = -1
+
+exitfunction:
+    Exit Function
+End Function
+
+
+    Print "File exists (0=false): "; hFileExists( Command )
+
+    On Error Goto errhandler
+    Error 1234
+    Print "back from resume next"
+    End 0
+
+errhandler:
+    Print "error number: " \+ Str( Err ) \+ " at line: " \+ Str( Erl )
+    Resume Next
+
+
+Differences from QB:
+  * QB has no LOCAL clause and requires the label to be in the main part 
+  of the module.
+

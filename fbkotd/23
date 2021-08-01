@@ -1,0 +1,10 @@
+json-c
+===============
+
+A JSON implementation in C
+
+Website: https://github.com/json-c/json-c
+Platforms supported: Win32, Linux
+Headers to include: json-c/json.bi
+Header version: 0.9 (not sure)
+

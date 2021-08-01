@@ -1,0 +1,57 @@
+ASSERT
+================
+
+Debugging macro that halts program execution if an expression is evaluated to
+`0` (false).
+
+Syntax:
+#define ASSERT(expression) if (expression) = 0 then : fb_Assert( __FILE__,
+__LINE__, __FUNCTION__, #expression ) : end if
+
+Usage:
+ASSERT( expression )
+
+Parameters:
+
+`expression`
+Any valid conditional/numeric expression. If `expression` evaluates to `0`
+(i.e. "false"), execution is halted.
+
+Description:
+
+The `ASSERT` macro is intended for use in debugging and works only if the `-g`
+or -eassert` option is specified on the `fbc` command line. In this case it
+prints an error message and stops the program execution if `expression`
+evaluates to `0`.
+
+Its normal use is to check the correct value of the variables or expressions
+during debugging.
+
+If `-g` and -eassert` are not passed to fbc, the macro does not generate any
+code, and has no effect.
+
+Note: If an `ASSERT` fails while the program is in a graphics `Screen`, the
+error message will not be visible as it will be printed to the graphics
+screen, which will be closed immediately after.
+
+Examples:
+
+Sub foo
+ Dim a As Integer
+ a=0
+ Assert(a=1)
+End Sub
+
+foo
+
+'' If -g or -eassert is used, this code stops with: test.bas(3): assertion
+failed at FOO: a=1
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__ASSERT`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,20 @@
+__FB_GCC__
+===============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_GCC__
+
+Description:
+Defined to true (`-1`) if -gen gcc is used, or false (`0`) otherwise.
+
+Examples:
+#if __FB_GCC__ <> 0
+        #print Backend Code Emitter And Assembler: gcc
+#else
+        #print Backend Code Emitter And Assembler: Not gcc
+#endif
+
+Differences from QB:
+Did not exist in QB

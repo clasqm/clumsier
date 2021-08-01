@@ -1,0 +1,68 @@
+EOF
+================
+
+Checks to see if the end of an open file has been reached
+
+Syntax:
+declare function Eof ( byval filenum as long ) as long
+
+Usage:
+result = Eof( filenum )
+
+Parameters:
+
+`filenum`
+File number of an open file.
+
+Return Value:
+Returns true (-1) if end-of-file has been reached, zero (0) otherwise.
+
+Description:
+
+When reading from files opened for `Input (File Mode)`, it is useful to know
+when the end of the file has been reached, thus avoiding errors caused by
+reading past the ends of files. Use EOF to determine this. EOF expects a valid
+file number from an already opened file. Use `Freefile` to retrieve an
+available file file number.
+
+For file numbers bound to files opened for `Output`, EOF always returns 0.
+
+Examples:
+
+'' This code finds a free file number to use and attempts to open the file
+'' "file.ext" and if successful, binds our file number to the opened file. It
+'' reads the file line by line, outputting it to the screen. We loop until
+eof()
+'' returns true, in this case we ignore the loop if file is empty.
+
+Dim As String file_name
+Dim As Integer file_num
+
+file_name = "file.ext"
+file_num = FreeFile( )                 '' retrieve an available file number
+
+'' open our file and bind our file number to it, exit on error
+If( Open( file_name For Input As #file_num ) ) Then
+   Print "ERROR: opening file " ; file_name
+   End -1
+End If
+
+Do Until EOF( file_num )               '' loop until we have reached the end
+of the file
+   Dim As String text
+   Line Input #file_num, text               '' read a line of text ...
+   Print text                             '' ... and output it to the screen
+Loop
+
+Close #file_num                        '' close file via our file number
+
+End 0
+
+
+Differences from QB:
+  * In QB the comm port signaled an EOF when there were no chars waiting 
+  to be read.
+  * In QB, for files opened in RANDOM or BINARY mode, EOF returned non-zero
+  only after a read past the end of file has been attempted. In FreeBASIC, 
+  EOF returns true after the last item is read.
+

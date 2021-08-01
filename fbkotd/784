@@ -1,0 +1,125 @@
+FMOD
+================
+
+Audio library supporting just about any format.
+
+Website: https://www.fmod.com/core
+Platforms supported: Win32, Linux
+Headers to include: fmod.bi
+Header version: 3.75
+Examples: in examples/sound/FMOD/
+
+Examples:
+
+#include once "fmod.bi"
+
+Const SOUND_FILE = "test.mod"
+
+If (FSOUND_GetVersion() < FMOD_VERSION) Then
+    Print "FMOD version mismatch"
+    End 1
+End If
+
+If (FSOUND_Init(44100, 32, 0) = 0) Then
+    Print "Could not initialize FMOD"
+    End 1
+End If
+
+Dim As FMUSIC_MODULE Ptr song = FMUSIC_LoadSong(SOUND_FILE)
+If (song = 0) Then
+    Print "FMOD could not load '" & SOUND_FILE & "'"
+    FSOUND_Close()
+    End 1
+End If
+
+FMUSIC_PlaySong(song)
+
+Print "Sound playing; waiting for keypress to stop and exit..."
+Sleep
+
+FMUSIC_FreeSong(song)
+FSOUND_Close()
+
+
+
+'' mp3 player based on FMOD
+
+#include once "fmod.bi"
+
+Const SOUND_FILE = "test.mp3"
+
+Sub print_all_tags(ByVal stream As FSOUND_STREAM Ptr)
+    Dim As Integer count = 0
+    FSOUND_Stream_GetNumTagFields(stream, @count)
+
+    For i As Integer = 0 To (count - 1)
+        Dim As Integer tagtype, taglen
+        Dim As ZString Ptr tagname, tagvalue
+        FSOUND_Stream_GetTagField(stream, i, @tagtype, @tagname, _
+	    @tagvalue, @taglen)
+        Print Left(*tagname, taglen)
+    Next
+End Sub
+
+Function get_tag _
+    ( _
+        ByVal stream As FSOUND_STREAM Ptr, _
+        ByVal tagv1 As ZString Ptr, _
+        ByVal tagv2 As ZString Ptr _
+    ) As String
+
+    Dim tagname As ZString Ptr, taglen As Integer
+
+    FSOUND_Stream_FindTagField(stream, FSOUND_TAGFIELD_ID3V1, tagv1, _
+        @tagname, @taglen)
+    If (taglen = 0) Then
+        FSOUND_Stream_FindTagField(stream, FSOUND_TAGFIELD_ID3V2, _
+	    tagv2, @tagname, @taglen)
+    End If
+
+    Return Left(*tagname, taglen)
+End Function
+
+    If (FSOUND_GetVersion < FMOD_VERSION) Then
+        Print "FMOD version " \+ Str(FMOD_VERSION) \+ _
+	    " or greater required!"
+        End 1
+    End If
+
+    If (FSOUND_Init(44100, 4, 0) = 0) Then
+        Print "Could not initialize FMOD"
+        End 1
+    End If
+
+    FSOUND_Stream_SetBufferSize(50)    
+
+    Dim As FSOUND_STREAM Ptr stream = FSOUND_Stream_Open(SOUND_FILE, _
+        FSOUND_MPEGACCURATE, 0, 0)
+    If (stream = 0) Then
+        Print "FMOD could not load '" & SOUND_FILE & "'"
+        FSOUND_Close()
+        End 1
+    End If
+
+    '' Read out mp3 tags to show some meta information
+    Print "Title:", get_tag(stream, "TITLE", "TIT2")
+    Print "Album:", get_tag(stream, "ALBUM", "TALB")
+    Print "Artist:", get_tag(stream, "ARTIST", "TPE1")
+    ''print_all_tags(stream)
+
+    Print "Playing mp3, press a key to exit..."
+    FSOUND_Stream_Play(FSOUND_FREE, stream)
+
+    While (Inkey() = "")
+        If (FSOUND_Stream_GetPosition(stream) >= _
+	    FSOUND_Stream_GetLength(stream)) Then
+            Exit While
+        End If
+        Sleep 50, 1
+    Wend
+  
+    FSOUND_Stream_Stop(stream)
+    FSOUND_Stream_Close(stream)
+    FSOUND_Close()
+
+

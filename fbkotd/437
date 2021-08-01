@@ -1,0 +1,56 @@
+VIEW PRINT
+================
+
+Sets the printable text area of the screen
+
+Syntax:
+View Print [ firstrow To lastrow ]
+
+Parameters:
+
+`firstrow`
+first row of print area
+
+`lastrow`
+last row of print area
+
+Description:
+
+Sets the boundaries of the text printing area on the screen (in console mode
+or in graphics mode) to the lines starting at first up to and including last
+(the number of the available text lines on the screen depends on the screen
+mode). Text lines are counted starting with `1`. The text cursor is moved to
+the beginning of the first line specified.
+If the row numbers are omitted, the entire screen is used as the text printing
+area.
+
+Examples:
+
+Cls
+View Print 5 To 6
+Color , 1
+'' clear only View Print area
+Cls
+
+`View Print` can be used in graphics mode to avoid the text output overwriting
+graphics:
+
+Screen 12
+Dim As Integer R,Y,x,y1
+Dim As Single y2
+View Print 20 To 27
+Line (0,0)-(639,300),1,BF
+Line (100,50)-(540,200),0,BF
+Do
+ r = (r + 1) And 15
+ For y = 1 To 99
+   y1 = ((1190 \ y + r) And 15)
+   y2 = 6 / y
+   For x = 100 To 540
+    PSet (x, y + 100), CInt((319 \- x) * y2) And 15 Xor y1
+  Next x,y
+ If r=0 Then Color Int(Rnd*16): Print "blah"
+Loop Until Len(Inkey)
+
+Differences from QB:
+  * None.

@@ -1,0 +1,80 @@
+HEX
+================
+
+Returns the hexadecimal of the given number
+
+Syntax:
+declare function Hex ( byval number as ubyte ) as string
+declare function Hex ( byval number as ushort ) as string
+declare function Hex ( byval number as ulong ) as string
+declare function Hex ( byval number as ulongint ) as string
+declare function Hex ( byval number as const any ptr ) as string
+
+declare function Hex ( byval number as ubyte, byval digits as long ) as string
+declare function Hex ( byval number as ushort, byval digits as long ) as
+string
+declare function Hex ( byval number as ulong, byval digits as long ) as string
+declare function Hex ( byval number as ulongint, byval digits as long ) as
+string
+declare function Hex ( byval number as const any ptr, byval digits as long )
+as string
+
+Usage:
+result = Hex[$]( number [, digits ] )
+
+Parameters:
+
+`number`
+A number or expression evaluating to a number. A floating-point number will be
+converted to a `longint`.
+
+`digits`
+Optional number of digits to return.
+
+Return Value:
+A string containing the unsigned hexadecimal representation of `number`.
+
+Description:
+
+Returns the unsigned hexadecimal string representation of the integer
+`number`. Hexadecimal digits range from 0-9, or A-F.
+
+If you specify `digits` > 0, the result string will be exactly that length. It
+will be truncated or padded with zeros on the left, if necessary.
+
+The length of the string will not go longer than the maximum number of digits
+required for the type of `number` (8 for a `long`, 16 for a `longint)`.
+
+If you want to do the opposite, i.e. convert a hexadecimal string back into a
+number, the easiest way to do it is to prepend the string with `"&H"`, and
+convert it to an integer type, using a function like `Cint`, similarly to a
+normal numeric string. E.g. `Cint("&HFF")`
+
+Examples:
+
+'54321 is D431 in hex
+Print Hex(54321)
+Print Hex(54321, 2)
+Print Hex(54321, 5)
+
+will produce the output:
+
+
+ 
+ 
+    D431
+    31
+    0D431
+
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * In QBASIC, there was no way to specify the number of digits returned.
+  * The size of the string returned was limited to 32 bits, or 8 hexadecimal 
+  digits.
+

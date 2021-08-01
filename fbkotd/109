@@ -1,0 +1,25 @@
+#INCLIB
+===============
+
+Preprocessor directive
+
+Syntax:
+#inclib "libname"
+
+Description:
+Includes a library in the linking process as if the user specified `-l
+libname` on the command line.
+
+Examples:
+
+'' this will include libmystuff.a in the link process
+#inclib "mystuff"
+
+Differences from QB:
+  * New to FreeBASIC
+
+See also:
+
+  * `#include`
+  * Compiler Option: -l
+  * Compiler Option: -p

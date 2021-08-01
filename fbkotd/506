@@ -1,0 +1,52 @@
+CHAIN
+================
+
+Temporarily transfers control to an external program
+
+Syntax:
+declare function Chain ( byref program as const string ) as long
+
+Usage:
+result = Chain( program )
+
+Parameters:
+
+`program`
+The file name (including file path) of the program (executable) to transfer
+control to.
+
+Return Value:
+Returns the external program's exit code if executed successfully, or negative
+one (-1) otherwise.
+
+Description:
+
+Transfers control over to an external program. When the program exits,
+execution resumes immediately after the call to `Chain`.
+
+Examples:
+
+#ifdef __FB_LINUX__
+    Dim As String program = "./program"
+#else
+    Dim As String program = "program.exe"
+#endif
+
+Print "Running " & program & "..."
+If (Chain(program) <> 0) Then
+    Print program & " not found!"
+End If
+
+Platform Differences:
+
+  * Linux requires the `program` name case matches the real name of the 
+  file. Windows and DOS are case insensitive. The program chained may be 
+  case sensitive for its command line parameters.
+  * Path separators in Linux are forward slashes / . Windows uses backward
+  slashes \ but it allows for forward slashes . DOS uses backward \ slashes.
+  * Exit code is limited to 8 bits in DOS.
+
+Differences from QB:
+  * `Common` does not allow to keep the values of certain variables when 
+  chaining programs with `Chain`.
+

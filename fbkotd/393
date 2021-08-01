@@ -1,0 +1,53 @@
+Operator / (Divide)
+================
+
+Divides two numeric expressions
+
+Syntax:
+declare operator ( byref lhs as double, byref rhs as double ) as double
+
+Usage:
+result = lhs `/` rhs
+
+Parameters:
+
+`lhs`
+The left-hand side dividend expression.
+
+`rhs`
+The right-hand side divisor expression.
+
+Return Value:
+Returns the quotient of a dividend and divisor.
+
+Description:
+
+`Operator /` (Divide) returns the quotient of a dividend and divisor.
+
+Neither operand is modified in any way. Unlike with integer division, float
+division by zero is safe to perform, the quotient will hold a special value
+representing infinity, converting it to a string returns something like "Inf"
+or "INF", exact text is platform specific.
+
+This operator can be overloaded to accept user-defined types.
+
+Examples:
+
+Dim n As Double
+Print n / 5
+n = 6 / 2.3
+Print n
+Sleep
+
+Output:
+
+  
+    0
+    2.608695652173913
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * None
+

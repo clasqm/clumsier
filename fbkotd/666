@@ -1,0 +1,91 @@
+Operating System Functions
+================
+
+Statements and procedures for working with files, directories and the system.
+
+Description:
+
+The statements and procedures listed here provide access to the operating
+system environment. They transfer execution to external programs, get
+information about files and directories, manipulate the file system and send
+commands to the command shell.
+
+
+##EXEC and CHAIN
+Temporarily transfers control to another program.
+
+##RUN
+Transfers control to another program.
+
+##KILL
+Deletes an existing file.
+
+##NAME
+Renames an existing file.
+
+File Properties
+
+##FILEATTR
+Gets information about a file bound to a file number.
+
+##FILECOPY
+Copies a file.
+
+##FILEDATETIME
+Gets the last modified date and time of a file.
+
+##FILEEXISTS
+Tests for the existence of a file.
+
+##FILELEN
+Gets the length (in bytes) of a file.
+
+##FILESETEOF
+Sets the length of an open file bound to a file number.
+
+##FILEFLUSH
+Flushes application or system buffers for an open file bound to a file number.
+
+Working with Directories
+
+##CURDIR
+Gets the current working directory.
+
+##CHDIR
+Sets the current working directory.
+
+##DIR
+Gets the names of files or directories matching certain attributes.
+
+##EXEPATH
+Gets the directory of the current running program.
+
+##MKDIR
+Creates a new directory.
+
+##RMDIR
+Deletes an existing directory.
+
+System Procedures
+
+##FRE
+Gets the amount of free memory (in bytes) available.
+
+##COMMAND
+Gets the command-line parameters passed to the program.
+
+##ENVIRON
+Gets the value of an environment variable.
+
+##ISREDIRECTED
+Checks whether stdin or stdout is redirected to a file or not.
+
+##SETENVIRON
+Sets the value of an environment variable.
+
+##SHELL
+Sends a command to the system command interpreter.
+
+##SYSTEM
+Closes all open files and exits the program.
+

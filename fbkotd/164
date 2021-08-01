@@ -1,0 +1,27 @@
+UNSIGNED
+========================
+
+Integer data type modifier
+
+Syntax:
+
+dim variable as Unsigned {integer-based data type}
+
+Description:
+Forces an integer-based data type to be unsigned (cannot contain negative
+numbers, but has its maximum value doubled).
+
+Examples:
+'e.g. notice what is displayed:
+
+Dim x As Unsigned Integer
+x = -1
+Print x
+
+'output is 4294967295
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the alias `__Unsigned`.
+
+Differences from QB:
+New to FreeBASIC

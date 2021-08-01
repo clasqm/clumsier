@@ -1,0 +1,23 @@
+__FB_CYGWIN__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_CYGWIN__
+
+Description:
+Define without a value created at compile time in the Cygwin version of the
+compiler, or when the -target cygwin command line option is used. It can be
+used to compile parts of the program only if the target is Cygwin.
+
+Examples:
+
+#IFDEF __FB_CYGWIN__
+  '...instructions only for Cygwin...
+#ELSE
+  '...instructions not for Cygwin...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,55 @@
+CHR
+================
+
+Returns a string of characters from one or more ASCII integer values
+
+Syntax:
+declare function Chr ( byval ch as integer [, ... ] ) as string
+
+Usage:
+result = Chr[$]( ch0 [, ch1 ... chN ] )
+
+Parameters:
+
+`ch`
+The ASCII integer value of a character.
+
+Return Value:
+Returns a string containing the character(s).
+
+Description:
+
+`Chr` returns a string containing the character(s) represented by the ASCII
+values passed to it.
+
+When `Chr` is used with numerical constants or literals, the result is
+evaluated at compile-time, so it can be used in variable initializers.
+
+`ASC` performs the opposite function, returning the ASCII code of a character
+represented by a string.
+
+Examples:
+
+Print "the character represented by";
+Print " the ASCII code of 97 is: "; Chr(97)
+
+Print Chr(97, 98, 99) ' prints abc
+
+' s initially has the value "abc"
+Dim s As String = Chr(97, 98, 99)
+
+Print s
+
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * FreeBASIC accepts multiple integer values as arguments, QB accepted 
+  only one.
+  * FreeBASIC evaluates the CHR function at compile time when used with 
+  constants or literals.
+

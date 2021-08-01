@@ -1,0 +1,63 @@
+CLNG
+================
+
+Converts numeric or string expression to `Long`
+
+Syntax:
+declare function Clng ( byval expression as datatype ) as long
+
+Type typename
+
+declare operator cast ( ) as long
+
+End Type
+
+Usage:
+result = Clng( numeric expression )
+result = Clng( string expression )
+result = Clng( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Long` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Long` value.
+
+Description:
+
+The `Clng` function rounds off the decimal part and returns a 32-bit `Long`
+value. The function does not check for an overflow, and results are undefined
+for values which are less than `-2` `147` `483` `648` or larger than `2` `147`
+`483` `647`.
+
+The name can be explained as 'Convert to LoNG'.
+
+If the argument is a string expression, it is converted to numeric by using
+`Valint`.
+
+Examples:
+
+' Using the CLNG function to convert a numeric value
+
+'Create an LONG variable
+Dim numeric_value As Long
+
+'Convert a numeric value
+numeric_value = CLng(-300.23)
+
+'Print the result, should return -300
+Print numeric_value
+Sleep
+
+
+Differences from QB:
+  * The string argument was not allowed in QB
+

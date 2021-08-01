@@ -1,0 +1,59 @@
+Operator OR= (Inclusive Disjunction and Assign)
+================
+
+Performs a bitwise-or (inclusive disjunction) and assigns the result to a
+variable
+
+Syntax:
+declare operator Or= ( byref lhs as T1, byref rhs as T2 )
+
+Usage:
+lhs Or= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`T1`
+Any numeric or boolean type.
+
+`rhs`
+The value to perform a bitwise-or (inclusive disjunction) with `lhs`.
+
+`T2
+Any numeric or boolean type.
+
+Description:
+
+This operator performs a bitwise-or and assigns the result to a variable (for
+conversion of a boolean to an integer, false or true boolean value becomes 0
+or -1 integer value). It is functionally equivalent to:
+
+`lhs = lhs or rhs`
+
+`Or=` compares each bit of its operands, `lhs` and `rhs`, and if either bits
+are 1, then the corresponding bit in the first operand, `lhs`, is set to 1,
+otherwise it is set to 0.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol 'Or=>'
+can be also used.
+
+Examples:
+
+Dim As UByte a = &b00110011
+Dim As UByte b = &b01010101
+a Or= b
+'' Result    a = &b01110111
+Print Bin(a)
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

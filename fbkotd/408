@@ -1,0 +1,42 @@
+SYSTEM
+================
+
+Closes all open files and ends the program
+
+Syntax:
+declare sub System ( byval retval as long = 0 )
+
+Usage:
+System( [ retval ] )
+
+Parameters:
+
+`retval`
+Error code returned to system.
+
+Description:
+
+Closes all open files, exits the program, and returns to the operating system.
+An optional return value, an integer, can be specified to return an error code
+to the system. If no return value is given, a value of 0 is automatically
+returned. This is the same as `End` and is here for compatibility between
+older BASIC dialects. It is recommended to use `End` instead.
+
+Usage of this statement does not cleanly close scope. Local variables will not
+have their destructors called automatically, because FreeBASIC does not do
+stack unwinding. Only the destructors of global variables will be called in
+this case.
+
+For this reason, it is discouraged to use `System` simply to mark the end of a
+program; the program will come to an end automatically, and in a cleaner
+fashion, when the last line of module-level code has executed.
+
+Examples:
+
+Print "this text is shown"
+System
+Print "this text will never be shown"
+
+Differences from QB:
+  * None
+

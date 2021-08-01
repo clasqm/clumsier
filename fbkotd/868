@@ -1,0 +1,122 @@
+Operator Placement New
+================
+
+Operator to construct an object at a specified memory address.
+
+Syntax:
+result = New(address) datatype
+
+or
+
+result = New(address) datatype ( initializers, ... )
+
+or
+
+result = New(address) datatype[ count ]
+
+Parameters:
+
+`address`
+the location in memory to construct. the parenthesis are not optional.
+
+`initializers`
+Initial value(s) for the variable.
+
+`datatype`
+name of the data type to construct.
+
+`count`
+Number of elements to construct.
+
+Return Value:
+A pointer of type `datatype` to the newly constructed data.
+
+Description:
+
+The `Placement New` operator constructs a specified data type at the specified
+memory location.
+
+For simple types, like integers, an initial value can be given. For types
+without `constructor`s, initial values can be specified for each field (either
+with default initializer at data-field declaration, or with initializer list
+as in `New datatype (initializers, ..)` if all type data-fields are numeric
+primitives only and without any default initializers). For types with at least
+one constructor, the initialize list (if any) must match an existing
+constructor. If no initializers are given, the default values for those types
+will be set.
+
+Memory is not allocated when using the `Placement New` operator. Instead, the
+memory at the specified `address` is used (the provided memory size must be
+large enough to contain all the placement).
+It is incorrect to call `Delete Statement` on the address. The proper way is
+to only call the destructor if one exists (implicitly or explicitly), with
+syntax as for a member method by using member access operator.
+See examples below for proper `Placement New` operator usage.
+
+`Placement New[]` operator is the (one-dimensional) array-version of the
+`Placement New` operator and constructs the specified number of objects from
+the specified memory location. The default constructor for the type will be
+used to set the initial values for each item.
+
+Specifying an initial value of `Any`, as in `New(address)datatype (Any)` or
+`New(address)datatype[count] {Any}` will not initialize the data. This is only
+valid on data types that do not have constructors (otherwise for data types
+with constructors, syntax of simple pointer conversion, like Cptr(datatype
+Ptr, address), can be substituted to the invalid use of New...Any).
+
+Because it does not provide any dynamic memory allocation process, the
+`Placement New` operator (unlike the `New Expression` operator) does not allow
+any overloading by a member operator for user-defined types.
+
+Note: Using `pointer = New(address)datatype[count]` may be unsafe if `pointer`
+was declared with a type different from `datatype` (for sub-type polymorphism
+purpose for example), because the pointer arithmetic fails to access the
+elements if the pointer type size is different from the size of `datatype`
+(when using `Operator [] (Pointer index)` or adding an offset (element number)
+to the pointer).
+
+Examples:
+
+'' "placement new" example
+
+Type Rational
+    As Integer    numerator, denominator
+    Declare Constructor ( ByVal n As Integer, ByVal d As Integer )
+    As String ratio = "/"
+End Type
+
+Constructor Rational ( ByVal n As Integer, ByVal d As Integer )
+    This.numerator = n
+    This.denominator = d
+End Constructor
+
+Scope
+  
+    '' allocate some memory to construct as a Rational
+    Dim As Any Ptr ap = CAllocate(Len(Rational))
+  
+    '' make the placement new call
+    Dim As Rational Ptr r = New (ap) Rational( 3, 4 )
+  
+    '' you can see, the addresses are the same, just having different types in the compiler
+    Print ap, r
+  
+    '' confirm all is okay
+    Print r->numerator & r->ratio & r->denominator
+   
+    '' delete must not be used with placement new
+    '' destroying must be done explicitly if a destructor exists (implicitly or explicitly)
+    ''   (in this example, the var-string member induces an implicit destructor)
+    r->Destructor( )
+   
+    '' we explicitly allocated, so we explicitly deallocate
+    Deallocate( ap )
+   
+End Scope
+
+Dialect Differences:
+Only available in the -lang fb dialect.
+
+Differences from QB:
+New to FreeBASIC
+

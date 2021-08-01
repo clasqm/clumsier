@@ -1,0 +1,33 @@
+PUBLIC
+================
+
+Specifies a procedure having external linkage.
+
+Syntax:
+Public Sub procedure_name [Cdecl|Stdcall|Pascal] [Overload] [Alias
+"external_name"] [([parameter_list])] [Constructor [priority]] [Static]
+[Export]
+..procedure body..
+End Sub
+
+Public Function procedure_name [Cdecl|Stdcall|Pascal] [Overload] [Alias
+"external_name"] [([parameter_list])] [ byref ] as return_type [Static]
+[Export]
+..procedure body..
+End Function
+
+Description:
+In procedure definitions (forbidden at declaration line level), `Public`
+specifies that a procedure has external linkage, meaning its name is visible
+to external modules. If `Public` or `Private` is not specified, a procedure is
+defined as if `Public` was specified.
+
+Examples:
+
+Private Sub i_am_private
+End Sub  
+Public Sub i_am_public
+End Sub
+
+Differences from QB:
+New to FreeBASIC

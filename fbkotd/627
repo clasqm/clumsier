@@ -1,0 +1,76 @@
+Operator + (Addition)
+================
+
+Sums two expressions
+
+Syntax:
+declare operator + ( byref lhs as integer, byref rhs as integer ) as integer
+declare operator + ( byref lhs as uinteger, byref rhs as uinteger ) as
+uinteger
+
+declare operator + ( byref lhs as single, byref rhs as single ) as single
+declare operator + ( byref lhs as double, byref rhs as double ) as double
+
+declare operator + ( byref lhs as T Pointer, byref rhs as integer ) as T
+Pointer
+declare operator + ( byref rhs as integer, byref lhs as T Pointer ) as T
+Pointer
+
+declare operator + ( byref lhs as T, byref rhs as integer ) as T
+declare operator + ( byref lhs as integer, byref rhs as T ) as T
+
+Usage:
+result = lhs `+` rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression to sum.
+
+`rhs`
+The right-hand side expression to sum.
+
+`T`
+Any pointer type.
+
+Return Value:
+Returns the sum of two expressions.
+
+Description:
+
+When the left and right-hand side expressions are numeric values, `Operator +`
+(Add) returns the sum of the two values.
+
+When the left and right-hand side expressions are string values, `Operator +`
+(Add) concatenates the two strings and returns the result.
+
+If an integral value `n` is added to a `T Pointer` type, the operator performs
+pointer arithmetic on the address, returning the memory position of a `T`
+value, `n` indices away (assuming `n` is within bounds of a contiguous array
+of `T` values). This behaves differently from numeric addition, because the
+`Integer` value is scaled by `Sizeof( T )`.
+
+Neither operand is modified in any way.
+
+This operator can be overloaded to accept user-defined types.
+
+Examples:
+
+Dim n As Single
+n = 4.75 \+ 5.25
+Print n
+
+will produce the output:
+
+
+ 
+ 
+    10
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * None
+

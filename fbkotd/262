@@ -1,0 +1,36 @@
+MONTH
+================
+
+Gets the month of the year from a Date Serial
+
+Syntax:
+declare function Month ( byval date_serial as double ) as long
+
+Usage:
+#include "vbcompat.bi"
+result = Month( date_serial )
+
+Parameters:
+
+`date_serial`
+the date
+
+Return Value:
+Returns the month number from a variable containing a date in Date Serial
+format.
+
+The month values are in the range 1-12 being 1 for January and 12 for
+December.
+
+Description:
+The compiler will not recognize this function unless `vbcompat.bi` is
+included.
+
+Examples:
+
+#include "vbcompat.bi"
+Dim a As Double = DateSerial(2005,11,28) \+ TimeSerial(7,30,50)
+Print Format(a, "yyyy/mm/dd hh:mm:ss "); Month(a)
+
+Differences from QB:
+Did not exist in QB. This function appeared in PDS and VBDOS

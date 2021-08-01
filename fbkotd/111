@@ -1,0 +1,27 @@
+__FB_FPU__
+===============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_FPU__
+
+Description:
+Defined as `"sse"` if SSE floating point arithmetics is enabled, or `"x87"`
+otherwise.
+
+Examples:
+
+#if __FB_FPU__ = "sse"
+  ' ... instructions only for SSE ...
+#else
+  ' ... instructions not for SSE ...
+#endif
+
+
+Differences from QB:
+New to FreeBASIC
+
+See also:
+
+  * `__FB_SSE__`

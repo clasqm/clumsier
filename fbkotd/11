@@ -1,0 +1,50 @@
+Converting Data Types
+=====================
+
+Operators and procedures that convert between different types.
+
+Generic conversions
+	Operators to convert between arbitrary types.
+CAST
+	Converts expressions between different types.
+-----------------------------------------------------
+Conversions to integral types
+	Operators to convert to integral types.
+CBYTE
+	Converts numeric expressions to 8-bit values.
+CSHORT
+	Converts numeric expressions to 16-bit values.
+CLNG
+	Converts numeric expressions to 32-bit values.
+CINT
+	Converts numeric expressions to 32-bit or 64-bit values.
+CLNGINT
+	Converts numeric expressions to 64-bit values.
+CSIGN
+	Converts a numeric expression to a signed-type value.
+CUNSG
+	Converts a numeric expression to an unsigned-type value.
+-----------------------------------------------------
+Conversions to floating-point types
+	Operators to convert to floating-point types.
+CSNG
+	Converts a numeric or string expression to floating-point
+	values.
+-----------------------------------------------------
+Conversions to/from string types
+	Operators to convert to and from string types.
+STR
+	Converts numeric expressions or booleans to their string
+	representation.
+VAL
+	Converts a numeric string expression to a floating-point
+	value.
+VALINT
+	Converts numeric string expressions to integer values.
+VALLNG
+	Converts numeric string expressions to long values.
+-----------------------------------------------------
+Conversion to boolean types
+	Operators to convert to boolean types.
+CBOOL
+	Converts a numeric or string expression to a boolean value.

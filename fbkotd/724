@@ -1,0 +1,77 @@
+Operator < (Less than)
+================
+
+Compares an expression less than another expression
+
+Syntax:
+declare operator < ( byref lhs as byte, byref rhs as byte ) as integer
+declare operator < ( byref lhs as ubyte, byref rhs as ubyte ) as integer
+declare operator < ( byref lhs as short, byref rhs as short ) as integer
+declare operator < ( byref lhs as ushort, byref rhs as ushort ) as integer
+declare operator < ( byref lhs as integer, byref rhs as integer ) as integer
+declare operator < ( byref lhs as uinteger, byref rhs as uinteger ) as integer
+declare operator < ( byref lhs as longint, byref rhs as longint ) as integer
+declare operator < ( byref lhs as ulongint, byref rhs as ulongint ) as integer
+
+declare operator < ( byref lhs as single, byref rhs as single ) as integer
+declare operator < ( byref lhs as double, byref rhs as double ) as integer
+
+declare operator < ( byref lhs as string, byref rhs as string ) as integer
+declare operator < ( byref lhs as zstring, byref rhs as zstring ) as integer
+declare operator < ( byref lhs as wstring, byref rhs as wstring ) as integer
+
+declare operator < ( byref lhs as T, byref rhs as T ) as integer
+
+Usage:
+result = lhs < rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression to compare to.
+
+`rhs`
+The right-hand side expression to compare to.
+
+`T`
+Any pointer type.
+
+Return Value:
+Returns negative one (-1) if the left-hand side expression is less than the
+right-hand side expression, or zero (0) if greater than or equal.
+
+Description:
+
+`Operator <` (Less than) is a binary operator that compares two expressions
+for inequality and returns the result - a boolean value in the form of an
+`Integer`: negative one (-1) for true and zero (0) for false. The arguments
+are not modified in any way.
+
+This operator can be overloaded to accept user-defined types as well.
+
+Examples:
+
+Const size As Integer = 4
+Dim array(size - 1) As Integer = { 1, 2, 3, 4 }
+
+Dim index As Integer = 0
+While (index < size)
+   Print array(index)
+   index += 1
+Wend
+
+`Operator >=` (Greater than or equal) is complement to `Operator <` (Less
+than), and is functionally identical when combined with `Operator Not` (Bit-
+wise Complement).
+
+
+   If (69 < 420) Then Print "(69 < 420) is true."
+   If Not (69 >= 420) Then Print "not (69 >= 420) is true."
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * none
+

@@ -1,0 +1,49 @@
+CVSHORT
+================
+
+Converts a two-byte string to a `Short` integer variable
+
+Syntax:
+declare function Cvshort ( byref str as const string ) as Short
+
+Usage:
+result = Cvshort( str )
+
+Parameters:
+
+`str`
+A `String` at least two bytes in length with a binary copy of a `Short`
+integer variable stored in it.
+
+Return Value:
+`Short` variable holding the binary copy of a `Short`.
+
+Description:
+
+Returns a 16-bit `Short` integer value using the binary data contained in a
+`string` of at least two bytes in length. A value of zero (`0`) is returned if
+the string is less than two bytes in length.
+
+`Cvshort` is used to convert 2-byte strings created with `Mkshort`.
+
+This function can also be used to convert 16-bit integer values from a memory
+or file buffer without the need for a `Type` structure. However, just as with
+the type structure, special care should be taken when using `Cvshort` to
+convert strings that have been read from a buffer.
+
+Examples:
+
+Dim si As Short, s As String
+s = "AB"
+si = CVShort(s)
+Print Using "s = ""&"""; s
+Print Using "si = _&H&"; Hex(si)
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Cvshort`.
+
+Differences from QB:
+  * In QB this function is called CVI
+

@@ -1,0 +1,15 @@
+ELSEIF
+======
+	Control flow statement for conditional branching
+
+Syntax:
+	If expression Then
+		[statement(s)]
+	[ Elseif expression Then ]
+		[statement(s)]
+	[ Else ]
+		[statement(s)]
+	End If
+
+Remark: EndIf (without blank) is also supported like in QB for backward
+compatibility.

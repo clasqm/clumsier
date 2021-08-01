@@ -1,0 +1,72 @@
+LTRIM
+================
+
+Removes surrounding substrings or characters on the left side of a string
+
+Syntax:
+declare function Ltrim ( byref str as const string, [ Any ] byref trimset as
+const string = " " ) as string
+declare function Ltrim ( byref str as const wstring, [ Any ] byref trimset as
+const wstring = Wstr(" ") ) as wstring
+
+Usage:
+result = Ltrim[$]( str [, [ Any ] trimset ] )
+
+Parameters:
+
+`str`
+The source string.
+
+`trimset`
+The substring to trim.
+
+Return Value:
+Returns the trimmed string.
+
+Description:
+
+This procedure trims surrounding characters from the left (beginning) of a
+source string. Substrings matching `trimset` will be trimmed if specified,
+otherwise spaces (ASCII code 32) are trimmed.
+
+If the `Any` keyword is used, any character matching a character in `trimset`
+will be trimmed.
+
+All comparisons are case-sensitive.
+
+Examples:
+
+Dim s1 As String = "  101 Things to do."
+Print "'" \+ LTrim(s1) \+ "'"
+Print "'" \+ LTrim(s1, " 01") \+ "'"
+Print "'" \+ LTrim(s1, Any " 01") \+ "'"
+
+Dim s2 As String = "BaaBaaBAA Test Pattern"
+Print "'" \+ LTrim(s2, "Baa") \+ "'"
+Print "'" \+ LTrim(s2, Any "BaA") \+ "'"
+
+will produce the output:
+
+
+ 
+ 
+    '101 Things to do.'
+    '  101 Things to do.'
+    'Things to do.'
+    'BAA Test Pattern'
+    ' Test Pattern'
+
+
+Platform Differences:
+
+  * DOS version/target of FreeBASIC does not support the wide-character version of `LTrim`.
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * QB does not support specifying a `trimset` string or the `ANY` clause.
+

@@ -1,0 +1,60 @@
+Operator PROCPTR (Procedure pointer)
+================
+
+Returns the address of a procedure
+
+Syntax:
+declare operator Procptr ( byref lhs as T ) as T ptr
+
+Usage:
+result = Procptr ( lhs )
+
+Parameters:
+
+`lhs`
+A procedure.
+
+`T`
+
+The type of procedure.
+
+Return Value:
+Returns the address of the procedure.
+
+Description:
+
+This operator returns the address of a `Sub` or `Function` procedure.
+
+`Operator @ (Address of)`, when used with procedures, has identical behavior.
+
+Examples:
+
+' This example uses ProcPtr to demonstrate function pointers
+Declare Function Subtract( x As Integer, y As Integer) As Integer
+Declare Function Add( x As Integer, y As Integer) As Integer
+Dim myFunction As Function( x As Integer, y As Integer) As Integer
+
+' myFunction will now be assigned to Add
+myFunction = ProcPtr( Add )
+Print myFunction(2, 3)
+
+' myFunction will now be assigned to Subtract.  Notice the different output.
+myFunction = ProcPtr( Subtract )
+Print myFunction(2, 3)
+
+Function Add( x As Integer, y As Integer) As Integer
+    Return x + y
+End Function
+
+Function Subtract( x As Integer, y As Integer) As Integer
+    Return x - y
+End Function
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Procptr`.
+
+Differences from QB:
+New to FreeBASIC
+

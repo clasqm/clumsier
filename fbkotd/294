@@ -1,0 +1,50 @@
+Export
+
+EXPORT
+================
+
+Definition specifier to indicate that a procedure in a DLL should be visible
+from other programs
+
+Syntax:
+
+{ sub | function } proc_name ( argumentlist ) [ [ byref ] as datatype ] Export
+
+Description:
+If a function is defined with this clause in a DLL, it is added to the public
+export table, so external programs can dynamically link to it using
+Dylibsymbol.
+(specifier to be put at the level of the first line of procedure definition,
+forbidden at procedure declaration line level)
+
+Examples:
+
+See the examples on the Shared Libraries page.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Export`.
+
+Platform Differences:
+
+  * Dynamic link libraries are not available in DOS, as the OS doesn't
+  support them.
+
+Differences from QB:
+New to FreeBASIC
+
+See also:
+
+  * `Dylibload`
+  * `Dylibsymbol`
+  * `Alias`
+
+
+Back to Modularizing
+
+  * 2020-02-09 10:17:38
+  * Owner: AntoniGual
+
+
+
+

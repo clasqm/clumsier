@@ -1,0 +1,32 @@
+SECOND
+================
+
+Gets the seconds from a Date Serial
+
+Syntax:
+declare function Second ( byval date_serial as double ) as long
+
+Usage:
+#include "vbcompat.bi"
+result = Second( date_serial )
+
+Parameters:
+`date_serial`
+the date serial
+
+Return Value:
+Returns the seconds from a variable containing a date in Date Serial format.
+
+Description:
+The compiler will not recognize this function unless `vbcompat.bi` is
+included.
+
+Examples:
+
+#include "vbcompat.bi"
+	Dim ds As Double = DateSerial(2005, 11, 28) \+ TimeSerial(7, 30, 50)
+Print Format(ds, "yyyy/mm/dd hh:mm:ss "); Second(ds)
+
+Differences from QB:
+Did not exist in QB. This function appeared in PDS and VBDOS
+

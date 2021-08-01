@@ -1,0 +1,38 @@
+DEFLNG
+================
+
+Specifies a default data type for a range of variable names
+
+Syntax:
+Deflng start_letter[-end_letter ][, ...]
+
+Parameters:
+
+`start_letter`
+the first letter in the range
+
+`end_letter`
+the last letter in the range
+
+Description:
+
+`Deflng` specifies that variables and arrays which aren't declared with a data
+type - or not declared at all - are implicitly declared of type `Long` if the
+first letter of their names matches a certain letter or lies within an
+inclusive range of letters.
+
+Examples:
+
+This will make `lNumber` a `Long` integer number since it starts with l.
+
+'' Compile with -lang fblite or qb
+#lang "fblite"
+DefLng l
+Dim lNumber ' implicit: As Long
+Print Len(lNumber) ' Displays 4, the number of bytes in a long.
+
+Dialect Differences:
+Only available in the -lang qb and -lang fblite dialects.
+
+Differences from QB:
+  * None

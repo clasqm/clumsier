@@ -1,0 +1,144 @@
+Callback
+================
+
+Callback procedures
+
+Description:
+
+From Wikipedia: A callback, also known as a "call-after" function, is any
+executable code that is passed as an argument to other code; that other code
+is expected to call back (execute) the argument at a given time. This
+execution may be immediate as in a synchronous (or blocking) callback, or it
+might happen at a later time as in an asynchronous (or deferred) callback.
+
+Examples:
+
+Example where a mathematical function is an argument in plot function call:
+
+Type MathFunction As Function( ByVal x As Double ) As Double
+
+Function Linear( ByVal x As Double ) As Double
+    Return x
+End Function
+
+Function Quadratic( ByVal x As Double ) As Double
+    Return x * x
+End Function
+
+Function Sinusoidal( ByVal x As Double ) As Double
+    Return Sin(x)
+End Function
+
+Sub PlotF( ByVal f As MathFunction )
+    PSet( -15, f(-15) )
+    For x As Double = -15 To 15 Step 0.1
+        Line -( x, f(x) )
+    Next
+End Sub
+
+Screen 19
+Window (-15,-10)-(15,10)
+
+PlotF( @Linear )
+PlotF( @Sinusoidal )
+PlotF( @Quadratic )
+
+Sleep
+
+
+Similar plotting example (as above) but with a asynchronous callback. Here an
+artificial delay is added. A more realistic case would be if the data to be
+plotted is retrieved form a web-server with a response time larger than
+acceptable for the main loop of our program (prevent blocking behavior):
+
+#Include "fbthread.bi"
+
+Type MathFunction As Function( ByVal x As Double ) As Double
+
+Sub ThreadPlot( ByVal p As Any Ptr )
+    Sleep 1500, 1  '' sleep added only to check the asynchronous way of the callback
+    Dim f As MathFunction = p
+    Window (-15,-10)-(15,10)
+    PSet( -15, f(-15) )
+    For x As Double = -15 To 15 Step 0.1
+        Line -( x, f(x) )
+    Next
+End Sub
+
+Function PlotF( ByVal f As MathFunction ) As String
+    Print "Plotting requested"
+    Threaddetach( ThreadCreate( @ThreadPlot, f ) )
+    Return "Plotting request taken into account"
+End Function
+
+Function Linear( ByVal x As Double ) As Double
+    Return x
+End Function
+
+Function Quadratic( ByVal x As Double ) As Double
+    Return x * x
+End Function
+
+Function Sinusoidal( ByVal x As Double ) As Double
+    Return Sin(x)
+End Function
+
+Screen 19
+
+Print PlotF( @Linear )
+Print PlotF( @Sinusoidal )
+Print PlotF( @Quadratic )
+
+'' following code added only to check the asynchronous way of callbacks
+Print "Main program continues ";
+For I As Integer = 1 To 15
+    Print ".";
+    Sleep 200, 1
+Next I
+Print
+Print "Main program finished"
+
+Sleep
+
+
+Example of a callback function for comparing values in a array to be sorted by
+the qsort algorithm:
+
+#include "crt/stdlib.bi"
+
+Function CmpVarLenStr CDecl( ByVal p1 As Any Ptr, ByVal p2 As Any Ptr ) As
+Long  '' compare 2 var-len strings
+    Dim As String Ptr ps1 = p1
+    Dim As String Ptr ps2 = p2
+    If *ps1 < *ps2 Then
+        Return -1
+    ElseIf *ps1 > *ps2 Then
+        Return 1
+    Else
+        Return 0
+    End If
+End Function
+
+Sub PrintList( array() As String)  '' print a var-len string list
+    For I As Integer = LBound(array) To UBound(array)
+        Print array(I)
+    Next I
+    Print
+End Sub
+
+Dim forename(1 To 12) As String = {"Madison", "Emily", "Hailey", "Sarah",
+"Kaitlyn", "Hannah", _
+                                   "Jacob", "Christopher", "Nicholas", "Michael", "Matthew", "Joshua" }
+
+Print "LIST OF UNSORTED FORENAMES:"
+PrintList( forename() )
+
+qsort( @forename(LBound(forename)), UBound(forename) \- LBound(forename) \+ 1,
+SizeOf(String), @CmpVarLenStr )
+
+Print "LIST OF SORTED FORENAMES:"
+PrintList( forename() )
+
+Sleep
+
+

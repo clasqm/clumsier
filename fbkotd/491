@@ -1,0 +1,53 @@
+Operator Shr= (Shift right and Assign)
+================
+
+Shifts right and assigns a value to a variable
+
+Syntax:
+declare operator Shr= ( byref lhs as integer, byref rhs as integer )
+declare operator Shr= ( byref lhs as uinteger, byref rhs as uinteger )
+declare operator Shr= ( byref lhs as longint, byref rhs as longint )
+declare operator Shr= ( byref lhs as ulongint, byref rhs as ulongint )
+
+Usage:
+lhs shr= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`rhs`
+The value to shift `lhs` right by.
+
+Description:
+
+This operator shifts the bits in its left-hand side (`lhs`) parameter a number
+of times specified by its right-hand side (`rhs`) parameter, and assigns the
+result to `lhs`. It is functionally equivalent to:
+
+`lhs = lhs Shr rhs`
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'Shr=>' can be also used.
+
+Examples:
+
+Dim i As Integer
+i = &b00011000   '' = 24
+i Shr= 3         '' = i\2^3
+'' Result: 11          3            3
+Print Bin(i), i, 24\2^3
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Shr=`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,59 @@
+Table of ASCII Characters
+================
+
+FreeBASIC graphics programs support in all versions the same "ASCII extended"
+USA character set the old DOS (and QBasic) supported. It is also called CP437
+or Code page 437. Each character is represented with one (1) byte of data.
+Here is a table. Each entry has decimal code, hex code, and printed
+representation.
+
+` 00000  03220sp 06440@ 09660` 12880Ç 160A0á 192C0`└` 224E0`α` 00101`☺` 03321!
+06541A 09761a 12981ü 161A1í 193C1`┴` 225E1ß  00202`☻` 03422" 06642B 09862b
+13082é 162A2ó 194C2`┬` 226E2`Γ` 00303`♥` 03523# 06743C 09963c 13183â 163A3ú
+195C3`├` 227E3`π` 00404`♦` 03624$ 06844D 10064d 13284ä 164A4ñ 196C4`─`
+228E4`Σ` 00505`♣` 03725% 06945E 10165e 13385à 165A5Ñ 197C5`┼` 229E5`σ`
+00606`♠` 03826`& 07046F 10266f 13486å 166A6ª 198C6`╞` 230E6µ  00707 03927'
+07147G 10367g 13587ç 167A7º 199C7`╟` 231E7`τ` 00808`◘` 04028( 07248H 10468h
+13688ê 168A8¿ 200C8`╚` 232E8`Φ` 00909`○` 04129) 07349I 10569i 13789ë 169A9`⌐`
+201C9`╔` 233E9`Θ` 0100A`◙` 0422A* 0744AJ 1066Aj 1388Aè 170AA¬ 202CA`╩`
+234EA`Ω` 0110B`♂` 0432B\+ 0754BK 1076Bk 1398Bï 171AB½ 203CB`╦` 235EB`δ`
+0120C`♀` 0442C, 0764CL 1086Cl 1408Cî 172AC¼ 204CC`╠` 236EC`∞` 0130D`♪` 0452D\-
+0774DM 1096Dm 1418Dì 173AD¡ 205CD`═` 237ED`φ` 0140E`♫` 0462E. 0784EN 1106En
+1428EÄ 174AE« 206CE`╬` 238EE`ε` 0150F`☼` 0472F/ 0794FO 1116Fo 1438FÅ 175AF»
+207CF`╧` 239EF`∩` 01610`►` 048300 08050P 11270p 14490É 176B0`░` 208D0`╨`
+240F0`≡` 01711`◄` 049311 08151Q 11371q 14591æ 177B1`▒` 209D1`╤` 241F1±
+01812`↕` 050322 08252R 11472r 14692Æ 178B2`▓` 210D2`╥` 242F2`≥` 01913`‼`
+051333 08353S 11573s 14793ô 179B3`│` 211D3`╙` 243F3`≤` 02014¶ 052344 08454T
+11674t 14894ö 180B4`┤` 212D4`╘` 244F4`⌠` 02115§ 053355 08555U 11775u 14995ò
+181B5`╡` 213D5`╒` 245F5`⌡` 02216`▬` 054366 08656V 11876v 15096û 182B6`╢`
+214D6`╓` 246F6÷  02317`↨` 055377 08757W 11977w 15197ù 183B7`╖` 215D7`╫`
+247F7`≈` 02418`↑` 056388 08858X 12078x 15298ÿ 184B8`╕` 216D8`╪` 248F8°
+02519`↓` 057399 08959Y 12179y 15399Ö 185B9`╣` 217D9`┘` 249F9`∙` 0261A`->`
+0583A: 0905AZ 1227Az 1549AÜ 186BA`║` 218DA`┌` 250FA 0271B`<-` 0593B; 0915B[
+1237B{ 1559B¢ 187BB`╗` 219DB`█` 251FB`√` 0281C`∟` 0603C< 0925C\ 1247C| 1569C£
+188BC`╝` 220DC`▄` 252FC`ⁿ` 0291D`↔` 0613D= 0935D] 1257D} 1579D¥ 189BD`╜`
+221DD`▌` 253FD²  0301E`▲` 0623E> 0945E^ 1267E~ 1589E`₧` 190BE`╛` 222DE`▐`
+254FE`■` 0311F`▼` 0633F? 0955F_ 1277F`⌂` 1599F 191BF`┐` 223DF`▀` 255FF
+`
+`
+
+Many of the standard ASCII characters cannot be `Print`ed in FreeBASIC,
+because the console interprets some characters as controls: `7` is bell, `8`
+is backspace, `9` is tab, `10` is line feed, `13` is carriage return, and
+others. There are symbols associated with these characters also, but there is
+no way in FreeBASIC to output them to the screen.
+
+The acronym ASCII stands for American Standard Code for Information
+Interchange. For more information, see http://en.wikipedia.org/wiki/Ascii. The
+symbols for codes `32` through `127` are the same as the standard Latin
+ISO-8859-1 char set most Windows fonts use. Others are often very different.
+
+In console mode (i.e. `Screen 0`/ non-graphics mode) the characters less than
+`32` or greater than `127` may display using different characters, depending
+on the operating system and code page of the screen / console in use.
+UNICODE is a newer standard of character sets involving two or more bytes per
+character, and may be used to print other characters to a Unicode-enabled
+console.
+
+In graphics modes, `Draw String` does not give special meaning to control
+characters allowing an alternative to display all characters in the set.

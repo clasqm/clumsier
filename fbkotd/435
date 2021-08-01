@@ -1,0 +1,24 @@
+objinfo
+================
+
+fbc stores extra information into the object files (.o) it generates, in order
+to read it out again at link-time. The information that is stored currently
+consists of the -lang/-mt settings and all libraries/search paths (-l,
+#inclib, -p, #libpath) that were specified when compiling that object file.
+This way fbc can show a warning when mixing object files that were compiled
+with different options, because they may be incompatible, and fbc can
+automatically link in libraries that were specified via #inclib, even if the
+user compiles and links in separate steps.
+
+This is accomplished by emitting an extra section called "fbctinf" (FreeBASIC
+compile time information?) when compiling, and reading it back in at link-
+time. Furthermore, when building a static library, fbc creates an extra object
+file (called __fb_ct.inf) containing just that extra information and adds it
+to the library. At link-time fbc looks at each library to figure out whether
+it has such an __fb_ct.inf file or not.
+
+In order to do this fbc has a custom COFF, ELF32 and also archive file format
+readers that can extract the .fbctinf section content. Previously, fbc used
+libbfd from binutils to do this, however depending on libbfd is problematic
+especially because of its highly unstable ABI.
+

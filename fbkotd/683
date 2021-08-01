@@ -1,0 +1,94 @@
+Date and Time Functions
+================
+
+Procedures that work with dates and time.
+
+Description:
+
+These procedures provide ways to deal with date and time intervals in a
+consistent way. Additional procedures are provided to set and get the current
+system date and time, and to retrieve a time stamp for sensitive timing
+algorithms.
+
+
+VisualBasic compatible procedures
+
+##NOW
+Gets a date serial of the current date and time.
+
+Creating Date serials
+
+##DATESERIAL
+Gets the date serial representation of a date.
+
+##TIMESERIAL
+Gets the date serial representation of a time.
+
+##DATEVALUE
+Gets the date serial representation of a date expressed as a `string`.
+
+##TIMEVALUE
+Gets the date serial representation of a time expressed as a `string`.
+
+Extracting information from Date serials
+
+##SECOND
+Gets the seconds of the hour from a date serial.
+
+##MINUTE
+Gets the minutes of the hour from a date serial.
+
+##HOUR
+Gets the hour of the day from a date serial.
+
+##DAY
+Gets the day of the month from a date serial.
+
+##WEEKDAY
+Gets the day of the week from a date serial.
+
+##MONTH
+Gets the month of the year from a date serial.
+
+##YEAR
+Gets the year from a date serial.
+
+##DATEPART
+Gets a time interval from a date serial.
+
+Extracting information from Date serials
+
+##DATEADD
+Gets the result of a time interval added to a date serial.
+
+##DATEDIFF
+Gets a time interval between two date serials.
+
+Miscellaneous
+
+##ISDATE
+Tests if a `String` can be converted to a date serial.
+
+##MONTHNAME
+Gets the month name of its integer representation.
+
+##WEEKDAYNAME
+Gets the weekday name of its integer representation.
+
+Date and time procedures
+
+##DATE
+Gets the `string` representation of the current system date.
+
+##TIME
+Gets the `string` representation of the current system time.
+
+##SETDATE
+Sets the current system date.
+
+##SETTIME
+Sets the current system time.
+
+##TIMER
+Gets a counter expressed in seconds.
+

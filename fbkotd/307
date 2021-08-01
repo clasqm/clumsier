@@ -1,0 +1,36 @@
+SPACE
+================
+
+Creates a string of a given length filled with spaces (`" "`)
+
+Syntax:
+declare function Space( byval count as integer ) as string
+
+Usage:
+result = Space[$]( count )
+
+Parameters:
+`count`
+An integer type specifying the length of the string to be created.
+
+Return Value:
+The created string. An empty string will be returned if `count` <= 0.
+
+Description:
+
+`Space` creates a string with the specified number of spaces.
+
+Examples:
+
+Dim a As String
+a = "x" \+ Space(3) \+ "x"
+Print a ' prints: x   x
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect,
+  warn only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * None

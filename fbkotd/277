@@ -1,0 +1,28 @@
+OPTION EXPLICIT
+================
+
+Forces variables, objects and arrays to be declared before they are used
+
+Syntax:
+Option Explicit
+
+Description:
+`Option Explicit` is a statement that forces any following variable, object or
+array usage to be preceded by a declaration, with, for example, `Dim` or
+`Static`. This rule remains in effect for the rest of the module in which
+`Option Explicit` is used, and cannot be overridden.
+
+Examples:
+
+'' Compile with the "-lang qb" or "-lang fblite" compiler switches
+#lang "fblite"
+Option Explicit
+Dim a As Integer            ' 'a' must be declared..
+a = 1                       ' ..or this statement will fail to compile.
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC
+

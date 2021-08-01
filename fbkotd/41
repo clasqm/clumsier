@@ -1,0 +1,9 @@
+TinyPTC
+===============
+
+A small and easy to use framebuffer graphics library.
+
+Website: http://sourceforge.net/projects/tinyptc/
+Platforms supported: Win32, Linux, DOS
+Headers to include: tinyptc.bi
+Examples: in examples/graphics/tinyptc/

@@ -1,0 +1,39 @@
+RSET
+================
+
+Right justifies a string in a string buffer
+
+Syntax:
+declare sub Rset ( byref dst as string, byref src as const string )
+declare sub Rset ( byval dst as wstring ptr, byval src as const wstring ptr )
+
+Usage:
+Rset dst, src
+
+Parameters:
+
+`dst`
+A `string` or `wstring` buffer to copy the text into.
+
+`src`
+The source `string` or `wstring` to be right justified.
+
+Description:
+
+`Rset` right justifies text into the string buffer `dst`, filling the right
+part of the string with `src` and the left part with spaces. The string buffer
+size is not modified.
+
+If text is too long for the string buffer size, `Rset` truncates characters
+from the right.
+
+Examples:
+
+Dim buffer As String
+buffer = Space(10)
+RSet buffer, "91.5"
+Print "-[" & buffer & "]-"
+
+Differences from QB:
+* In QBasic the syntax was `Rset dst = src`. That syntax is also supported by FB.
+

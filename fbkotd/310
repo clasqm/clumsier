@@ -1,0 +1,37 @@
+DEFINT
+================
+
+Specifies a default data type for a range of variable names
+
+Syntax:
+Defint start_letter[-end_letter ][, ...]
+
+Parameters:
+
+`start_letter`
+the first letter in the range
+
+`end_letter`
+the last letter in the range
+
+Description:
+`Defint` specifies that variables and arrays which aren't declared with a data
+type - or not declared at all - are implicitly declared of type `Integer` if
+the first letter of their names matches a certain letter or lies within an
+inclusive range of letters.
+
+Examples:
+
+This will make `iNumber` an `Integer` number since its first letter starts
+with `i`.
+
+'' Compile with -lang fblite or qb
+#lang "fblite"
+DefInt i
+Dim iNumber
+
+Dialect Differences:
+Only available in the -lang qb and -lang fblite dialects.
+
+Differences from QB:
+  * None

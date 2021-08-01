@@ -1,0 +1,22 @@
+__FB_SSE__
+=============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_SSE__
+
+Description:
+Define without a value created at compile time if SSE floating point
+arithmetics is enabled.
+
+Examples:
+
+#ifdef __FB_SSE__
+  ' ... instructions only for SSE ...
+#else
+  ' ... instructions not for SSE ...
+#endif
+
+Differences from QB:
+New to FreeBASIC

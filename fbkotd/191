@@ -1,0 +1,23 @@
+Compiler Option: -Wa
+================
+
+Pass options to the assembler when using the assembly emitter (-gen gas).
+
+Syntax:
+-Wa < options >
+
+Parameters:
+`options`
+
+Additional options to pass to the assembler.
+
+Description:
+The `-Wa` compiler option passes additional options to GAS, the assembler.
+Options must be separated by commas only. The `-Wa` compiler option may be
+specified multiple times on the command line.
+
+For example:
+
+`fbc -Wa -o,output.o,--verbose`
+`fbc -Wa -o -Wa output.o -Wa --verbose`
+

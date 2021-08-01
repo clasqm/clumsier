@@ -1,0 +1,86 @@
+INSTRREV
+================
+
+Locates the last occurrence of a substring or character within a string
+
+Syntax:
+declare function Instrrev ( byref str as const string, [ Any ] byref substring
+as const string, byval start as integer = -1 ) as integer
+declare function Instrrev ( byref str as const wstring, [ Any ] byref
+substring as const wstring, byval start as integer = -1 ) as integer
+
+Usage:
+last = Instrrev( str, [ Any ] substring [, start ] )
+
+Parameters:
+
+`str`
+The string to be searched.
+
+`substring`
+The substring to find.
+
+`start`
+The position in `str` at which the search will begin. The first character
+starts at position 1.
+
+Return Value:
+The position of the last occurrence of `substring` in `str`.
+
+Description:
+
+Locates the position of the last occurrence of a substring or character within
+a string. If `start` parameter is not given or is less than zero, the search
+begins at the last character.
+
+Zero (0) is returned if:
+
+  * `substring` is not found, or
+  * either `str` or `substring` is an empty strings, or
+  * `start` is zero, or
+  * start is greater than the length of `str`.
+
+If the `Any` keyword is specified, `Instrrev` returns the last occurrence of
+any character in `substring`.
+
+Examples:
+
+' It will return 4
+Print INSTRREV("abcdefg", "de")
+
+' It will return 0
+Print INSTRREV("abcdefg", "h")
+
+
+Dim test As String
+Dim idx As Integer
+
+test = "abababab"
+idx = instrrev(test, "b")
+
+Do While idx > 0 'if not found loop will be skipped
+    Print """b"" at " & idx
+    idx = instrrev(Test, "b", idx - 1)
+Loop
+
+
+
+'A Unicode example:
+dim text as wstring*20
+text = "Привет, мир!"
+print instrrev(text,"ет") ' displays 5
+
+
+
+Platform Differences:
+
+  * The wide-character string version of `Instrrev` is not supported for 
+  DOS target.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Instrrev`.
+
+Differences from QB:
+New to FreeBASIC
+

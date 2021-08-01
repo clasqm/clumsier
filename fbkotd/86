@@ -1,0 +1,12 @@
+Compiler Option: -nodeflibs
+===============
+
+Do not include the default libraries
+
+Syntax:
+-nodeflibs
+
+Description:
+The `-nodeflibs` compiler option causes default libraries not to be used when
+linking. The libraries which are normally linked by default can still be used,
+but only if they are explicitly specified.

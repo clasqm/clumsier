@@ -1,0 +1,85 @@
+Operator ANDALSO (Short Circuit Conjunction)
+================
+
+Returns the short circuit-and (conjunction) of two numeric values
+
+Syntax:
+declare operator AndAlso ( byref lhs as T1, byref rhs as T2 ) as Ret
+
+Usage:
+result = lhs AndAlso rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression.
+
+`T1`
+Any numeric or boolean type.
+
+`rhs`
+The right-hand side expression.
+
+`T2
+Any numeric or boolean type.
+
+`Ret`
+A numeric or boolean type (varies with `T1` and `T2`).
+
+Return Value:
+Returns the short circuit-and (conjunction) of the two operands.
+
+Description:
+
+This operator evaluates the left hand side expression. If the result is zero,
+then zero is immediately returned. If the result is nonzero then the right
+hand side is evaluated, and the logical result from that is returned.
+(for conversion of a boolean to an integer, false or true boolean value
+becomes 0 or -1 integer value)
+
+The truth table below demonstrates all combinations of a short circuit-and
+operation, the '-' denotes that the operand is not evaluated.
+
+Lhs Value Rhs Value Result
+0 - 0
+nonzero 0 0
+nonzero nonzero -1
+
+
+Short-circuiting is performed - only expressions needed to calculate the
+result are evaluated. The left hand side `lhs` is evaluated first, and only if
+it evaluates to non-zero (true) is the right hand side `rhs` also evaluated.
+If the left hand side evaluation `lhs` returns zero (false), it is known that
+at that point that the overall condition is false, so the right hand side
+`rhs` is not evaluated (skipped).
+
+The return type is almost always an `Integer`, of the value `0` or `-1`,
+denoting false and true respectively. Except if the left and right-hand side
+types are both `Boolean`, then the return type is also `Boolean`.
+
+This operator cannot be overloaded for user-defined types.
+
+Examples:
+
+'' Using the ANDALSO operator to guard against array access
+'' when the index is out of range
+
+Dim As Integer isprime(1 To 10) = { _
+    _ ' 1  2  3  4  5  6  7  8  9  10
+        0, 1, 1, 0, 1, 0, 1, 0, 0, 0 _
+    }
+
+Dim As Integer n
+Input "Enter a number between 1 and 10: ", n
+
+'' isprime() array will only be accessed if n is in range
+If (n >= 1 And n <= 10) andalso isprime(n) Then
+    Print "n is prime"
+Else
+    Print "n is not prime, or out of range"
+End If
+
+
+Differences from QB:
+  * This operator was not available in QB.
+

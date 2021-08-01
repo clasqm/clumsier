@@ -1,0 +1,38 @@
+WSPACE
+================
+
+Creates a `Wstring` of a given length filled with spaces (`" "`)
+
+Syntax:
+declare function Wspace( byval count as integer ) as wstring
+
+Usage:
+result = Wspace( count )
+
+Parameters:
+
+`count`
+An integer type specifying the length of the string to be created.
+
+Return Value:
+The created `Wstring`. An empty string will be returned if `count <= 0`.
+
+Description:
+`Wspace` creates a wstring (wide character string- Unicode) with the specified
+number of spaces.
+
+Examples:
+
+Dim a As WString * 10
+a = "x" \+ WSpace(3) \+ "x"
+Print a ' prints: x   x
+
+Platform Differences:
+Unicode strings are not supported in the DOS port of FreeBASIC.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Wspace`.
+
+Differences from QB:
+New to FreeBASIC

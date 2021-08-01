@@ -1,0 +1,35 @@
+ERASE
+================
+
+Statement to erase arrays
+
+Syntax:
+declare sub Erase ( array as any [, ... ] )
+
+Usage:
+Erase( array0 [, array1 ... arrayN ] )
+
+Parameters:
+
+`array`
+An array to be erased.
+
+Description:
+
+Using `Erase` on a fixed-length array resets all elements without freeing the
+allocated memory.
+In case of objects, there is destruction then re-construction.
+
+Using `Erase` on a variable-length array (array already sized) frees the
+memory allocated for the array elements, but the array remains declared at its
+same scope level (with the same datatype and number of dimensions).
+In case of objects, there is destruction before freeing memory.
+
+Examples:
+
+Dim MyArray1(1 To 10) As Integer
+ReDim MyArray2(1 To 10) As Integer
+Erase MyArray1, MyArray2
+
+Differences from QB:
+  * None

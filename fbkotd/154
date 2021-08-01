@@ -1,0 +1,24 @@
+__FB_XBOX__
+========================
+
+Intrinsic define set by the compiler
+
+Syntax:
+
+__FB_XBOX__
+
+Description:
+Define without a value created at compile time when the -target xbox command
+line option is used. It can be used to compile parts of the program only if
+the target is Xbox.
+
+Examples:
+
+#IFDEF __FB_XBOX__
+  '...instructions only for Xbox...
+#ELSE
+  '...instructions not for Xbox...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

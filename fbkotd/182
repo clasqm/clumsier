@@ -1,0 +1,24 @@
+__FB_ARGC__
+================
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__FB_ARGC__
+
+Description:
+Substituted with the number of arguments passed in on the command line.
+
+__FB_ARGC__ is the name of a parameter passed to the program's implicit main
+function, and therefore is only defined in the module level code of the main
+module for an application.
+
+Examples:
+
+Dim i As Integer
+For i = 0 To __FB_ARGC__ \- 1
+        Print "arg "; i; " = '"; Command(i); "'"
+Next i
+
+Differences from QB:
+New to FreeBASIC

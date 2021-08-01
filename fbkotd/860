@@ -1,0 +1,103 @@
+RANDOMIZE
+================
+
+Seeds the random number generator
+
+Syntax:
+declare sub Randomize ( byval seed as double = -1.0, byval algorithm as long =
+0 )
+
+Usage:
+Randomize [ seed ][, algorithm ]
+
+Parameters:
+
+`seed`
+A `double` seed value for the random number generator. If omitted, a value
+based on `Timer` will be used instead.
+
+`algorithm`
+An integer value to select the algorithm (see below, or from fbc version >=
+1.08 the standard header "fbmath.bi" for available algorithms). If omitted,
+the default algorithm for the current language dialect is used.
+
+Description:
+
+Sets the random seed that helps `Rnd` generate random numbers, and selects the
+algorithm to use.
+The constants for `algorithm` are defined in `fbmath.bi` (from fbc version
+1.08). In the -lang fb dialect, these constants are part of the `FB`
+`Namespace`.
+Valid values for `algorithm` are:
+
+`FB_RND_AUTO (0)` \- Default for current language dialect. This is algorithm
+`FB_RND_MTWIST (3)` in the -lang fb dialect, `FB_RND_QB (4)` in the -lang qb
+dialect and `FB_RND_CRT (1)` in the -lang fblite dialect.
+`FB_RND_CRT (1)` \- Uses the C runtime library's `rand()` function. This will
+give different results depending on the platform.
+`FB_RND_FAST (2)` \- Uses a fast implementation. This should be stable across
+all platforms, and provides 32-bit granularity, reasonable degree of
+randomness.
+`FB_RND_MTWIST (3)` \- Uses the Mersenne Twister. This should be stable across
+all platforms, provides 32-bit granularity, and gives a high degree of
+randomness.
+`FB_RND_QB (4)` \- Uses a function that is designed to give the same random
+number sequences as QBASIC. This should be stable across all platforms, and
+provides 24-bit precision, with a low degree of randomness.
+`FB_RND_REAL (5)` \- Available on Win32 and Linux, using system features
+(Win32 Crypto API, Linux /dev/urandom) to provide cryptographically random
+numbers. If those system APIs are unavailable, algorithm `FB_RND_MTWIST (3)`
+will be used instead.
+
+For any given seed, each algorithm will produce a specific, deterministic
+sequence of numbers for that seed. If you want each call to `Randomize` to
+produce a different sequence of numbers, a seed that is not quite predictable
+should be used - for example, the value returned from `Timer`. Omitting the
+`seed` parameter will use a value based on this.
+Note: using the `Timer` value directly as a parameter will produce the same
+seed if used more than once in the same second. However, it is generally not
+worth calling `Randomize` twice with unpredictable seeds anyway, because the
+second sequence will be no more random than the first. In most cases, the
+Mersenne twister should provide a sufficiently random sequence of numbers,
+without requiring reseeding between `Rnd` calls.
+
+When you call `Randomize` with the QB compatible algorithm, part of the old
+seed is retained. This means that if you call `Randomize` several times with
+the same seed, you will not get the same sequence each time. To get a specific
+sequence in QB compatible mode, set the seed by calling `Rnd` with a negative
+parameter.
+
+Note:
+
+- For fbc version >= 1.08, `Randomize` is became thread-safe (by using an 
+internal mutex), but not thread specific. Structures for other random number
+generators are also now available in the standard header "fbmath.bi".
+
+Examples:
+
+'' Seed the RNG to the method using C's rand()
+Randomize , 1
+
+'' Print a sequence of random numbers
+For i As Integer = 1 To 10
+    Print Rnd
+Next
+
+
+Dialect Differences:
+
+The default algorithm used depends on the current dialect in use:
+
+  * With the -lang fb dialect, a 32 bit Mersenne Twister function with a 
+  granularity of 32 bits is used.
+  * With the -lang qb dialect, a function giving the same output as `Rnd` 
+  in QB is used. The granularity is 24 bits.
+  * With the -lang deprecated and -lang fblite dialects, the function in 
+  the C runtime available in the system is used. The function has a 
+  granularity of 15 bits in Win32, and 32 bits in Linux and DOS.
+
+Differences from QB:
+  * The `algorithm` parameter is new to FreeBASIC.
+  * QBASIC only had one algorithm (replicated in FB in algorithm number 
+  `4`, and set as the default in the -lang qb dialect).
+

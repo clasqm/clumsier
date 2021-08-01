@@ -1,0 +1,113 @@
+OPEN PIPE
+================
+
+Opens an external process' standard input (stdin) or output (stdout) stream
+for file operations.
+
+Syntax:
+Open Pipe shell_command For Input As [#]filenumber
+Open Pipe shell_command For Output As [#]filenumber
+Open Pipe shell_command For Binary access_type [#]filenumber
+
+Usage:
+result = Open Pipe( command[,] For {Input|Output}[,] As filenumber )
+
+`or,`
+
+result = Open Pipe( command[,] For Binary[,] access_type[,] As filenumber )
+
+`(or in the QB-like syntax,)`
+
+Open Pipe filename For {Input|Output} As filenumber
+
+`(or,)`
+
+Open Pipe filename For Binary access_type As filenumber
+
+Parameters:
+
+`shell_command`
+The external process to execute in the operating system command shell.
+Relative file paths are relative to the current directory (see `Curdir`). When
+opening a pipe for a process that requires double quotes in either its
+executable path, or its arguments, the entire pipe string should be nested
+inside of double quotes.
+
+`access_type`
+The type of read or write access requested by the calling process.
+
+* `Access` {`Read`|`Write`} (either the stdin or stdout stream of the 
+external process can be opened)
+
+`filenumber`
+An available file number to bind to the external process' stdin or stdout
+stream.
+
+Return Value:
+In the first usage, `Open Pipe()` returns a 32 bit `Long`: a zero (`0`) on
+success and a non-zero error code otherwise.
+
+Description:
+
+`Open Pipe` executes another process in the command shell and opens either its
+stdin or stdout streams for reading or writing. A file number is bound to the
+stream, which is used in subsequent file operations, such as `Input #`. An
+available `filenumber` can be retrieved with `Freefile`. If the external
+process does not exist, a runtime error is thrown.
+
+The `Input` and `Output` file modes open the external process' stdin and
+stdout streams, respectively, for sequential text I/O, useful for reading or
+writing plain text. Characters, words or whole lines can then be read or
+written using text-mode file operations, such as `Line Input #` and `Print #`.
+
+The `Binary` file mode opens the external process' stdin or stdout streams -
+depending on the access type specified (see description of the `access_type`
+parameter above) - for random-access reading or writing of arbitrarily sized
+and interpreted raw data. Simple data type values, like `Byte` and `Longint`,
+and whole chunks of memory can be read from or written to the streams with
+binary-mode file operations like `Get #` and `Put #`.
+Bidirectional pipes are not supported by FB and must be implemented using the
+OS' API functions.
+
+The error code returned by `Open Pipe` can be checked using `Err` in the next
+line. The function version of `Open Pipe` returns directly the error code as a
+32 bit `Long`.
+
+Runtime errors:
+
+`Open Pipe` throws one of the following runtime errors:
+
+(`1`) Illegal function call
+
+  * `filenumber` was not free at the time. use `Freefile` to ensure 
+  that `filenumber` is free.
+
+Examples:
+
+'' This example uses Open Pipe to run a shell command and retrieve its output.
+#ifdef __FB_UNIX__
+Const TEST_COMMAND = "ls *"
+#else
+Const TEST_COMMAND = "dir *.*"
+#endif
+
+Open Pipe TEST_COMMAND For Input As #1
+
+Dim As String ln
+Do Until EOF(1)
+    Line Input #1, ln
+    Print ln
+Loop
+
+Close #1
+
+
+Platform Differences:
+
+  * The `Binary` file mode is not supported on all platforms; `Open Pipe` 
+  will throw an error if it is unable to open the external process' stdin 
+  or stdout streams in binary mode.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,62 @@
+Operator -> (Pointer to member access)
+================
+
+Returns a reference to a member from a pointer to an object
+
+Syntax:
+Declare Operator -> ( Byref lhs As T Ptr ) Byref As U
+
+Usage:
+result = lhs -> rhs
+
+Parameters:
+
+`lhs`
+The address of an object.
+
+`T`
+A user-defined type.
+
+`rhs`
+The name of a member to access.
+
+`U`
+The type that `rhs` refers to.
+
+Return Value:
+Returns a reference to the member specified by `rhs`.
+
+Description:
+
+`Operator ->` (Pointer to member access) returns a reference to a member of an
+object through a pointer to that object. It has the effect of dereferencing a
+pointer to an object, then using `Operator . (Member access)`. For example,
+`"p->member"` is equivalent to `"x.member"`, if x is an object of user-defined
+type and p is a pointer to an object of the same type. `"p->member"` is
+equivalent to `"(*p).member"`.
+
+This operator can be overloaded for user-defined types.
+
+Examples:
+
+Type rect
+    x As Integer
+    y As Integer
+End Type
+
+Dim r As rect
+Dim rp As rect Pointer = @r
+
+rp->x = 4
+rp->y = 2
+
+Print "x = " & rp->x & ", y = " & rp->y
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect.
+
+Differences from QB:
+New to FreeBASIC
+

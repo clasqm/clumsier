@@ -1,0 +1,17 @@
+Type or Class Operators
+========================
+
+Operators that work with objects
+
+These operators return references to members of objects, given an object or
+its memory address.
+
+Operator . (Member access)
+	Returns a reference to a member.
+
+Operator -> (Pointer to member access)
+	Returns a reference to a member from a pointer.
+
+Operator Is (Run-time type information)
+	Checks whether an object is compatible to a type derived from its
+	runtime-type.

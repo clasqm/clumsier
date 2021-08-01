@@ -1,0 +1,30 @@
+IMAGEDESTROY
+================
+
+Destroys and deallocates storage for an image
+
+Syntax:
+declare sub ImageDestroy ( byval image as any ptr )
+
+Usage:
+ImageDestroy( image )
+
+Parameters:
+`image`
+The address of the image to destroy.
+
+Description:
+Destroys the image pointed to by `image`, which must be an address returned
+from a call to `ImageCreate`.
+
+Calling `ImageDestroy` on a null pointer induces no action.
+
+Examples:
+See `ImageCreate` for an example on using `ImageDestroy`.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Imagedestroy`.
+
+Differences from QB:
+New to FreeBASIC

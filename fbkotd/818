@@ -1,0 +1,112 @@
+REALLOCATE
+================
+
+Reallocates storage for an existing reserved block of memory
+
+Syntax:
+declare function Reallocate cdecl ( byval pointer as any ptr, byval count as
+uinteger ) as any ptr
+
+Usage:
+result = Reallocate( pointer, count )
+
+Parameters:
+
+`pointer`
+The address of allocated memory to be reallocated.
+
+`count`
+The number of bytes, in total, to be reallocated.
+
+Return Value:
+The address of the reallocated memory. A null (`0`) pointer is returned if
+reallocation was unsuccessful, and the original memory pointed to by `pointer`
+remains unchanged.
+
+Description:
+
+Attempts to reallocate, or resize, memory previously allocated with `Allocate`
+or `Callocate`. The contents of the buffer are preserved, although if `count`
+is less than the original size of the memory block, the buffer will be
+truncated. If the size is increased, the added memory range is not initialized
+to anything.
+
+When using `Reallocate`, the `result` pointer must be saved to prevent a
+potential memory leak, because the original `pointer` may no longer be valid
+after reallocation. The value of the new pointer should be checked - if it is
+`0`, the reallocation has failed - the original `pointer` remains valid, and
+the amount of memory allocated to it has not changed.
+
+Reallocated memory must be freed with `Deallocate` when no longer needed.
+
+If `pointer` is null (`0`), then `ReAllocate` behaves identically to
+`Allocate`. If `pointer` is valid and `count` is null (0), then `ReAllocate`
+behaves similar to `Deallocate` and a null (0) pointer is returned.
+
+If the memory has previously been deallocated by a call to `Deallocate` or
+`ReAllocate`, the behavior is undefined.
+
+When manually allocating memory for `String` descriptors (or `UDT`s that
+contain one), if `count` is larger than the original size of the memory block,
+the new extra memory range must be explicitly cleared to zeroes before the
+first string use (for example, using `Clear`). Otherwise accessing the string
+will cause undefined results (trying to write or read at a random place in
+memory, or trying to deallocate a random pointer).
+
+This function is not part of the FreeBASIC runtime library, it is an alias for
+the C runtime library's `realloc`, so it's not guaranteed to be thread safe in
+all platforms.
+
+NOTE: Reallocating a pointer inside an object function, when that pointer
+contains the parent object of the function, is undefined, and will likely
+result in horrible crashes.
+
+Examples:
+
+Dim a As Integer Ptr, b As Integer Ptr, i As Integer
+
+a = Allocate( 5 * SizeOf(Integer) )   ' Allocate memory for 5 integers
+
+If a = 0 Then Print "Error Allocating a": End
+
+For i = 0 To 4
+  a[i] = (i + 1) * 2   ' Assign integers to the buffer
+Next i
+
+b = Reallocate( a, 10 * SizeOf(Integer) )   ' Reallocate memory for 5
+additional integers
+
+If b <> 0 Then
+
+    a = b   ' Discard the old pointer and use the new one
+
+    For i = 5 To 9
+      a[i] = (i + 1) * 2   ' Assign more integers to the buffer
+    Next i
+
+    For i = 0 To 9   ' Print the integers
+      Print i, a[i]
+    Next i
+    Print
+
+Else '' Reallocate failed, memory unchanged
+
+    Print "Error Reallocating a"
+
+    For i = 0 To 4   ' Print the integers
+      Print i, a[i]
+    Next i
+    Print
+
+End If
+
+Deallocate a   ' Clean up
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Reallocate`.
+
+Differences from QB:
+New to FreeBASIC
+

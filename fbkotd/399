@@ -1,0 +1,45 @@
+MKLONGINT
+================
+
+Does a binary copy from a `longint` variable to a `string`, setting its length
+to 8 bytes
+
+Syntax:
+declare function Mklongint ( byval number as longint ) as string
+
+Usage:
+result = Mklongint[$]( number )
+
+Parameters:
+
+`number`
+A `longint` variable to binary copy to a `string`.
+
+Return Value:
+Returns a `string` with a binary copy of the `longint`.
+
+Description:
+
+Does a binary copy from a `Longint` variable to a string, setting its length
+to 8 bytes. The resulting string can be read back to a longint by `Cvlongint`
+
+This function is useful to write numeric values to buffers without using a
+`Type` definition.
+
+Examples:
+
+Dim a As LongInt, b As String
+a = 4534
+b = MKLongInt(a)
+Print a, CVLongInt(b)
+Sleep
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Mklongint`.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+New to FreeBASIC
+

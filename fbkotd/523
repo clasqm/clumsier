@@ -1,0 +1,46 @@
+OPTION()
+================
+
+Specifies additional attributes and/or characteristics of symbols.
+
+Syntax:
+Option( "literal-text" )
+
+Parameters:
+
+`literal-text`
+The literal text specifying the option. See description.
+
+Description:
+
+`Option()` allows the programmer to specify additional attributes or
+characteristics. Enclosing the string into quotes and parentheses is required
+in the syntax. Unrecognized options are ignored.
+
+`Option` can also be used as a statement to specify other compile time
+options. See Compiler Switches.
+
+Individual options are explained below.
+
+SSE
+`Option("SSE")` indicates that a floating point value (`Single` or `Double`)
+returned from a function is stored in the `xmm0` register. `Option("SSE")` is
+ignored unless the source is compiled with the -fpu SSE command line option.
+This option may be used immediately after the return type in a function
+declaration or function definition. This option is an optimization only and
+not required to compile programs using the -fpu SSE command line option.
+
+Declare Function ValueInXmm0 () As Double Option("sse")
+
+
+FPU
+`Option("FPU")` indicates that a floating point value (`Single` or `Double`)
+returned from a function is stored in the `st(0)` register. This option may be
+used immediately after the return type in a function declaration or function
+definition.
+
+Declare Function ValueInStZero () As Double Option("fpu")
+
+Differences from QB:
+New to FreeBASIC
+

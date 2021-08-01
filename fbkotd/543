@@ -1,0 +1,58 @@
+Threading Support Functions
+================
+
+Procedures for working with multithreaded applications.
+
+Description:
+
+These procedures allow for multithreaded programming. Threads and conditional
+variables can be created and destroyed, and so-called mutexes can be obtained
+to protect thread-sensitive data.
+
+
+##THREADCALL
+Starts a procedure with parameters in a separate thread of execution.
+
+##THREADCREATE
+Starts a procedure in a separate thread of execution.
+
+##THREADWAIT
+Waits for a thread to finish and releases the thread handle.
+
+##THREADDETACH
+Releases a thread handle without waiting for the thread to finish.
+
+##THREADSELF
+Returns the thread handle of the current thread.
+
+##MUTEXCREATE
+Creates a mutex.
+
+##MUTEXLOCK
+Acquires a lock on a mutex.
+
+##MUTEXUNLOCK
+Releases a lock on a mutex.
+
+##MUTEXDESTROY
+Destroys a mutex that is no longer needed.
+
+##CONDCREATE
+Creates a conditional variable.
+
+##CONDWAIT
+Pauses execution of a threaded procedure.
+
+##CONDSIGNAL
+Resumes execution of a threaded procedure waiting for a conditional.
+
+##CONDBROADCAST
+Resumes all threaded procedures waiting for a conditional.
+
+##CONDDESTROY
+Destroys a conditional variable that is no longer needed.
+
+
+Platform Differences:
+
+  * These procedures are not supported in DOS.

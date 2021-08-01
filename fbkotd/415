@@ -1,0 +1,44 @@
+KILL
+================
+
+Deletes a file from disk / storage media.
+
+Syntax:
+declare function Kill ( byref filename as const string ) as long
+
+Usage:
+result = Kill( filename )
+
+Parameters:
+
+`filename`
+The filename is the name of the disk file to delete. If the file is not in the
+current directory, the path must also be given as `path/file`.
+
+Return Value:
+Returns zero (`0`) on success, or non-zero on error.
+
+Description:
+
+`Kill` deletes a file from disk / storage media.
+
+The error code returned by `Kill` can be checked using `Err` in the next line.
+The function version of `Kill` returns directly the error code as a 32 bit
+`Long`.
+
+Examples:
+
+Dim filename As String = "file.ext"
+Dim result As Integer = Kill( filename )
+If result <> 0 Then Print "error trying to kill " ; filename ; " !"
+
+Platform Differences:
+
+On some platforms, `Kill` may be able to remove folders and read-only files.
+Whether it succeeds or fails here is not currently defined. It may be
+necessary to check the attributes of the file you are deleting, and decide
+accordingly whether you want to try `Kill`ing it.
+
+Differences from QB:
+  * KILL can optionally be used as function in FreeBASIC.
+

@@ -1,0 +1,31 @@
+BYTE
+================
+
+Standard data type: 8 bit signed
+
+Syntax:
+dim variable as Byte
+
+Description:
+8-bit signed whole-number data type. Can hold a value in the range of -128 to
+127.
+
+Examples:
+
+  Dim bytevar As Byte
+  bytevar = 100
+  Print "bytevar= ", bytevar
+
+Dim x As Byte = CByte(&H80)
+Dim y As Byte = CByte(&H7F)
+Print "Byte Range = "; x; " to "; y
+
+Output:
+
+    Byte Range = -128 to  127
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the alias `__Byte`.
+
+Differences from QB:
+New to FreeBASIC

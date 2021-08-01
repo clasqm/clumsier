@@ -1,0 +1,29 @@
+Operator ## (Preprocessor Concatenate)
+================
+
+Preprocessor operator to concatenate strings
+
+Syntax:
+text##text
+
+Description:
+This operator creates a new token by concatenating the texts at both sides of
+it. This text can be recognized by other macros and further expanded. One use,
+is to create a macro that expands to different macro names, variable names,
+and function names depending on the arguments received.
+
+Examples:
+#define Concat(t,n) t##n
+Print concat (12,34)
+Dim Concat (hello,world) As Integer
+Concat (hello,world)=99
+Print helloworld
+
+Output:
+
+    1234
+    99
+
+Differences from QB:
+New to FreeBASIC
+

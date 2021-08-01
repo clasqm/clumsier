@@ -1,0 +1,24 @@
+Memory Operators
+================
+
+Operators that work with memory
+
+The memory operators provide a way to dynamically allocate and deallocate
+variables and objects.
+
+Operator New Expression
+	Allocates memory for and constructs objects.
+
+Operator New Overload
+	Overloads memory allocation process of Operator New Expression when
+	applying to UDT.
+
+Operator Placement New
+	Constructs objects at a specified memory location.
+
+Operator Delete Statement
+	Destroys and deallocates memory for objects.
+
+Operator Delete Overload
+	Overloads memory deallocation process of Operator Delete Statement when
+	applying to UDT.

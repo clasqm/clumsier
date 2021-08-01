@@ -1,0 +1,87 @@
+SCREENLOCK
+================
+
+Locks the working page's frame buffer
+
+Syntax:
+declare sub Screenlock ( )
+
+Usage:
+Screenlock
+
+Description:
+All of FreeBASIC's Graphics Library functions draw to a frame buffer and an
+automatic routine copies the frame buffer to the actual screen memory at each
+draw. If the user program does a lot of drawing, the automatic refreshes may
+take a significant amount of time.
+
+The `Screenlock` function locks the automatic refresh, so several drawing
+operations may be done before the screen refresh is performed, thus increasing
+the speed of execution, and preventing the user from seeing partial results.
+
+Frame buffer memory may be freely accessed by using pointers (see ScreenPtr)
+ONLY while the screen is locked. Primitive graphics statements (`Line`,
+`PSet`, `Draw String`, ...) may be used at any time.
+
+The screen refresh remains locked until the use of `Screenunlock` statement,
+which resumes it.
+
+Calls to `Screenlock` must be paired with a matching call to `Screenunlock`.
+The graphics driver keeps track of how many times `Screenlock` has been called
+using a counter. Only the first call to `Screenlock` actually performs a
+locking operation. Subsequent calls to `Screenlock` only increment the
+counter. Conversely, `Screenunlock` only decrements the lock counter until it
+reaches zero at which time the actual unlock operation will be performed.
+Using `Screen` or `Screenres` will release all locks and set the lock counter
+back to zero before changing screen modes.
+
+It is strongly recommended that the lock on a page be held for as short a time
+as possible. Only screen drawing should occur while the screen is locked,
+input/output and waiting must be avoided. In Win32 and Linux the screen is
+locked by stopping the thread that processes also the OS' events. If the
+screen is kept locked for a long time the event queue could overflow and make
+the system unstable. When the induced lock time becomes too long, use
+preferably the method of double buffering (with `Screencopy`).
+
+The automatic refresh takes place only in the visible page of the frame
+buffer. `Screenlock` has no effect when drawing to pages other than the
+visible one.
+
+Examples:
+
+'' Draws a circle on-screen at the mouse cursor
+Dim As Integer mx, my
+Dim As String key
+
+ScreenRes 640, 480, 32
+
+Do
+
+  'process
+  GetMouse(mx, my)
+  key = Inkey()
+
+  'draw
+  ScreenLock()
+  Cls()
+  Circle (mx, my), 8, RGB(255, 255, 255)
+  ScreenUnlock()
+
+  'free up CPU time
+  Sleep(18, 1)
+ 
+Loop Until key = Chr(27) Or key = Chr(255, 107)
+
+
+Platform Differences:
+
+  * In DOS, the mouse arrow does not react to mouse movements while the 
+  screen is locked
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Screenlock`.
+
+Differences from QB:
+New to FreeBASIC
+

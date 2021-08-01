@@ -1,0 +1,57 @@
+Operator VARPTR (Variable pointer)
+================
+
+Returns the address of a variable or object
+
+Syntax:
+declare operator Varptr ( byref lhs as T ) as T ptr
+
+`
+Syntax:
+result = Varptr ( lhs )
+
+Parameters:
+
+`lhs`
+A variable or object.
+
+`T`
+Any data type.
+
+Return Value:
+Returns the address of a variable or object.
+
+Description:
+
+This operator returns the address of its operand.
+
+When the operand is of type `String`, the address of the internal string
+descriptor is returned. Use `Operator Strptr (String pointer)` to retrieve the
+address of the string data.
+
+The operand cannot be an array, but may be an array element. For example,
+`"Varptr(myarray(0))"` returns the address of `"myarray(0)"`.
+
+`Operator @ (Address of)`, when used with variables or objects, has identical
+behavior.
+
+Examples:
+
+Dim a As Integer, addr As Integer
+a = 10
+
+'' place the address of a in addr
+addr = CInt( VarPtr(a) )
+
+'' change all 4 bytes (size of INTEGER) of a
+Poke Integer, addr, -1000
+Print a
+
+'' place the address of a in addr (same as above)
+addr = CInt( @a )
+
+'' print the least or most significant byte, depending on the CPU endianess
+Print Peek( addr )
+
+Differences from QB:
+  * None

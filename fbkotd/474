@@ -1,0 +1,59 @@
+Operator EQV= (Equivalence and Assign)
+================
+
+Performs a bitwise-eqv (equivalence) and assigns the result to a variable
+
+Syntax:
+declare operator Eqv= ( byref lhs as T1, byref rhs as T2 )
+
+Usage:
+lhs Eqv= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`T1`
+
+Any numeric or boolean type.
+
+`rhs`
+The value to perform a bitwise-eqv (equivalence) with `lhs`.
+
+`T2`
+Any numeric or boolean type.
+
+Description:
+
+This operator performs a bitwise-eqv and assigns the result to a variable (for
+conversion of a boolean to an integer, false or true boolean value becomes 0
+or -1 integer value). It is functionally equivalent to:
+
+`lhs = lhs eqv rhs`
+
+`Eqv=` compares each bit of its operands, `lhs` and `rhs`, and if both bits
+are the same (either both 0 or both 1), then the corresponding bit in the
+first operand, `lhs`, is set to 1, otherwise it is set to 0.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'Eqv=>' can be also used.
+
+Examples:
+
+Dim As UByte a = &b00110011
+Dim As UByte b = &b01010101
+a Eqv= b
+'' Result    a = &b10011001
+Print Bin(a)
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

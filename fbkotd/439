@@ -1,0 +1,60 @@
+Operator & (String concatenation with conversion)
+================
+
+Concatenates two strings, converting non-strings to strings as needed
+
+Syntax:
+declare operator & ( byref lhs as T, byref rhs as U ) as V
+
+Usage:
+result = lhs & rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression to concatenate.
+
+`T`
+Any standard data type or user-defined type that can be converted to a
+standard data type.
+
+`rhs`
+The right-hand side expression to concatenate.
+
+`U`
+Any standard data type or user-defined type that can be converted to a
+standard data type.
+
+`V`
+The resultant string type (varies with operands).
+
+Description:
+
+This operator concatenates two expressions. If either of the expressions is
+not a string type, it is converted to `String` with `Str`.
+
+If either of the expressions is a `Wstring`, a `Wstring` is returned,
+otherwise a `String` is returned.
+
+This operator can be overloaded to accept user-defined types.
+
+Note: This operator exists in C/C++ with a different meaning - there it
+performs a bitwise And.
+
+Examples:
+
+Dim As String A,C
+Dim As Single B
+A="The result is: "
+B=124.3
+C=A & B
+Print C
+Sleep
+
+Output:
+ 
+    The result is: 124.3
+
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,22 @@
+Compiler Option: -Wc
+===================
+
+Pass options to the C compiler when using the C emitter (-gen gcc).
+
+Syntax:
+-Wc < options >
+
+Parameters:
+`options`
+Additional options to pass to the C compiler.
+
+Description:
+The `-Wc` compiler option passes additional options to GCC, the C compiler.
+Options must be separated by commas only. The -Wc compiler option may be
+specified multiple times on the command line.
+
+For example:
+
+`fbc -gen gcc -Wc -m32,--verbose,-include,some-header.h`
+`fbc -gen gcc -Wc -m32 -Wc --verbose -Wc -include -Wc some-header.h`
+

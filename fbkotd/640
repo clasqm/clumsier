@@ -1,0 +1,79 @@
+Compiling the test suite
+================
+
+The FreeBASIC project has a suite of tests which ensure that bugs stay dead
+and that new bugs have a harder time of gaining a foothold.
+
+Compiling and getting Test Results
+The tests are located in the `tests` subdirectory within the main FreeBASIC
+directory. The following two commands will compile and run all the tests:
+
+ 
+ 
+    $ make unit-tests
+       generates fbc-tests[.exe]
+ 
+    $ make log-tests
+       generates failed-test-fb.log
+       generates failed-test-qb.log
+       generates failed-test-deprecated.log
+       if all tests passed, the log file reports "None found"
+
+
+Initial generation of index files will take place, followed by the compilation
+of hundreds of tests. Be patient, it can take a while to run all of the
+tests...
+
+More testing options
+
+Invoking with make will present the following help text:
+
+ 
+ 
+    $ make
+    usage: make target [options]
+ 
+    Targets:
+       unit-tests
+       log-tests
+       failed-tests
+       check
+       mostlyclean
+       clean
+ 
+    Options:
+       FBC=/path/fbc
+       FB_LANG=fb | fblite | qb | deprecated
+       DEBUG=1
+       EXTRAERR=1
+       TARGET=target
+       ARCH=arch (default is 486)
+       OS=DOS
+       FPU=fpu | sse
+       FPMODE=fast | precise
+       GEN=gas | gcc
+       UNITTEST_RUN_ARGS=args
+       ENABLE_CHECK_BUGS=1
+       ENABLE_CONSOLE_OUTPUT=1
+ 
+    Targets: Configuration and Checks
+       check
+ 
+    Example: make all available tests
+       make unit-tests
+       make log-tests
+ 
+    Example: make the -lang qb tests
+       make log-tests FB_LANG=qb
+
+
+Reporting Test Failures
+
+If everything is working as it should, there should be no failures. If there
+is a failure, then it could indicate a problem with the compiler, or a
+particular build target. If you get failures, please consider reporting on
+https://www.freebasic.net/forum so others can investigate.
+
+Thank you for running the tests and contributing to make FreeBASIC a healthy
+compiler!
+

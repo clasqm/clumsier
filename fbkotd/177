@@ -1,0 +1,23 @@
+__FB_PCOS__
+===============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_PCOS__
+
+Description:
+Define created at compile time if the OS has filesystem behavior styled like
+common PC OSes, e.g. DOS, Windows, OS/2, Symbian OS, possibly others. Drive
+letters, backslashes, that stuff, otherwise undefined.
+
+Examples:
+
+#IFDEF __FB_PCOS__
+  '...instructions for PC-ish OSes...
+#ELSE
+  '...instructions for other OSes
+#ENDIF
+
+Differences from QB:
+  * New to FreeBASIC

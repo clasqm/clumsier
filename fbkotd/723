@@ -1,0 +1,110 @@
+DateDiff
+================
+
+Gets the difference of two dates measured by a specified interval
+
+Syntax:
+declare function DateDiff ( byref interval as const string, byval serial1 as
+double, byval serial2 as double, byval firstdayofweek as long = fbUseSystem,
+byval firstdayofyear as long = fbUseSystem ) as long
+
+Usage:
+#include "vbcompat.bi"
+result = DateDiff( interval, date_serial1, date_serial2 [, firstdayofWeek [,
+firstweekofyear ] ] )
+
+Parameters:
+
+`interval`
+the unit of time (interval) with which to measure the difference
+
+`date_serial1`
+starting date serial
+
+`date_serial2`
+end date serial
+
+`firstdayofweek`
+first day of the week
+
+`firstdayofyear`
+first day of the year
+
+Return Value:
+Returns an integer corresponding to the number of `interval`s found between
+two Date Serials.
+
+If `date_serial1` > `date_serial2`, the result is negative.
+
+Description:
+
+`interval` is specified as follows:
+
+value interval
+yyyy years
+q quarter(three months)
+m months
+w seven day periods
+ww calendar weeks
+d,y days
+h hours
+n minutes
+s seconds
+
+
+`first_dayofweek` Affects the counting when `'ww'` interval is used.
+
+value first day of week constant
+omitted sunday
+
+0 local settings fbUseSystem
+1 sunday fbSunday
+2 monday fbMonday
+3 tuesday fbTuesday
+4 wednesday fbWednesday
+5 thursday fbThursday
+6 friday fbFriday
+7 saturday fbSaturday
+
+
+`first_weekofyear` specifies which year (previous or next) that the week which
+spans the end of one year and the beginning of the next should included with.
+
+value first week of year constant
+0 local settings fbUseSystem
+1 January 1's week fbFirstJan1
+2 first weeks having 4 days in the year fbFirstFourDays
+3 first full week of year fbFirstFullWeek
+
+
+Notice if you do an arithmetical subtraction of two date serials you get the
+difference in days.
+
+The compiler will not recognize this function unless `vbcompat.bi` or
+`datetime.bi` is included.
+
+Examples:
+
+#include "vbcompat.bi"
+
+Dim s As String, d1 As Double, d2 As Double
+
+Line Input "Enter your birthday: ", s
+
+If IsDate( s ) Then
+  d1 = DateValue( s )
+  d2 = Now()
+
+  Print "You are " & DateDiff( "yyyy", d1, d2 ) & " years old."
+  Print "You are " & DateDiff( "d", d1, d2 ) & " days old."
+  Print "You are " & DateDiff( "s", d1, d2 ) & " seconds old."
+
+Else
+  Print "Invalid date"
+
+End If
+
+
+Differences from QB:
+  * Did not exist in QB. This function appeared in Visual Basic.
+

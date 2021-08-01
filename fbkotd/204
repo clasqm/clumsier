@@ -1,0 +1,36 @@
+UBYTE
+===================
+
+Standard data type: 8 bit unsigned.
+Equivalent to `Unsigned Byte`.
+
+Syntax:
+dim variable as Ubyte
+
+Description:
+8-bit unsigned whole-number data type. Can hold a value in the range of 0 to
+255.
+
+Examples:
+
+Dim ubytevar As UByte
+ubytevar = 200
+Print "ubytevar= ", ubytevar
+
+Examples:
+
+  Dim x As UByte = 0
+  Dim y As UByte = &HFF
+  Print "UByte Range = "; x; " to "; y
+
+Output:
+
+    UByte Range = 0 to 255
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Ubyte`.
+
+Differences from QB:
+New to FreeBASIC
+

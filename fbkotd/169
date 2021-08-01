@@ -1,0 +1,20 @@
+Preprocessor Operators
+========================
+
+Operators that are executed by the preprocessor
+
+These operators control how text is interpreted by the preprocessor.
+
+Operator # (Stringize)
+	Returns a text operand converted to a String literal.
+
+Operator ## (Concatenation)
+	Concatenates two text operands.
+
+Operator ! (Escaped String Literal)
+	Indicates string literal immediately following must be processed for
+	escape sequences.
+
+Operator $ (Non-Escaped String Literal)
+	Indicates string literal immediately following must not be processed for
+	escape sequences.

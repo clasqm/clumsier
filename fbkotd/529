@@ -1,0 +1,66 @@
+CSHORT
+================
+
+Converts numeric or string expression to an integer (`Short`)
+
+Syntax:
+declare function Cshort ( byval expression as datatype ) as short
+
+Type typename
+
+declare operator cast ( ) as short
+
+End Type
+
+Usage:
+result = Cshort( numeric expression )
+result = Cshort( string expression )
+result = Cshort( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Short` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Short` value.
+
+Description:
+
+The `Cshort` function rounds off the decimal part and returns a 16-bit `Short`
+value. The function does not check for an overflow, and results are undefined
+for values which are less than `-32` `768` or larger than `32` `767`.
+
+The name can be explained as 'Convert to Short'.
+
+If the argument is a string expression, it is converted to numeric by using
+`Valint`.
+
+Examples:
+
+' Using the CSHORT function to convert a numeric value
+
+'Create an SHORT variable
+Dim numeric_value As Short
+
+'Convert a numeric value
+numeric_value = CShort(-4500.66)
+
+'Print the result, should return -4501
+Print numeric_value
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Cshort`.
+
+Differences from QB:
+New to FreeBASIC
+

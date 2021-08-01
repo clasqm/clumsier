@@ -1,0 +1,13 @@
+Compiler Option: -noerrline
+===============
+
+Do not show source line where error occurred
+
+Syntax:
+-noerrline
+
+Description:
+
+The `-noerrline` compiler option causes reported errors to not show the place
+in source where error occurred. Useful if an IDE is parsing the error
+messages.

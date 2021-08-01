@@ -1,0 +1,29 @@
+User Input Functions (Graphics Library)
+================
+
+Procedures (from graphics library) for working with mice, gaming devices and
+keyboards.
+
+Description:
+These procedures provide access to external devices such as keyboards, mice
+and gamepads.
+
+Mouse and Joystick Input
+Procedures that provide state information of the mouse or joystick.
+
+GETMOUSE
+	Gets button and axis information for the mouse.
+SETMOUSE
+	Sets position and visibility of the mouse cursor.
+GETJOYSTICK
+	Gets button and axis information for gaming devices.
+STICK
+	Gets axis position for gaming devices.
+STRIG
+	Gets button state for gaming devices.
+
+Keyboard Input
+Procedures that provide keyboard state information.
+
+MULTIKEY
+	Gets key information for the keyboard.

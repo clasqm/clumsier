@@ -1,0 +1,18 @@
+Compiler Option: -C
+===============
+
+Do not delete the object file(s)
+
+Syntax:
+-C
+
+Description:
+
+The `-C` compiler option causes the object file(s) that are generated during
+the compile process to not be deleted.
+
+See also:
+
+  * Compiler Option: -c
+  * Compiler Option: -R
+  * Using the Command Line

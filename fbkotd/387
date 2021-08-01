@@ -1,0 +1,44 @@
+MKL
+================
+
+Does a binary copy from a `long` variable to a `string`, setting its length to
+4 bytes
+
+Syntax:
+declare function Mkl ( byval number as long ) as string
+
+Usage:
+result = Mkl( number )
+
+Parameters:
+
+`number`
+A `long` variable to binary copy to a `string`.
+
+Return Value:
+Returns a `string` with a binary copy of the `long`.
+
+Description:
+
+Does a binary copy from a `Long` variable to a `string`, setting its length to
+4 bytes. The resulting string can be read back to a `Long` by `Cvl`.
+
+This function is useful to write numeric values to buffers without using a
+`Type` definition.
+
+Examples:
+
+Dim a As Long, b As String
+a = 4534
+b = MKL(a)
+Print a, CVL(b)
+Sleep
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * None

@@ -1,0 +1,70 @@
+DateAdd
+================
+
+Offset a date with a specified interval
+
+Syntax:
+declare function DateAdd ( byref interval as const string, byval number as
+double, byval date_serial as double ) as double
+
+Usage:
+#include "vbcompat.bi"
+result = DateAdd( interval, number, date_serial )
+
+Parameters:
+
+`interval`
+string indicating which period of time corresponds to one unit of `number`
+
+`number`
+the number of intervals to add to the base date. The number will be rounded to
+the nearest integer.
+
+`date_serial`
+the base date
+
+Return Value:
+Returns a Date Serial corresponding to the received `date_serial` plus the
+`number` of `intervals`.
+
+Description:
+
+Interval is specified as follows:
+
+value interval
+yyyy years
+q quarter(three months)
+m months
+ww weeks
+d,w,y days
+h hours
+n minutes
+s seconds
+
+The compiler will not recognize this function unless `vbcompat.bi` or
+`datetime.bi` is included.
+
+Examples:
+
+#include "vbcompat.bi"
+
+Const fmt = "ddddd ttttt"
+Dim d As Double
+d = Now()
+
+Print "1 hour from now is ";
+Print Format( DateAdd( "h", 1, d ), fmt )
+
+Print "1 day from now is ";
+Print Format( DateAdd( "d", 1, d ), fmt )
+
+Print "1 week from now is ";
+Print Format( DateAdd( "ww", 1, d ), fmt )
+
+Print "1 month from now is ";
+Print Format( DateAdd( "m", 1, d ), fmt )
+
+
+Differences from QB:
+  * Did not exist in QB. This function appeared in Visual Basic.
+

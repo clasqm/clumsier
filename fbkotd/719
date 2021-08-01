@@ -1,0 +1,83 @@
+LEN
+================
+
+Returns the length of an expression or data type
+
+Syntax:
+declare function Len ( byref expression as string ) as integer
+declare function Len ( byref expression as zstring ) as integer
+declare function Len ( byref expression as wstring ) as integer
+
+declare operator Len ( byref expression as datatype ) as datatype
+
+declare function Len ( datatype ) as integer
+
+Usage:
+result = Len( expression )
+
+`or`
+
+result = Len( DataType )
+
+Parameters:
+`expression`
+
+An expression of any type.
+
+`datatype`
+A DataType.
+
+Return Value:
+Returns the size of an expression or DataType (and the data fields of a UDT
+for fbc version >= 1.08) in bytes.
+
+Description:
+
+`Len` returns the length of an expression or the size of a DataType, in bytes.
+
+In the first form, if `expression` is of type `String`, `Wstring` or
+`Zstring`, the length of the string in characters will be returned. If the
+expression is of a user defined type, an `Operator Len` compatible with that
+data type is called. Otherwise, the size of the `expression`'s data type in
+bytes is returned.
+
+In the second form, if `expression` is `Zstring` or `Wstring`, the size in
+bytes of an ASCII or Unicode character is returned, respectively. If
+`datatype` is `String`, the size of the string descriptor type is returned.
+
+For fbc version < 1.08: When a variable from a given namespace is accessed
+with the namespace's name prefix, wrap the argument to `Len` with parentheses
+to force it to be seen as an expression. For example
+`Len((namespace_name.variable))`.
+
+If there is both a user defined type and a variable visible with the same name
+in the current scope, the user defined type takes precedence over the
+variable. To ensure that the `Len` takes the variable instead of the user
+defined type, wrap the argument to `Len` with parentheses to force it to be
+seen as an expression. For example `Len((variable))`.
+
+The `Len` unary `operator` can be overloaded with user defined types.
+
+Examples:
+
+Print Len("hello world") 'returns "11"
+Print Len(Integer) ' returns 4
+
+Type xyz
+    a As Integer
+    b As Integer
+End Type
+
+Print Len(xyz) ' returns 8
+
+
+Dialect Differences:
+`Len` only allows expressions in the -lang qb dialect.
+  * Can be used with built-in types and user-defined types in the -lang fb 
+  and -lang fblite dialects.
+
+Differences from QB:
+  * Can be used with built-in types and user-defined types in the -lang fb 
+  and -lang fblite dialects.
+  * None in the -lang qb dialect.
+

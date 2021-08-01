@@ -1,0 +1,39 @@
+DEFDBL
+================
+
+Specifies a default data type for a range of variable names
+
+Syntax:
+Defdbl start_letter[-end_letter ][, ...]
+
+Parameters:
+
+`start_letter`
+the first letter in the range
+
+`end_letter`
+the last letter in the range
+
+Description:
+`Defdbl` specifies that variables and arrays which aren't declared with a data
+type - or not declared at all - are implicitly declared of type `Double` if
+the first letter of their names matches a certain letter or lies within an
+inclusive range of letters.
+
+Examples:
+
+This will make `aNum` a `Double`-precision decimal number since it is in the
+range of a-d:
+
+'' Compile with -lang fblite or qb
+#lang "fblite"
+DefDbl a-d
+Dim aNum 'implicit: As Double
+Print Len(aNum) ' Prints 8, the number of bytes in a double.
+
+Dialect Differences:
+Only available in the -lang qb and -lang fblite dialects.
+
+
+Differences from QB:
+  * None

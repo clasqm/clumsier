@@ -1,0 +1,50 @@
+DEFINED
+================
+
+Preprocessor function to test if a symbol has been defined
+
+Syntax:
+defined (symbol_name)
+
+Parameters:
+
+`symbol_name`
+Name of the symbol to test
+
+Return Value:
+Returns non-zero (`-1`) if the symbol has been defined, otherwise returns zero
+(`0`).
+
+Description:
+
+Given the symbol name, the `defined()` preprocessor function returns true if
+the symbol has been defined - or false if the symbol is unknown.
+
+This is used mainly with `#if`.
+
+Similar to `#ifdef` except it allows more than one check to occur because of
+its flexibility.
+
+Examples:
+
+'e.g. - which symbols are defined out of a, b, c, and d ?
+
+Const a = 300
+#define b 12
+Dim c As Single
+
+#if defined(a)
+ Print "a is defined"
+#endif
+#if defined(b)
+ Print "b is defined"
+#endif
+#if defined(c)
+ Print "c is defined"
+#endif
+#if defined(d)
+ Print "d is defined"
+#endif
+
+Differences from QB:
+New to FreeBASIC

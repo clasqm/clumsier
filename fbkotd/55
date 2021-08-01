@@ -1,0 +1,19 @@
+WEND
+===============
+
+Control flow statement.
+
+Syntax:
+
+While [condition]
+	[statement block]
+Wend
+
+Description:
+	`Wend` specifies the end of a `While...Wend` loop block.
+
+Examples:
+See example at `While...Wend`.
+
+Differences from QB:
+	None

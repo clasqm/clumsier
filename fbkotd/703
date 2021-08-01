@@ -1,0 +1,92 @@
+Operator @ (Address of)
+================
+
+Returns the address of a string literal, variable, object or procedure
+
+Syntax:
+declare operator @ ( byref rhs as T ) as T pointer
+
+Usage:
+result = @ rhs
+
+Parameters:
+
+`rhs`
+The string literal, variable, object or procedure to retrieve the address of.
+
+`T`
+Any standard, user-defined or procedure type.
+
+Return Value:
+Returns the address of the right-hand side (`rhs`) operand.
+
+Description:
+
+`Operator @` (Address of) returns the memory address of its operand.
+
+When the operand is of type `String`, the address of the internal string
+descriptor is returned. Use `Operator Strptr` (String pointer) to retrieve the
+address of the string data.
+
+The operand cannot be an array, but may be an array element. For example,
+`"@myarray(0)"` returns the address of `"myarray(0)"`.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Examples:
+
+'This program demonstrates the use of the @ operator.
+
+Dim a As Integer
+Dim b As Integer
+
+Dim addr As Integer Ptr
+
+a = 5   'Here we place the values 5 and 10 into a and b, respectively.
+b = 10
+
+'Here, we print the value of the variables, then where in memory they are
+stored.
+Print "The value in A is ";a;" but the pointer to a is ";@a
+Print "The value in B is ";b;" but the pointer to b is ";@b
+
+'Now, we will take the integer ptr above, and use @ to place a value into it.
+'Note that the * will check the value in the ptr, just as @ checked the ptr
+'for a normal variable.
+
+addr = @a
+
+Print "The pointer addr is now pointing at the memory address to a, value:
+";*addr
+
+addr = @b
+
+Print "The pointer addr is now pointing at the memory address to b, value:
+";*addr
+
+
+
+'This program demonstrates how the @ symbol can be used
+'to create pointers to subroutines.
+
+Declare Sub mySubroutine ()
+
+Dim say_Hello As Sub()
+
+say_Hello = @mySubroutine   'We tell say_Hello to point to mySubroutine.
+                            'The sub() datatype acts as a pointer here.
+
+say_Hello() 'Now we can run say_Hello just like mySubroutine.
+
+Sub mySubroutine
+    Print "hi"
+End Sub
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,23 @@
+__FB_NETBSD__
+================
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_NETBSD__
+
+Description:
+Define without a value created at compile time in the NetBSD version of the
+compiler, or when the -target netbsd command line option is used. It can be
+used to compile parts of the program only if the target is NetBSD.
+
+Examples:
+
+#IFDEF __FB_NETBSD__
+  '...instructions only for NetBSD...
+#ELSE
+  '...instructions not for NetBSD...
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,27 @@
+SINGLE
+================
+
+Standard data type: 32 bit floating point
+
+Syntax:
+dim variable as Single
+
+Description:
+Single is a 32-bit, floating point data type used to store decimal numbers.
+They can hold positive values in the range `1.401298e-45` to `3.402823e+38`,
+or negative values in the range `-1.401298e-45` to `-3.402823e+38`, or zero
+(`0`). They contain at most 24 bits of precision, or about 6 decimal digits.
+
+They are similar to `Double` data types, but less precise.
+
+Examples:
+
+'Example of using a single variable.
+
+Dim a As Single
+a = 1.9857665
+Print a
+Sleep
+
+Differences from QB:
+None

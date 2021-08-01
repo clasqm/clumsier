@@ -1,0 +1,57 @@
+INPUT #
+================
+
+Reads a list of values from a text file
+
+Syntax:
+Input # filenum, variable_list
+
+Parameters:
+
+`filenum`
+a file number of a file or device opened for `Input`
+
+`variable_list`
+a list of variables used to hold the values read
+
+Description:
+
+Reads from a text file through a bound file number a delimiter-separated set
+of values and writes them in reading order into the variables in
+`variable_list`. If a variable is numeric the read value is converted from its
+string representation into the corresponding type.
+
+Numeric values are converted in a similar way to the procedures `Val` and
+`ValLng`, using the most appropriate function for the number format.
+
+Delimiters may be commas or line breaks. Whitespace is also treated as a
+separator after numbers. A string including a comma or a whitespace must be
+surrounded by double quotes.
+
+To read an entire line into a string, use `Line Input` instead.
+
+Write # can be used to create a file readable with `Input #`.
+
+Examples:
+
+Dim a As Integer
+Dim b As String
+Dim c As Single
+
+Open "myfile.txt" For Output As #1
+Write #1, 1, "Hello, World", 34.5
+Close #1
+
+Open "myfile.txt" For Input As #1
+Input #1, a, b, c
+Close #1
+Print a, b, c
+
+
+Differences from QB:
+  * QB has a bug in INPUT # that causes it to read past the end of the 
+  line if it does not find a matching end-quote when reading a string. 
+  If you are porting QB code that relies upon this bug, you may need to 
+  edit your data files to remove newlines from inside quoted strings, 
+  or to use a custom function to piece back together the multiline string.
+

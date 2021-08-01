@@ -1,0 +1,54 @@
+CVLONGINT
+================
+
+Converts a double-precision floating-point number or eight-byte string to a
+`Longint` variable
+
+Syntax:
+declare function Cvlongint ( byval dbl as double ) as longint
+declare function Cvlongint ( byref str as const string ) as longint
+
+Usage:
+result = Cvlongint( dbl )
+result = Cvlongint( str )
+
+Parameters:
+
+`dbl`
+A `Double` floating-point number with a binary copy of a `Longint` variable
+stored in it.
+
+`str`
+A `String` at least eight bytes in length with a binary copy of a `Longint`
+variable stored in it.
+
+Return Value:
+A `Longint` variable holding a binary copy of the input variable.
+
+Description:
+
+Returns a 64-bit `Longint` value using the binary data contained in a
+`Double`, or a `String` of at least eight bytes in length. A value of zero
+(`0`) is returned if the string is less than eight bytes in length.
+
+`Cvlongint` is used to convert 8-byte strings created with `Mklongint`.
+
+This function can also be used to convert 64-bit integer values from a memory
+or file buffer without the need for a `Type` structure. However, just as with
+the type structure, special care should be taken when using `Cvlongint` to
+convert strings that have been read from a buffer.
+
+Examples:
+
+Dim ll As LongInt, s As String
+s = "ABCDEFGH"
+ll = CVLongInt(s)
+Print Using "s = ""&"""; s
+Print Using "ll = _&H&"; Hex(ll)
+
+
+Differences from QB:
+  * In QB an error occurs if the string passed is less than eight 
+  bytes in length.
+  * QB did not support floating-point arguments.
+

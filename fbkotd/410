@@ -1,0 +1,56 @@
+POKE
+================
+
+Assigns a value to a location in memory.
+
+Syntax:
+declare sub Poke ( byval address as any ptr, byref value as ubyte )
+declare sub Poke ( datatype, byval address as any ptr, byref value as datatype
+)
+
+Usage:
+Poke [ datatype, ] address, value
+
+Parameters:
+
+`datatype`
+The type of data at the specified address. If omitted, `ubyte` is assumed.
+
+`address`
+The location in memory to assign to.
+
+`value`
+The value to assign.
+
+Description:
+
+`Poke` assigns a value to a location in memory. It is equivalent to
+
+`*cast(ubyte ptr, address) = value`
+
+or
+
+`*cast(datatype ptr, address) = value`
+
+When `datatype` is a user-defined type, `Poke` assigns `value` using the
+type's `Operator Let`.
+
+Note: When using `Poke`, the -exx compiler option does not add code for null-
+pointer checking (no nullity test on the value of `address`).
+
+Examples:
+
+Dim i As Integer, p As Integer Ptr
+p = @i
+
+Poke Integer, p, 420
+Print Peek(Integer, p)
+
+Will produce the output:
+
+    420
+
+Differences from QB:
+  * Only the byte form were supported in QB.
+  * `DEF SEG` isn't needed anymore because the address space is 32-bit 
+  flat in FreeBASIC.

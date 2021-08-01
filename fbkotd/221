@@ -1,0 +1,35 @@
+LOF
+================
+
+Returns the length of an open disk file
+
+Syntax:
+declare function Lof ( byval filenum as long ) as longint
+
+Usage:
+result = Lof( filenum )
+
+Parameters:
+`filenum`
+The file number of an open disk file.
+
+Return Value:
+The length in bytes of an open disk file.
+
+Description:
+Returns the length, in bytes, of a file opened previously with `Open` using
+the given `filenum`.
+
+With `Open Com` it returns the length of the data pending to be read in the
+receive buffer.
+
+Examples:
+
+Dim f As Integer
+f = FreeFile
+Open "file.ext" For Binary As #f
+Print LOF(f)
+Close #f
+
+Differences from QB:
+  * None

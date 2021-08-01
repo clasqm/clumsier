@@ -1,0 +1,31 @@
+EXEPATH
+================
+
+Returns the path of the running program
+
+Syntax:
+
+declare function Exepath ( ) as string
+
+Usage:
+result = Exepath
+
+Return Value:
+A `string` variable set to the path of the running program.
+
+Description:
+
+Returns the path (the location) of the calling program. This is not
+necessarily the same as `Curdir`.
+
+Examples:
+
+Dim pathname As String = ExePath
+Print "This program's initial directory is: " & pathname
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Exepath`.
+
+Differences from QB:
+New to FreeBASIC

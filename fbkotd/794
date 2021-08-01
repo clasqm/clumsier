@@ -1,0 +1,110 @@
+User Defined Types
+================
+
+
+Declarations
+
+##ENUM...END ENUM
+User defined enumeration of values
+
+##TYPE...END TYPE
+User defined structure of non overlapping data and member procedures
+
+##CLASS...END CLASS
+Not implemented. Keyword reserved.
+
+##UNION...END UNION
+User defined structure of overlapping data
+
+##EXTENDS
+Extends an user defined type to derive another
+
+##EXTENDS WSTRING
+Extends an user defined type to inherits Wstring behavior
+
+##EXTENDS ZSTRING
+Extends an user defined type to inherits Zstring behavior
+
+##IMPLEMENTS
+Not implemented. Keyword reserved.
+
+##FIELD
+Specifies field alignment within a user defined type
+
+##OBJECT
+Built-in type providing run-time type information
+
+Referencing
+
+##Temporary Types
+Creates a temporary copy of a user defined type
+
+##THIS
+Built-in, hidden, parameter passed to non-static member procedures to access
+the user defined type instance
+
+##BASE (member access)
+Built-in, hidden, variable to access the base user defined type instance in
+derived user defined types
+
+##Type Alias
+Declares a user defined type from other user defined or standard data types
+
+##WITH
+Compound statement to access the data and members of a user defined type
+
+Member Procedures
+
+##BASE (initialization)
+Specifies an initializer for the base user defined type in derived user
+defined type constructors
+
+##CONSTRUCTOR
+Declares or defines a member procedure that is automatically called when a
+user defined type is created
+
+##DESTRUCTOR
+Declares or defines a member procedure that is automatically called when a
+user defined type is destroyed or goes out of scope
+
+##FUNCTION
+Declares or defines a member procedure returning a value
+
+##OPERATOR
+Declares or defines an overloaded operator
+
+##OVERRIDE
+Member method attribute that specifies that the method is expected to override
+a virtual method in the base user defined type
+
+##PROPERTY
+Declares or defines property member procedures for a user defined type
+
+##SUB
+Declare or defines a member procedure
+
+##STATIC (Member)
+Declares or defines a member procedure or variable is static
+
+##VIRTUAL
+Member method attribute that declares that a member must have an
+implementation
+
+##ABSTRACT
+Member method attribute that declares that a member must be implemented in a
+derived user defined type
+
+##CONST (Member)
+Member method attribute that declares or defines that the method is readonly
+and does not modify the user defined types's data
+
+Member Access Control
+
+##PUBLIC: (Access Control)
+Data and members in a user defined type have public visibility
+
+##PRIVATE: (Access Control)
+Data and members in a user defined type have private visibility
+
+##PROTECTED: (Access Control)
+Data and members in a user defined type have protected visibility

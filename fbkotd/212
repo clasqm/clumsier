@@ -1,0 +1,25 @@
+__FB_MT__
+===================
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__FB_MT__
+
+Description:
+`__FB_MT__` indicates if the the multithreaded option -mt was specified on the
+command line at the time of compilation, or whether one of the `ThreadtCreate`
+or `ThreadCall` keywords is used more above in the source code.
+
+Returns non-zero (-1) if the option was specified. Returns zero (0) otherwise.
+
+Examples:
+
+#if __FB_MT__
+        #print Using multi-threaded library
+#else
+        #print Using single-threaded library
+#endif
+
+Differences from QB:
+New to FreeBASIC

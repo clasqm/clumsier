@@ -1,0 +1,40 @@
+RMDIR
+================
+
+Removes a folder/directory from the file system
+
+Syntax:
+declare function Rmdir ( byref folder as const string ) as long
+
+Usage:
+result = Rmdir( folder )
+
+Parameters:
+
+`folder`
+The folder/directory to be removed.
+
+Return Value:
+Returns zero (0) on success, and negative one (-1) on failure.
+
+Description:
+
+Removes a folder from the file system. The function will fail if the folder is
+not empty.
+
+Examples:
+
+Dim pathname As String = "foo\bar\baz"
+Dim result As Integer = RmDir( pathname )
+If 0 <> result Then Print "error: unable to remove folder " & pathname & " in
+the current path."
+
+Platform Differences:
+
+  * Linux requires the folder case matches the real name of the file. Windows
+   and DOS are case insensitive.
+  * Path separators in Linux are forward slashes / . Windows uses backward
+  slashes \ but it allows for forward slashes . DOS uses backward \ slashes.
+
+Differences from QB:
+  * None

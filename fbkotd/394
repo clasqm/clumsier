@@ -1,0 +1,47 @@
+Error Handling Functions
+================
+
+Statements and procedures that provide runtime error-handling capabilities.
+
+Description:
+These statements and procedures provide ways of dealing with runtime errors.
+Specific modules, procedures and source code lines can be retrieved, and error
+handlers can be set up.
+
+Determining Errors
+Procedures that retrieve information about an error.
+
+Handling Errors
+Statements that allow handling of errors.
+
+Determining Errors
+
+##ERL
+Gets the line in source code where the error occurred.
+
+##ERFN
+Gets the name of the function where the error occurred.
+
+##ERMN
+Gets the name of the source file where the error occurred.
+
+##ERR
+Gets the error number of the last error that occurred.
+
+##ERROR
+Generates an error using an error number.
+
+Handling Errors
+
+##ON ERROR
+Sets a global error handler using a label.
+
+##ON LOCAL ERROR
+Sets a local error handler using a label.
+
+##RESUME
+Resumes execution at the line where the error occurred.
+
+##RESUME NEXT
+Resumes execution at the line after where the error occurred.
+

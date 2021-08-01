@@ -1,0 +1,19 @@
+#PRINT
+===============
+
+Preprocessor diagnostic directive
+
+Syntax:
+	#print text
+`
+Description:
+	Causes compiler to output `text` to screen during compilation.
+
+Examples:
+#PRINT Now compiling module foo
+
+Differences from QB:
+	New to FreeBASIC
+
+See also:
+	`#error`

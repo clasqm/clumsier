@@ -1,0 +1,75 @@
+__FB_QUOTE__
+================
+
+Intrinsic define (macro) performed by the compiler.
+
+Syntax:
+__FB_QUOTE__( arg )
+
+Parameters:
+
+`arg`
+argument
+
+Description:
+
+Converts the argument to a string, similar to stringize operator (#) but can
+be used anywhere (will expand the argument before conversion).
+More precisely, `__FB_QUOTE__` returns an over-quoted text compared to the one
+passed through the argument (the argument may already be a string, and so the
+return will be an over-quoted string in this case).
+
+Examples:
+
+#macro m( arg )
+    Scope
+        Dim s1 As String = #arg
+        Print s1
+        Dim s2 As String = __FB_QUOTE__( arg )
+        Print s2
+    End Scope
+#endmacro
+
+m(Hello)
+Print
+m("Hello")
+
+Sleep
+
+/' Output:
+Hello
+Hello
+
+"Hello"
+"Hello"
+'/
+
+
+#macro m( arg1, arg2 )
+    Scope
+        'Dim s0 As String = #arg1##arg2  ' does not work because 
+        'arg1##arg2 is not developped before applying #
+        Dim s1 As String = #arg1###arg2  ' workaround because 
+                                          '    #arg => $"arg" and not only "arg"
+                                         '    (otherwise the result would 
+                                         '     be "arg1""arg2" => "arg1"arg2")
+        Print s1
+        Dim s2 As String = __FB_QUOTE__( arg1##arg2 )
+        Print s2
+    End Scope
+#endmacro
+
+m(Free, BASIC)
+
+Sleep
+
+/' Output:
+FreeBASIC
+FreeBASIC
+'/
+
+See also `__FB_QUOTE__` example.
+
+Differences from QB:
+New to FreeBASIC
+

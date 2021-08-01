@@ -1,0 +1,60 @@
+SIZEOF
+================
+
+Returns the size of a variable or type in bytes.
+
+Syntax:
+Sizeof ( variable | DataType )
+
+Description:
+The `Sizeof` operator returns an `Integer` value: the number of bytes taken up
+by a `variable` or `DataType` (and the data fields of a UDT for fbc version >=
+1.08).
+
+Different from `Len`, when used with fixed-length strings (including fixed-
+length `Zstring`s and `Wstring`s) it will return the number of bytes they use,
+and when used with variable-length strings, it will return the size of the
+string descriptor.
+
+For fbc version < 1.08: When a variable from a given namespace is accessed
+with the namespace's name prefix, wrap the argument to `Sizeof` with
+parentheses to force it to be seen as an expression. For example
+`Sizeof((namespace_name.variable))`.
+
+If there is both a user defined type and a variable visible with the same name
+in the current scope, the user defined type takes precedence over the
+variable. To ensure that the `Sizeof` takes the variable instead of the user
+defined type, wrap the argument to `Sizeof` with parentheses to force it to be
+seen as an expression. For example `Sizeof((variable))`.
+
+Note: When used with arrays, `Sizeof` returns the size of a single element of
+the array. This differs from its behavior in C, where arrays could only be a
+fixed size, and `sizeof()` would return the number of it used.
+For clarity, it is recommended that you avoid this potential confusion, and
+use `Sizeof` directly on an array element or the array datatype doing
+`Sizeof(array(i))` or `Sizeof(Typeof(array))`, rather than the whole array
+doing `Sizeof(array)`.
+
+Remark: When used with a dereferenced z/wstring pointer, `Sizeof` always
+returns the number of bytes taken up by one z/wstring character.
+
+Examples:
+
+Print SizeOf(Byte) ' returns 1
+
+
+Type bar
+    a As Integer
+    b As Double
+End Type
+Dim foo As bar
+Print SizeOf(foo)
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Sizeof`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,67 @@
+SCREENUNLOCK
+================
+
+Unlocks work page's framebuffer
+
+Syntax:
+declare sub Screenunlock ( byval startline as long = -1, byval endline as long
+= -1 )
+
+Usage:
+Screenunlock [ start_line ] [, end_line ]
+
+Parameters:
+`startline`
+
+optional argument specifying first screen line to be updated. If omitted, top
+screen line is assumed.
+
+`endline`
+optional argument specifying last screen line to be updated. If omitted,
+bottom screen line is assumed.
+
+Description:
+
+`Screenunlock` unlocks the current work page assuming it was previously locked
+by calling `Screenlock` and lets the system restart updating the screen
+regularly. When called with `start_line` and `end_line` , only the screen area
+between those lines is assumed to have changed, and will be updated.
+
+An internal counter exists that remembers the screen lock state, thus
+`Screenunlock` has an effect only on a screen that is locked. A screen that
+has not been locked with `Screenlock` cannot get unlocked, however
+`Screenunlock` still will force an update of given area or full screen.
+
+Calls to `Screenunlock` must be paired with matching calls to `Screenlock`.
+Only the first call to `Screenlock` actually performs a locking operation.
+Subsequent calls to `Screenlock` only increment the lock counter. Conversely,
+`Screenunlock` only decrements the lock counter until it reaches zero at which
+time the actual unlock operation will be performed. Using `Screen` or
+`Screenres` will release all locks and set the lock counter back to zero
+before changing screen modes.
+
+All graphic statements automatically lock the screen before the function call,
+and unlock the screen afterwards, so you do not need to do this explicitly
+using `Screenlock` and `Screenunlock`. You only need to lock the screen when
+you wish to access the screen (framebuffer) directly using `Screenptr` or when
+you wish to group several graphic statements together so their effects appear
+simultaneously on screen, thus avoiding potential screen flicker during screen
+updates.
+
+Warning (Win32, Linux) : The screen is locked by stopping the thread that
+processes also the OS' events. This means the screen should be locked only for
+the short time required to redraw it, and no user input will be received while
+the screen is locked. When the induced lock time becomes too long, use
+preferably the method of double buffering (with `Screencopy`).
+
+Examples:
+
+See `Screenptr` example.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Screenunlock`.
+
+Differences from QB:
+New to FreeBASIC
+

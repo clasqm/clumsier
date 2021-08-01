@@ -1,0 +1,71 @@
+OPEN SCRN
+================
+
+Opens the console directly for input and output as a file
+
+Syntax:
+Open Scrn [for mode] as [#]filenumber as long
+
+Usage:
+Open Scrn [for mode] as [#]filenumber
+
+or
+
+result = Open Scrn( [for mode[,]] as [#]filenumber )
+
+Parameters:
+
+`mode`
+Either `Input` or `Output`. If omitted, `Output` is assumed.
+
+`filenumber`
+An unused file number.
+
+Return Value:
+A 32 bit `Long`: a zero (`0`) is returned if `Open Scrn()` completed
+successfully, otherwise a non-zero value is returned to indicate failure.
+
+Description:
+
+This command opens the console for both input and output as a file, allowing
+to read/write from/to it with normal file commands.
+
+This command may use direct access to the console for speed in some
+implementations, so it should not be used when the input / output is required
+to be redirected or piped with OS commands.
+
+The normal console commands, such as `Color` and `Locate`, do not work in this
+mode, because they do not accept a file number.
+
+The `[For Input|Output]` clause is allowed for compatibility, but is ignored.
+
+`filenumber` is an unused file number.
+
+An unused file number can be found using `FreeFile`.
+
+The error code returned by `Open Scrn` can be checked using `Err` in the next
+line. The function version of `Open Scrn` returns directly the error code as a
+32 bit `Long`.
+
+Runtime errors:
+
+`Open Scrn` throws one of the following runtime errors:
+
+(`1`) Illegal function call
+
+  * `filenumber` was not free at the time. use `Freefile` to ensure that `filenumber` is free.
+
+Examples:
+
+Dim a As String
+Open Scrn For Input  As #1
+Print #1,"Please write something and press ENTER"
+Line Input #1,a
+Print #1, "You wrote";a
+Close
+Sleep
+
+
+Differences from QB:
+  * QB used OPEN "SCRN:" ...
+

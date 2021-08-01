@@ -1,0 +1,61 @@
+BITRESET
+================
+
+Gets the value with a specified bit cleared, from a copied integer.
+
+Syntax:
+#define Bitreset( value, bit_number ) ((value) and not (Cast(TypeOf(Value), 1)
+shl (bit_number)))
+
+Usage:
+result = Bitreset( value, bit_number )
+
+Parameters:
+
+`value`
+The integer value.
+
+`bit_number`
+The index of the bit to clear.
+
+Return Value:
+Returns the integer value with the specified bit cleared.
+
+Description:
+
+This macro expands to a copy of the integer `value` with the specified
+`bit_number` cleared (to off, or ``0``). Behaves as ``value And Not (1 Shl
+bit_number)``.
+To clear a specified bit in a variable, the following assignment can be used:
+`variable = Bitreset( variable, bit_number )`
+
+The valid range of values for `bit_number` depends on the size, in bits, of
+``Typeof(value)``, which is ``0`` (from the lowest bit) through
+``Sizeof(value) * 8 - 1`` (up to the highest bit). See Standard Datatype
+Limits for a table of the standard datatypes and their sizes.
+For the `bit_number` values outside the valid range, the results of this macro
+are undefined.
+
+Examples:
+
+Print Bin(BitReset(&b10101, 2))
+Print BitReset(5,0)
+Print Hex(BitReset(&h8000000000000001,63))
+
+will produce the output:
+
+
+ 
+ 
+    10001
+     4
+    1
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Bitreset`.
+
+Differences from QB:
+  * New to FreeBASIC.
+

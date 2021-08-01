@@ -1,0 +1,28 @@
+CSRLIN
+==========
+
+Returns the row position of the cursor
+
+Syntax:
+declare function Csrlin ( ) as integer
+
+Usage:
+result = Csrlin
+
+Return Value:
+An `integer` specifying the current row of the cursor.
+
+Description:
+Returns the current row the cursor is on (i.e. the "cursor line"). The topmost
+row is number `1`.
+
+Examples:
+
+Print "The cursor is on row:"; CsrLin
+
+Differences from QB:
+None
+
+See also:
+`Locate`
+`Pos`

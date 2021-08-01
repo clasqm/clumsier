@@ -1,0 +1,61 @@
+WRITE #
+================
+
+Outputs a comma-separated list of values to a text file or device
+
+Syntax:
+Write # filenum , [ expressionlist ]
+
+Parameters:
+
+`filenum`
+File number of an open file or device opened for `Output` or `Append`.
+
+`expressionlist`
+Comma-separated list of items to print
+
+Description:
+
+Outputs the values in `expressionlist` to the text file or device bound to
+`filenum`. The values are separated with commas, and strings are enclosed in
+double quotes. Numeric values greater than zero (`0`) and less than one (`1`)
+are prefixed with a zero (`0`) if none is given (e.g., a value of `-.123` will
+be output as `-0.123`). Extra zeroes are truncated.
+
+If no expression list is given, `Write #` outputs a carriage return (note that
+the comma after `filenum` is still necessary, even if no expression list is
+given).
+The purpose of `Write #` is to create a file that can be read back by using
+Input #.
+
+Examples:
+
+Const filename As String = "file.txt"
+
+Dim filenum As Integer = FreeFile()
+If 0 <> Open(filename, For Output, As filenum) Then
+    Print "error opening " & filename & " for output."
+    End -1
+End If
+
+Dim i As Integer = 10
+Dim d As Double = 123.456
+Dim s As String = "text"
+
+Write #filenum, 123, "text", -.45600
+Write #filenum,
+Write #filenum, i, d, s
+
+will produce the file:
+
+
+ 
+ 
+    123,"text",-0.456
+ 
+    10,123.456,"text"
+
+
+Differences from QB:
+  * None
+

@@ -1,0 +1,27 @@
+DATE
+================
+
+Returns the current system date as a string
+
+Syntax:
+declare function Date ( ) as string
+
+Usage:
+result = Date[$]
+
+Return Value:
+Returns the current system date, in the format `mm-dd-yyyy`
+
+Description:
+None
+
+Examples:
+Print Date ' prints the current date
+
+Differences from QB:
+  * The QB DATE statement (to set the system date) is now called `Setdate`.
+  * The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn
+  only with the -w suffix compile option (or -w pedantic compile option).
+

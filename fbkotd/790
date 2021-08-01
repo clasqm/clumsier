@@ -1,0 +1,33 @@
+Known problems when compiling FB
+================
+
+Win32 rtlib compilation error: wchar.h: unknown type name 'dev_t'
+
+http://sourceforge.net/p/mingw/bugs/2039/
+
+The `wchar.h` header file from MinGW.org contains a `struct _stat64`
+declaration that does not compile when _NO_OLDNAMES is defined, because it
+uses dev_t, ino_t, mode_t which are only available with an _ underscore prefix
+(_dev_t etc.) under _NO_OLDNAMES. For the FB rtlib we #define _NO_OLDNAMES
+when compiling.
+
+To work around this issue, adjust wchar.h and add _ underscore prefixes to
+those typedef names in the `struct _stat64` declaration.
+
+Win32 rtlib compilation error: _controlfp, _PC_64 undeclared
+
+ 
+ 
+    CC src/rtlib/obj/hinit.o
+    src/rtlib/win32/hinit.c: In function 'fb_hInit':
+    src/rtlib/win32/hinit.c:21:5: warning: implicit declaration of function 
+       '_controlfp' [-Wimplicit-function-declaration]
+    src/rtlib/win32/hinit.c:21:17: error: '_PC_64' undeclared (first use in this function)
+
+
+Both the MinGW.org runtime and GCC have a `float.h` header, and in some setups
+the GCC one is found before the MinGW one, causing the above errors.
+
+Easiest temporary fix: Append `#include_next <float.h>` to gcc's `float.h`
+(`C:\MinGW\lib\gcc\[target]\[version]\include\float.h`)
+

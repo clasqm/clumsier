@@ -1,0 +1,15 @@
+Compiler Option: -map
+===============
+
+Save the linking map to file name
+
+Syntax:
+-map < map file >
+
+Parameters:
+`map file`
+
+Name of the map file to save generated during linking.
+
+Description:
+The `-map` compiler option saves the a map file of the executable made.

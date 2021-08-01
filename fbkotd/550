@@ -1,0 +1,55 @@
+VALULNG
+================
+
+Converts a string to a unsigned 64bit integer
+
+Syntax:
+declare function Valulng ( byref strnum as const string ) as ulongint
+declare function Valulng ( byref strnum as const wstring ) as ulongint
+
+Usage:
+result = Valulng ( strnum )
+
+Parameters:
+
+`strnum`
+the string to convert
+
+Return Value:
+Returns a `ulongint` of the converted string
+
+If the first character of the string is invalid, `Valulng` will return `0`.
+
+Description:
+
+For example, `Valulng("10")` will return `10`, and `Valulng("10.60")` will
+return `10` as well. The function parses the string from the left, skipping
+any white space, and returns the longest number it can read, stopping at the
+first non-suitable character it finds. Any non-numeric characters, including
+decimal points and exponent specifiers, are considered non-suitable, for
+example, `Valulng("23.1E+6")` will just return `23`.
+
+`Valulng` can be used to convert integer numbers in binary / octal /
+hexadecimal format, if they have the relevant identifier (`"&B"` / `"&O"` /
+`"&H"`) prefixed, for example: `Valulng("&HFF")` returns `255`.
+
+If you want to convert a number into string format, use the `Str` function.
+
+Examples:
+
+Dim a As String, b As ULongInt
+a = "20xa211"
+b = ValULng(a)
+Print a, b
+
+ 
+    20xa211   20
+
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Valulng`.
+
+Differences from QB:
+New to FreeBASIC

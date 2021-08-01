@@ -1,0 +1,10 @@
+QuickLZ
+===============
+
+Cross-platform fast compression library
+
+Website: https://www.quicklz.com
+Platforms supported: Win32, Linux, DOS
+Headers to include: quicklz.bi
+Header version: 1.5.0
+Example: examples/compression/QuickLZ.bas

@@ -1,0 +1,44 @@
+SETTIME
+================
+
+Sets the current system time
+
+Syntax:
+declare function Settime ( byref newtime as const string ) as long
+
+Usage:
+result = Settime( newtime )
+
+Parameters:
+
+`newtime`
+the new time to set
+
+Return Value:
+Returns zero on success or non-zero on failure on all ports except DOS.
+
+Description:
+
+To set the time, format the date and send to `Settime` in one of the following
+formats: `"hh:mm:ss"`, `"hh:mm"`, or `"hh"` (`hh` is the hour, `mm` is the
+minute, and `ss` is the second).
+
+The error code returned by `Settime` can be checked using `Err` in the next
+line. The function version of `Settime` returns directly the error code as a
+32 bit `Long`.
+
+Examples:
+
+SetTime "1:20:30"
+
+Platform Differences:
+
+  * On Windows the privilege SE_SYSTEMTIME_NAME is required, which
+  typically means that the calling process has to be run with administrator
+  privileges.
+  * On Linux the capability CAP_SYS_TIME is required, which typically
+  means that the calling process has to be run as root/superuser.
+
+Differences from QB:
+  * The `Time` statement was used QB and the syntax was `TIME = newtime`.
+

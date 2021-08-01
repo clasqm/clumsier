@@ -1,0 +1,26 @@
+CLASS
+===================
+
+Declares a class object
+
+Syntax:
+Class typename ...
+
+Parameters:
+`typename`
+name of the `Class`
+
+Description:
+We would have put something useful here (honest) except this feature isn't
+implemented in the compiler yet. But since it will get added in future, and
+there are several other document pages that need to link here, we thought it
+safe to include in anyway.
+
+
+Dialect Differences:
+
+Object-related features are supported only in the -lang fb option
+
+Differences from QB:
+New to FreeBASIC
+

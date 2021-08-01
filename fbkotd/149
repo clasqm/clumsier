@@ -1,0 +1,28 @@
+__FB_ASM__
+=============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_ASM__
+
+Description:
+`__FB_ASM__` returns a string equal to `"intel"` or `"att"` depending on
+whether inline assembly blocks should use the Intel format or the GCC/AT&T;
+format.
+
+Examples:
+
+Dim a As Long
+#if __FB_ASM__ = "intel"
+    Asm
+        inc dword Ptr [a]
+    End Asm
+#else
+    Asm
+        "incl %0\n" : "+m" (a) : :
+    End Asm
+#endif
+
+Differences from QB:
+New to FreeBASIC

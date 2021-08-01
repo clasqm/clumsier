@@ -1,0 +1,127 @@
+GETJOYSTICK
+================
+
+Reads buttons and axis information from attached gaming devices
+
+Syntax:
+declare function Getjoystick ( byval id as long, byref buttons as integer = 0,
+byref a1 as single = 0, byref a2 as single = 0, byref a3 as single = 0, byref
+a4 as single = 0, byref a5 as single = 0, byref a6 as single = 0, byref a7 as
+single = 0, byref a8 as single = 0 ) as integer
+
+Usage:
+result = Getjoystick( id[, buttons[, a1[, a2[, a3[, a4[, a5[, a6[, a7[,
+a8]]]]]]]]] )
+
+Parameters:
+
+`id`
+
+the device id number (0 - 15)
+
+`buttons`
+
+the button status
+
+`a1`
+
+first axis value
+
+`a2`
+
+second axis value
+
+`a3`
+
+third axis value
+
+`a4`
+
+fourth axis value
+
+`a5`
+
+fifth axis value
+
+`a6`
+
+sixth axis value
+
+`a7`
+
+seventh axis value
+
+`a8`
+
+eighth axis value
+
+Return Value:
+`0` on success or `1` on failure. All of the axis positions are returned in
+floating point format.
+
+Description:
+
+`Getjoystick` will retrieves the button state, and the axis positions for up
+to 8 axes, for the joystick determined by `id`, a number between `0` and `15`.
+Buttons are stored in a similar manner to `Getmouse`, with each bit in
+`buttons` representing a button.
+
+A single precision value between `-1.0` and `1.0` is returned for each valid
+axis. If the axis does not exist for the controller, a value of `-1000.00` is
+returned.
+
+`Getjoystick` will return `0` upon successful completion; It will return `1`
+upon failure. Failure can be caused by specifying an illegal joystick number,
+specifying a joystick which doesn't exist, or a failure in the joystick API.
+
+The error code returned by `Getjoystick` can be checked using `Err` in the
+next line. The function version of `Getjoystick` returns directly the error
+code as a 32 bit `Long`.
+
+Examples:
+
+Screen 12
+
+Dim x As Single
+Dim y As Single
+Dim buttons As Integer
+Dim result As Integer
+Dim a As Integer
+
+Const JoystickID = 0
+
+'This line checks to see if the joystick is ok.
+
+If GetJoystick(JoystickID,buttons,x,y) Then
+    Print "Joystick doesn't exist or joystick error."
+    Print
+    Print "Press any key to continue."
+    Sleep
+    End
+End If
+
+
+Do
+    result = GetJoystick(JoystickID,buttons,x,y)
+
+    Locate 1,1
+    Print ;"result:";result;" x:" ;x;" y:";y;" Buttons:";buttons,"","",""
+   
+    'This tests to see which buttons from 1 to 27 are pressed.
+    For a = 0 To 26
+        If (buttons And (1 Shl a)) Then
+            Print "Button ";a;" pressed.    "
+        Else
+            Print "Button ";a;" not pressed."
+        End If
+    Next a
+Loop
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Getjoystick`.
+
+Differences from QB:
+New to FreeBASIC
+

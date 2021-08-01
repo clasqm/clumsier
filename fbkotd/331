@@ -1,0 +1,43 @@
+__FB_MIN_VERSION__
+================
+
+Macro function to test minimum compiler version
+
+Syntax:
+#define __FB_MIN_VERSION__( major, minor, patch) _
+
+((__FB_VER_MAJOR__ > major) or _
+((__FB_VER_MAJOR__ = major) and ((__FB_VER_MINOR__ > minor) or _
+(__FB_VER_MINOR__ = minor and __FB_VER_PATCH__ >= patch_level))))
+
+Usage:
+__FB_MIN_VERSION__( major, minor, patch)
+
+Parameters:
+
+`major`
+minimum major version to test
+
+`minor`
+minimum minor version to test
+
+`patch`
+minimum patch version to test
+
+Return Value:
+Returns zero (0) if the compiler version is less than the specified version,
+or non-zero (-1) if the compiler version is greater than or equal to specified
+version
+
+Description:
+
+`__FB_MIN_VERSION__` tests for a minimum version of the compiler.
+
+Examples:
+
+#if Not __FB_MIN_VERSION__(0, 18, 2)
+    #error fbc must be at least version 0.18.2 To compile This module
+#endif
+
+Differences from QB:
+New to FreeBASIC

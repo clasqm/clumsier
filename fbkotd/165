@@ -1,0 +1,38 @@
+Obsolete Keywords
+========================
+
+Along the way FB has had a few keywords changed. Here is the list of those no
+longer supported. Old code must be updated if recompiled.
+
+OPEN "CON:"
+
+Use OPEN CONS
+
+OPEN "ERR:"
+
+Use OPEN ERR
+
+OPEN "PIPE:"
+
+Use OPEN PIPE
+
+POKEI
+
+Use POKE (integer,address,n)
+
+POKES
+
+Use POKE (short,address,n)
+
+SCREENINFO (Function returning a pointer to a structure)
+
+Use SCREENINFO, Sub returning values in its arguments
+
+VAL64
+
+Use VALLNG()
+
+GOSUB
+
+Do not use GOSUB in SUBs or FUNCTIONs anymore; allowed in `-lang qb` mode.
+

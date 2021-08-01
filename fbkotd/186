@@ -1,0 +1,18 @@
+Indexing Operators
+================
+
+Operators that return references based on an index
+
+The indexing operators return references to some memory based on the value of
+their second, or right-hand side, operand. This operand is used as an index,
+or offset, from the beginning of some memory represented by the first, or
+left-hand side, operand.
+
+Operator () (Array index)
+	Returns a reference to an element in an array.
+
+Operator [] (String index)
+	Returns a reference to the numeric value of a character in a string.
+
+Operator [] (Pointer index)
+	Returns a reference to memory offset from a base address.

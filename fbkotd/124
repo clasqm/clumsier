@@ -1,0 +1,19 @@
+#ENDIF
+======
+
+Preprocessor conditional directive
+
+Syntax:
+#endif
+
+Description:
+Ends a group of conditional directives
+
+See `#if`, `#ifdef`, or `#ifndef` for examples of usage.
+
+Examples:
+
+#DEFINE DEBUG_LEVEL 1
+#IF (DEBUG_LEVEL = 1)
+  'Conditional statements
+#ENDIF

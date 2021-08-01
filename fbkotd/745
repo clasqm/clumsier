@@ -1,0 +1,94 @@
+Different ways angles are measured
+================
+
+Written by RandyKeeling
+
+This very simple tutorial assumes that you know what an angle is.
+
+There are three commonly used ways to measure the size of an angle:
+
+  * Degrees (deg)
+  * Radians (rad)
+  * Gradients (grad)
+
+Degrees
+
+Most people are familiar with angles measured in degrees. A full circle
+measures 360?. Parts of a degree are often measured two different ways,
+degrees decimal and DMS (degree, minute, second).
+
+We can always show a degree as we would any decimal number by showing its
+whole units followed by its fractional portion. For example, 75.23? means that
+we have 75 degrees and twenty-three hundredths of a degree.
+
+In the DMS system, each degree is made up of 60 minutes (or arcminutes) and is
+marked with a ` . Each minute is made up of 60 seconds (or arcseconds) and is
+marked with a . This is read as 36 degrees, 14 minutes, 52 seconds.
+
+To convert DMS to decimal degrees you can use the following code.
+
+
+Dim D As Integer
+Dim M As Integer
+Dim S As Integer
+Dim DD As Single
+
+'' Convert to degree decimal
+DD = D + M / 60 + S / 3600  '' 3600 comes from 1/60 * 1/60
+
+`
+
+Radians
+
+Radians are more common in computer programming and mathematics. To understand
+radians, you must understand the constant Pi (often given the symbol of the
+lowercase Greek letter pi). Pi is an irrational and transcendental number (its
+decimal notation never ends) and is the circumference of any circle divided by
+that circle's diameter. An approximate value (to 20 decimal places) is Pi =
+3.1415926535897932385. The value of Pi can also be found using this code.
+
+`
+
+Pi = 4 * Atn ( 1 )
+
+`
+
+With the radian system, a full circle has 2*Pi (6.2831853071795864770)
+radians. Unlike degrees, radians are not marked with any form of a symbol.
+FreeBASIC, like most programming languages, accepts angle measurements in
+radians and not degrees.
+
+To convert between radians and degrees (decimal) you can use the following
+code.
+
+`
+
+Const PI As Double = 3.1415926535897932
+
+Dim D As Double
+Dim R As Double
+
+R = D * PI / 180    '' A full circle has 360 degrees, and a full circle has
+2*PI Radians
+D = R * 180 / PI
+
+`
+
+The value of PI is used so often, it is not uncommon to find it defined in
+libraries and commonly used routines. The following are useful constants.
+
+`
+
+Const PI As Double = 3.1415926535897932
+Const TWO_PI As Double = 6.283185307179586
+Const HALF_PI As Double = 1.570796326794896
+Const DegToRAD As Double = 0.01745329251994330  '' PI/180
+Const RADToDeg As Double = 57.29577951308233      '' 180/PI
+
+`
+
+Gradients
+
+Gradients are used mainly in some forms of engineering. Within the gradient
+system a circle has 400 grads.
+

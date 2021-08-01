@@ -1,0 +1,38 @@
+ATN
+================
+
+Returns the arctangent of a number
+
+Syntax:
+declare function Atn ( byval number as double ) as double
+
+Usage:
+result = Atn( number )
+
+Parameters:
+`number`
+A number.
+
+Return Value:
+The angle, in radians, whose tangent is `number`, in the range [-Pi/2..Pi/2].
+
+Description:
+`Atn` returns the arctangent of the argument `number` as a `Double` within the
+range of -Pi/2 to Pi/2. The arctangent is the inverse of the `Tan` function.
+The returned angle is measured in radians (not degrees).
+
+`Atn` can be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Print "Pi ="; Atn ( 1.0 ) * 4
+Print Atn ( 4 / 5 )
+
+The output would be:
+
+    Pi = 3.141592653589793
+    0.6747409422235527
+
+Differences from QB:
+None
+

@@ -1,0 +1,81 @@
+OCT
+================
+
+Converts a number to octal representation
+
+Syntax:
+declare function Oct ( byval number as ubyte ) as string
+declare function Oct ( byval number as ushort ) as string
+declare function Oct ( byval number as ulong ) as string
+declare function Oct ( byval number as ulongint ) as string
+declare function Oct ( byval number as const any ptr ) as string
+
+declare function Oct ( byval number as ubyte, byval digits as long ) as string
+declare function Oct ( byval number as ushort, byval digits as long ) as
+string
+declare function Oct ( byval number as ulong, byval digits as long ) as string
+declare function Oct ( byval number as ulongint, byval digits as long ) as
+string
+declare function Oct ( byval number as const any ptr, byval digits as long )
+as string
+
+Usage:
+result = Oct[$]( number [, digits ] )
+
+Parameters:
+
+`number`
+
+A number or expression evaluating to a number. A floating-point number will be
+converted to a `longint`.
+
+`digits`
+
+Desired number of digits in the returned string.
+
+Return Value:
+A string containing the unsigned octal representation of `number`.
+
+Description:
+
+Returns the unsigned octal string representation of `number`. Octal digits
+range from 0 to 7.
+
+If you specify `digits` > 0, the result string will be exactly that length. It
+will be truncated or padded with zeros on the left, if necessary.
+
+The length of the returned string will not be longer than the maximum number
+of digits required for the type of `number` (3 characters for `Byte`, 6 for
+`Short`, 11 for `Long`, and 22 for `Longint`)
+
+If you want to do the opposite, i.e. convert an octal string back into a
+number, the easiest way to do it is to prepend the string with `"&O"`, and
+convert it to an integer type, using a function like `Cint`, similarly to a
+normal numeric string. E.g. `Cint("&O77")`
+
+Examples:
+
+Print Oct(54321)
+Print Oct(54321, 4)
+Print Oct(54321, 8)
+
+will produce the output:
+
+
+ 
+ 
+    152061
+    2061
+    00152061
+
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * In QBASIC, there was no way to specify the number of digits returned.
+  * The size of the string returned was limited to 32 bits, or 11 octal digits.
+

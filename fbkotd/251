@@ -1,0 +1,36 @@
+SADD
+================
+
+Returns a pointer to a string variable's data
+
+Syntax:
+declare function Sadd ( byref str as string ) as Zstring ptr
+declare function Sadd ( byref str as Wstring ) as Wstring ptr
+declare function Sadd ( byref str as Zstring ) as Zstring ptr
+
+Usage:
+result = Sadd( str )
+
+Parameters:
+
+`str`
+the string expression or variable to get the address of
+
+Return Value:
+A pointer to the data associated with `str`.
+
+Description:
+Returns the memory offset of the string data in the string variable.
+
+Examples:
+
+Dim s As String
+Print SAdd(s)
+s = "hello"
+Print SAdd(s)
+s = "abcdefg, 1234567, 54321"
+Print SAdd(s)
+
+Differences from QB:
+QB returned an integer instead of a pointer.
+

@@ -1,0 +1,17 @@
+__FB_BUILD_DATE__
+====================
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:`
+__FB_BUILD_DATE__
+
+Description:
+Substituted with the quoted string containing the date (`MM-DD-YYYY`) the
+compiler was built on.
+
+Examples:
+Print "This program compiled on this date:" & __FB_BUILD_DATE__
+
+Differences from QB:
+New to FreeBASIC

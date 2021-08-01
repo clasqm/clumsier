@@ -1,0 +1,105 @@
+DESTRUCTOR
+================
+
+Called automatically when a class or user defined type goes out of scope or is
+destroyed
+
+Syntax:
+Type typename
+
+field declarations
+Declare Destructor ( )
+
+End Type
+
+Destructor typename ( ) [ Export ]
+
+statements
+
+End Destructor
+
+Parameters:
+
+`typename`
+
+name of the `Type` of `Class`
+
+Description:
+
+The destructor method is called when a user defined `Type` or `Class` variable
+goes out of scope or is destroyed explicitly with the `Delete Statement`
+operator.
+
+`typename` is the name of the type for which the `Destructor` method is
+declared and defined. Name resolution for `typename` follows the same rules as
+procedures when used in a `Namespace`.
+
+The `Destructor` method is passed a hidden `this` parameter having the same
+type as `typename`.
+
+The destructor in a type is called before the destructors on any of its
+fields. Therefore, all fields are accessible with the hidden `this` parameter
+in the destructor body.
+
+Only one destructor may be declared and defined per type (but several
+destructors can be called in a chained way if the type contains or inherits
+other types with their own destructors).
+
+Since the `End` statement does not close any scope, object destructors will
+not automatically be called if the `End` statement is used to terminate the
+program.
+
+`Destructor` can be also called directly from the `typename` instance like the
+other member methods (`Sub`) and with the same syntax, i.e. using a member
+access operator, e.g. `obj.Destructor()`. The object, and all its members, are
+assumed to be constructed and in a valid state, otherwise its effects are
+undefined and may cause crashes. This syntax is useful in cases where `obj`
+has been constructed manually, e.g. with `obj.constructor()` or `Placement
+New`.
+
+Examples:
+
+Type T
+  value As ZString * 32
+  Declare Constructor ( init_value As String )
+  Declare Destructor ()
+End Type
+
+Constructor T ( init_value As String )
+  value = init_value
+  Print "Creating: "; value
+End Constructor
+
+Destructor T ()
+  Print "Destroying: "; value
+End Destructor
+
+Sub MySub
+  Dim x As T = ("A.x")
+End Sub
+
+Dim x As T = ("main.x")
+
+Scope
+  Dim x As T = ("main.scope.x")
+End Scope
+
+MySub
+
+Output:
+
+ 
+ 
+    Creating: main.x
+    Creating: main.scope.x
+    Destroying: main.scope.x
+    Creating: A.x
+    Destroying: A.x
+    Destroying: main.x
+
+Dialect Differences:
+Object-related features are supported only in the -lang fb dialect.
+
+Differences from QB:
+New to FreeBASIC
+

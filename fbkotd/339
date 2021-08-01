@@ -1,0 +1,29 @@
+OPTION STATIC
+================
+
+Reverts to default array declaration behavior
+
+Syntax:
+Option Static
+
+Description:
+`Option Static` is a statement that overrides the behavior of `Option
+Dynamic`, that is, arrays declared with constant subscript ranges are fixed-
+length. This remains in effect for the rest of the module in which `Option
+Static` is used, and can be overridden with `Option Dynamic`. It is equivalent
+to the `'$Static` metacommand.
+
+Examples:
+
+'' Compile with the "-lang fblite" compiler switch  
+#lang "fblite"
+Option Dynamic
+Dim foo(100) As Integer         ' declares a variable-length array
+Option Static
+Dim bar(100) As Integer         ' declares a fixed-length array
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC

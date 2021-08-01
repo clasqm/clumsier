@@ -1,0 +1,59 @@
+EXEC
+================
+
+Temporarily transfers execution to an external program
+
+Syntax:
+declare function Exec ( byref program as const string, byref arguments as
+const string ) as long
+
+Usage:
+result = Exec( program, arguments )
+
+Parameters:
+
+`program`
+The file name (including file path) of the program (executable) to transfer
+control to.
+
+`arguments`
+The command-line arguments to be passed to the program.
+
+Return Value:
+The exit status of the program, or negative one (-1) if the program could not
+be executed.
+
+Description:
+
+Transfers control over to an external program. When the program exits,
+execution resumes immediately after the call to `Exec`.
+
+Examples:
+
+'A Windows based example but the same idea applies to Linux
+Const exename = "NoSuchProgram.exe"
+Const cmdline = "arg1 arg2 arg3"
+Dim result As Integer
+result = Exec( exename, cmdline )
+If result = -1 Then
+    Print "Error running "; exename
+Else
+    Print "Exit code:"; result
+End If
+
+Platform Differences:
+
+  * Linux requires the program case matches the real name of the file. 
+  Windows and DOS are case insensitive. The program being executed may 
+  be case sensitive for its command line parameters.
+  * Path separators in Linux are forward slashes / . Windows uses backward 
+  slashes \ but it allows for forward slashes . DOS uses backward \ slashes.
+  * Exit code is limited to 8 bits in DOS.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Exec`.
+
+Differences from QB:
+New to FreeBASIC
+

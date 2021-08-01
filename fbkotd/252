@@ -1,0 +1,20 @@
+Compiler Option: -r
+================
+
+Compile into `*.asm/*.c/*.ll` file(s) only, do not assemble or link
+
+Syntax:
+-r
+
+Description:
+The `-r` option specifies that any source files listed are to be compiled to
+`*.asm`/`*.c`/`*.ll` files, depending on the used code generation backend, and
+not compiled or linked into an executable.
+
+When using the `-r` option, `-m` must be specified when compiling the main
+module.
+
+Use the `-R` option to preserve intermediate files without affecting
+compilation/assembling/linking.
+Use the `-rr` option to compile input source files to `*.asm` regardless of
+the code generation backend.

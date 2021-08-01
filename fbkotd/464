@@ -1,0 +1,61 @@
+PEEK
+================
+
+Gets the value of an arbitrary type at an address in memory
+
+Syntax:
+declare function Peek ( byval address as any ptr ) byref as ubyte
+declare function Peek ( datatype, byval address as any ptr ) byref as datatype
+
+Usage:
+Peek( [ datatype, ] address )
+
+Parameters:
+
+`address`
+The address in memory to get the value from.
+
+`datatype`
+The type of value to get. If omitted, `ubyte` is assumed.
+
+Description:
+
+This procedure returns a reference to the value in memory given by a memory
+address, and is equivalent to:
+
+`*cast(ubyte ptr, address)`
+
+or
+
+`*cast(datatype ptr, address)`
+
+thus this keyword can also be used to assign a value to a memory location,
+similarly to `Poke`.
+
+Note: When using `Peek`, the -exx compiler option does not add code for null-
+pointer checking (no nullity test on the value of `address`).
+
+Examples:
+
+Dim i As Integer, p As Integer Ptr
+p = @i
+
+Poke Integer, p, 420
+Print Peek(Integer, p)
+
+will produce the output:
+
+
+ 
+ 
+    420
+
+
+Differences from QB:
+  * `Peek` did not support the `datatype` parameter in QB, and could only 
+  return individual bytes.
+  * `Peek` returns a reference in FB, so can be used to set the memory 
+  contents of the address, like with `Operator * (Value of)`.
+  * `DEF SEG` isn't needed anymore because the address space is 32-bit 
+  flat in FreeBASIC.
+

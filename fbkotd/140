@@ -1,0 +1,28 @@
+FALSE
+=========
+
+Intrinsic constant set by the compiler
+
+Syntax:
+Const False As Boolean
+
+Description:
+Gives the False `Boolean` value where used.
+
+Examples:
+
+Dim b As Boolean = False
+If b Then
+    Print "b is True"
+Else
+    Print "b is False"
+End If
+
+    b is False
+
+Dialect Differences:
+  * Not available in the -lang qb dialect unless referenced with the alias `__False`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,55 @@
+INPUT()
+================
+
+Reads a number of characters from console or file
+
+Syntax:
+declare function Input ( n as integer ) as string
+declare function Input ( n as integer, filenum as integer ) as string
+
+Usage:
+result = Input[$]( n [, [#]filenum ] )
+
+Parameters:
+
+`n`
+Number of bytes to read.
+
+`filenum`
+File number of a bound file or device.
+
+Return Value:
+Returns a `String` of the characters read.
+
+Description:
+
+Reads a number of characters from the console, or a bound file/device
+specified by `filenum`.
+
+The first version waits for and reads `n` characters from the keyboard buffer.
+Extended keys are not read. The characters are not echoed to the screen.
+
+The second version waits for and reads `n` characters from a file or device.
+The file position is updated.
+
+Examples:
+
+Print "Select a color by number"
+Print "1\. blue"
+Print "2\. red"
+Print "3\. green"
+Dim choice As String
+Do
+   choice = Input(1)
+Loop Until choice >= "1" And choice <= "3"
+
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * None in the -lang qb dialect.
+

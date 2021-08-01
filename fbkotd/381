@@ -1,0 +1,43 @@
+Operator + (String concatenation)
+================
+
+Concatenates two strings
+
+Syntax:
+declare operator + ( byref lhs as string, byref rhs as string ) as string
+declare operator + ( byref lhs as zstring, byref rhs as zstring ) as zstring
+declare operator + ( byref lhs as wstring, byref rhs as wstring ) as wstring
+
+Usage:
+result = lhs + rhs
+
+Parameters:
+
+`lhs`
+The left-hand side string to concatenate.
+
+`rhs`
+The right-hand side string to concatenate.
+
+Description:
+
+This operator concatenates two strings. Unlike Operator & (String
+concatenation with conversion) both expressions must be strings, and may not
+be converted (in fact, any attempt to concatenate a string with a non-string
+or two non-strings will result in a type mismatch error, with the exception of
+when operator overloading is used in a UDT).
+
+Examples:
+
+Dim As String a = "Hello, ", b = "World!"
+Dim As String c
+c = a + b
+Print c
+
+Output:
+    Hello, World!
+
+
+Differences from QB:
+  * None
+

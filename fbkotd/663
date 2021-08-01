@@ -1,0 +1,87 @@
+CLS
+================
+
+Clears the screen in both text modes and graphics modes
+
+Syntax:
+declare sub Cls ( byval mode as long = 1 )
+
+Usage:
+Cls mode
+
+Parameters:
+
+`mode`
+A optional numeric variable with a value from `0` to `2`. If omitted, it
+defaults to `1`.
+
+Description:
+
+An optional `mode` parameter may be given,
+
+If omitted, `CLS` clears either the text or graphics viewport. If a graphics
+viewport has been defined using the `View (Graphics)` statement, the graphics
+viewport is cleared. Otherwise, the text viewport, defined by `View Print`, is
+cleared. (If there is no explicit text viewport defined, the entire screen is
+cleared.)
+
+If `0`, clears the entire screen
+If `1`, clears the graphics viewport if defined. Otherwise, clears the text
+viewport
+If `2`, clears the text viewport
+
+
+Examples:
+
+'' set the color to light grey text on a blue background
+Color 7, 1
+
+'' clear the screen to the background color
+Cls
+
+'' print text in the center of the screen
+Locate 12, 33
+Print "Hello Universe!"
+
+
+In graphics modes, if you want to clear the entire screen to color `0`, it can
+be faster using `Clear` to write zeroes to the screen memory than calling
+`CLS`.
+
+Dim scrbuf As Byte Ptr, scrsize As Integer
+Dim As Integer scrhei, scrpitch
+Dim As Integer r = 0, dr = 1
+
+ScreenRes 640, 480, 8
+
+scrbuf = ScreenPtr: Assert( scrbuf <> 0 )
+ScreenInfo( , scrhei, , , scrpitch )
+scrsize = scrpitch * scrhei
+
+Do
+   
+    '' lock the screen (must do this while working directly on screenbuffer)
+    ScreenLock
+       
+        '' clear the screen (could use Cls here):
+        Clear *scrbuf, 0, scrsize
+       
+        '' draw circle
+        Circle (320, 240), r
+       
+    ScreenUnlock
+   
+    '' grow/shrink circle radius
+    r += dr
+    If r <= 0 Then dr = 1 Else If r >= 100 Then dr = -1
+   
+    '' short pause in each frame (prevents hogging the CPU)
+    Sleep 1, 1
+   
+    '' run loop until user presses a key
+Loop Until Len(Inkey) > 0
+
+
+Differences from QB:
+  * None
+

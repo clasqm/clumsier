@@ -1,0 +1,62 @@
+SHARED
+================
+
+Variable declaration modifier specifying visibility throughout a module
+
+Syntax:
+Dim Shared ...
+Redim Shared ...
+Common Shared ...
+Static Shared ...
+Var Shared ...
+
+Description:
+`Shared` makes module-level variables visible inside `Sub`s and `Function`s.
+If `Shared` is not used on a module-level variable's declaration, the variable
+is only visible to the module-level code in that file (furthermore, only a
+variable declared with `Dim` without `Shared` modifier, and not inside a
+Namespace block, is stored on the stack).
+
+NOTES (for `Shared` variables excluding `Common` variables):
+
+  * Generally a `Shared` variable may only be initialized with a constant 
+  value (its starting value is set at the start of the program in the .
+  data section before any code is run, and so it cannot depend on any 
+  variables or functions in it).
+  * A first exception is a `Shared` variable of var-len string type, 
+  that never can be initialized, even with a constant string (because of 
+  its structure with a descriptor in the .data section, but to point to 
+  a dynamic memory block).
+  * A second exception is a `Shared` variable of user-defined type having 
+  a constructor even implicit, that can be initialized with a non-constant 
+  value (because it's the constructor code, called when the program starts, 
+  which writes the "initial" values into the .data section).
+
+Examples:
+
+'' Compile with -lang qb or fblite
+
+'$lang: "qb"
+
+Declare Sub MySub
+Dim Shared x As Integer
+Dim y As Integer
+
+x = 10
+y = 5
+
+MySub
+
+Sub MySub
+    Print "x is "; x 'this will report 10 as it is shared
+    Print "y is "; y 'this will not report 5 because it is not shared
+End Sub
+
+
+Differences from QB:
+  * The `Shared` statement inside scope blocks -- functions, subs, if/thens,
+  and loops -- is not supported. Use `Dim`|`Redim`|`Common`|`Static Shared` 
+  \in the main program instead. Or if you're inside a scope block and 
+  `Redim`ming a variable or array previously set up with `Shared`, just 
+  do a `Redim` without `Shared`; it will work fine and won't ruin anything.
+

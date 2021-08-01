@@ -1,0 +1,60 @@
+LOBYTE
+================
+
+Gets the lowest byte of the operand.
+
+Syntax:
+#define Lobyte( expr ) (Cast(Uinteger, expr) and &h000000FF)
+
+Usage:
+result = Lobyte( expr )
+
+Parameters:
+
+`expr`
+A numeric expression, converted to an `Uinteger` value.
+
+Return Value:
+Returns the value of the low byte of expr.
+
+Description:
+
+This macro converts the numeric expression `expr` to an `Uinteger` value, then
+expands to an `Uinteger` representing the value of its least-significant (low)
+byte.
+
+Examples:
+
+Dim N As UInteger
+
+'Note there are 16 bits
+N = &b1010101110000001
+Print "N is                                       "; N
+Print "The binary representation of N is          "; Bin(N)
+Print "The most significant byte (MSB) of N is    "; HiByte(N)
+Print "The least significant byte (LSB) of N is   "; LoByte(N)
+Print "The binary representation of the MSB is    "; Bin(HiByte(N))
+Print "The binary representation of the LSB is    "; Bin(LoByte(N))
+Sleep
+
+
+The output would look like:
+
+ 
+ 
+    N Is                                       43905
+    The Binary representation of N Is          1010101110000001
+    The most significant Byte (MSB) of N Is    171
+    The least significant Byte (LSB) of N Is   129
+    The Binary representation of the MSB Is    10101011
+    The Binary representation of the LSB Is    10000001
+
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__LOBYTE`.
+
+Differences from QB:
+New to FreeBASIC
+

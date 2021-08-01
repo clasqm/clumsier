@@ -1,0 +1,100 @@
+IIF
+================
+
+Conditional function that returns one of two values.
+
+Syntax:
+IIf ( condition, expr_if_true, expr_if_false )
+
+Parameters:
+
+`condition`
+The condition to test.
+A non-zero value evaluates as true, while a value of zero evaluates as false.
+
+`expr_if_true`
+An expression to evaluate and return if `condition` is true.
+It must return:
+
+  * a numeric value, which can be an integer, floating point number or a pointer, including Boolean,
+  * or a string value,
+  * or an UDT value.
+
+`expr_if_false`
+An expression to evaluate and return if `condition` is false.
+It must be same type as `expr_if_true` (either numeric, either string or UDT).
+
+Return Value:
+if `condition` is non-zero, `expr_if_true`, otherwise `expr_if_false`
+
+Description:
+
+`IIf` returns a different numeric or string or UDT value (not a reference)
+depending of the result of a conditional expression evaluated at run-time. Its
+typical use is in the middle of an expression; it avoids splitting it to put a
+conditional in the middle.
+
+`IIf` only evaluates the expression that it needs to return. This saves time,
+and can also be useful to prevent evaluating expressions that might be invalid
+depending on the `condition`.
+
+When IIf treats expressions of mixed numeric types (conditional expression
+evaluated at run-time):
+
+  * if at least one expression is of floating-point type, the result type 
+  is the floating-point type (the bigger in case of two floating-point types),
+  * if the two expressions are of integer types, the result type is the 
+  bigger type of both (see Coercion and Conversion for the precise ranking 
+  of integer types).
+
+Examples:
+
+Dim As Integer a, b, x, y, z
+a = (x + y + IIf(b > 0, 4, 7)) \ z
+
+is equivalent to:
+
+Dim As Integer a, b, x, y, z, temp
+If b > 0 Then temp = 4 Else temp = 7
+a = (x + y + temp) \ z
+
+
+Dim As Integer I
+I = -10
+Print I, IIf(I>0, "positive", IIf(I=0, "null", "negative"))
+I = 0
+Print I, IIf(I>0, "positive", IIf(I=0, "null", "negative"))
+I = 10
+Print I, IIf(I>0, "positive", IIf(I=0, "null", "negative"))
+Sleep
+
+
+Type UDT1
+  Dim As Integer I1
+End Type
+
+Type UDT2 Extends UDT1
+  Dim As Integer I2
+End Type
+
+Dim As UDT1 u1, u10 = (1)
+Dim As UDT2 u2, u20 = (2, 3)
+
+u1 = IIf(0, u10, u20)
+Print u1.I1
+u1 = IIf(1, u10, u20)
+Print u1.I1
+
+u2 = IIf(0 , u10, u20)
+Print u2.I1; u2.I2
+'u2 = Iif(1, u10, u20) ''Invalid assignment/conversion
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Iif`.
+
+Differences from QB:
+New to FreeBASIC
+

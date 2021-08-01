@@ -1,0 +1,57 @@
+PRESET
+================
+
+Plots a single pixel
+
+Syntax:
+PReset [target ,] [STEP] (x, y) [,color]
+
+Parameters:
+
+`target`
+specifies buffer to draw on.
+
+`STEP`
+indicates that coordinates are relative
+
+`(x, y)`
+coordinates of the pixel.
+
+`color`
+the color attribute.
+
+Description:
+
+`target` specifies buffer to draw on. `target` may be an image created with
+`ImageCreate` or `Get (Graphics)`. If omitted, target defaults to the screen's
+current work page.
+
+`(x, y)` are the coordinates of the pixel. STEP if present, indicates that
+`(x, y)` coordinates are relative to the graphics cursor position. If omitted,
+`(x, y)` are relative to the upper left-hand corner of `target`. The x and y
+coordinates are affected by the last call to the `View (Graphics)` and
+`Window` statements, and respect the current clipping region as set by the
+`View (Graphics)` statement.
+
+`color` specifies the color attribute. If omitted, `color` defaults to the
+current background color. See `Color`. `color` is graphics mode specific, see
+`Color` and `Screen (Graphics)` for details.
+
+Examples:
+
+Screen 13
+
+'Set background color to 15
+Color , 15
+
+'Draw a pixel with the background color at 10, 10
+PReset (10,10)
+
+'Draw a pixel with the background color at Last x cord +10, Last y cord +10
+PReset Step (10,10)
+Sleep
+
+
+Differences from QB:
+  * `target` is new to FreeBASIC
+

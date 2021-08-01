@@ -1,0 +1,101 @@
+Standard Data Types
+================
+
+Built-in data types
+
+Integer types
+Types that store integer values, whose range is determined by the size of the
+data type and its signedness.
+
+Floating-point types
+Types that store real number values, whose range and precision is determined
+by the size of the data type.
+
+Boolean types
+Types that store boolean values.
+
+Procedure Types
+Types that store pointers to procedures
+
+Data Type Modifiers
+Specifies additional characteristics of a standard or user-defined data type.
+
+String types
+Types that store or point to an array of characters.
+
+Class types
+Types that provide special capabilities to be used directly or to be extended
+by user-defined types
+
+
+Integer types
+
+##BYTE and UBYTE
+8-bit wide data types that store integer values.
+
+##SHORT and USHORT
+16-bit wide data types that store integer values.
+
+##LONG and ULONG
+32-bit wide data types that store integer values.
+
+##INTEGER and UINTEGER
+32-bit or 64-bit wide data types that store integer values.
+
+##LONGINT and ULONGINT
+64-bit wide data types that store integer values.
+
+Floating-point types
+
+##SINGLE
+32-bit wide data types that store real number values.
+
+##DOUBLE
+64-bit wide data types that store real number values.
+
+Boolean types
+
+##BOOLEAN
+1-bit wide data types that store boolean values.
+
+Procedure Types
+
+##FUNCTION Pointer
+Types that store a pointer to a function procedure
+
+##SUB Pointer
+Types that store a pointer to a sub procedure
+
+Data Type Modifiers
+
+##CONST
+Specifies a read only type.
+
+##POINTER and PTR (Shortcut for 'POINTER')
+Modifies types to be pointer types.
+
+##UNSIGNED
+Specifies an unsigned integer type.
+
+##ALIAS (Modifier)
+Modifies how a datatype is linked with other languages (Name mangling).
+
+String types
+
+##STRING
+Fixed-length and variable-length strings with built-in memory management.
+
+##ZSTRING
+Fixed-length and variable-length null-terminated strings.
+
+##WSTRING
+Fixed-length and variable-length null-terminated strings of wide characters.
+
+Class types
+
+##OBJECT
+Super class providing run-time type information
+
+
+
+

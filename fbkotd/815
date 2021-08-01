@@ -1,0 +1,111 @@
+DECLARE
+================
+
+Declares a module-level or member procedure
+
+Syntax:
+Declare Sub name [ param_list ]
+Declare Function name [ param_list ] [ Byref ] As return_type
+Declare Operator op_symbol param_list [ [ Byref ] As return_type ]
+
+Type T
+
+Declare Constructor [ param_list ]
+Declare Destructor
+Declare Sub name [ param_list ]
+Declare Function name [ param_list ] [ Byref ] As return_type
+Declare Operator name [ param_list ] [ [ Byref ] As return_type ]
+Declare Property name [ ( [ param_list ] ) ] [ [ Byref ] As return_type ]
+
+End Type
+
+Parameters:
+
+`param_list`
+
+Parenthesized comma-separated list of parameters.
+
+`return_type`
+
+The return type of a `Function`, `Operator`, or `Property` procedure.
+
+`name`
+
+The name or symbol of the procedure.
+
+`op_symbol`
+
+The name or symbol of an operator.
+
+`T`
+
+The name of a new user-defined type.
+
+Description:
+
+The `Declare` statement declares a `Sub`, `Function`, `Operator`,
+`Constructor`, or `Destructor`.
+The procedure can be referred to in code without seeing its definition,
+although it must be defined somewhere. Essentially, the `Declare` statement
+introduces a procedure, and states that its definition is elsewhere. For
+example, a function can be declared at the top of a source module, called,
+then defined at the bottom of the source file, as shown below the example.
+
+A procedure's declaration is almost identical to the first line of its
+definition, except the declaration is preceded by the `Declare` keyword and
+has no body. Also, attributes such as Export are left off the declaration.
+
+FreeBASIC, as QB, does not require the declaration of the functions unless
+they are defined in a different source file or in the same file past the point
+where they are called. This is no longer true for procedures declared inside a
+Type body, which must always be declared first in the Type's body before use.
+If you do not declare Type procedures you will receive an error.
+
+As every file using a function must have its declaration, declarations are
+usually kept in one or more include files to allow usage of the function by
+any module that needs it using the `#include` statement.
+
+Examples:
+Module-level Function:
+
+'' declare the function sum which takes two integers and returns an integer
+Declare Function sum( As Integer, As Integer ) As Integer
+
+   Print "the sum of 420 and 69 is: " & sum( 420, 69 )    '' call the function
+sum
+
+'' define the function sum which takes two integers and returns an integer
+Function sum( a As Integer, b As Integer ) As Integer
+   Return a + b
+End Function
+
+
+Type-level Sub:
+
+Type my_type
+    my_data As Integer
+    Declare Sub increment_data( )
+End Type
+
+Sub my_type.increment_data( )
+    my_data += 1
+End Sub
+
+Dim As my_type an_instance
+
+an_instance.my_data = 68
+
+an_instance.increment_data( )
+
+Print an_instance.my_data
+
+Dialect Differences:
+In the -lang fb dialect, `Byval` is the default parameter passing convention.
+  * In the -lang qb and -lang deprecated dialects, `Byref` is the default 
+  parameter passing convention.
+  * Type-level `Sub`/`Function`/`Operator`/`Constructor`/`Destructor`'s 
+  are only allowed in -lang fb
+
+Differences from QB:
+  * In FreeBASIC, the parameter names are optional.
+

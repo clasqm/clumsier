@@ -1,0 +1,14 @@
+Compiler Option: -O
+===============
+
+Set the optimization level for GCC
+
+Syntax:
+-O < level >
+`
+Parameters:
+level
+The optimization level: `0`, `1`, `2`, `3` or `max` (`3`).
+
+Description:
+Specifies the optimization level to be passed to GCC when using `-gen gcc`.

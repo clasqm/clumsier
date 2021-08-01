@@ -1,0 +1,75 @@
+BASE (initializer)
+================
+
+Specifies an initializer for the base UDT in derived UDT constructors
+
+Syntax:
+base ( constructor-parameters... )
+
+or:
+
+base ( UDT-initializers... )
+
+Description:
+The `Base` initializer can be used at the top of constructors of derived UDTs.
+It allows to specify an explicit constructor call or UDT initializers to be
+used to initialize the base object. It will replace the implicit default
+initialization, and must appear above any other statements in the constructor
+it is used in.
+
+Note: Unlike "`Base( )`", a "`Base.Constructor( )`" statement does not replace
+the implicit default initialization done by the constructor of a derived UDT,
+and can usually not be used legally, because it would result in two
+constructor calls for the base object (for an inheritance structure extending
+the built-in `Object` type, this second base constructor call may also corrupt
+the vtable pointer to point to the base-type vtable instead of to the type
+vtable).
+
+Examples:
+
+Type SimpleParent
+    As Integer a, b, c
+End Type
+
+Type Child extends SimpleParent
+    Declare Constructor( )
+End Type
+
+Constructor Child( )
+    '' Simple UDT initializer
+    Base( 1, 2, 3 )
+End Constructor
+
+
+
+Type ComplexParent
+    As Integer i
+    Declare Constructor( ByVal As Integer = 0 )
+End Type
+
+Constructor ComplexParent( ByVal i As Integer = 0 )
+    This.i = i
+End Constructor
+
+Type Child extends ComplexParent
+    Declare Constructor( )
+    Declare Constructor( ByRef As Child )
+End Type
+
+Constructor Child( )
+    '' Base UDT constructor call
+    Base( 1 )
+End Constructor
+
+Constructor Child( ByRef rhs As Child )
+    '' Base UDT constructor call
+    Base( rhs.i )
+End Constructor
+
+Dialect Differences:
+Methods are only supported in the -lang fb dialect, hence `Base` has no 
+function in other dialects.
+
+Differences from QB:
+New to FreeBASIC
+

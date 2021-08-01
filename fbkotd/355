@@ -1,0 +1,46 @@
+Operator Mod= (Modulus and Assign)
+================
+
+Divides a value and assigns the remainder to a variable
+
+Syntax:
+declare operator Mod= ( byref lhs as integer, byref rhs as integer )
+
+Usage:
+lhs Mod= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`rhs`
+The value to divide `lhs` by.
+
+Description:
+
+This operator divides two values of `Integer` type and assigns the remainder
+to its left-hand side (`lhs`) variable. It is functionally equivalent to:
+
+`lhs = lhs Mod rhs`
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'Mod=>' can be also used.
+
+Examples:
+
+Dim n As Integer
+n = 11
+n Mod= 3
+'' The result is 2
+Print n
+Sleep
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC

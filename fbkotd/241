@@ -1,0 +1,27 @@
+TIME
+================
+
+Returns the current system time as a string
+
+Syntax:
+declare function Time ( ) as string
+
+Usage:
+result = Time[$]
+`
+Return Value:
+Returns the current system time.
+
+Description:
+Returns the current system time in the format `hh:mm:ss`.
+
+Examples:
+
+Print "the current time is: "; Time
+
+Differences from QB:
+  * The QB TIME statement (to set the system time) is now called `Settime`.
+  * The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn only with the -w suffix compile option (or -w pedantic compile option).
+

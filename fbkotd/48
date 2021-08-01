@@ -1,0 +1,10 @@
+GD
+===============
+
+Open source code library for the dynamic creation of images by programmers.
+
+Website: http://www.libgd.org
+Platforms supported: Win32, Linux
+Headers to include: gd.bi
+Header version: 2.1.0 development version
+Examples: yes, in examples/files/GD/

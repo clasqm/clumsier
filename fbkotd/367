@@ -1,0 +1,46 @@
+SIN
+================
+
+Returns the sine of an angle
+
+Syntax:
+declare function Sin ( byval angle as double ) as double
+
+Usage:
+result = Sin( angle )
+
+Parameters:
+
+`angle`
+the angle (in radians)
+
+Return Value:
+Returns the sine of the argument `angle` as a `Double` within the range of
+`-1.0` to `1.0`.
+
+Description:
+The argument `angle` is measured in radians (not degrees).
+
+The value returned by this function is undefined for values of `angle` with an
+absolute value of `2 ^ 63` or greater.
+
+`Sin` can be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Const PI As Double = 3.1415926535897932
+Dim a As Double
+Dim r As Double
+Input "Please enter an angle in degrees: ", a
+r = a * PI / 180    'Convert the degrees to Radians
+Print ""
+Print "The sine of a" ; a; " degree angle is"; Sin ( r )
+Sleep
+
+The output would look like:
+
+    Please enter an angle in degrees: 30
+    The sine of a 30 degree angle Is 0.5
+
+Differences from QB:
+  * None

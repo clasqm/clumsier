@@ -1,0 +1,77 @@
+Operator * (Value of)
+================
+
+Dereferences a pointer
+
+Syntax:
+declare operator * ( byref rhs as T pointer ) byref as T
+
+`
+
+Usage:
+result = * rhs
+
+or
+
+* rhs = value
+
+Parameters:
+
+`rhs`
+The address to dereference.
+
+`T`
+Any standard, user-defined or procedure type.
+
+Return Value:
+Returns a reference to the value stored at the address `rhs`.
+
+Description:
+
+`Operator *` (Value of) returns a reference to the value stored at an address,
+and is often called the dereference operator. The operand is not modified in
+any way.
+Any type of `Pointer` can be dereferenced except for an `Any` `Pointer`.
+
+As a reference, the result of this operator can be used on the left-hand side
+of assignments.
+
+This operator must not be used in case of null pointer because reference is
+undefined (inducing runtime error).
+Otherwise, the user must ensure that the pointer value induces access to a
+valid memory. Otherwise, results are undefined.
+
+This operator can be overloaded for user-defined types.
+
+Examples:
+
+'This program demonstrates the use of * to utilize the value a pointer points
+to.
+Dim a As Integer
+Dim pa As Integer Ptr
+
+pa=@a 'Here, we use the @ operator to point our integer ptr at 'a'.
+' 'a' is, in this case, a standard integer variable.
+
+a=9     'Here we give 'a' a value of 9.
+
+Print "The value of 'a' is";*pa 'Here, we display the value of 'a' using a
+pointer.
+
+*pa = 1 'Here we use our pointer to change the value of 'a'
+Print "The new value of 'a' is";a 'Here we display the new value of 'a'.
+
+Output:
+
+ 
+ 
+    The value of 'a' is 9
+    The new value of 'a' is 1
+
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+New to FreeBASIC
+

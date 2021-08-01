@@ -1,0 +1,35 @@
+OPTION GOSUB
+================
+
+Enables support for `Gosub` and `On Gosub`.
+
+Syntax:
+Option Gosub
+
+Description:
+`Option Gosub` enables support for `Gosub` and `Return` (from gosub).
+
+Because `Return` could mean return-from-gosub or return-from-procedure,
+`Option Gosub` and `Option Nogosub` can be used to enable and disable `Gosub`
+support. When `Gosub` support is disabled, `Return` is then recognized as
+return-from-procedure.
+
+Examples:
+
+'' Compile with the "-lang fblite" compiler switch
+#lang "fblite"
+'' turn on gosub support
+Option GoSub
+GoSub there
+backagain:
+    Print "backagain"
+    End
+there:
+    Print "there"
+    Return
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC

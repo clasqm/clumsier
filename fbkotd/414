@@ -1,0 +1,53 @@
+FILEDATETIME
+================
+
+Returns the last modified date and time of a file as Date Serial
+
+Syntax:
+declare function FileDateTime ( byval filename as zstring ptr ) as double
+
+Usage:
+#include "file.bi"
+result = FileDateTime( filename )
+
+or
+
+#include "vbcompat.bi"
+result = FileDateTime( filename )
+
+Parameters:
+
+`filename`
+Filename to retrieve date and time for.
+
+Return Value:
+Returns a Date Serial.
+
+Description:
+
+Returns the file's last modified date and time as Date Serial.
+
+Examples:
+
+#include "vbcompat.bi"
+Dim filename As String, d As Double
+Print "Enter a filename: "
+Line Input filename
+If FileExists( filename ) Then
+  Print "File last modified: ";
+  d = FileDateTime( filename )
+  Print Format( d, "yyyy-mm-dd hh:mm AM/PM" )
+Else
+  Print "File not found"
+End If
+
+Platform Differences:
+
+  * Linux requires the `filename` case matches the real name of the file. 
+  Windows and DOS are case insensitive.
+  * Path separators in Linux are forward slashes `/` . Windows uses 
+  backward slashes `\` but it allows forward slashes. DOS uses backward 
+  slashes `\`.
+
+Differences from QB:
+New to FreeBASIC

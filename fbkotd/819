@@ -1,0 +1,125 @@
+Procedures
+================
+
+Keywords that work with procedures.
+
+Description:
+
+These keywords control the declaration and definition of both module-level
+procedures and member procedures, how they are called, how arguments are
+passed and how their names are seen externally to other modules. Procedures
+can also be declared to be executed automatically before any module-level code
+is executed.
+
+
+Declaration
+
+##Declare
+Declares a module-level or member procedure.
+
+##Sub
+Specifies a procedure that does not return an argument.
+
+##Function
+Specifies a procedure that returns an argument.
+
+##Overload
+Specifies that the procedure name can be used in other procedure declarations.
+
+##Static
+Specifies static storage for all variables and objects in the procedure body.
+
+##Const (Member)
+Specifies a const member procedure in user-defined type definitions.
+
+##Static (Member)
+Specifies a static member procedure in user-defined type definitions.
+
+Linkage
+
+##Public
+Specifies external linkage for a procedure.
+
+##Private
+Specifies internal linkage for a procedure.
+
+##Alias
+Specifies an alternate external name for a procedure.
+
+##Export
+Specifies a procedure is to be exported from a shared library.
+
+##Lib
+Specifies automatic loading of a library.
+
+Calling conventions
+
+##Stdcall
+Specifies the standard calling convention for BASIC languages, including
+FreeBASIC.
+
+##Cdecl
+Specifies the standard calling convention in the C and C++ languages.
+
+##Pascal
+Specifies the standard calling convention in the Fortran, Pascal and Microsoft
+QuickBASIC/QBasic languages.
+
+Parameter passing conventions
+
+##Byref
+Specifies passing an argument by reference.
+
+##Byval
+Specifies passing an argument by value.
+
+##Any
+Disables type-checking on arguments.
+
+Variadic Procedures
+
+##... (Ellipsis)
+Indicates a variadic procedure in a declaration.
+
+## CVA_ARG
+Macro to obtain the next argument from a variadic argument list object
+
+## CVA_COPY
+Macro to copy a variadic argument list object variable
+
+## CVA_END
+Macro to end using a variadic argument list object variable
+
+## CVA_LIST
+Variadic argument list object type
+
+## CVA_START
+Macro to initialize variadic argument list object variable
+
+##VA_FIRST
+Macro to obtain the argument list in a variadic procedure.
+
+##VA_ARG
+Macro to obtain the current argument in a variadic procedure.
+
+##VA_NEXT
+Macro to move to the next argument in a variadic procedure.
+
+Automatic execution
+
+##Constructor (Module)
+Indicates a procedure is to be executed before module-level code.
+
+##Destructor (Module)
+Indicates a procedure is to be executed after module-level code.
+
+Miscellaneous
+
+##Byref (function results)
+Specifies that a function returns by reference rather than by value.
+
+##Call
+Invokes a procedure.
+
+##Naked
+Specifies that a function body is not to be given any prolog/epilog code

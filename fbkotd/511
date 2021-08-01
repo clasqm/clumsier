@@ -1,0 +1,66 @@
+CBOOL
+================
+
+Converts numeric or string expression to a boolean (`Boolean`)
+
+Syntax:
+declare function Cbool ( byval expression as datatype ) as boolean
+
+Type typename
+
+declare operator cast ( ) as boolean
+
+End Type
+
+Usage:
+result = Cbool( numeric expression )
+result = Cbool( string expression )
+result = Cbool( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or user defined type to cast to a `Boolean` value
+
+`datatype`
+any numeric, string, or user defined type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Boolean` value.
+
+Description:
+
+The `Cbool` function converts a zero value to `False` and a non-zero value to
+`True`.
+
+The name can be explained as 'Convert to Boolean'.
+
+If the argument is a string expression, it is converted to boolean using a
+case insensitive to the string "false" to return a `False` value or "true" to
+return a `True` value.
+
+Examples:
+
+' Using the CBOOL function to convert a numeric value
+
+'Create an BOOLEAN variable
+Dim b As BOOLEAN
+
+'Convert a numeric value
+b = CBOOL(1)
+
+'Print the result, should return True
+Print b
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Cbool`.
+
+Differences from QB:
+New to FreeBASIC
+

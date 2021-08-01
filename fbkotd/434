@@ -1,0 +1,55 @@
+MID (STATEMENT)
+================
+
+Overwrites a substring of a string with another
+
+Syntax:
+declare sub Mid ( byref text as string, byval start as integer, byval length
+as integer, byref expression as const string )
+declare sub Mid ( byval text as wstring ptr, byval start as integer, byval
+length as integer, byval expression as const wstring ptr )
+
+Usage:
+Mid( text, start ) = expression
+
+or
+
+Mid( text, start, length ) = expression
+
+Parameters:
+
+`text`
+The string to work with.
+
+`start`
+The start position in `text` of the substring to overwrite. The first
+character starts at position 1.
+
+`length`
+The number of characters to overwrite.
+
+Description:
+
+Copies a maximum of `length` characters of `expression` into `text`, starting
+at `start`.
+
+If `length` is not specified, all of `expression` is copied. The size of the
+string `text` is unchanged; if `expression` is too big, as much of it is
+copied up to the end of `text`.
+
+`Mid` can also be used as a function to return part of another string. See Mid
+(Function).
+
+Examples:
+
+Dim text As String
+
+text = "abc 123"
+Print text 'displays "abc 123"
+
+' replace part of text with another string
+Mid(text, 5, 3) = "456"
+Print text 'displays "abc 456"
+
+Differences from QB:
+  * None

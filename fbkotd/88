@@ -1,0 +1,12 @@
+mxml, Mini-XML
+===============
+
+Mini-XML is a small XML parsing library that you can use to read XML and XML-
+like data files in your application without requiring large non-standard
+libraries.
+
+Website: https://www.msweet.org/mxml/
+Github: https://github.com/michaelrsweet/mxml
+Platforms supported: Win32, Linux
+Headers to include: mxml.bi
+Header version: 2.7

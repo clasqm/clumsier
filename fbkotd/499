@@ -1,0 +1,67 @@
+CONTINUE
+================
+
+Control flow statement to continue next iteration of a loop
+
+Syntax:
+Continue {do | for | while}
+
+Description:
+Skips all code until the end clause of a loop structure, i.e. `Do...Loop`,
+`For...Next`, or a `While...Wend` block, then executes the limit condition
+check. In the case of a `For...Next`, the variable is incremented according to
+the `Step` specified.
+
+Where there are multiple `Do` / `For` / `While` blocks nested, it will
+continue on the innermost block of that type, i.e. the last one entered. You
+can continue an earlier block of that type by giving the word multiple times,
+separated by commas. e.g. `continue while, while`
+
+Examples:
+
+Dim As Integer n
+
+Print "Here are odd numbers between 0 and 10!"
+Print
+For n = 0 To 10
+
+  If ( n Mod 2 ) = 0 Then
+    Continue For
+  End If
+ 
+  Print n
+ 
+Next n
+
+
+ '' simple prime number finder
+
+Print "Here are the prime numbers between 1 and 20!"
+Print
+
+Dim n As Integer, d As Integer
+
+For n = 2 To 20
+   
+    For d = 2 To Int(Sqr(n))
+       
+        If ( n Mod d ) = 0 Then ' d divides n
+           
+            Continue For, For ' n is not prime, so try next n
+           
+        End If
+       
+    Next d
+   
+    Print n
+   
+Next n
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Continue`.
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,61 @@
+JNI, The Java Native Interface
+================
+
+Standard programming interface for writing Java native methods and embedding
+the Java virtual machine into native applications.
+
+Website:
+http://download.oracle.com/javase/6/docs/technotes/guides/jni/index.html,
+http://java.sun.com/docs/books/jni/
+Platforms supported: Win32, Linux
+Headers to include: jni.bi
+Header version: from 2006
+Examples: in examples/other-languages/Java/
+
+Examples:
+
+Three files:
+
+  * `mylib.bas` \- A DLL writting in FreeBASIC
+
+#include "jni.bi"
+   
+'' Note: The mangling must be "windows-ms" or the JRE won't find any function
+Extern "windows-ms"
+    Function Java_MyLib_add( env As JNIEnv Ptr, obj As jobject, l As _
+        jint, r As jint ) As jint Export
+        Return l + r
+    End Function
+End Extern
+
+
+  * `Mylib.java` \- The Java class that represents the interface to the _ 
+       FreeBASIC code and ensures the FreeBASIC DLL is loaded
+
+class MyLib {
+    public native int add( int l, int r );
+    static {
+        System.loadLibrary( "mylib" );
+    }
+}
+
+
+  * `Test.java` \- The Java main() that uses the Mylib class
+
+class Test {
+    public static void main(String[] args) {
+        MyLib lib = new MyLib();
+        System.out.println( "2+2=" + lib.add( 2, 2 ) );
+    }
+}
+
+
+Steps to test it:
+
+  * Compile the FreeBASIC DLL: `fbc mylib.bas -dll`
+  * Compile the two Java classes: `javac Mylib.java Test.java`
+  * Run the `Test` class: `java Test`
+
+
+
+

@@ -1,0 +1,77 @@
+
+FB_MEMMOVE
+================
+
+Copies a block of memory from a location to another
+
+Syntax:
+declare function fb_memmove cdecl ( byref dst as any, byref src as any, _
+    byval bytes as uinteger ) as any ptr
+
+Usage:
+[ _result_ =] fb_memmove ( _dst_ , _src_ , _bytes_ )
+
+
+Parameters:
+
+_dst_
+starting address of destination memory
+
+_src_
+starting address of source memory
+
+_bytes_
+number of bytes to copy
+
+Return Value:
+The starting address of destination memory is returned.
+
+Description:
+
+fb_memmove copies a given number of bytes from the memory location
+_src_ to the memory location _dst_. Each starting address is taken from a
+reference to a variable or array element.
+Copying takes place as if an intermediate buffer were used, allowing the
+destination and source areas to overlap in any way (safer approach, and for
+any platform). Using [fb_memcopy](wikka.php@wakka=FBMemcopy) is
+sufficient (and may induce greater speed) when the memory areas do not
+overlap.
+To avoid overflows, the valid memory areas pointed to by both _src_ and
+_dst_ must be at least equal in size to the number of bytes to be copied.
+
+The underlying type of the objects pointed to by both the source and
+destination pointers are irrelevant for this function.
+The function does not check for any terminating null character in the source
+area. It always copies exactly the given number of bytes.
+The result is a binary copy of the data.
+
+Note: In order to copy from/to memory referenced by a
+Pointer, it must be dereferenced first (or else
+specify in argument term the Byval keyword in
+front of the pointer name). Otherwise, fb_memmove will try to copy the
+bytes from/to the pointer variable 's memory location.
+
+Examples:
+
+Dim As ZString * 33 z = "memmove can be very useful......"
+
+Print z
+
+fb_memmove(z[20], z[15], 11)
+
+Print z
+
+Sleep
+
+Output:
+
+ 
+ 
+    memmove can be very useful......
+    memmove can be very very useful.
+
+
+Differences from QB:
+
+  * The behavior and usage is new to FreeBASIC.
+

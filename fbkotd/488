@@ -1,0 +1,73 @@
+Mathematical Functions
+================
+
+Procedures that work with numbers mathematically.
+
+Description:
+
+This set of procedures provide basic algebraic and trigonometric function.
+Random numbers can also be retrieved, using a variety of random number
+generators.
+
+Algebraic Procedures
+Trigonometry Procedures
+Miscellaneous Procedures
+
+Algebraic Procedures
+
+##ABS
+Returns the absolute value of a number.
+
+##EXP
+Returns e raised to some power.
+
+##LOG
+Returns the natural logarithm of a number.
+
+##SQR
+Returns the square root of a number.
+
+##FIX
+Returns the integer part of a number.
+
+##FRAC
+Returns the fractional part of a number.
+
+##INT
+Returns the largest integer less than or equal to a number.
+
+##SGN
+Returns the sign of a number.
+
+Trigonometric Procedures
+
+##SIN
+Returns the sine of an angle.
+
+##ASIN
+Returns the arcsine of a number.
+
+##COS
+Returns the cosine of an angle.
+
+##ACOS
+Returns the arccosine of a number.
+
+##TAN
+Returns the tangent of an angle.
+
+##ATN
+Returns the arctangent of a number.
+
+##ATAN2
+Returns the arctangent of the ratio between two numbers.
+
+Miscellaneous Procedures
+
+##RANDOMIZE
+Seeds the random number generator used by `Rnd`.
+
+##RND
+Returns a random Double in the range [0, 1).
+
+

@@ -1,0 +1,66 @@
+DYLIBSYMBOL
+================
+
+Returns the address of a function or variable in a dll
+
+Syntax:
+declare function Dylibsymbol ( byval library as any ptr, byref symbol as
+string ) as any ptr
+declare function Dylibsymbol ( byval library as any ptr, byval symbol as short
+) as any ptr
+
+Usage:
+result = Dylibsymbol ( library, symbol )
+
+Parameters:
+
+`library`
+The any ptr handle of a DLL returned by `Dylibload`
+
+`symbol`
+A string containing name of the function, or variable in the library to return
+the address of. In Windows only, can also be a `short` containing the ordinal
+of the function/variable.
+
+Return Value:
+A `pointer` to the function or variable in the library.
+
+If the function fails, the return value is 0.
+
+Description:
+
+`Dylibsymbol` returns a pointer to the variable or function named `symbol` ,
+in the dll pointed by `libhandle`. `libhandle` is obtained by loading the dll
+with `Dylibload`. The symbol must have been `Export`ed in the dll.
+If `libhandle` is 0, the symbol is searched in the current executable or dll.
+
+If using `Cdecl` functions, only the name of the procedure needs to be
+specified. If dynamically linking to a function created using STDCALL (default
+in windows), then the function must be decorated. To decorate a function, use
+its name, '@', then the number of bytes passed as arguments. For instance if
+the function `FOO` takes 3 integer arguments, the decorated function would be
+'FOO@12'. Remember, without an explicit `alias`, the procedure name will be
+uppercase.
+
+If linking to a dll created in Visual C++(tm), decoration need not be used.
+For GCC, decoration is needed.
+
+Note: The dylibsymbol, if failing, will attempt to automatically decorate the
+procedure, from @0 to @256, in 4 byte increments.
+
+Examples:
+
+See the dynamic loading example on the Shared Libraries page.
+
+Platform Differences:
+
+  * Dynamic link libraries are not available in DOS ,as the OS doesn't support them.
+  * Ordinals are not supported on Linux, 0 is always returned.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Dylibsymbol`.
+
+Differences from QB:
+New to FreeBASIC
+

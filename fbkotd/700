@@ -1,0 +1,87 @@
+FB_MEMCOPYCLEAR
+================
+
+Copies the first part of a block of memory from a location to another and
+clears the rest
+
+Syntax:
+declare sub fb_memcopyclear ( byref dst as any, byval dstlen as uinteger,
+byref src as any, byval srclen as uinteger )
+
+Usage:
+fb_memcopy( dst, dstlen, src, srclen )
+
+Parameters:
+
+`dst`
+starting address of destination memory
+
+`dstlen`
+number of bytes to write
+
+`src`
+starting address of source memory
+
+`srclen`
+number of first bytes to copy (other are cleared)
+
+Description:
+
+`fb_memcopycopy` copies a given number of bytes (`dstlen`) from the memory
+location `src` to the memory location `dst`, but only the first `srclen` bytes
+are really copied and the rest is cleared (`(dstlen` \- `srclen)` bytes).
+Each starting address is taken from a reference to a variable or array
+element.
+The memory areas must not overlap (otherwise, the copying is not guaranteed to
+work properly, especially depending on the platform).
+To avoid overflows, the valid memory areas pointed to by both `src` and `dst`
+must be at least equal in size to the number of bytes to be copied (including
+the bytes cleared).
+
+The underlying type of the objects pointed to by both the source and
+destination pointers are irrelevant for this function.
+The function does not check for any terminating null character in the source
+area. It always copies exactly the given number of bytes.
+The result is a binary copy of the data for the first `srclen` bytes and a
+zeroing for the rest (`(dstlen` \- `srclen)` bytes).
+
+Note: In order to copy from/to memory referenced by a `Pointer`, it must be
+dereferenced first (or else specify in argument term the `Byval` keyword in
+front of the pointer name). Otherwise, `fb_memcopyclear` will try to copy the
+bytes from/to the pointer variable's memory location.
+
+Examples:
+
+Dim src As ZString * 10 = "FreeBASIC"
+Dim dst As ZString * 10 = "012345678"
+
+Print "before:"
+Print "src = " & src
+Print "dst = " & dst
+Print
+
+'' copy first 4 bytes and clear the rest
+fb_memcopyclear(dst, SizeOf(dst), src, 4)
+
+Print "after:"
+Print "src = " & src
+Print "dst = " & dst
+
+Sleep
+
+Output:
+
+ 
+ 
+    before:
+    src = FreeBASIC
+    dst = 012345678
+ 
+    after:
+    src = FreeBASIC
+    dst = Free
+
+
+Differences from QB:
+  * The behavior and usage is new to FreeBASIC.
+

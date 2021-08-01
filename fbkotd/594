@@ -1,0 +1,69 @@
+CULNGINT
+================
+
+Converts numeric or string expression to 64-bit unsigned integer (`Ulongint`)
+
+Syntax:
+declare function Culngint ( byval expression as datatype ) as ulongint
+
+Type typename
+
+declare operator cast ( ) as ulongint
+
+End Type
+
+Usage:
+result = Culngint( numeric expression )
+result = Culngint( string expression )
+result = Culngint( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Ulongint` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Ulongint` value.
+
+Description:
+
+The `Culngint` function rounds off the decimal part and returns a 64-bit
+`Ulongint` value. The function does not check for an overflow, and results are
+undefined for values which are less than `0` or larger than `18` `446` `744`
+`073` `709` `551` `615`. Additionally, casts from floating-point expressions
+are currently not guaranteed to work for values higher than `2^63` (`9` `223`
+`372` `036` `854` `775` `808`).
+
+The name can be explained as 'Convert to Unsigned LoNG INTeger'.
+
+If the argument is a string expression, it is converted to numeric by using
+`Valulng`.
+
+Examples:
+
+' Using the CLNGINT function to convert a numeric value
+
+'Create an UNSIGNED LONG INTEGER variable
+Dim numeric_value As ULongInt
+
+'Convert a numeric value
+numeric_value = CULngInt(12345678.123)
+
+'Print the result, should return 12345678
+Print numeric_value
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Culngint`.
+
+Differences from QB:
+New to FreeBASIC
+

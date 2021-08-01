@@ -1,0 +1,81 @@
+Operator [] (Pointer index)
+================
+
+Returns a reference to memory offset from an address
+
+Syntax:
+declare operator [] ( byref lhs as T pointer, byref rhs as integer ) byref as
+T
+
+`
+
+Usage:
+result = lhs [ rhs ]
+
+or
+
+lhs [ rhs ] = value
+
+Parameters:
+
+`lhs`
+The base address.
+
+`rhs`
+A signed offset from `lhs`.
+
+`T`
+Any data type.
+
+Description:
+
+This operator returns a reference to a value some distance in memory from a
+base address. It is essentially shorthand for "`*(lhs + rhs)`" because the
+reference can be thought of as a pointer having as value the memory location
+"`(lhs + rhs)`", and which is implicitly dereferenced; both do exactly the
+same thing.
+Like pointer arithmetic, any type of `Pointer` can be indexed except for an
+`Any` `Pointer`. Also, like pointer arithmetic, it is up to the user to make
+sure meaningful data is being accessed.
+
+When indexing a '2-dimensional' pointer (i.e. a `T Ptr Ptr`), the first
+(leftmost) index is applied before the second: For example, `Pt[I1][I2]` =
+`*(Pt[I1] + I2)` = `*(*(Pt + I1) + I2)`
+In general, when using an 'n-dimensional' pointer: `Pt[I1][I2].....[In]`, the
+index order (from left to right) corresponds to the dereferencing order.
+
+This operator must not be used in case of null pointer because reference is
+undefined (inducing runtime error).
+Otherwise, the user must ensure that the offset value (`rhs`) is in a range
+that allows an access to valid memory. Outside this range, results are
+undefined.
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Examples:
+
+'' initialize a 5-element array
+Dim array(4) As Integer = { 0, 1, 2, 3, 4 }
+
+'' point to the first element
+Dim p As Integer Ptr = @array(0)
+
+'' use pointer indexing to output array elements
+For index As Integer = 0 To 4
+    Print p[index];
+Next
+Print
+
+
+Will give the output,
+
+
+ 
+ 
+     0 1 2 3 4
+
+
+Differences from QB:
+New to FreeBASIC
+

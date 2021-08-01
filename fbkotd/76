@@ -1,0 +1,17 @@
+__FILE_NQ__
+===============
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FILE_NQ__
+
+Description:
+Substituted with the non-quoted source file name where used.
+
+Examples:
+
+#print __FILE_NQ__
+
+Differences from QB:
+New to FreeBASIC

@@ -1,0 +1,44 @@
+WRITE
+================
+
+Outputs a comma-separated list of values to the screen
+
+Syntax:
+Write [ expressionlist ]
+
+Parameters:
+
+`expressionlist`
+Comma-separated list of items to print
+
+Description:
+
+Outputs the values in `expressionlist` to the screen. The values are separated
+with commas, and strings are enclosed in double quotes. Numeric values with an
+absolute value of less than one are prefixed with a zero (`0`) if none is
+given (e.g. `0.5`, `-0.123`). Floating-point numbers with absolute values
+greater than or equal to `10^16`, or with absolute values greater than `0` and
+less than `10^-5` are printed in scientific notation (e.g. `1.8e+019`,
+`3e-005`)
+
+If no expression list is given, `Write` outputs a carriage return.
+
+Examples:
+
+Dim i As Integer = 10
+Dim d As Double = 123.456
+Dim s As String = "text"
+
+Write 123, "text", -.45600
+Write
+Write i, d, s
+
+will produce the output:
+
+
+    123,"text",-0.456
+
+    10,123.456,"text"
+
+Differences from QB:
+  * QBASIC might print format floating-point values in slightly different ways.

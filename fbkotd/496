@@ -1,0 +1,61 @@
+CDBL
+================
+
+Converts numeric or string expression to `Double` precision floating point
+
+Syntax:
+declare function Cdbl ( byval expression as datatype ) as double
+
+Type typename
+
+declare operator cast ( ) as double
+
+End Type
+
+Usage:
+result = Cdbl( numeric expression )
+result = Cdbl( string expression )
+result = Cdbl( user defined type )
+
+Parameters:
+
+`expression`
+a numeric, string, or pointer expression to cast to a `Double` value
+
+`datatype`
+any numeric, string, or pointer data type
+
+`typename`
+a user defined type
+
+Return Value:
+A `Double` precision value.
+
+Description:
+
+The `CDbl` function returns a 64-bit `Double` value. The function does not
+check for an overflow, so be sure not to pass a value outside the
+representable range of the `Double` data type. The name can be explained as
+'Convert to DouBLe'.
+
+If the argument to `CDbl` is a string expression, it is first converted to
+numeric by using `Val`.
+
+Examples:
+
+' Using the CDBL function to convert a numeric value
+
+'Create an DOUBLE variable
+Dim numeric_value As Double
+
+'Convert a numeric value
+numeric_value = CDbl(-12345678.123)
+
+'Print the result, should return -12345678.123
+Print numeric_value
+Sleep
+
+
+Differences from QB:
+  * The string argument was not allowed in QB
+

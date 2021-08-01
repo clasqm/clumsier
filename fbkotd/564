@@ -1,0 +1,68 @@
+PRIVATE: (Access Control)
+================
+
+Specifies private member access control in a `Type` or `Class`
+
+Syntax:
+Type typename
+
+Private:
+
+member declarations
+
+End Type
+
+Parameters:
+
+`typename`
+
+name of the `Type` or `Class`
+
+`member declarations`
+
+declarations for fields, functions, or enumerations
+
+Description:
+
+`Private:` indicates that `member declarations` following it have private
+access. Private members are accessible only from inside a member function for
+the `Type` or `Class` (so not accessible from inside a member function for
+types or classes which are derived from the `Type` or `Class`).
+
+`member declarations` following `Private:` are private until a different
+access control specifier is given, like `Public:` or `Protected:`.
+
+Members in a `Type` declaration are `Public:` by default if no member access
+control specifier is given.
+
+Examples:
+
+Type testing
+  number As Integer
+  Private:
+    nome As String
+  Declare Sub setNome( ByRef newnome As String )
+End Type
+
+Sub testing.setnome( ByRef newnome As String )
+  '' This is OK. We're inside a member function for the type
+  This.nome = newnome
+End Sub
+
+Dim As testing myVariable
+
+'' This is OK, number is public
+myVariable.number = 69
+
+'' this would generate a compile error
+'' - nome is private and we're trying to access it outside any of this TYPE's
+member functions
+'' myVariable.nome = "FreeBASIC"
+
+
+Dialect Differences:
+Available only in the -lang fb dialect.
+
+Differences from QB:
+New to FreeBASIC
+

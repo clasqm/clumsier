@@ -1,0 +1,20 @@
+__FB_BUILD_SHA1__
+====================
+
+Intrinsic define (macro string) set by the compiler
+
+Syntax:
+__FB_BUILD_SHA1__
+
+Description:
+Substituted by a string of the compiler's source SHA-1 revision. The value is
+set using the SHA-1 commit id of the source code revision used to build the
+compiler binary, if available. If the SHA-1 was not available at the time of
+building the compiler, the value will be an empty string.
+
+Examples:
+
+Print __FB_BUILD_SHA1__
+
+Differences from QB:
+New to FreeBASIC

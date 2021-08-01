@@ -1,0 +1,57 @@
+STDCALL
+================
+
+Specifies a stdcall-style calling convention in a procedure declaration
+
+Syntax:
+Sub name Stdcall [Overload] [Alias "alias"] ( parameters )
+Function name Stdcall [Overload] [Alias "alias"] ( parameters ) [ Byref ] as
+return_type
+
+Description:
+In procedure declarations, `Stdcall` specifies that a procedure will use the
+`Stdcall` calling convention. In the `Stdcall` calling convention, any
+parameters are to be passed (pushed onto the stack) in the reverse order in
+which they are listed, that is, from right to left. The procedures need not
+preserve the `EAX`, `ECX` or `EDX` registers, and must clean up the stack (pop
+any parameters) before it returns.
+
+`Stdcall` is not allowed to be used with variadic procedure declarations
+(those with the last parameter listed as "`...`").
+
+`Stdcall` is the default calling convention on Windows, unless another calling
+convention is explicitly specified or implied by one of the `EXTERN blocks`.
+`Stdcall` is also the standard (or most common) calling convention used in
+BASIC languages, and the Windows API.
+
+Examples:
+
+Declare Function Example Stdcall (param1 As Integer, param2 As Integer) As
+Integer
+Declare Function Example2 CDecl (param1 As Integer, param2 As Integer) As
+Integer
+
+Function Example Stdcall (param1 As Integer, param2 As Integer) As Integer
+    ' This is an STDCALL function, the first parameter on the stack is 
+    'param2, since it was pushed last.
+    Print param1, param2
+    Return param1 Mod param2
+End Function
+
+Function Example2 CDecl (param1 As Integer, param2 As Integer) As Integer
+    ' This is a CDECL function, the first parameter on the stack is param1, 
+    'since it was pushed last.
+    Print param1, param2
+    Return param1 Mod param2
+End Function
+
+
+Platform Differences:
+
+  * On Windows systems, `Stdcall` procedures have an `"@N"` decoration 
+  added to their internal/external name, where `N` is the size of the 
+  parameter list, in bytes.
+
+Differences from QB:
+New to FreeBASIC
+

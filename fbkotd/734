@@ -1,0 +1,82 @@
+Operator For (iteration)
+================
+
+Declares or defines operators used by a `For...Next` loop with user defined
+type variables
+
+Syntax:
+{ Type | Class | Union } typename
+
+declare operator For ()
+declare operator For ( [ byref | byval ] stp as typename )
+...
+
+End { Type | Class | Union }
+
+Usage:
+For iterator [ As typename ] = start_value To end_value [ Step step_value ]
+
+[ ...statements... ]
+
+Next
+
+`
+Parameters:
+`(including arguments)`
+
+`typename`
+name of the `Type`, `Class`, or `Union`
+
+`stp`, `step_value`
+a `typename` object used as an incremental value
+
+`iterator`
+a `typename` object used as an iterator
+
+`end_value`
+a `typename` object used as a loop-terminating value
+
+`start_value`
+a `typename` object used to copy construct or assign to the iterator initially
+
+Description:
+
+`Operator For`, `Operator Next` and `Operator Step` can be overloaded in user-
+defined type definitions to allow objects of that type to be used as iterators
+and step values in `For...Next` loops.
+As all non-static member procedures, they have passed a hidden `this`
+parameter that allows to access by reference to the iterator object in the
+code body of the 3 operators.
+
+`Operator For` is called once after copy constructing or assigning to the
+iterator object, and allows the object to perform any additional
+initialization needed in preparation for the loop.
+
+The first version of `Operator For` is used if no step value is given in the
+`For...Next` statement. If a step value is given, the second version is used
+and is passed the step value because eventual additional initialization may
+use it.
+
+Advanced usage
+
+The above description seems to imply that the 3 arguments `start_value`,
+`end_value`, and `step_value` must be of the same type as the `iterator` (this
+is the more obvious use), but it is not quite true:
+
+- The `start_value`, `end_value`, and `step_value` arguments can be of any 
+type (of different types among themselves and also of different types from 
+the one of the `iterator`).
+- The only constraint is that the `iterator` could be constructed (in case 
+of local `iterator`) or assigned (in case of global `iterator`) from the 
+`start_value` argument (because the `iterator` is implicitly constructed 
+or assigned under the hood).
+- Similarly the other parameters `end_value`, and `step_value` must be able 
+to be converted into objects of the same type as the `iterator`.
+
+Examples:
+
+See the Operator Step examples.
+
+Dialect Differences:
+Only available in the -lang fb dialect.
+

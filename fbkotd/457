@@ -1,0 +1,50 @@
+SHELL
+================
+
+Sends a command to the system command interpreter
+
+Syntax:
+declare function Shell ( byref command as const string ) as long
+
+Usage:
+result = Shell( command )
+
+Parameters:
+
+`command`
+A string specifying the command to send to the command interpreter.
+
+Return Value:
+If the command could not be executed, `-1` is returned. Otherwise, the command
+is executed and its exit code is returned.
+
+Description:
+
+Program execution will be suspended until the command interpreter exits.
+
+Examples:
+
+'e.g. for windows:
+Shell "dir c:*.*"
+
+'e.g. for linux:
+Shell "ls"
+
+
+Platform Differences:
+
+  * Linux requires the command case matches the real name of the command. 
+  Windows and DOS are case insensitive. The program being shelled may be 
+  case sensitive for its command line parameters.
+  * Path separators in Linux are forward slashes / . Windows uses backward 
+  slashes \ but it allows for forward slashes. DOS uses backward \ slashes.
+  * If an empty command string is passed, DOS will open an interactive 
+  command prompt. On Windows, an error may be returned.
+
+
+Differences from QB:
+  * QB allowed SHELL on its own without a "command" argument which caused 
+  a default command shell to be started. Execution in the main program 
+  would suspend until exit from the command shell. The behaviour in FB 
+  is platform-dependent.
+

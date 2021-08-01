@@ -1,0 +1,226 @@
+Using the fbc command-line.
+==========================
+
+The official FreeBASIC distribution comes with fbc, FreeBASIC's flagship
+compiler. fbc is a command line compiler, and can be launched from the
+console - from DOS, the Windows command prompt or a Linux shell. Running
+fbc from the console without any arguments displays a list of available
+options, or command-line switches, that can be used to adjust the
+behavior of the compiler.
+
+At its simplest, fbc takes a source file as a command-line argument and
+produces an executable file. It does this by compiling the source file
+(.bas) into an assembly (.asm) file, then compiling this into an object
+file (.o) using GAS and finally linking using LD this object file to
+other object files and libraries it needs to run, producing the final
+executable file. The assembly and compiled object files are deleted at
+this point by default. For example, the following command,
+
+fbc foo.bas
+
+produces the executable foo.exe in DOS and Windows, and ./foo in Linux.
+fbc can accept multiple source files at once, compile and link them all
+into one executable. For example, the following command,
+
+fbc foo.bas bar.bas baz.bas
+
+produces the executable foo.exe in DOS and Windows, and ./foo in Linux.
+Since foo.bas was listed first, it will be the main entry point into the
+executable, and also provide its name. To specify a different entry
+point or executable name, use the "-m" and "-x" switches, respectively.
+To have, for example, baz.bas provide the main entry point into an
+executable called foobar.exe, you would use
+
+fbc -x foobar.exe -m baz foo.bas bar.bas baz.bas
+
+The "-x" switch names the executable verbatim, so in Linux, the
+executable produced from the above command would be called ./foobar.exe.
+
+Syntax:
+fbc [ options ] [ input_list ]
+
+Where input_list is a list of filenames. Accepted files are:
+
+File extension 	Description
+
+	.bas 	FreeBASIC source file
+	.a 	Library
+	.o 	Object file
+	.rc 	Resource script (Windows only)
+	.res 	Compiled resource (Windows only)
+	.xpm 	X icon pixmap (Linux only)
+
+Source code
+
+-b < name >
+	Add a source file to compilation
+-i < name >
+	Add a path to search for include files
+-include < name >
+	Include a header file on each source compiled
+-d < name=val >
+	Add a preprocessor's define
+-lang < name >
+	Select language mode: fb, fblite, qb, deprecated
+-forcelang < name >
+	Select language mode: fb, fblite, qb, deprecated (overrides
+	statements in code)
+
+Code generation
+
+-target < platform >
+	Set the target platform for cross compilation
+-gen < backend >
+	Sets the compiler backend (default is 'gas' for x86 and 'gcc' for
+	x86_64)
+-asm < format >
+	Sets the assembler format for Asm block
+-arch < type >
+	Set target architecture (default: 486)
+-O < level >
+	Set the optimization level (-gen gcc)
+-vec < level >
+	Set level of vector optimizations enabled by the compiler
+	(default: 0)
+-fpu < type >
+	Set the floating point arithmetics unit (default: FPU)
+-fpmode < type >
+	Select between fast and accurate floating-point operations (
+	default: PRECISE)
+-z < value >
+	Sets miscellaneous or experimental options
+-pic
+	Generate position-independent code (non-x86 Unix shared libs)
+
+Compilation
+
+-m < name >
+	Main file without extension, the entry point (default is the first
+	.bas file on the command line)
+-g
+	Add debug info
+-profile
+	Enable function profiling
+-e
+	Add error checking
+-ex
+	Add error checking with RESUME support
+-exx
+	Same as -ex, plus array bounds, null-pointer, and error location
+	reporting
+-Wa < opt >
+	Pass options to GAS (separated by commas)
+-Wc < opt >
+	Pass options to GCC (separated by commas)
+-o < name >
+	Set object file path/name (must be passed after the .bas file)
+
+Linking
+
+-a < name >
+	Add an object file to linker's list
+-l < name >
+	Add a library file to linker's list
+-p < name >
+	Add a path to search for libraries
+-mt
+	Link with thread-safe runtime library
+-nodeflibs
+	Do not include the default libraries
+-static
+	Prefer static libraries over dynamic ones when linking
+-map < name >
+	Save the linking map to file name
+-Wl < opt >
+	Pass options to LD (separated by commas)
+-export
+	Export symbols for dynamic linkage
+-lib
+	Create a static library
+-dylib
+	Create a DLL, including the import library
+-dll
+	Create a DLL, including the import library. (Same as -dylib)
+-x < name >
+	Set executable/library path/name
+
+Behaviour
+
+-prefix < path >
+	Set the compiler prefix path
+-version
+	Show compiler version on the command line, do not compile or link
+-v
+	Be verbose
+-print < option >
+	Display certain information (fblibdir, host, target, x)
+-pp
+	Emit the preprocessed input file only, do not compile
+-r
+	Compile into intermediate file(s) only, do not assemble or link
+-rr
+	Compile into asm file(s) only, do not assemble or link
+-c
+	Compile and assemble source file only, do not link
+-R
+	Do not delete the intermediate file(s)
+-RR
+	Do not delete the asm file(s)
+-C
+	Do not delete the object file(s)
+-w < value >
+	Set min warning level: all, none, param, escape, pedantic, next,
+	funcptr, constness, suffix or a value
+-maxerr < val >
+	Only stop parsing if <val> errors occurred
+-noerrline
+	Do not show source line where error occurred
+-noobjinfo
+	Do not read/write compile-time info from/to .o and .a files
+-showincludes
+	Display a tree of file names of #included files
+
+Target specific
+
+-s < name >
+	Set subsystem (gui, console)
+-t < value >
+	Set stack size in kbytes (default: 1 MB or 2 MB)
+
+Meta
+
+@< file >
+	Read (additional) command-line options from a file
+
+Examples:
+
+fbc myfile.bas
+(With DOS version of FBC, compile and link a DOS executable MYFILE.EXE.)
+
+fbc -s gui myfile.bas
+(With Windows version of FBC, compile and link a Windows executable
+myfile.exe. Running the program will not show the console window
+("MS-DOS Prompt"))
+
+fbc -lib module1.bas module2.bas module3.bas -x libmylib.a
+(Compile and link a static library libmylib.a from the three source
+files)
+
+fbc -m main_module -c main_module.bas
+(Compile an object file main_module.o and mark it as an entry point)
+
+fbc -c sub_module.bas
+(Compile an object file sub_module.o)
+
+fbc -x application.exe main_module.o sub_module.o
+(Link an executable application.exe)
+
+Note: How to include an icon in a FB executable program
+
+There is a simple command line option to compile a FB program into an
+executable with an Icon:
+- Create a *.rc file, for example appicon.rc, with this info:
+	FB_PROGRAM_ICON ICON "appicon.ico"
+	(where appicon.ico is the name of icon)
+- Then when compiling program, add appicon.rc in the list of files to
+compile.

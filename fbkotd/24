@@ -1,0 +1,10 @@
+GRX
+===============
+
+2D graphics library
+
+Website: http://grx.gnu.de/
+Platforms supported: Win32, Linux, DOS
+Headers to include: grx/grx20.bi
+Header version: 2.4.6
+Examples: in examples/graphics/grx/

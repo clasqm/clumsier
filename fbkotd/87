@@ -1,0 +1,18 @@
+Compiler Option: -strip
+===============
+
+Omit all symbol information from the output file
+
+Syntax:
+-strip
+
+Description:
+The `-strip` compiler option passes an option to the linker to strip (remove)
+all symbols.
+
+Platform Differences:
+  * fbc strips all symbols by default on Dos and Windows platforms only
+
+See also
+  * -nostrip
+  * Using the Command Line

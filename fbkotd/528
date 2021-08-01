@@ -1,0 +1,60 @@
+FILEEXISTS
+================
+
+Tests the existence of a file
+
+Syntax:
+declare function FileExists ( byval filename as zstring ptr ) as long
+
+Usage:
+#include "file.bi"
+result = FileExists( filename )
+
+`or`
+
+#include "vbcompat.bi"
+result = FileExists( filename )
+
+Parameters:
+
+`filename`
+Filename to test for existence.
+
+Return Value:
+Returns non-zero (`-1`) if the file exists, otherwise returns zero (`0`).
+
+Description:
+
+`FileExists` tests for the existence of a file.
+Internally, it may issue an Open() and a Close() function, which may have
+consequences - eg, any existing `Lock`(s) on the file may be released.
+Depending on the exact requirements, alternative methods of checking for file
+existence may be to use the `Dir()` function (being careful of attributes and
+ensuring the path doesn't contain wildcards), or to try `Open`ing the file and
+checking the return value for success.
+
+Examples:
+
+#include "vbcompat.bi"
+
+Dim filename As String
+
+Print "Enter a filename: "
+Line Input filename
+
+If FileExists( filename ) Then
+  Print "File found: " & filename
+Else
+  Print "File not found: " & filename
+End If
+
+
+Platform Differences:
+
+  * Linux requires the `filename` case matches the real name of the file. Windows and DOS are case insensitive.
+  * Path separators in Linux are forward slashes `/`. Windows uses backward slashes `\` but it allows for forward slashes. DOS uses backward `\` slashes.
+
+
+Differences from QB:
+New to FreeBASIC
+

@@ -1,0 +1,86 @@
+Returning Values
+================
+
+Returning Values
+
+... refers to the ability of a `Function` procedure to have a value when the
+function finishes such that the value can be used in an expression or assigned
+to a variable.
+
+The value of a function can be returned in three ways:
+
+'' Using the name of the function to set the return value and continue
+executing the function:
+Function myfunc1() As Integer
+   myfunc1 = 1
+End Function
+
+'' Using the keyword 'Function' to set the return value and continue executing
+the function:
+Function myfunc2() As Integer
+   Function = 2
+End Function
+
+'' Using the keyword 'Return' to set the return value and immediately exit the
+function:
+Function myfunc3() As Integer
+   Return 3
+End Function
+
+
+
+'' This program demonstrates a function returning a value.
+
+Declare Function myFunction () As Integer
+
+Dim a As Integer
+
+'Here we take what myFunction returns and add 10.
+a = myFunction() \+ 10
+
+'knowing that myFunction returns 10, we get 10+10=20 and will print 20.
+Print a
+
+Function myFunction () As Integer
+  'Here we tell myFunction to return 10.
+  Function = 10
+End Function
+
+
+Returning References
+
+Function results can also be returned by reference, rather than by value. The
+semantics are quite different.
+
+When assigning a `Byref` function result through a `Function = variable` or
+`Return variable` statement, the function does not copy and return the
+variable's value. Instead, it returns a reference to that variable. The caller
+of the function can modify the variable through the reference returned from
+the function, without having to use pointers manually. This is very much like
+`Byref` parameters.
+
+For more information, refer to: `Byref (function results)`
+
+Manually returning pointers as-is from Byref functions
+
+By specifying the `Byval` keyword in front of the result variable in the
+`Function = variable` or `Return variable` statements, an address (usually
+stored in a pointer) can be passed directly as-is, forcing the `Byref`
+function result to reference the same memory location which the address
+pointed to. For example:
+
+
+Dim Shared i As Integer = 123
+
+Function f( ) ByRef As Integer
+    Dim pi As Integer Ptr = @i
+
+    Function = ByVal pi
+
+    '' or, with RETURN it would look like this:
+    Return ByVal pi
+End Function
+
+Print i, f( )
+
+

@@ -1,0 +1,129 @@
+CVA_LIST
+================
+
+Variadic argument list object type
+
+Syntax:
+dim variable as cva_list
+
+Description:
+`cva_list` is a built in data type for working with the variable length
+argument list in a variadic procedure.
+
+Use `cva_start` to initialize the `cva_list` variable (constructor).
+Use `cva_copy` to copy a `cva_list` variable (copy constructor).
+Use `cva_arg` to obtain the value of the next argument.
+Use `cva_end` when finished with a `cva_list` variable (destructor).
+
+The exact type and size of `cva_list` varies depending on the target platform.
+This builtin type provides a layer of abstraction over the underlying
+mechanism for obtaining the values passed to a variadic procedure.
+
+fbc will select a default `cva_list` type depending on -target, -arch, and
+-gen command line options, as described in the following code.
+
+#if (__FB_BACKEND__ = "gcc")
+    #if defined( __FB_64BIT__ )
+        #if defined( __FB_ARM__ )
+            Type __va_list Alias "__va_list"
+                As Any Ptr __stack
+                As Any Ptr __gr_top
+                As Any Ptr __vr_top
+                As Long __gr_offs
+                As Long __vr_offs
+            End Type
+            Type cva_list As __va_list Alias "__builtin_va_list"
+        #elseif defined( __FB_WIN32__ )
+            Type cva_list As Any Alias "__builtin_va_list" Ptr
+        #else
+            Type __va_list_tag Alias "__va_list_tag"
+                As ulong gp_offset
+                As ulong fp_offset
+                As Any Ptr overflow_arg_area
+                As Any Ptr reg_save_area
+            End Type 
+            Type cva_list As __va_list_tag Alias "__builtin_va_list[]"
+        #endif 
+    #else
+        Type cva_list As Any Alias "__builtin_va_list" Ptr
+    #endif
+#else
+    Type cva_list As Any Alias "char" Ptr
+#endif
+
+
+
+Examples:
+
+Function average CDecl(count As Integer, ... ) As Double
+
+    Dim sum As Double = 0
+    Dim i As Integer
+
+    Dim args As cva_list '' argument list object
+    cva_start( args, count ) '' constructor
+    For i = 1 To count
+        sum += cva_arg(args, Double)
+    Next
+    cva_end( args ) '' destructor
+   
+    Return sum / count
+End Function
+
+Print average(4, 3.4 ,5.0, 3.2, 4.1) '' all passed variable arguments must be
+of type double
+Print average(2, 65.2, 454.65481)    '' all passed variable arguments must be
+of type double
+
+
+The output would look like:
+
+ 
+ 
+     3.925
+     259.927405
+
+
+
+'' pass the args list to a function taking an cva_list type argument
+#include "crt/stdio.bi"
+
+Sub myprintf CDecl( fmt As ZString Ptr, ... )
+    Dim args As cva_list
+    cva_start( args, fmt )
+    vprintf( fmt, args )
+    cva_end( args )
+End Sub
+
+Dim As String s = "bar"
+
+myprintf( !"integer=%i, longint=%lli float=%f\n", _
+    1, 1ll Shl 32, 3.3 )
+
+myprintf( !"string=%s, string=%s\n", "foo", s )
+
+
+Platform Differences:
+
+  * The exact type and size of `cva_list` depends on -target, -arch, -gen 
+  command line options.
+  * In `-gen gas`, `cva_list` is a pointer
+  * In `-gen gcc`, `cva_list` is a pointer, a struct, or a struct array. 
+  The `cva_list` type is replaced by `"__builtin_va_list"` in gcc.
+  * On 32-bit targets, gas backend: `type cva_list as any alias "char" ptr`.
+  * On 32-bit targets, gcc backend: `type cva_list as any alias 
+  "__builtin_va_list" ptr`
+  * On Windows 64-bit, gcc backend: `type cva_list as any alias 
+  "__builtin_va_list" ptr`
+  * On Linux x86_64, gcc backend: `type cva_list as __va_list_tag alias 
+  "__builtin_va_list[]"`
+  * On arm64, gcc backend: `type cva_list as __va_list alias 
+  "__builtin_va_list"`
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__cva_list`.
+
+Differences from QB:
+New to FreeBASIC
+

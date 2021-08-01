@@ -1,0 +1,38 @@
+Arithmetic Operators
+================
+
+Operators that can be used in mathematical expressions
+
+The mathematical operators perform mathematical operations with the values of
+their operands and return the results.
+
+##Operator + (Add)
+Returns the result of an addition of two operands.
+
+##Operator - (Subtract)
+Returns the result of a subtraction of two operands.
+
+##Operator * (Multiply)
+Returns the result of a multiplication of two operands.
+
+##Operator / (Divide)
+Returns the result of a division of two operands.
+
+##Operator \ (Integer divide)
+Returns the result of an integer divide of two operands.
+
+##Operator ^ (Exponentiate)
+Returns the result of an exponentiation of two operands.
+
+##Operator Mod (Modulus)
+Returns the result of a modulus of two operands.
+
+##Operator - (Negate)
+Returns the result of a negation of an operand.
+
+##Operator Shl (Shift left)
+Returns the result of a bitwise shift left of an operand.
+
+##Operator Shr (Shift right)
+Returns the result of a bitwise shift right of an operand.
+

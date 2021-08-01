@@ -1,0 +1,39 @@
+DATESERIAL
+================
+
+Creates a date serial
+
+Syntax:
+declare function DateSerial ( byval year as long, byval month as long, byval
+day as long ) as long
+
+Usage:
+#include "vbcompat.bi"
+result = DateSerial( year, month, day )
+
+Parameters:
+
+`year`
+the year
+`month`
+
+the month of the year
+`day`
+the day of the month
+
+Return Value:
+Returns a date serial containing the date formed by the values in the `year`,
+`month` and `day` parameters.The date serial returned has no decimal part.
+
+Description:
+The compiler will not recognize this function unless `vbcompat.bi` or
+`datetime.bi` is included.
+
+Examples:
+
+#include "vbcompat.bi"
+Dim a As Double = DateSerial(2005, 11, 28)
+Print Format(a, "yyyy/mm/dd hh:mm:ss")
+
+Differences from QB:
+  * Did not exist in QB. This function appeared in PDS and VBDOS

@@ -1,0 +1,34 @@
+OPTION PRIVATE
+================
+
+Specifies internal linkage by default for procedure declarations
+
+Syntax:
+Option Private
+
+Description:
+`Option Private` is a statement that gives any following procedure
+declarations internal linkage by default, as if declared with `Private`. This
+default remains in effect for the rest of the module in which `Option Private`
+is used, and can be overridden by declaring procedures with `Public`.
+
+Examples:
+
+'' Compile with the "-lang fblite" compiler switch
+#lang "fblite"
+Sub ProcWithExternalLinkage()
+   ' ...
+End Sub
+Option Private
+Sub ProcWithInternalLinkage()
+   ' ...
+End Sub
+Public Sub AnotherProcWithExternalLinkage()
+   ' ...
+End Sub
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+New to FreeBASIC

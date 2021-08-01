@@ -1,0 +1,89 @@
+RND
+================
+
+Returns a random double precision number in the range `[0, 1)`
+
+Syntax:
+declare function Rnd ( byval seed as single = 1.0 ) as double
+
+Usage:
+result = Rnd( seed )
+
+Parameters:
+
+`seed`
+Optional `single` argument. If `seed` has a value of zero (`0.0`), the last
+random number generated is repeate. For any other number a new random number
+is returned. With the QB-compatible algorithm, a negative number fully reseeds
+the generator. The default for no argument is to return a new random number.
+
+Return Value:
+Returns the random number generated.
+
+Description:
+
+Returns a number of type `double` in the range `[0, 1)` (i.e. `0 <= Rnd < 1`),
+based on a random seed (see `Randomize`).
+
+`Rnd` can use a variety of different algorithms - see `Randomize` for details
+of the default and selectable algorithms.
+
+`Rnd` will return the same sequence of numbers every time a program is run.
+This sequence can be changed by reseeding the generator.
+
+Note:
+
+- For fbc version < 1.08, `Rnd` is not thread-safe. Used in the context 
+of a multi-threaded program with race conditions due to asynchronous calls 
+to `Rnd`, many values ​​are temporarily returned in duplicate for a same thread.
+- For fbc version >= 1.08, `Rnd` is became thread-safe (by using an 
+internal mutex), but not thread specific. Used in the context of a 
+multi-threaded program, only the execution speed is significantly slowed 
+down compared to a single thread call context. Structures for other random 
+number generators are also now available in the standard header "fbmath.bi".
+
+Examples:
+
+'' Function to a random number in the range [first, last), or {first <= x <
+last}.
+Function rnd_range (first As Double, last As Double) As Double
+    Function = Rnd * (last - first) \+ first
+End Function
+
+'' seed the random number generator, so the sequence is not the same each time
+Randomize
+
+'' prints a random number in the range [0, 1), or {0 <= x < 1}.
+Print Rnd
+
+'' prints a random number in the range [0, 10), or  {0 <= x < 10}.
+Print Rnd * 10
+
+'' prints a random integral number in the range  [1, 10], or {1 <= n <= 10}.
+''     (because: 0 <= Rnd * 10 < 10)
+Print Int(Rnd * 10) \+ 1
+
+'' prints a random integral number in the range [69, 420], or {69 <= n <=
+420}.
+''     (because: 69 <= rnd_range(69, 421) < 421)
+Print Int(rnd_range(69, 421))
+
+Dialect Differences:
+
+The default algorithm used depends on the current dialect in use:
+
+  * With the -lang fb dialect, a 32 bit Mersenne Twister function with 
+  a granularity of 32 bits is used.
+  * With the -lang qb dialect, a function giving the same output as `Rnd` 
+  in QB is used. The granularity is 24 bits.
+  * With the -lang deprecated and -lang fblite dialects, the function in the 
+  C runtime available in the system is used. The function available in Win32 
+  has a granularity of 15 bits, and 32 bits in Linux and DOS.
+
+Differences from QB:
+  * None, if compiled in the -lang qb dialect. Other dialects can also 
+  use the same seeding and generating algorithms by calling `Randomize` 
+  with the appropriate parameter.
+  * For the non-QB-compatible algorithms, if the optional argument is 
+  less than 0, it has the same meaning as passing an argument of 1.
+

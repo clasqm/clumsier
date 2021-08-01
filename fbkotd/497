@@ -1,0 +1,49 @@
+OPTION BASE
+================
+
+Specifies a default lower bound for array declarations
+
+Syntax:
+Option Base base_subscript
+
+Parameters:
+
+`base_subscript`
+an numeric literal value
+
+Description:
+
+`Option Base` is a statement that sets the default lower bound for any
+following array declarations. This default remains in effect for the rest of
+the module in which `Option Base` is used, and can be overridden by declaring
+arrays with an explicit lower bound, or with another `Option Base` statement.
+
+Note: initially, the default base is `0`.
+
+Examples:
+
+'' Compile with the "-lang qb" or "-lang fblite" compiler switches
+
+#lang "fblite"
+
+Dim foo(10) As Integer      ' declares an array with indices 0-10
+
+Option Base 5
+
+Dim bar(15) As Integer      ' declares an array with indices 5-15
+Dim baz(0 To 4) As Integer  ' declares an array with indices 0-4
+
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+  * In -lang fb, `Option Base` is not allowed, and the default lower 
+  bound is always `0`.
+
+Differences from QB:
+  * QBASIC only supported values of `0` or `1` for `base_subscript`.
+  * In QBASIC the word `Base` was a reserved keyword, and couldn't be used 
+  as a variable name.
+  * Arrays must always be explicitly created in FreeBASIC. QBASIC would 
+  implicitly create an array from `base_subscript` to `10` if one was used 
+  in code without being predefined.
+

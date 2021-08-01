@@ -1,0 +1,28 @@
+CURDIR
+========================
+
+Returns the current directory/folder
+
+Syntax:
+declare function Curdir ( ) as string
+
+Usage:
+result = Curdir
+
+Return Value:
+A `string` which is set to the name of the current directory/folder.
+
+Description:
+Returns the current directory/folder.
+
+Examples:
+
+Print CurDir
+
+output will vary.
+
+Dialect Differences:
+  * Not available in the -lang qb dialect unless referenced with the alias `__Curdir`.
+
+Differences from QB:
+  * New to FreeBASIC

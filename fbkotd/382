@@ -1,0 +1,47 @@
+TAN
+================
+
+Returns the tangent of an angle
+
+Syntax:
+declare function Tan ( byval angle as double ) as double
+
+Usage:
+result = Tan( angle )
+
+Parameters:
+
+`angle`
+the angle (in radians)
+
+Return Value:
+Returns the tangent of the argument `angle` as a `Double` within the range of
+-infinity to infinity.
+
+Description:
+
+The argument `angle` is measured in radians (not degrees).
+
+The value returned by this function is undefined for values of `angle` with an
+absolute value of `2 ^ 63` or greater.
+
+`Tan` can be overloaded as operator to accept user-defined types.
+
+Examples:
+
+Const PI As Double = 3.1415926535897932
+Dim a As Double
+Dim r As Double
+Input "Please enter an angle in degrees: ", a
+r = a * PI / 180    'Convert the degrees to Radians
+Print ""
+Print "The tangent of a" ; a; " degree angle is"; Tan ( r )
+Sleep
+
+The output would look like:
+
+    Please enter an angle in degrees: 75
+    The tangent of a 75 degree angle Is 3.732050807568878
+
+Differences from QB:
+  * None

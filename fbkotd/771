@@ -1,0 +1,119 @@
+CVA_COPY
+================
+
+Macro to initialize variadic argument list object variable from an already
+initialized variadic argument list object variable
+
+Syntax:
+cva_copy( dst_list, src_list )
+
+Parameters:
+
+`dst_list`
+destination `cva_list` variable to initialize
+
+`src_list`
+source `cva_list` variable to copy from
+
+Description:
+
+Copies one `cva_list` type variable to another `cva_list` type variable.
+`dst_list` is initialized using current state of `src_list`
+
+`src_list` must already have been initialized with a previous `cva_start` or
+`cva_copy` statement.
+
+`cva_copy` is like a copy constructor for the a variadic argument list object
+and must eventually have a matching call to `cva_end`, which is like the
+destructor. After `cva_end` for `dst_list` has been called, `dst_list` can be
+reused and reinitialized with another call to `cva_start` or `cva_copy`. The
+`cva_copy` and `cva_end` calls must both be called in the same procedure (for
+cross platform compatibility).
+
+Examples:
+
+'' example of using cva_copy to create
+'' a copy of the variable argument list
+
+Sub proc CDecl(count As Integer, ... )
+    Dim args1 As cva_list
+    Dim args2 As cva_list
+
+    '' first list
+    cva_start( args1, count )
+
+    '' create a copy
+    cva_copy( args2, args1 )
+
+    For i As Integer = 1 To count
+        Print cva_arg( args1, Integer ), cva_arg( args2, Integer )
+    Next
+   
+    '' clean-up
+    cva_end( args2 )
+    cva_end( args1 )
+
+End Sub
+
+proc( 4, 4000, 300, 20, 1 )
+
+
+
+'' example of using cva_copy to create
+'' a copy of the variable argument list
+'' and pass it to another procedure
+
+Sub vproc CDecl(count As Integer, ByRef args As cva_list )
+
+    '' if we don't know that caller made a copy
+    '' of args, it is safe to make our own copy
+    '' and leave the passed in args untouched
+
+    Dim a As cva_list
+    cva_copy( a, args )
+
+    Print "vproc"
+    For i As Integer = 1 To count
+        Print cva_arg( a, Integer )
+    Next
+   
+    '' clean-up
+    cva_end( a )
+
+End Sub
+
+Sub proc CDecl(count As Integer, ... )
+
+    Dim args As cva_list
+    cva_start( args, count )
+
+    '' if don't know that the called procedure
+    '' will make it's own copy, it is safe to
+    '' make a copy here and pass that instead
+
+    Dim tmp As cva_list
+    cva_copy( tmp, args )
+    vproc( count, tmp )
+    cva_end( tmp )
+
+    '' args is still valid, we can use it
+    Print "proc"
+    For i As Integer = 1 To count
+        Print cva_arg( args, Integer )
+    Next
+   
+    '' clean-up
+    cva_end( args )
+
+End Sub
+
+proc( 4, 4000, 300, 20, 1 )
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__cva_copy`.
+
+Differences from QB:
+New to FreeBASIC
+

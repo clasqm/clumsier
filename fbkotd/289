@@ -1,0 +1,33 @@
+$DYNAMIC
+================
+
+Metacommand to change the way arrays are allocated
+
+Syntax:
+'$Dynamic
+
+or
+
+rem $Dynamic
+
+Description:
+'$Dynamic is a metacommand that specifies that any following array
+declarations are variable-length, whether they are declared with constant
+subscript ranges or not. This remains in effect for the rest of the module in
+which '$Dynamic is used, and can be overridden with `'$Static`. It is
+equivalent to the `Option Dynamic` statement.
+
+Examples:
+
+' compile with -lang fblite or qb
+#lang "fblite"
+'$DYNAMIC
+Dim a(100)
+'......
+ReDim a(200)
+
+Dialect Differences:
+Only available in the -lang fblite and -lang qb dialects.
+
+Differences from QB:
+When used inside comments it must be the first token

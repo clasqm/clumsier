@@ -1,0 +1,22 @@
+__FB_UNIX__
+=============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_UNIX__
+
+Description:
+Define created at compile time if the OS is reasonably enough like UNIX that
+you can call it UNIX, otherwise undefined.
+
+Examples:
+
+#IFDEF __FB_UNIX__
+  '...instructions for UNIX-family OSes...
+#ELSE
+  '...instructions for other OSes
+#ENDIF
+
+Differences from QB:
+New to FreeBASIC

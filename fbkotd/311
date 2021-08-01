@@ -1,0 +1,48 @@
+Operator - (Negate)
+================
+
+Changes the sign of a numeric expression
+
+Syntax:
+
+declare operator - ( byref rhs as integer ) as integer
+declare operator - ( byref rhs as single ) as single
+declare operator - ( byref rhs as double ) as double
+
+Usage:
+result = - rhs
+
+Parameters:
+`rhs`
+The right-hand side numeric expression to negate.
+
+Return Value:
+Returns the negative of the expression.
+
+Description:
+`Operator -` (Negate) is a unary operator that negates the value of its
+operand.
+
+The operand is not modified in any way.
+
+This operator can be overloaded for user-defined types.
+
+Examples:
+
+Dim n As LongInt
+Print -5
+n = 65432568459
+n = - n
+Print n
+Sleep
+
+Output:
+
+    -5
+    -65432568459
+
+Dialect Differences:
+In the -lang qb dialect, this operator cannot be overloaded.
+
+Differences from QB:
+  * None

@@ -1,0 +1,11 @@
+PostgreSQL
+===============
+
+Free software object-relational database management system
+
+Website: https://www.postgresql.org/
+Platforms supported: Win32, Linux
+Headers to include: postgresql/postgres_ext.bi
+Header version: 12.0
+Example Usage: yes, in examples/database/
+

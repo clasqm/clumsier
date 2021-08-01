@@ -1,0 +1,77 @@
+Operator Shr (Shift right)
+================
+
+Shifts the bits of a numeric expression to the right
+
+Syntax:
+declare operator Shr ( byref lhs as integer, byref rhs as integer ) as integer
+declare operator Shr ( byref lhs as uinteger, byref rhs as uinteger ) as
+uinteger
+
+Usage:
+result = lhs Shr rhs
+
+Parameters:
+
+`lhs`
+The left-hand side expression.
+
+`rhs`
+The right-hand side shift expression.
+
+Return Value:
+Returns the result of `lhs` being shifted right `rhs` number of times.
+
+Description:
+
+`Operator Shr` (Shift right) shifts all of the bits in the left-hand side
+expression (`lhs`) right a number of times specified by the right-hand side
+expression (`rhs`). Numerically, the result is the same as "`Int(lhs` / `2 ^
+rhs)`". For example, "`&b0101 Shr 1`" returns the binary number `&b010`, and
+"`5 Shr 1`" returns `2`.
+
+If the left-hand side expression is signed and negative, the sign bit is
+copied in the newly created bits on the left after the shift. For example,
+"`-5 Shr 2`" returns `-2`.
+
+Neither of the operands are modified in any way.
+
+The results of this operation are undefined for values of `rhs` less than
+zero, or greater than or equal to the number of bits in the result's data
+type.
+
+This operator can be overloaded for user-defined types.
+
+Examples:
+
+'Halve a number
+For i As Integer = 0 To 10
+   
+    Print 1000 Shr i, Bin(1000 Shr i, 16)
+   
+Next i
+
+Output:
+
+ 
+ 
+     1000         0000001111101000
+     500          0000000111110100
+     250          0000000011111010
+     125          0000000001111101
+     62           0000000000111110
+     31           0000000000011111
+     15           0000000000001111
+     7            0000000000000111
+     3            0000000000000011
+     1            0000000000000001
+     0            0000000000000000
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Shr`.
+
+Differences from QB:
+New to FreeBASIC
+

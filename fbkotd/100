@@ -1,0 +1,20 @@
+__TIME__
+===============
+
+Intrinsic define (macro value) set by the compiler
+
+Syntax:
+__TIME__
+
+Description:
+Substitutes the compiler time in a literal string (24 clock, `"hh:mm:ss"`
+format) where used.
+
+Examples:
+
+Print "Compile Time: " & __TIME__
+
+    Compile Time: 13:42:57
+
+Differences from QB:
+New to FreeBASIC

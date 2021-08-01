@@ -1,0 +1,73 @@
+STR
+================
+
+Returns a string representation of a number, boolean or Unicode character
+string
+
+Syntax:
+declare function Str ( byval n as byte ) as string
+declare function Str ( byval n as ubyte ) as string
+declare function Str ( byval n as short ) as string
+declare function Str ( byval n as ushort ) as string
+declare function Str ( byval n as long ) as string
+declare function Str ( byval n as ulong ) as string
+declare function Str ( byval n as longint ) as string
+declare function Str ( byval n as ulongint ) as string
+declare function Str ( byval n as single ) as string
+declare function Str ( byval n as double ) as string
+declare function Str ( byval b as boolean ) as string
+declare function Str ( byref str as const string ) as string
+declare function Str ( byval str as const wstring ) as string
+
+Usage:
+result = Str[$]( number )
+
+or
+
+result = Str( string )
+
+Parameters:
+
+`number`
+Numeric expression to convert to a string.
+
+`string`
+String expression to convert to a string.
+
+Description:
+
+`Str` converts numeric variables to their string representation. Used this way
+it is the `String` equivalent to `Wstr` applied to numeric variables, and the
+opposite of the `Val` function, which converts a string into a number.
+
+`Str` converts boolean variables to their string representation "false" /
+"true".
+
+`Str` also converts Unicode character strings to ASCII character strings. Used
+this way it does the opposite of `Wstr`. If an ASCII character string is
+given, that string is returned unmodified.
+
+Examples:
+
+Dim a As Integer
+Dim b As String
+a = 8421
+b = Str(a)
+Print a, b
+
+
+Dialect Differences:
+In the -lang qb dialect, `Str` will left pad a positive number with a space.
+  * The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn 
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Platform Differences:
+
+  * DOS version/target of FreeBASIC does not support the wide-character 
+  string version of `Str`.
+
+Differences from QB:
+  * QB does not support the wide-character string version of `Str`.
+

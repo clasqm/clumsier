@@ -1,0 +1,22 @@
+__FB_VECTORIZE__
+===============
+
+Intrinsic define set by the compiler
+
+Syntax:
+__FB_VECTORIZE__
+
+Description:
+Defined as the vectorisation level number set by the -vec command-line option.
+
+Examples:
+
+#if __FB_VECTORIZE__ = 2
+  ' ... instructions only for vectorization level 2...
+#else
+  ' ...
+#endif
+
+Differences from QB:
+New to FreeBASIC
+

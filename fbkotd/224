@@ -1,0 +1,29 @@
+#ELSE
+================
+
+Preprocessor conditional directive
+
+Syntax:
+#if (expression)
+	Conditionally included statements if expression is True
+#else
+	Conditionally included statements if expression is False
+#endif
+
+Description:
+#else can be added to an `#if`, `#ifdef`, or `#ifndef` block to provide an
+alternate result to the conditional expression.
+
+Examples:
+
+#DEFINE MODULE_VERSION 1
+Dim a As String
+#IF (MODULE_VERSION > 0)
+  a = "Release"
+#ELSE
+  a = "Beta"
+#ENDIF
+Print "Program is "; a
+
+Differences from QB:
+New to FreeBASIC

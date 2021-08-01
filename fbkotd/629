@@ -1,0 +1,69 @@
+ISREDIRECTED
+================
+
+Checks whether stdin or stdout is redirected to a file
+
+Syntax:
+declare function IsRedirected ( byval is_input as long = 0 ) as long
+
+Usage:
+#include "fbio.bi"
+result = IsRedirected( is_input )
+
+Parameters:
+
+`is_input`
+
+A `long` indicating the type of information to return.
+
+Return Value:
+Returns non-zero (`-1`) if stdin or stdout is redirected, otherwise returns
+zero (`0`).
+
+Description:
+
+IsRedirected checks whether stdin or stdout is redirected to a file, instead
+of being connected to the console/terminal as usual.
+
+If `is_input` is equal to non-zero (`-1`), IsRedirected checks stdin.
+If `is_input` is equal to zero (`0`), IsRedirected checks stdout.
+
+Examples:
+
+'' A Windows based example, just for the use principle
+'' Self-sufficient example, using his own .exe file as dummy input file for
+stdin redirection
+
+#include "fbio.bi"
+
+'' Quotation marks wrapping for compatibility with spaces in path name
+Dim As String pathExe = """" & ExePath & """"
+Dim As String fileExe = Mid(Command(0), Instrrev(Command(0), "\") \+ 1)
+Dim As String redirection = " < """ & Command(0)
+If LCase(Right(Command(0), 4)) = ".exe" Then
+  redirection &= """"
+Else
+  redirection &= ".exe"""
+End If
+
+If Command() = "" Then  '' First process without stdin redirection
+  '' Check stdin redirection
+  Print "First process without stdin redirection: IsRedirected(-1) = ";
+Isredirected(-1)
+  '' Creation of asynchronous second process with stdin redirected from
+file.exe
+  Shell("start /d " & pathExe & " /b " & fileExe & redirection & "
+secondprocess")
+  '' Waiting for termination of asynchronous second process
+  Sleep
+ElseIf Command() = "secondprocess" Then  '' Second process with stdin
+redirection
+  '' Check stdin redirection
+  Print "Second process with stdin redirection  : IsRedirected(-1) = ";
+Isredirected(-1)
+End If
+
+
+Differences from QB:
+  * New to FreeBASIC.
+

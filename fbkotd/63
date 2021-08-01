@@ -1,0 +1,12 @@
+Compiler Option: -version
+===============
+
+Show compiler version
+
+Syntax:
+-version
+
+Description:
+The `-version` compiler option makes FBC show the compiler version and exit.
+Any other command-line options are ignored, and no compilation will be
+performed.

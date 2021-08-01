@@ -1,0 +1,75 @@
+SCREENSET
+================
+
+Sets current work and visible pages
+
+Syntax:
+declare sub Screenset ( byval work_page as long = -1, byval visible_page as
+long = -1 )
+
+Usage:
+Screenset [ work_page ] [, visible_page ]
+
+Parameters:
+
+`work_page`
+index to working page
+
+`visible_page`
+index to visible page
+
+Description:
+
+`Screenset` allows to set the current working page and the current visible
+page. Page numbers range from `0` to `num_pages - 1`, where `num_pages` is the
+number of pages specified when setting the graphics mode with `Screenres` or
+`Screen`. You can use this function to achieve page-flipping or double-
+buffering.
+
+If you provide `visible_page` but omit `work_page`, only the visible page is
+changed. If you provide `work_page` but omit `visible_page`, only the work
+page is changed. If you omit both arguments, both work page and visible page
+are reset to page 0.
+
+`Screenset` provides one method of writing to the screen without instantly
+displaying changes to the user. See also `Screenlock` / `Screenunlock` for an
+alternative method of doing this.
+
+Note: The current cursor position is not handled independently for each video
+page. Therefore, when another working page is selected, the starting cursor
+position corresponds to the last cursor position on the previous working page
+(same behavior for the text cursor and the graphics cursor).
+
+Examples:
+
+' Open graphics screen (320*200, 8bpp) with 2 pages
+ScreenRes 320, 200, 8, 2
+
+' Work on page 1 while displaying page 0
+ScreenSet 1, 0
+
+Dim As Integer x = -40
+
+Do
+    '' Clear the screen, draw a box, update x
+    Cls
+    Line (x, 80)-Step(39, 39), 4, BF
+    x += 1: If (x > 319) Then x = -40
+   
+    ' Wait for vertical sync: only used to control refresh rate, can be 
+    'put anywhere in the Do loop
+    ScreenSync
+   
+    ' Copy work page to visible page
+    ScreenCopy
+   
+Loop While Inkey = ""
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Screenset`.
+
+Differences from QB:
+New to FreeBASIC
+

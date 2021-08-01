@@ -1,0 +1,43 @@
+MKD
+================
+
+Does a binary copy from a `double` variable to a `string`, setting its length
+to 8 bytes
+
+Syntax:
+declare function Mkd ( byval number as double ) as string
+
+Usage:
+result = Mkd[$]( number )
+
+Parameters:
+
+`number`
+A `double` variable to binary copy to a `string`.
+
+Return Value:
+Returns a `string` with a binary copy of the `double`.
+
+Description:
+
+Does a binary copy from a `double` variable to a `string`, setting its length
+to 8 bytes. The resulting string can be read back to a `double` by `Cvd`.
+
+This function is useful to write numeric values to buffers without using a
+`Type` definition.
+
+Examples:
+
+Dim n As Double, e As String
+n = 1.2345
+e = MKD(n)
+Print n, CVD(e)
+
+Dialect Differences:
+The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * None

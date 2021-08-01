@@ -1,0 +1,53 @@
+CVL
+================
+
+Converts a single-precision floating-point number or four-byte string to an
+integer (`long`) variable
+
+Syntax:
+declare function Cvl ( byval sng as single ) as long
+declare function Cvl ( byref str as const string ) as long
+
+Usage:
+result = Cvl( sng )
+result = Cvl( str )
+
+Parameters:
+
+`sng`
+A `Single` floating-point number with a binary copy of an integer variable
+stored in it.
+
+`str`
+A `String` at least four bytes in length with a binary copy of an integer
+variable stored in it.
+
+Return Value:
+A `long` variable to copy the binary copy of a integer to.
+
+Description:
+
+Returns a 32-bit `Long` integer value using the binary data contained in a
+`Single`, or a `String` of at least four bytes in length. A value of zero
+(`0`) is returned if the string is less than four bytes in length.
+
+`Cvl` is used to convert 4-byte strings created with `Mkl`.
+
+This function can also be used to convert 32-bit integer values from a memory
+or file buffer without the need for a `Type` structure. However, just as with
+the type structure, special care should be taken when using `Cvl` to convert
+strings that have been read from a buffer.
+
+Examples:
+
+Dim l As Long, s As String
+s = "ABCD"
+l = CVL(s)
+Print Using "s = ""&"""; s
+Print Using "l = &"; l
+
+
+Differences from QB:
+  * In QB an error occurs if the string passed is less than four bytes in length.
+  * QB did not support floating-point arguments.
+

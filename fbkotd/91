@@ -1,0 +1,11 @@
+Windows API
+===============
+
+Standard API for all Windows Systems, used for example for creating Windows
+GUIs (forms and controls), socket programming, inter-process communication,
+and so much more.
+
+Website: http://msdn.microsoft.com/en-us/library/ee663300.aspx
+Platforms supported: Win32, Linux (using WINE)
+Headers to include: windows.bi
+Examples: yes, in examples/win32/

@@ -1,0 +1,79 @@
+Screen Functions
+================
+
+Statements and procedures that work with the graphics display.
+
+Description:
+
+These statements and procedures control the graphics capabilities of the
+FreeBASIC graphics library. Screen modes can be set with varying resolutions
+and color depths, window events can be handled, and specific OpenGL procedures
+can be retrieved.
+
+
+Working with screen modes
+
+##SCREENLIST
+Gets the available fullscreen resolutions.
+
+##SCREEN and SCREENRES
+Sets a new graphics display mode.
+
+##SCREENINFO
+Gets information about the system desktop or current display mode.
+
+##SCREENCONTROL
+Gets or sets internal graphics library settings.
+
+##SCREENEVENT
+Gets system events.
+
+##SCREENGLPROC
+Returns the address of an OpenGL procedure.
+
+##WINDOWTITLE
+Sets the running program's window caption.
+
+Working with pages
+
+##CLS
+Clears the entire screen or viewport.
+
+##SCREENSET
+Sets the current work and visible pages.
+
+##SCREENCOPY and PCOPY and FLIP
+Copies pixel data from one page to another.
+
+##SCREENSYNC
+Waits for the vertical refresh of the monitor.
+
+Working video memory
+
+##SCREENPTR
+Gets the address of the working page's framebuffer.
+
+##SCREENLOCK
+Locks the current working page's framebuffer for direct access.
+
+##SCREENUNLOCK
+Reverts a previous ScreenLock command.
+
+Screen Metrics
+
+##VIEW (GRAPHICS)
+Sets a clipping region for all drawing and blitting procedures.
+
+##WINDOW
+Sets a new coordinate mapping for the current viewport.
+
+##PMAP
+Converts coordinates between physical and view mappings.
+
+##POINTCOORD
+Queries `Draw`'s pen position.
+
+Screen Data Types
+
+##EVENT
+Data type for ScreenEvent function.

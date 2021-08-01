@@ -1,0 +1,12 @@
+DUGL
+===============
+
+Graphics and game programming library
+
+Website: http://dugl.50webs.com
+Platforms supported: DOS
+Headers to include: DUGL.BI (not yet included with FB, see link below)
+Example of usage: see link below
+Note: use DUGL 1.13 or newer (see link below), older version have a bug and do
+crash when used with FB
+

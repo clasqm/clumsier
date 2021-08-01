@@ -1,0 +1,14 @@
+WRITE (File Access)
+===============
+
+File access specifier
+
+Syntax:
+Open filename As String For Binary Access Write As #filenum As Integer
+
+Description:
+Specifier for the `Access` clause in the `Open` statement. `Write` specifies
+that the file is accessible for output.
+
+Examples:
+See example at `Access`

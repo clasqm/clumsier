@@ -1,0 +1,18 @@
+Compiler Option: -prefix
+===========================
+
+Set the compiler prefix path
+
+Syntax:
+
+-prefix < path >
+
+Parameters:
+`path`
+
+The directory, relative or absolute to where fbc is located.
+
+Description:
+The `-prefix` compiler option sets the compiler prefix (where the compiler
+finds the bin, lib, and inc directories); and defaults to the path where fbc
+resides, if this can be determined.

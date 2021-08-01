@@ -1,0 +1,46 @@
+MKSHORT
+================
+
+Does a binary copy from a `short` variable to a `string`, setting its length
+to 2 bytes
+
+Syntax:
+declare function Mkshort ( byval number as short ) as string
+
+Usage:
+result = Mkshort[$](number)
+
+Parameters:
+
+`number`
+A `short` variable to binary copy to a `string`.
+
+Return Value:
+Returns a `string` with a binary copy of the `short`.
+
+Description:
+
+Does a binary copy from a SHORT variable to a string, setting its length to 2
+bytes. The resulting string can be read back to a `short` by `Cvshort`
+
+This function is useful to write numeric values to buffers without using a
+`Type` definition.
+
+Examples:
+
+Dim a As Short, b As String
+a = 4534
+b = MKShort(a)
+Print a, CVShort(b)
+Sleep
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Mkshort`.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, warn
+  only with the -w suffix compile option (or -w pedantic compile option).
+
+Differences from QB:
+  * In QBasic this function is called `Mki`.
+

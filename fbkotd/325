@@ -1,0 +1,35 @@
+ENVIRON
+================
+
+Returns the value of a system environment variable
+
+Syntax:
+declare function Environ ( byref varname as const string ) as string
+
+Usage:
+result = Environ[$]( varname )
+
+Parameters:
+`varname`
+The name of an environment variable.
+
+Return Value:
+Returns the text value of the environmental variable, or the empty string
+(`"``"`) if the variable does not exist.
+
+Description:
+`Environ` returns the text value of a system environment variable.
+
+
+Examples:
+
+'e.g. to show the system variable "path":
+Print Environ("path")
+
+Differences from QB:
+  * The `QB ENVIRON` statement is now called `Setenviron`.
+  * The string type suffix "$" is required in the -lang qb dialect.
+  * The string type suffix "$" is optional in the -lang fblite dialect.
+  * The string type suffix "$" is ignored in the -lang fb dialect, 
+  warn only with the -w suffix compile option (or -w pedantic compile option).
+

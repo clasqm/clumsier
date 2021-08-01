@@ -1,0 +1,56 @@
+VAL
+================
+
+Converts a string to a floating point number
+
+Syntax:
+declare function Val ( byref str as const string ) as double
+declare function Val ( byref str as const wstring ) as double
+
+Usage:
+result = Val( strnum )
+
+Parameters:
+
+`strnum`
+the string containing a number to convert
+
+Return Value:
+Returns a converted `Double` precision number
+
+If the first character of the string is invalid, `Val` will return `0`.
+
+Description:
+
+`Val("10")` will return `10.0`, and `Val("10.10")` will return `10.1`. The
+function parses the string from the left, skipping any white space, and
+returns the longest number it can read, stopping at the first non-suitable
+character it finds. Scientific notation is recognized, with `"D"` or `"E"`
+used to specify the exponent.
+
+`Val` can be used to convert integer numbers in binary / octal / hexadecimal
+format, if they have the relevant identifier (`"&B"` / `"&O"` / `"&H"`)
+prefixed, for example: `Val("&HFF")` returns `255`.
+
+Note:
+If you want to get an integer value from a string, consider using `ValInt` or
+`ValLng` instead. They are faster, since they don't use floating-point
+numbers, and only `ValLng` provides full 64-bit precision for `LongInt` types.
+
+If you want to convert a number into string format, use the `Str` function.
+
+Examples:
+
+Dim a As String, b As Double
+a = "2.1E+30xa211"
+b = Val(a)
+Print a, b
+
+
+ 
+    2.1E+30xa211   2.1e+030
+
+
+Differences from QB:
+  * None
+

@@ -1,0 +1,10 @@
+DOS API
+=========
+
+Provides access to low-level BIOS and DOS calls.
+
+Website: http://freedos.org
+Platforms supported: DOS
+Headers to include: dos/dos.bi
+Examples: in examples/DOS/
+

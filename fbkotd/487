@@ -1,0 +1,53 @@
+Operator Shl= (Shift left and Assign)
+================
+
+Shifts left and assigns a value to a variable
+
+Syntax:
+declare operator Shl= ( byref lhs as integer, byref rhs as integer )
+declare operator Shl= ( byref lhs as uinteger, byref rhs as uinteger )
+declare operator Shl= ( byref lhs as longint, byref rhs as longint )
+declare operator Shl= ( byref lhs as ulongint, byref rhs as ulongint )
+
+Usage:
+lhs shl= rhs
+
+Parameters:
+
+`lhs`
+The variable to assign to.
+
+`rhs`
+The value to shift `lhs` left by.
+
+Description:
+
+This operator shifts the bits in its left-hand side (`lhs`) parameter a number
+of times specified by its right-hand side (`rhs`) parameter, and assigns the
+result to `lhs`. It is functionally equivalent to:
+
+`lhs = lhs Shl rhs`
+
+This operator can be overloaded for user-defined types as a member `Operator`
+using the appropriate syntax.
+
+Note: Similarly to the operator '=[>]' (assign), the alternative symbol
+'Shl=>' can be also used.
+
+Examples:
+
+Dim i As Integer
+i = &b00000011   '' = 3
+i Shl= 3         '' = i*2^3
+'' Result: 11000          24            24
+Print Bin(i), i, 3*2^3
+Sleep
+
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Shl=`.
+
+Differences from QB:
+New to FreeBASIC
+

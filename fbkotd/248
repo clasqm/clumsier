@@ -1,0 +1,25 @@
+VA_NEXT
+================
+
+Returns a pointer to the next argument in a variable argument list
+
+Syntax:
+Argument_Pointer = va_next ( Argument_List, datatype )
+
+Description:
+The `va_next` macro provides a `datatype` pointer value that points to the
+next argument within the list `Argument_List`, `datatype` being the type of
+the current argument being stepped over.
+
+Not supported when using `-gen gcc`. Use `cva_list` variadic argument list
+type for cross platform compatibility.
+
+Examples:
+See the `va_first()` examples.
+
+Dialect Differences:
+Not available in the -lang qb dialect unless referenced with the
+alias `__Va_next`.
+
+Differences from QB:
+New to FreeBASIC

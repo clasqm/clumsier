@@ -1,0 +1,56 @@
+Memory Functions
+================
+
+Procedures that work with static and dynamic memory.
+
+Description:
+
+These procedures provide access to the free store, or heap. Memory from the
+free store can be reserved and freed, and procedures are provided to read and
+write directly to that memory.
+
+Working with Dynamic Memory
+
+##ALLOCATE
+Reserves a number of bytes of uninitialized memory and returns the address.
+
+##CALLOCATE
+Reserves a number of bytes of initialized (zeroed) memory and returns the
+address.
+
+##REALLOCATE
+Changes the size of reserved memory.
+
+##DEALLOCATE
+Returns reserved memory back to the system.
+
+Miscellaneous Procedures
+
+##PEEK
+Reads some type of value from an address.
+
+##POKE
+Writes some type of value to an address.
+
+##CLEAR
+Clears data in an array with a specified value.
+
+##FB_MEMCOPY
+Copies a block of memory from a location to another.
+(memory areas must not overlap)
+
+##FB_MEMCOPYCLEAR
+Copies the first part of a block of memory from a location to another and
+clears the rest.
+(memory areas must not overlap)
+
+##FB_MEMMOVE
+Copies a block of memory from a location to another.
+(memory areas may overlap)
+
+##SWAP
+Exchange the contents of two variables.
+
+##SADD
+Returns the address for the data in a zstring/wstring variable.
+
